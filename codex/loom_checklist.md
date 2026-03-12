@@ -27,7 +27,6 @@
 
 ### Demo Surfaces (order matters)
 - [ ] Codex desktop app — demo repo loaded
-- [ ] Browser: `http://localhost:8501/visibility.html` — dashboard ready
 - [ ] Backup: screenshot or note file in case Codex output is weak
 
 ### Demo Pre-Flight
