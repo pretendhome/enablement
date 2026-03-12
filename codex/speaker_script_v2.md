@@ -1,15 +1,15 @@
 # Speaker Script v2 -- 5-Minute Loom Recording
 
-**Thesis**: Visibility IS governance. Visibility IS enablement. Visibility is the common ground.
+**Thesis**: Codex adoption succeeds when developer value and operational control are designed together.
 **Target**: 5:00 total (slides ~2:00, demo ~3:00)
-**Demo repo**: RetailPOS — open-source Java retail peripheral platform
+**Demo repo**: JavaPOS — open-source Java retail peripheral platform
 **Recording strategy**: 2-3 full takes at ~5-6 min. Pick the best. Don't chase perfection -- chase clarity.
 
 ---
 
 ## [0:00-0:12] Opening — Hook First
 
-> "I'm [Presenter Name]. The last AI coding tool rollout at this company was killed in weeks. Source code reached third-party servers, there was no audit trail, compliance flagged SOX risk, and the project was shut down. This session is about making sure that doesn't happen again."
+> "I'm [Presenter Name]. The issue here is not whether AI can help engineers. It can. The issue is whether you can roll it out in a way developers actually adopt and leadership can safely scale. This session is about how to do both."
 
 [BEAT — let the title slide breathe]
 
@@ -19,19 +19,19 @@
 
 [ADVANCE SLIDE]
 
-> "Here's what discovery told us. Engineering: 15-year-old checkout codebase, 3-month onboarding, test coverage gaps, tribal knowledge locked in senior heads. IT: that prior rollout -- no governance, no visibility, no way to know what was happening.
+> "Here's what discovery told us. Engineering: a large aging checkout codebase, slow onboarding, inconsistent tests, and tribal knowledge locked in senior heads. IT: prior tool rollouts failed because guidance was unclear, adoption was uneven, and no one could see what good or unsafe usage looked like.
 
 > Four problems, one root cause: invisibility. The codebase is invisible to new developers. Usage is invisible to leadership. Risk is invisible to compliance."
 
 ---
 
-## [0:30-0:50] Slide 3: Agentic. Sandboxed. Every Action Audited.
+## [0:30-0:50] Slide 3: Codex in the Workflow
 
 [ADVANCE SLIDE]
 
-> "Codex is not autocomplete — it's an agentic system. It reads your entire codebase, plans an approach, executes in a kernel-level sandbox, and verifies the result. Source code stays on the developer's machine. Only relevant context reaches the API.
+> "Codex is not just autocomplete. It can work across a real codebase, reason about multiple files, and operate inside a controlled local environment. That makes it useful for understanding unfamiliar systems, planning bounded changes, and generating tests.
 
-> But here's what matters for this deployment: every interaction generates structured metadata. What was asked, what was read, what changed, who approved it. That metadata is the raw material for governance AND enablement. The tool doesn't just write code — it generates the data that makes engineering visible."
+> For this deployment, the key point is not novelty. It's control. Teams can define local instructions, IT can set central guardrails, and leaders can review how the tool is being used over time."
 
 ---
 
@@ -39,11 +39,11 @@
 
 [ADVANCE SLIDE]
 
-> "The harness is how you make visibility operational. Three components.
+> "The harness is how you make that control operational. Three components.
 
-> AGENTS.md — per-repo rules, version-controlled, team-owned. requirements.toml — enterprise policies, IT-managed, centrally enforced. Approval modes — graduated trust from 'ask every time' to autonomous with test gates.
+> AGENTS.md gives each repo version-controlled instructions. An org policy layer gives IT and security central guardrails. Approval modes let you phase trust from 'ask every time' to broader autonomy only when the evidence supports it.
 
-> OpenAI built a million lines of production code using this exact system. Every action governed, logged, attributable."
+> The important idea is that the rollout model is durable. Teams know how to use Codex. Leadership knows where it is being used. Security knows which controls are in force."
 
 ---
 
@@ -51,13 +51,11 @@
 
 [ADVANCE SLIDE]
 
-> "Three workflows, phased. Start with Code Understanding — read-only, zero generation risk, directly addresses the biggest pain. At Cisco, Codex saved 1,500 engineering hours per month. DX Research shows AI-assisted onboarding cuts time-to-productivity by 46% — from 91 days to 49.
+> "Three workflows, phased. Start with Code Understanding: read-only, low risk, and directly tied to the customer's biggest pain point, which is getting engineers productive in a large legacy codebase.
 
-> [PAUSE — let the numbers land]
-
-> We highlight Code Understanding because it's the visibility thesis in action. A developer asks Codex to explain a module — that query becomes a visible artifact. For the first time, leadership can see which parts of the codebase developers struggle with, how long onboarding really takes, where the knowledge gaps live. Read-only for developers. High-signal for leadership.
+> We teach this workflow first because it builds judgment, not just speed. Developers learn how to ask Codex to explain a module, trace dependencies, and identify what they still need to verify. Leadership gets a low-risk adoption path with clear patterns to monitor before enabling higher-trust workflows.
 >
-> During the pilot: weekly office hours, shared prompt library in Slack, and a dedicated channel for questions. Enablement doesn't end at deployment — it's an ongoing cadence."
+> During the pilot: weekly office hours, a shared prompt library, and explicit review expectations. Enablement is not a launch event. It's an operating cadence."
 
 ---
 
@@ -65,17 +63,17 @@
 
 [ADVANCE SLIDE]
 
-> "The visibility layer turns Codex metadata into two views. Engineering sees which modules developers explore, where they're getting stuck. Leadership sees usage by team, risk distribution, compliance status.
+> "The same usage data serves two audiences. Engineering leaders see adoption by workflow, where teams are getting stuck, and which use cases are worth scaling. IT sees whether guardrails are being followed and whether usage patterns match the approved rollout.
 
 > Same data, two audiences, one system. Not 'trust us, developers are being careful.' Observable evidence that governance is working."
 
 ---
 
-## [2:00-3:00] Demo Move 1: Code Understanding on RetailPOS
+## [2:00-3:05] Demo Move 1: Code Understanding on JavaPOS
 
 [SWITCH TO CODEX SCREEN]
 
-> "Let me show you what this looks like. I've loaded RetailPOS -- an open-source Java retail peripheral platform. Think of this as a stand-in for your checkout infrastructure."
+> "Let me show you what this looks like. I've loaded JavaPOS -- an open-source Java point-of-sale device API. Think of this as a stand-in for your checkout infrastructure."
 
 [SUBMIT PROMPT: "Explain the device management architecture in this codebase. What are the main components, how do they interact, and what would a new developer need to understand first?"]
 
@@ -83,49 +81,39 @@
 
 [WAIT FOR RESPONSE -- narrate while waiting if needed: "Codex is reading the Java source, tracing the call graph, building a dependency map..."]
 
-> "Look at what we get. A clear explanation of what this module does, its upstream and downstream dependencies, the data flow. A developer who's never seen this codebase has a working mental model in 30 seconds. That's work that would take 2 to 3 hours of code archaeology.
+> "Look at what we get. A clear explanation of what this module does, its upstream and downstream dependencies, and where a new developer should start. That's the fastest path to value in an enterprise rollout because it reduces code archaeology without changing a line of code.
 
-> And notice -- nothing was changed. Read-only. But the metadata from this interaction is now visible: which module was queried, how many files were read, the dependency map itself. That's the visibility thesis. The act of understanding the codebase generates governance data."
+> And notice -- nothing was changed. This is where I would start the pilot: useful for developers on day one, low risk for leadership on day one."
 
 ---
 
-## [3:00-4:00] Demo Move 2: Codex Self-Awareness -- Limitations
+## [3:05-4:15] Demo Move 2: Bounded Change Planning and Review
 
-[SUBMIT PROMPT: "What are you likely to get wrong about this codebase? What should I verify before trusting your analysis?"]
+[SUBMIT PROMPT: "Based on that architecture, propose a small low-risk refactor to improve maintainability. Do not write code yet. Give me the files you would inspect, the tests you would run, and the risks I should review before approving any change."]
 
 [PAUSE -- let this land]
 
-> "This is a question most people don't think to ask an AI coding tool. Watch what Codex says."
+> "Now I move from understanding to a bounded change plan. Still no code. I want Codex to scope the work, surface the files involved, and tell me what needs review before anyone approves a change."
 
 [WAIT FOR RESPONSE]
 
-> "Codex identifies its own blind spots -- runtime behavior it can't see from static analysis, configuration files that change behavior, integration patterns that depend on external systems, implicit conventions that aren't in the code.
+> "This is the workflow I would teach in week two. Codex helps the developer break a change into something reviewable: what to inspect, what might break, and what tests or owners need to be involved.
 
-> This is what responsible enablement looks like. We're not telling developers 'Codex is always right.' We're teaching them to ask: 'Where should I not trust this?' That question -- and the answer -- is itself a governance artifact. It's visible, it's logged, it's part of the operating model."
+> This is what responsible usage looks like. Codex accelerates planning, but the developer still owns the decision, the review, and the merge. That is the standard I would set from the first enablement session."
 
 ---
 
-## [4:00-4:45] Demo Move 3: Dashboard Reveal
+## [4:15-4:45] Demo Bridge Back to Rollout
 
-[SWITCH TO STREAMLIT DASHBOARD]
+[RETURN TO SLIDES OR STAY ON CODEX OUTPUT]
 
-> "Now let me show you where all of this goes."
-
-[SHOW BUBBLE CHART — workflow distribution by team]
-
-> "This is a visibility dashboard we built in 48 hours — using Codex. Every Codex interaction from a two-week pilot, visualized. Teams, workflows, risk levels — at a glance."
-
-[RUN PRE-SCRIPTED CHAT QUERY: "Show me security-related queries this week"]
-
-> "Natural language queries against the usage data. The VP asks 'show me security queries this week' — instant answer. The Director asks 'which team has highest adoption' — same data, different question, both answered."
-
-> "We built this in 48 hours. The tool built its own visibility layer."
+> "In a pilot, those same interactions become the evidence base for rollout. You can see which workflows teams actually use, where they need more guidance, and whether it is safe to expand from read-only understanding into test generation and refactoring."
 
 ---
 
 ## [4:45-5:00] Closing
 
-> "Start visible. Stay visible. Scale on evidence. Next step: select the pilot team. We can have them running in two weeks. Thank you."
+> "Start with code understanding. Put the harness in place early. Then scale based on evidence, not enthusiasm. Next step: select the pilot team and define the success criteria before rollout. Thank you."
 
 ---
 
@@ -135,43 +123,41 @@
 |---|---|---|
 | Opening (hook first) | 0:12 | 0:15 |
 | Slide 2: Four problems, one root cause | 0:18 | 0:22 |
-| Slide 3: Agentic, sandboxed, audited | 0:20 | 0:25 |
+| Slide 3: Codex in the workflow | 0:20 | 0:25 |
 | Slide 4: Your standards = AI's rules | 0:20 | 0:25 |
 | Slide 5: Start read-only, scale on evidence | 0:30 | 0:35 |
 | Slide 6: Same data, two audiences | 0:20 | 0:25 |
-| Demo Move 1: Code understanding | 1:00 | 1:10 |
-| Demo Move 2: Limitations | 1:00 | 1:10 |
-| Demo Move 3: Dashboard | 0:45 | 0:55 |
+| Demo Move 1: code understanding | 1:05 | 1:15 |
+| Demo Move 2: bounded change planning | 1:10 | 1:20 |
+| Demo bridge back to rollout | 0:30 | 0:35 |
 | Closing (with next step) | 0:15 | 0:18 |
 | **TOTAL** | **5:00** | **5:30** |
 
 ## Contingency Instructions
 
-- **If running long at 2:00**: compress Slide 6 to one sentence: "Same data, two audiences — I'll show you the live version in a moment."
-- **If Codex response is slow (>20s)**: narrate while waiting. "Response times vary with codebase size. The structured metadata is generated regardless."
-- **If Codex gives a weak response on Move 2 (limitations)**: pivot to the point. "Even a partial answer demonstrates the principle — we're teaching developers to interrogate the tool, not just consume its output."
-- **If dashboard doesn't load**: describe it verbally. "The dashboard visualizes every Codex interaction by team, workflow, risk level, and module. It turns usage data into governance evidence."
-- **If running long at 4:00**: compress Move 3 to 20 seconds — show the bubble chart, skip the chat query, close.
-- **If running short**: expand Move 1 narration. Point to specific modules and explain what the VP would see vs. what the developer would see. Or add: "Phase two adds Test Generation — measurable coverage lift. Phase three, Docs and Refactoring — by then teams have trust and muscle memory."
+- **If running long at 2:00**: compress Slide 6 to one sentence: "The same usage data tells engineering what to teach next and IT what is safe to scale."
+- **If Codex response is slow (>20s)**: narrate while waiting. "Response times vary with codebase size. What matters is that the workflow stays reviewable."
+- **If Codex gives a weak response on Move 2**: pivot to the standard. "Even if the plan is imperfect, the point is the workflow: Codex scopes the work, and the developer reviews before any code is written."
+- **If running long at 4:00**: cut the bridge section to one sentence and go straight to the close.
+- **If running short**: expand Move 2 by naming exactly which owners or tests you would require before approving a change.
 
 ## Key Lines — Must Hit
 
 These six lines carry the thesis. If you forget everything else, land these:
 
-1. "The last AI coding tool rollout was killed in weeks." (hook — first 5 seconds)
+1. "The issue is not whether AI can help engineers. It can. The issue is whether you can roll it out safely and actually get adoption." (hook — first 5 seconds)
 2. "Four problems, one root cause: invisibility." (thesis — slide 2)
-3. "Cisco: 1,500 engineering hours per month. Onboarding: 91 days to 49." (credibility — slide 5)
+3. "Start with Code Understanding: read-only, low risk, directly tied to the biggest pain point." (strategy — slide 5)
 4. "This is what responsible usage looks like." (Move 2 — the differentiator)
-5. "We built this in 48 hours. The tool built its own visibility layer." (Move 3 — payoff)
-6. "Start visible. Stay visible. Scale on evidence." (close — last line)
+5. "The same usage data serves two audiences." (governance — slide 6)
+6. "Scale based on evidence, not enthusiasm." (close — last line)
 
 ## Energy Notes
 
-- Opening: confident, direct. No warmup patter. The hook is the first thing they hear.
-- Discovery: compressed energy — you're playing back facts, not performing
-- "Four problems, one root cause" — slow down, this is the thesis moment
-- Numbers (Cisco, onboarding) — steady, factual. Let the data speak. Don't oversell.
-- Demo: teaching energy — you're showing, not selling
-- Limitations question: let it breathe. The pause after submitting is powerful.
-- Dashboard: pace picks up slightly — this is the payoff
+- Opening: confident, direct. No warmup patter.
+- Discovery: compressed energy — you're playing back facts, not performing.
+- "Four problems, one root cause" — slow down. This is the thesis moment.
+- Strategy section — steady, practical. You're showing judgment, not hype.
+- Demo: teaching energy — you're showing, not selling.
+- Bounded change plan: let it breathe. This is where they see your operating standards.
 - Closing: downward pressure. Calm authority. "Next step" = forward momentum. End clean.

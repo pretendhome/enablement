@@ -3,8 +3,8 @@
 **Context**: 30-minute live session with VP Engineering role-player. Target 18-19 min for presentation + demo, leaving 11-12 min for Q&A.
 **Audience**: VP Engineering who is skeptical but open. Has been burned by prior AI tool deployments.
 **Thesis**: Visibility IS governance. Visibility IS enablement. Visibility is the common ground.
-**Demo repo**: RetailPOS — open-source Java retail peripheral platform
-**Dashboard**: Pre-built Streamlit visibility dashboard
+**Demo repo**: JavaPOS — open-source Java point-of-sale device API
+**Dashboard**: `http://localhost:8501/visibility.html`
 
 ---
 
@@ -228,7 +228,7 @@
 
 [SWITCH TO CODEX SCREEN]
 
-> "I've loaded RetailPOS -- an open-source Java retail peripheral platform. Think of this as a stand-in for your checkout infrastructure. Real Java, real retail domain, real complexity."
+> "I've loaded JavaPOS -- an open-source Java point-of-sale device API. Think of this as a stand-in for your checkout infrastructure. Real Java, real retail domain, real complexity."
 
 ### Demo Move 1: Code Understanding (~60s)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Generate Codex Enterprise Enablement Slide Deck v2 — VISIBILITY thesis.
+"""Generate Codex Enterprise Enablement Slide Deck v2.
 
-7 slides implementing the VISIBILITY thesis for Codex enterprise enablement.
+7 slides for Codex enterprise enablement.
 Sales enablement presentation for a Fortune 500 retail deployment.
 """
 
@@ -162,7 +162,7 @@ def add_circle(slide, left, top, size, fill_color):
 
 
 # ================================================================
-# SLIDE 1: TITLE — "Engineering Visibility"
+# SLIDE 1: TITLE
 # ================================================================
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, DARK_BG)
@@ -172,13 +172,13 @@ add_accent_bar(slide, 0, 0, 13.333, 0.05, OAI_GREEN)
 
 # Title
 add_text_box(slide, 1.5, 1.6, 10, 1.0,
-             'Engineering Visibility',
+             'Governed Codex Adoption',
              font_size=48, bold=True, color=WHITE)
 add_accent_bar(slide, 1.5, 2.8, 3.0, 0.06, OAI_GREEN)
 
 # Subtitle
 add_text_box(slide, 1.5, 3.1, 10, 0.8,
-             'How Codex Makes Your Codebase \u2014 and Your Engineering \u2014 Visible',
+             'Improve code understanding, quality, and onboarding without losing control',
              font_size=22, color=RGBColor(0xCC, 0xCC, 0xDD))
 
 # Session type
@@ -215,7 +215,7 @@ add_multi_text(slide, 0.8, 2.1, 5.5, 3.8, [
     ('', False, False),
     ('\u2022  Test coverage gaps \u2014 teams afraid to refactor', False, False),
     ('', False, False),
-    ('\u2022  Prior AI tool rollout ended in a security incident', False, False),
+    ('\u2022  Prior tool rollouts stalled due to uneven adoption and weak governance', False, False),
     ('', False, False),
     ('\u2022  No visibility into what developers were generating', False, False),
 ], font_size=15, color=DARK_TEXT, line_spacing=1.1)
@@ -233,24 +233,24 @@ add_multi_text(slide, 6.8, 2.1, 5.8, 3.8, [
     ('', False, False),
     ('\u2192  Invisible usage \u2192 leadership can\'t govern', False, False),
     ('', False, False),
-    ('\u2192  Invisible impact \u2192 business can\'t justify', False, False),
+    ('\u2192  Invisible impact \u2192 leadership can\'t justify scale', False, False),
 ], font_size=15, color=DARK_TEXT, line_spacing=1.1)
 
 # Bottom callout bar
 add_box(slide, 0.5, 6.2, 12.3, 0.9, OAI_GREEN, CALLOUT_BG)
 add_text_box(slide, 0.7, 6.25, 12.0, 0.8,
              'All four problems share one root cause: invisibility. '
-             'Codex doesn\'t just write code \u2014 it generates the data that makes engineering visible.',
+             'Codex helps teams work in the codebase while giving leadership evidence to govern rollout.',
              font_size=15, bold=True, color=DARK_NAVY, alignment=PP_ALIGN.CENTER)
 
 
 # ================================================================
-# SLIDE 3: HOW CODEX WORKS — AND WHY IT'S DIFFERENT
+# SLIDE 3: HOW CODEX FITS THE WORKFLOW
 # ================================================================
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, SOFT_WHITE)
 add_accent_bar(slide, 0, 0, 13.333, 0.07, OAI_GREEN)
-add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Agentic. Sandboxed. Every Action Audited.',
+add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Codex in the Workflow: Local Context, Managed Controls',
              font_size=28, bold=True, color=DARK_NAVY)
 add_accent_bar(slide, 0.8, 1.15, 2.5, 0.04, OAI_GREEN)
 
@@ -268,7 +268,7 @@ add_text_box(slide, 0.95, 2.7, 4.6, 0.45, 'Source files, dependencies, tests, AG
 
 # Codex CLI sub-box
 add_box(slide, 0.8, 3.4, 4.9, 0.9, OAI_GREEN, WHITE)
-add_text_box(slide, 0.95, 3.45, 4.6, 0.35, 'Codex CLI (Open-Source Rust)',
+add_text_box(slide, 0.95, 3.45, 4.6, 0.35, 'Codex',
              font_size=13, bold=True, color=OAI_GREEN)
 add_text_box(slide, 0.95, 3.8, 4.6, 0.45, 'Read \u2192 Plan \u2192 Edit \u2192 Run \u2192 Verify',
              font_size=11, color=MED_GRAY)
@@ -293,7 +293,7 @@ add_text_box(slide, 7.5, 1.7, 5.1, 0.4, 'OPENAI CLOUD',
 
 # GPT-5.4 sub-box
 add_box(slide, 7.6, 2.3, 4.9, 0.9, OAI_GREEN, WHITE)
-add_text_box(slide, 7.75, 2.35, 4.6, 0.35, 'GPT-5.4 (1M context)',
+add_text_box(slide, 7.75, 2.35, 4.6, 0.35, 'OpenAI Models',
              font_size=13, bold=True, color=OAI_GREEN)
 add_text_box(slide, 7.75, 2.7, 4.6, 0.45, 'Reasoning + code generation. No training on your data.',
              font_size=11, color=MED_GRAY)
@@ -304,23 +304,22 @@ add_text_box(slide, 7.75, 3.45, 4.6, 0.35, 'Enterprise Controls',
              font_size=13, bold=True, color=ACCENT_PURPLE)
 add_text_box(slide, 7.75, 3.85, 4.6, 1.4,
              '\u2022  SAML SSO + SCIM provisioning\n'
-             '\u2022  RBAC + Compliance API + audit trails\n'
+             '\u2022  RBAC + audit logging + usage reporting\n'
              '\u2022  Usage analytics dashboard\n'
-             '\u2022  requirements.toml \u2014 cloud-managed policies',
+             '\u2022  Central policy controls',
              font_size=11, color=DARK_TEXT)
 
 # Key differentiator callout
 add_box(slide, 0.5, 5.85, 12.3, 0.7, OAI_GREEN, CALLOUT_BG)
 add_text_box(slide, 0.7, 5.9, 12.0, 0.6,
-             'Codex is governed AND visible. Open-source CLI, auditable, Compliance API. '
+             'Codex is governed and observable. Teams work locally, leadership gets rollout evidence. '
              'Part of OpenAI\'s enterprise suite alongside ChatGPT Enterprise + API + Frontier.',
              font_size=14, bold=True, color=DARK_NAVY, alignment=PP_ALIGN.CENTER)
 
 # VP assurance bar at bottom
 add_box(slide, 0.5, 6.7, 12.3, 0.55, ACCENT_ORANGE, VP_CALLOUT)
 add_text_box(slide, 0.7, 6.72, 12.0, 0.5,
-             'VP Assurance: Source code stays on the developer machine. '
-             'Only relevant context reaches the API. Kernel-level sandbox blocks unauthorized access.',
+             'VP Assurance: use a managed environment, central guardrails, and phased permissions so adoption can scale safely.',
              font_size=12, bold=True, color=DARK_TEXT, alignment=PP_ALIGN.CENTER)
 
 
@@ -348,13 +347,13 @@ harness_items = [
       '  "Do not modify files in /payments"',
       '  "Always run tests before committing"'],
      OAI_GREEN),
-    ('requirements.toml',
-     'Cloud-managed guardrails',
+    ('Org Policy Layer',
+     'Central guardrails',
      'IT-owned',
      ['\u2022  Set by IT/Security, enforced centrally',
       '\u2022  Overrides local AGENTS.md when stricter',
       '\u2022  Define allowed/blocked operations globally',
-      '\u2022  Audit-friendly: policy = code',
+      '\u2022  Versioned and reviewable',
       '',
       'Example:',
       '  "Block all direct database writes"',
@@ -395,8 +394,7 @@ for i, (title, subtitle, owner, items, color) in enumerate(harness_items):
 # Credibility callout at bottom
 add_box(slide, 0.5, 6.5, 12.3, 0.7, OAI_GREEN, CALLOUT_BG)
 add_text_box(slide, 0.7, 6.55, 12.0, 0.6,
-             'OpenAI built 1 million lines of production code using this exact harness in 5 months. '
-             'The open-source CLI is auditable.',
+             'The harness makes rollout governable: local team instructions, central guardrails, and phased permissions.',
              font_size=14, bold=True, color=DARK_NAVY, alignment=PP_ALIGN.CENTER)
 
 
@@ -424,8 +422,8 @@ workflows = [
       '  \u2713  Fastest "aha moment"',
       '  \u2713  Gateway to other workflows',
       '',
-      'Cisco: 1,500 hrs/month saved',
-      'Onboarding: 91\u219249 days (DX Research)'],
+      'Why it wins:',
+      '  \u2713  Immediate value for onboarding and legacy code'],
      OAI_GREEN, CALLOUT_BG),
     ('2. Test Generation',
      'Measurable coverage lift',
@@ -602,7 +600,7 @@ add_text_box(slide, 0.7, 5.85, 12.0, 0.6,
 # Accent line at bottom
 add_accent_bar(slide, 0.5, 6.65, 12.3, 0.03, OAI_GREEN)
 add_text_box(slide, 0.5, 6.75, 12.3, 0.5,
-             'We built this dashboard in 48 hours using Codex.',
+             'Example pilot view: adoption, risk, and workflow mix in one place.',
              font_size=14, bold=True, italic=True, color=OAI_GREEN,
              alignment=PP_ALIGN.CENTER)
 
@@ -627,7 +625,7 @@ steps = [
      OAI_GREEN),
     ('2', 'IT/Security Workshop \u2014 Day 1, Not Day 30',
      'Joint session with your security team and OpenAI to configure '
-     'requirements.toml, SSO integration, data classification, and audit policies. '
+     'policy controls, SSO integration, data classification, and audit expectations. '
      'Security is a partner, not a gate.',
      ACCENT_BLUE),
     ('3', 'Define Pass/Fail Metrics Before the Pilot Starts',
