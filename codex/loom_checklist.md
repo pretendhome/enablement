@@ -34,10 +34,12 @@
 ### Demo Pre-Flight
 - [ ] Move 1 prompt tested: "Explain what this module does and map its dependencies" on demo repo
 - [ ] Move 2 prompt tested: "What are you likely to get wrong about this codebase? What should I verify?"
+- [ ] Move 2 backup: screenshot a strong self-awareness response during rehearsal (fallback if live response is weak)
 - [ ] Move 3 dashboard loads, bubble chart renders, "Show me security-related queries" chat works
 - [ ] Backup prompts identified for each move (see demo_runbook_v2.md)
 - [ ] Codex response time is acceptable (<15 seconds)
 - [ ] Run all 3 moves 30 min before recording to warm up
+- [ ] Rehearsed demo completes in under 2:45 (buffer for live response variance)
 
 ### You
 - [ ] Glass of water within reach

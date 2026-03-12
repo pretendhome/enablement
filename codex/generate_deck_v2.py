@@ -473,7 +473,7 @@ add_accent_bar(slide, 0.5, 5.85, 12.3, 0.03, MED_GRAY)
 add_text_box(slide, 0.5, 5.95, 4.0, 0.3, 'WEEKS 1\u20132: Pilot',
              font_size=13, bold=True, color=OAI_GREEN)
 add_text_box(slide, 0.5, 6.22, 4.0, 0.35,
-             '20\u201330 devs  |  Code Understanding  |  on-request',
+             '20\u201330 devs  |  Code Understanding  |  on-request  |  weekly office hours',
              font_size=11, color=DARK_TEXT)
 add_text_box(slide, 4.7, 5.95, 4.0, 0.3, 'WEEKS 3\u20136: Expand',
              font_size=13, bold=True, color=ACCENT_BLUE)

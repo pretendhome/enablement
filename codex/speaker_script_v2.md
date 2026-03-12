@@ -55,7 +55,9 @@
 
 > [PAUSE — let the numbers land]
 
-> We highlight Code Understanding because it's the visibility thesis in action. A developer asks Codex to explain a module — that query becomes a visible artifact. For the first time, leadership can see which parts of the codebase developers struggle with, how long onboarding really takes, where the knowledge gaps live. Read-only for developers. High-signal for leadership."
+> We highlight Code Understanding because it's the visibility thesis in action. A developer asks Codex to explain a module — that query becomes a visible artifact. For the first time, leadership can see which parts of the codebase developers struggle with, how long onboarding really takes, where the knowledge gaps live. Read-only for developers. High-signal for leadership.
+>
+> During the pilot: weekly office hours, shared prompt library in Slack, and a dedicated channel for questions. Enablement doesn't end at deployment — it's an ongoing cadence."
 
 ---
 

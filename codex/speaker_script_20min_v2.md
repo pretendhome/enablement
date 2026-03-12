@@ -121,6 +121,8 @@
 > Reason four: it's the fastest path to the aha moment. When a developer asks 'explain this function and its dependencies' and gets a clear answer in 30 seconds instead of spending 3 hours reading code -- that's when adoption happens. Not because you mandated it, but because it's genuinely useful.
 
 > Reason five: it's the gateway. Once developers trust Codex for understanding, the transition to test generation is natural. And once they trust it for testing, refactoring follows. The trust chain is: understand, test, refactor. You don't skip steps.
+>
+> And to support that chain: weekly office hours during the pilot, a shared prompt library in Slack, and a dedicated channel for questions. Enablement doesn't end at deployment — it's an ongoing cadence that evolves with the team.
 
 > Let me walk through three interactions from the highlighted workflow.
 

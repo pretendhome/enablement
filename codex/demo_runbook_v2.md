@@ -252,7 +252,8 @@ Codex workflow distribution from a JSON data source.
 - Full run with spoken narration
 - Practice transitions between tabs
 - Time the full demo
-- Must be under 3:00
+- **Target: under 2:45** (leaves buffer for slow Codex responses during recording)
+- Hard limit: 3:00
 
 ### Run 3: Failure Mode Rehearsal
 - Deliberately slow-walk Move 1 (practice "narrate while waiting")
@@ -264,7 +265,8 @@ Codex workflow distribution from a JSON data source.
 - Full demo with narration, correct pacing, all transitions
 - Record it (phone video, not Loom — just for self-review)
 - Watch playback for filler words, pacing issues, awkward transitions
-- Must be under 3:00
+- **Target: under 2:45** (buffer for live response variance)
+- Hard limit: 3:00
 
 ---
 
