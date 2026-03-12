@@ -69,6 +69,8 @@ Never bluff. Never make up a number. "I'll get you that answer" is always better
 >
 > On existing tooling: Codex doesn't require you to rip out anything. If developers are using Copilot for inline autocomplete, they can continue. Codex operates at a different level — agentic tasks, not line completion. In practice, usage shifts organically.
 >
+> On return: at Cisco, Codex saved 1,500 engineering hours per month. DX Research across six multinationals shows AI-assisted onboarding drops from 91 days to 49 — 46% faster. For an organization with several hundred developers, the onboarding savings alone are significant.
+>
 > But I want to reframe the cost question. What did the last failed deployment cost you? Not just the license fees — the security incident, the compliance review, the lost developer trust, and the six months where teams were afraid to try any AI tool. That's the cost of deploying without visibility.
 >
 > With Codex, the visibility layer means you know whether the investment is paying off from week one. You're not making a renewal decision on vibes. You're making it on data — usage rates, workflow adoption, review quality. The dashboard tells you whether to expand or contract."

@@ -144,7 +144,7 @@ proprietary retail conventions and custom annotations?
 
 ---
 
-## Move 3: Dashboard Reveal + Live Component (~60 seconds)
+## Move 3: Dashboard Reveal (~45-60 seconds)
 
 **Platform**: Switch to Streamlit dashboard (Tab 2)
 

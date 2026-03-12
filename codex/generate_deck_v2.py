@@ -203,7 +203,7 @@ add_text_box(slide, 1.5, 5.9, 5, 0.35,
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, SOFT_WHITE)
 add_accent_bar(slide, 0, 0, 13.333, 0.07, OAI_GREEN)
-add_text_box(slide, 0.8, 0.4, 11, 0.8, 'What We Heard + The Insight',
+add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Four Problems. One Root Cause.',
              font_size=28, bold=True, color=DARK_NAVY)
 add_accent_bar(slide, 0.8, 1.15, 2.5, 0.04, OAI_GREEN)
 
@@ -250,7 +250,7 @@ add_text_box(slide, 0.7, 6.25, 12.0, 0.8,
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, SOFT_WHITE)
 add_accent_bar(slide, 0, 0, 13.333, 0.07, OAI_GREEN)
-add_text_box(slide, 0.8, 0.4, 11, 0.8, 'How Codex Works \u2014 and Why It\'s Different',
+add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Agentic. Sandboxed. Every Action Audited.',
              font_size=28, bold=True, color=DARK_NAVY)
 add_accent_bar(slide, 0.8, 1.15, 2.5, 0.04, OAI_GREEN)
 
@@ -330,7 +330,7 @@ add_text_box(slide, 0.7, 6.72, 12.0, 0.5,
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, SOFT_WHITE)
 add_accent_bar(slide, 0, 0, 13.333, 0.07, ACCENT_PURPLE)
-add_text_box(slide, 0.8, 0.4, 11, 0.8, 'The Harness \u2014 Governance Architecture',
+add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Your Standards Become the AI\u2019s Operating Rules',
              font_size=28, bold=True, color=DARK_NAVY)
 add_accent_bar(slide, 0.8, 1.15, 2.5, 0.04, ACCENT_PURPLE)
 
@@ -406,7 +406,7 @@ add_text_box(slide, 0.7, 6.55, 12.0, 0.6,
 slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, SOFT_WHITE)
 add_accent_bar(slide, 0, 0, 13.333, 0.07, OAI_GREEN)
-add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Enablement \u2014 Three Workflows, Phased Rollout',
+add_text_box(slide, 0.8, 0.4, 11, 0.8, 'Start Read-Only. Scale on Evidence.',
              font_size=28, bold=True, color=DARK_NAVY)
 add_accent_bar(slide, 0.8, 1.15, 2.5, 0.04, OAI_GREEN)
 
@@ -422,7 +422,10 @@ workflows = [
       '  \u2713  Read-only = zero generation risk',
       '  \u2713  Addresses pain #1 (legacy code)',
       '  \u2713  Fastest "aha moment"',
-      '  \u2713  Gateway to other workflows'],
+      '  \u2713  Gateway to other workflows',
+      '',
+      'Cisco: 1,500 hrs/month saved',
+      'Onboarding: 91\u219249 days (DX Research)'],
      OAI_GREEN, CALLOUT_BG),
     ('2. Test Generation',
      'Measurable coverage lift',
@@ -503,7 +506,7 @@ slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, SOFT_WHITE)
 add_accent_bar(slide, 0, 0, 13.333, 0.07, OAI_GREEN)
 add_text_box(slide, 0.8, 0.4, 11, 0.8,
-             'The Visibility Layer \u2014 Every Interaction Generates Data',
+             'Same Data. Two Audiences.',
              font_size=28, bold=True, color=DARK_NAVY)
 add_accent_bar(slide, 0.8, 1.15, 2.5, 0.04, OAI_GREEN)
 
@@ -611,7 +614,7 @@ slide = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg_rect(slide, DARK_BG)
 add_accent_bar(slide, 0, 0, 13.333, 0.05, OAI_GREEN)
 
-add_text_box(slide, 1.5, 0.8, 10, 0.8, 'Next Steps',
+add_text_box(slide, 1.5, 0.8, 10, 0.8, 'Next Step: Pilot in Two Weeks',
              font_size=36, bold=True, color=WHITE)
 add_accent_bar(slide, 1.5, 1.65, 2.5, 0.06, OAI_GREEN)
 
@@ -655,7 +658,7 @@ for i, (num, title, desc, color) in enumerate(steps):
 # Closing thesis
 add_accent_bar(slide, 1.5, 6.3, 10, 0.03, OAI_GREEN)
 add_text_box(slide, 1.5, 6.45, 10, 0.7,
-             '"Visibility is the common ground. Start visible, stay visible, scale on evidence."',
+             '"Start visible. Stay visible. Scale on evidence."',
              font_size=16, bold=True, italic=True, color=OAI_GREEN,
              alignment=PP_ALIGN.CENTER)
 

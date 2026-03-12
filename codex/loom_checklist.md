@@ -83,17 +83,17 @@
 
 | Segment | Target | Hard Limit |
 |---|---|---|
-| Intro + Title | 0:10 | 0:15 |
-| Slide 2: Discovery → Visibility Insight | 0:20 | 0:30 |
-| Slide 3: Architecture | 0:20 | 0:30 |
-| Slide 4: Harness | 0:20 | 0:25 |
-| Slide 5: Enablement + Phased Rollout | 0:30 | 0:35 |
-| Slide 6: Visibility Layer | 0:20 | 0:25 |
-| Demo Move 1: Code Understanding | 0:60 | 1:10 |
-| Demo Move 2: Codex Self-Awareness | 0:60 | 1:10 |
-| Demo Move 3: Dashboard Reveal | 0:50 | 1:00 |
-| Closing | 0:10 | 0:15 |
-| **TOTAL** | **4:40** | **5:15** |
+| Opening (hook first) | 0:12 | 0:15 |
+| Slide 2: Four Problems. One Root Cause. | 0:18 | 0:22 |
+| Slide 3: Agentic. Sandboxed. Every Action Audited. | 0:20 | 0:25 |
+| Slide 4: Your Standards = AI's Rules | 0:20 | 0:25 |
+| Slide 5: Start Read-Only. Scale on Evidence. | 0:30 | 0:35 |
+| Slide 6: Same Data. Two Audiences. | 0:20 | 0:25 |
+| Demo Move 1: Code Understanding | 1:00 | 1:10 |
+| Demo Move 2: Codex Self-Awareness | 1:00 | 1:10 |
+| Demo Move 3: Dashboard Reveal | 0:45 | 0:55 |
+| Closing (with next step) | 0:15 | 0:18 |
+| **TOTAL** | **5:00** | **5:30** |
 
 ---
 

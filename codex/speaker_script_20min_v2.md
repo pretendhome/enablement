@@ -24,7 +24,7 @@
 
 ---
 
-## [1:00-3:00] Discovery Recap -- The Visibility Reframe
+## [1:00-3:00] Slide 2: Four Problems. One Root Cause.
 
 > "Let me play back what we heard in discovery, and then I'll reframe it.
 
@@ -48,7 +48,7 @@
 
 ---
 
-## [3:00-5:00] How Codex Works -- Architecture + Security
+## [3:00-5:00] Slide 3: Agentic. Sandboxed. Every Action Audited.
 
 > "Let me show you how Codex works, because the architecture itself is the first layer of visibility.
 
@@ -70,7 +70,7 @@
 
 ---
 
-## [5:00-7:00] The Harness -- Governance Architecture
+## [5:00-7:00] Slide 4: Your Standards Become the AI's Operating Rules
 
 > "The harness is what makes visibility operational. Three components.
 
@@ -96,15 +96,17 @@
 
 ---
 
-## [7:00-10:00] Enablement -- Three Workflows + Code Understanding Deep Dive
+## [7:00-10:00] Slide 5: Start Read-Only. Scale on Evidence.
 
 > "Now let's talk about what developers actually do with Codex. Three workflows, phased.
 
-> Workflow one: Code Understanding. Developers ask Codex to explain code, map dependencies, trace call chains, analyze impact. Read-only operations.
+> Workflow one: Code Understanding. Read-only. Developers ask Codex to explain code, map dependencies, trace call chains, analyze impact.
 
-> Workflow two: Test Generation. Developers ask Codex to write unit tests, add edge cases, improve coverage. Measurable output -- you can track coverage percentage before and after.
+> Workflow two: Test Generation. Measurable output — you can track coverage percentage before and after.
 
-> Workflow three: Documentation and Refactoring. Developers ask Codex to document modules, extract shared logic, modernize patterns. Highest impact, highest review need.
+> Workflow three: Documentation and Refactoring. Highest impact, highest review need.
+
+> Before I go deeper, let me ground this in data. At Cisco, Codex saved 1,500 engineering hours per month. DX Research across six multinationals shows AI-assisted onboarding cuts time-to-productivity by 46% — from 91 days to the 10th pull request down to 49. OpenAI's own engineering team reports 92% daily usage and 3.5 pull requests per engineer per day. These aren't projections. These are measured outcomes from production deployments.
 
 > [ADVANCE SLIDE]
 
@@ -138,7 +140,7 @@
 
 ---
 
-## [10:00-12:00] The Visibility Layer -- Dashboard + Dual-Audience Views
+## [10:00-12:00] Slide 6: Same Data. Two Audiences.
 
 > "Now I want to show you where all of this metadata goes. This is the visibility layer -- a dashboard that turns Codex interaction data into actionable views for two audiences.
 
