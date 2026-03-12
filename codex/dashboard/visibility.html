@@ -7,37 +7,55 @@
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #0D0D0D;
-            --bg-card: #1A1A2E;
-            --bg-card-hover: #1E1E35;
+            --bg: #0D0D0D;
+            --card: #1A1A2E;
+            --card-hover: #1E1E35;
             --border: #2D2D3D;
             --accent: #10A37F;
-            --accent-dim: rgba(16, 163, 127, 0.15);
-            --text-primary: #FFFFFF;
-            --text-secondary: #B0B0C0;
-            --text-muted: #6E6E80;
+            --accent-dim: rgba(16,163,127,0.15);
+            --text: #FFFFFF;
+            --text2: #B0B0C0;
+            --muted: #6E6E80;
             --green: #27AE60;
             --yellow: #F39C12;
             --red: #E74C3C;
-            --green-bg: rgba(39, 174, 96, 0.12);
-            --yellow-bg: rgba(243, 156, 18, 0.12);
-            --red-bg: rgba(231, 76, 60, 0.12);
+            --chart-bg: #1A1A2E;
+            --grid: #2D2D3D;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: var(--bg);
+            color: var(--text);
             height: 100vh;
             overflow: hidden;
         }
 
+        /* ---- LOADING ---- */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .loading .spinner {
+            width: 32px; height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading .msg { font-size: 0.8rem; color: var(--muted); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ---- DASHBOARD GRID ---- */
         .dashboard {
-            display: grid;
+            display: none;
             grid-template-rows: auto auto 1fr 140px auto;
             gap: 8px;
             height: 100vh;
@@ -46,726 +64,481 @@
             margin: 0 auto;
             overflow: hidden;
         }
+        .dashboard.ready { display: grid; }
 
         /* ---- HEADER ---- */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header-left h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        .header-left h1 .accent { color: var(--accent); }
-        .header-left .subtitle {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-        .header-right {
-            text-align: right;
-        }
-        .live-indicator {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            justify-content: flex-end;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-        .live-dot {
-            width: 7px; height: 7px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,163,127,0.4); }
-            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(16,163,127,0); }
-        }
-        .header-date {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .header-left h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; }
+        .header-left h1 .a { color: var(--accent); }
+        .header-left .sub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+        .header-right { text-align: right; }
+        .live { display: flex; align-items: center; gap: 6px; justify-content: flex-end; font-size: 0.75rem; font-weight: 600; color: var(--accent); }
+        .live-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,163,127,.4)} 50%{opacity:.7;box-shadow:0 0 0 6px rgba(16,163,127,0)} }
+        .hdate { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
 
-        /* ---- METRICS ROW ---- */
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-        }
-        .metric-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 14px;
-            transition: border-color 0.3s ease, background 0.3s ease;
-        }
-        .metric-card:hover {
-            border-color: var(--accent);
-            background: var(--bg-card-hover);
-        }
-        .metric-card .label {
-            font-size: 0.68rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .metric-card .value {
-            font-size: 1.7rem;
-            font-weight: 700;
-            margin-top: 1px;
-            transition: color 0.4s ease;
-        }
-        .metric-card .detail {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            margin-top: 0;
-        }
-        .metric-card.green .value { color: var(--green); }
-        .metric-card.yellow .value { color: var(--yellow); }
-        .metric-card.red .value { color: var(--red); }
-        .metric-card.accent .value { color: var(--accent); }
+        /* ---- METRICS ---- */
+        .metrics { display: grid; grid-template-columns: repeat(5,1fr); gap: 8px; }
+        .mc { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; transition: border-color .3s, background .3s; }
+        .mc:hover { border-color: var(--accent); background: var(--card-hover); }
+        .mc .l { font-size: .68rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+        .mc .v { font-size: 1.7rem; font-weight: 700; margin-top: 1px; transition: color .4s; }
+        .mc .d { font-size: .65rem; color: var(--text2); }
+        .mc.c-a .v { color: var(--accent); }
+        .mc.c-g .v { color: var(--green); }
+        .mc.c-y .v { color: var(--yellow); }
+        .mc.c-r .v { color: var(--red); }
 
-        /* ---- CHARTS GRID ---- */
-        .charts {
-            display: grid;
-            grid-template-columns: 63fr 37fr;
-            gap: 10px;
-            min-height: 0;
-            overflow: hidden;
-        }
-        .chart-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px 14px 4px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            min-height: 0;
-        }
-        .chart-card .chart-title {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-        .chart-card .chart-title::before {
-            content: '';
-            display: inline-block;
-            width: 3px;
-            height: 14px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-        .chart-container {
-            flex: 1;
-            min-height: 0;
-            overflow: hidden;
-        }
+        /* ---- CHARTS ---- */
+        .charts { display: grid; grid-template-columns: 63fr 37fr; gap: 10px; min-height: 0; overflow: hidden; }
+        .cc { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px 4px; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+        .cc .ct { font-size: .78rem; font-weight: 600; color: var(--text2); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .cc .ct::before { content: ''; display: inline-block; width: 3px; height: 14px; background: var(--accent); border-radius: 2px; }
+        .cc .cbox { flex: 1; min-height: 0; overflow: hidden; }
 
-        /* ---- CHAT SECTION ---- */
-        .chat-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 14px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            min-height: 0;
-        }
-        .chat-top-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-        .chat-label {
-            font-size: 0.68rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
-            white-space: nowrap;
-        }
-        .chat-label .dot {
-            width: 5px; height: 5px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-        .chat-input {
-            flex: 1;
-            background: #0D0D15;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 14px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.84rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .chat-input::placeholder { color: var(--text-muted); }
-        .chat-input:focus { border-color: var(--accent); }
-        .chat-submit {
-            background: var(--accent);
-            border: none;
-            border-radius: 8px;
-            padding: 8px 18px;
-            color: white;
-            font-family: inherit;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            flex-shrink: 0;
-        }
-        .chat-submit:hover { opacity: 0.85; }
-
-        .chat-response-area {
-            flex: 1;
-            min-height: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        .chat-response {
-            margin-top: 6px;
-            padding: 7px 12px;
-            background: rgba(16, 163, 127, 0.06);
-            border-left: 3px solid var(--accent);
-            border-radius: 0 6px 6px 0;
-            font-size: 0.75rem;
-            line-height: 1.45;
-            color: var(--text-secondary);
-            opacity: 0;
-            transform: translateY(4px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            flex: 1;
-            overflow-y: auto;
-            max-height: 100%;
-        }
-        .chat-response.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .chat-response strong { color: var(--text-primary); }
-        .chat-response .highlight-green { color: var(--green); font-weight: 600; }
-        .chat-response .highlight-yellow { color: var(--yellow); font-weight: 600; }
-        .chat-response .highlight-red { color: var(--red); font-weight: 600; }
-        .chat-response .highlight-accent { color: var(--accent); font-weight: 600; }
-
-        .filter-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--accent-dim);
-            border: 1px solid rgba(16, 163, 127, 0.3);
-            border-radius: 6px;
-            padding: 2px 8px;
-            font-size: 0.68rem;
-            font-weight: 500;
-            color: var(--accent);
-            margin-top: 6px;
-            flex-shrink: 0;
-        }
-        .filter-badge .clear-btn {
-            cursor: pointer;
-            opacity: 0.6;
-            transition: opacity 0.2s;
-        }
-        .filter-badge .clear-btn:hover { opacity: 1; }
+        /* ---- CHAT ---- */
+        .chat { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
+        .chat-top { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .chat-lbl { font-size: .68rem; font-weight: 500; color: var(--muted); display: flex; align-items: center; gap: 5px; flex-shrink: 0; white-space: nowrap; }
+        .chat-lbl .dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+        .chat-in { flex: 1; background: #0D0D15; border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; color: var(--text); font-family: inherit; font-size: .84rem; outline: none; transition: border-color .2s; }
+        .chat-in::placeholder { color: var(--muted); }
+        .chat-in:focus { border-color: var(--accent); }
+        .chat-btn { background: var(--accent); border: none; border-radius: 8px; padding: 8px 18px; color: #fff; font-family: inherit; font-size: .78rem; font-weight: 600; cursor: pointer; transition: opacity .2s; flex-shrink: 0; }
+        .chat-btn:hover { opacity: .85; }
+        .chat-resp-area { flex: 1; min-height: 0; overflow: hidden; display: flex; align-items: flex-start; gap: 8px; }
+        .chat-resp { margin-top: 6px; padding: 7px 12px; background: rgba(16,163,127,.06); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; font-size: .75rem; line-height: 1.45; color: var(--text2); opacity: 0; transform: translateY(4px); transition: opacity .4s, transform .4s; flex: 1; overflow-y: auto; max-height: 100%; }
+        .chat-resp.vis { opacity: 1; transform: translateY(0); }
+        .chat-resp strong { color: var(--text); }
+        .hl-g { color: var(--green); font-weight: 600; }
+        .hl-y { color: var(--yellow); font-weight: 600; }
+        .hl-r { color: var(--red); font-weight: 600; }
+        .hl-a { color: var(--accent); font-weight: 600; }
+        .fbadge { display: inline-flex; align-items: center; gap: 6px; background: var(--accent-dim); border: 1px solid rgba(16,163,127,.3); border-radius: 6px; padding: 2px 8px; font-size: .68rem; font-weight: 500; color: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .fbadge .x { cursor: pointer; opacity: .6; transition: opacity .2s; }
+        .fbadge .x:hover { opacity: 1; }
 
         /* ---- FOOTER ---- */
-        .footer {
-            text-align: center;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            padding-top: 1px;
-            border-top: 1px solid var(--border);
-            flex-shrink: 0;
-        }
-        .footer .accent { color: var(--accent); font-weight: 600; }
+        .footer { text-align: center; font-size: .65rem; color: var(--muted); padding-top: 1px; border-top: 1px solid var(--border); flex-shrink: 0; }
+        .footer .a { color: var(--accent); font-weight: 600; }
     </style>
 </head>
 <body>
 
-<div class="dashboard">
+<div class="loading" id="loader">
+    <div class="spinner"></div>
+    <div class="msg">Loading pilot data...</div>
+</div>
 
-    <!-- HEADER -->
+<div class="dashboard" id="dash">
     <div class="header">
         <div class="header-left">
-            <h1>Engineering <span class="accent">Visibility</span> Dashboard</h1>
-            <div class="subtitle">Codex Pilot — Week 1–2 | Platform Team + Early Adopters</div>
+            <h1>Engineering <span class="a">Visibility</span> Dashboard</h1>
+            <div class="sub">Codex Pilot — Week 1–2 | Platform Team + Early Adopters</div>
         </div>
         <div class="header-right">
-            <div class="live-indicator">
-                <div class="live-dot"></div>
-                Live Pilot Data
-            </div>
-            <div class="header-date">March 10–20, 2026 · 530 queries · 28 engineers</div>
+            <div class="live"><div class="live-dot"></div> Live Pilot Data</div>
+            <div class="hdate" id="hdate"></div>
         </div>
     </div>
 
-    <!-- METRICS ROW -->
     <div class="metrics">
-        <div class="metric-card accent">
-            <div class="label">Total Queries</div>
-            <div class="value" id="m-total">530</div>
-            <div class="detail">across 5 teams</div>
-        </div>
-        <div class="metric-card">
-            <div class="label">Active Engineers</div>
-            <div class="value" id="m-engineers">28</div>
-            <div class="detail">18.9 queries/engineer</div>
-        </div>
-        <div class="metric-card green">
-            <div class="label">Safe Rate</div>
-            <div class="value" id="m-safe">70.0%</div>
-            <div class="detail" id="m-safe-detail">371 green queries</div>
-        </div>
-        <div class="metric-card yellow">
-            <div class="label">Review Required</div>
-            <div class="value" id="m-review">127</div>
-            <div class="detail">24.0% of queries</div>
-        </div>
-        <div class="metric-card red">
-            <div class="label">Blocked by Harness</div>
-            <div class="value" id="m-blocked">32</div>
-            <div class="detail" id="m-blocked-detail">11 incidents prevented</div>
-        </div>
+        <div class="mc c-a"><div class="l">Total Queries</div><div class="v" id="m-total"></div><div class="d" id="m-total-d"></div></div>
+        <div class="mc"><div class="l">Active Engineers</div><div class="v" id="m-eng"></div><div class="d" id="m-eng-d"></div></div>
+        <div class="mc c-g"><div class="l">Safe Rate</div><div class="v" id="m-safe"></div><div class="d" id="m-safe-d"></div></div>
+        <div class="mc c-y"><div class="l">Review Required</div><div class="v" id="m-yellow"></div><div class="d" id="m-yellow-d"></div></div>
+        <div class="mc c-r"><div class="l">Blocked by Harness</div><div class="v" id="m-red"></div><div class="d" id="m-red-d"></div></div>
     </div>
 
-    <!-- CHARTS -->
     <div class="charts">
-        <div class="chart-card">
-            <div class="chart-title">Usage Map — Team × Workflow × Risk</div>
-            <div class="chart-container" id="bubbleChart"></div>
-        </div>
-        <div class="chart-card">
-            <div class="chart-title">Team Adoption</div>
-            <div class="chart-container" id="teamChart"></div>
-        </div>
+        <div class="cc"><div class="ct">Usage Map — Team × Workflow × Risk</div><div class="cbox" id="bubbleChart"></div></div>
+        <div class="cc"><div class="ct">Team Adoption — Risk Breakdown</div><div class="cbox" id="teamChart"></div></div>
     </div>
 
-    <!-- CHAT -->
-    <div class="chat-section">
-        <div class="chat-top-row">
-            <div class="chat-label">
-                <span class="dot"></span>
-                Ask about the data
-            </div>
-            <input
-                type="text"
-                class="chat-input"
-                id="chatInput"
-                placeholder='Try: "Show me security-related queries this week"'
-                onkeydown="if(event.key==='Enter') handleQuery()"
-            />
-            <button class="chat-submit" onclick="handleQuery()">Ask</button>
+    <div class="chat">
+        <div class="chat-top">
+            <div class="chat-lbl"><span class="dot"></span> Ask about the data</div>
+            <input class="chat-in" id="chatIn" placeholder='Try: "Show me security-related queries this week"' onkeydown="if(event.key==='Enter')ask()"/>
+            <button class="chat-btn" onclick="ask()">Ask</button>
         </div>
-        <div class="chat-response-area">
-            <div class="chat-response" id="chatResponse"></div>
-        </div>
-        <div id="filterBadge"></div>
+        <div class="chat-resp-area"><div class="chat-resp" id="resp"></div></div>
+        <div id="badge"></div>
     </div>
 
-    <!-- FOOTER -->
-    <div class="footer">
-        Built in 48 hours using Codex · Every query generates data · <span class="accent">Data makes engineering visible</span>
-    </div>
-
+    <div class="footer">Built in 48 hours using Codex · Every query generates data · <span class="a">Data makes engineering visible</span></div>
 </div>
 
 <script>
 // ================================================================
-// DATA
+// CONSTANTS
 // ================================================================
+const C = { bg:'#1A1A2E', grid:'#2D2D3D', accent:'#10A37F', green:'#27AE60', yellow:'#F39C12', red:'#E74C3C' };
+const WF_LABELS = { code_understanding:'Code Understanding', test_generation:'Test Generation', impact_analysis:'Impact Analysis', docs_refactoring:'Docs & Refactoring' };
+const WF_ORDER = ['Docs & Refactoring','Impact Analysis','Test Generation','Code Understanding'];
 
-const BUBBLE_DATA = [
-    { team: 'Platform', workflow: 'Code Understanding', count: 80, green: 68, yellow: 10, red: 2 },
-    { team: 'Platform', workflow: 'Test Generation', count: 40, green: 28, yellow: 10, red: 2 },
-    { team: 'Platform', workflow: 'Impact Analysis', count: 22, green: 8, yellow: 12, red: 2 },
-    { team: 'Platform', workflow: 'Docs & Refactoring', count: 12, green: 2, yellow: 9, red: 1 },
-    { team: 'Checkout', workflow: 'Code Understanding', count: 70, green: 60, yellow: 8, red: 2 },
-    { team: 'Checkout', workflow: 'Test Generation', count: 34, green: 24, yellow: 8, red: 2 },
-    { team: 'Checkout', workflow: 'Impact Analysis', count: 18, green: 6, yellow: 10, red: 2 },
-    { team: 'Checkout', workflow: 'Docs & Refactoring', count: 10, green: 5, yellow: 4, red: 1 },
-    { team: 'Inventory', workflow: 'Code Understanding', count: 58, green: 48, yellow: 8, red: 2 },
-    { team: 'Inventory', workflow: 'Test Generation', count: 30, green: 20, yellow: 8, red: 2 },
-    { team: 'Inventory', workflow: 'Impact Analysis', count: 16, green: 5, yellow: 9, red: 2 },
-    { team: 'Inventory', workflow: 'Docs & Refactoring', count: 8, green: 5, yellow: 2, red: 1 },
-    { team: 'Payments', workflow: 'Code Understanding', count: 40, green: 32, yellow: 5, red: 3 },
-    { team: 'Payments', workflow: 'Test Generation', count: 20, green: 14, yellow: 4, red: 2 },
-    { team: 'Payments', workflow: 'Impact Analysis', count: 11, green: 5, yellow: 5, red: 1 },
-    { team: 'Payments', workflow: 'Docs & Refactoring', count: 6, green: 3, yellow: 3, red: 0 },
-    { team: 'Mobile', workflow: 'Code Understanding', count: 29, green: 24, yellow: 4, red: 1 },
-    { team: 'Mobile', workflow: 'Test Generation', count: 15, green: 10, yellow: 4, red: 1 },
-    { team: 'Mobile', workflow: 'Impact Analysis', count: 7, green: 3, yellow: 2, red: 2 },
-    { team: 'Mobile', workflow: 'Docs & Refactoring', count: 4, green: 1, yellow: 2, red: 1 },
-];
-
-const TEAMS = [
-    { name: 'Platform', queries: 154, green: 106, yellow: 41, red: 7, engineers: 8 },
-    { name: 'Checkout', queries: 132, green: 95, yellow: 30, red: 7, engineers: 7 },
-    { name: 'Inventory', queries: 112, green: 78, yellow: 27, red: 7, engineers: 5 },
-    { name: 'Payments', queries: 77, green: 54, yellow: 17, red: 6, engineers: 5 },
-    { name: 'Mobile', queries: 55, green: 38, yellow: 12, red: 5, engineers: 3 },
-];
-
-const CHART_BG = '#1A1A2E';
-const CHART_GRID = '#2D2D3D';
-const ACCENT = '#10A37F';
-const GREEN = '#27AE60';
-const YELLOW = '#F39C12';
-const RED = '#E74C3C';
-
-let currentFilter = null;
+let D = null; // processed data
+let filter = null;
 
 // ================================================================
-// CHART RENDERING
+// DATA LAYER — load from JSON, compute all aggregates
 // ================================================================
+async function loadData() {
+    const r = await fetch('data/codex_usage.json');
+    if (!r.ok) throw new Error('Failed to load data');
+    const raw = await r.json();
+    return process(raw);
+}
 
-function dominantRisk(d) {
+function wfLabel(wf) { return WF_LABELS[wf] || wf.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()); }
+
+function process(raw) {
+    const q = raw.queries;
+    const meta = raw.metadata;
+
+    // Team aggregates
+    const tm = {};
+    q.forEach(r => {
+        if (!tm[r.team]) tm[r.team] = { name:r.team, total:0, green:0, yellow:0, red:0, engineers:new Set() };
+        tm[r.team].total++;
+        tm[r.team][r.risk_level]++;
+        tm[r.team].engineers.add(r.engineer);
+    });
+    const teams = Object.values(tm)
+        .map(t => ({ ...t, engineers: t.engineers.size }))
+        .sort((a,b) => b.total - a.total);
+
+    // Workflow aggregates
+    const wm = {};
+    q.forEach(r => {
+        const wf = wfLabel(r.workflow);
+        if (!wm[wf]) wm[wf] = { name:wf, count:0 };
+        wm[wf].count++;
+    });
+    const workflows = Object.values(wm).sort((a,b) => b.count - a.count);
+
+    // Cross-tab (team × workflow)
+    const ct = {};
+    q.forEach(r => {
+        const key = r.team + '|' + wfLabel(r.workflow);
+        if (!ct[key]) ct[key] = { team:r.team, workflow:wfLabel(r.workflow), count:0, green:0, yellow:0, red:0 };
+        ct[key].count++;
+        ct[key][r.risk_level]++;
+    });
+    const crossTab = Object.values(ct);
+
+    // Risk summary
+    const risk = { green:0, yellow:0, red:0, incidents:0 };
+    q.forEach(r => {
+        risk[r.risk_level]++;
+        if (r.review_status === 'rejected') risk.incidents++;
+    });
+
+    // Highest risk cells (for response generation)
+    const riskCells = crossTab
+        .map(c => ({ ...c, riskCount: c.yellow + c.red }))
+        .filter(c => c.riskCount > 3)
+        .sort((a,b) => b.riskCount - a.riskCount);
+
+    // Code understanding totals
+    const cuTotal = workflows.find(w => w.name === 'Code Understanding')?.count || 0;
+
+    // Engineers
+    const allEngineers = new Set(q.map(r => r.engineer)).size;
+
+    return { meta, queries: q, teams, workflows, crossTab, risk, riskCells, cuTotal, totalEngineers: allEngineers };
+}
+
+// ================================================================
+// METRICS
+// ================================================================
+function animateNum(el, end, suffix='', duration=600) {
+    const start = parseInt(el.textContent) || 0;
+    if (start === end) { el.textContent = end + suffix; return; }
+    const range = end - start;
+    const t0 = performance.now();
+    function step(now) {
+        const p = Math.min((now - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(start + range * eased) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+
+function renderMetrics(f) {
+    const total = D.queries.length;
+    const r = D.risk;
+
+    if (f === 'security') {
+        const riskTotal = r.yellow + r.red;
+        animateNum(document.getElementById('m-total'), riskTotal);
+        document.getElementById('m-total-d').textContent = 'yellow + red events';
+        document.getElementById('m-safe').textContent = '0.0%';
+        document.getElementById('m-safe-d').textContent = 'filtered to risk only';
+        animateNum(document.getElementById('m-yellow'), r.yellow);
+        document.getElementById('m-yellow-d').textContent = ((r.yellow/total)*100).toFixed(1) + '% of all queries';
+        animateNum(document.getElementById('m-red'), r.red);
+        document.getElementById('m-red-d').textContent = r.incidents + ' incidents prevented';
+    } else {
+        animateNum(document.getElementById('m-total'), total);
+        document.getElementById('m-total-d').textContent = `across ${D.teams.length} teams`;
+        document.getElementById('m-eng').textContent = D.totalEngineers;
+        document.getElementById('m-eng-d').textContent = (total / D.totalEngineers).toFixed(1) + ' queries/engineer';
+        document.getElementById('m-safe').textContent = ((r.green/total)*100).toFixed(1) + '%';
+        document.getElementById('m-safe-d').textContent = r.green + ' green queries';
+        animateNum(document.getElementById('m-yellow'), r.yellow);
+        document.getElementById('m-yellow-d').textContent = ((r.yellow/total)*100).toFixed(1) + '% of queries';
+        animateNum(document.getElementById('m-red'), r.red);
+        document.getElementById('m-red-d').textContent = r.incidents + ' incidents prevented';
+    }
+}
+
+// ================================================================
+// BUBBLE CHART
+// ================================================================
+function domRisk(d) {
+    if (d.count === 0) return 'green';
     if (d.red / d.count > 0.10) return 'red';
     if (d.yellow / d.count > 0.30) return 'yellow';
     return 'green';
 }
 
-function getBubbleColors(data, filter) {
-    const riskColors = { green: GREEN, yellow: YELLOW, red: RED };
-    if (filter === 'security') {
-        return data.map(d => {
-            const risk = dominantRisk(d);
-            if (risk === 'red') return RED;
-            if (risk === 'yellow') return YELLOW;
-            return 'rgba(39, 174, 96, 0.08)';
-        });
-    }
-    if (filter && filter.startsWith('team:')) {
-        const teamName = filter.split(':')[1];
-        return data.map(d => {
-            if (d.team === teamName) return riskColors[dominantRisk(d)];
-            return 'rgba(100, 100, 120, 0.12)';
-        });
-    }
-    return data.map(d => riskColors[dominantRisk(d)]);
-}
+function renderBubble(f) {
+    const data = D.crossTab;
+    const teamOrder = D.teams.map(t => t.name);
+    const riskC = { green: C.green, yellow: C.yellow, red: C.red };
 
-function getBubbleOpacity(data, filter) {
-    if (filter === 'security') {
-        return data.map(d => {
-            const risk = dominantRisk(d);
-            return risk === 'green' ? 0.1 : 0.92;
-        });
-    }
-    if (filter && filter.startsWith('team:')) {
-        const teamName = filter.split(':')[1];
-        return data.map(d => d.team === teamName ? 0.92 : 0.12);
-    }
-    return data.map(() => 0.85);
-}
+    const colors = data.map(d => {
+        if (f === 'security') {
+            const r = domRisk(d);
+            return r === 'red' ? C.red : r === 'yellow' ? C.yellow : 'rgba(39,174,96,0.08)';
+        }
+        if (f && f.startsWith('team:')) {
+            return d.team === f.split(':')[1] ? riskC[domRisk(d)] : 'rgba(100,100,120,0.12)';
+        }
+        return riskC[domRisk(d)];
+    });
 
-function getBubbleBorders(data, filter) {
-    if (filter === 'security') {
-        return data.map(d => {
-            const risk = dominantRisk(d);
-            if (risk === 'red') return { width: 2, color: RED };
-            if (risk === 'yellow') return { width: 2, color: YELLOW };
-            return { width: 0, color: 'transparent' };
-        });
-    }
-    return data.map(() => ({ width: 1, color: CHART_GRID }));
-}
+    const opacities = data.map(d => {
+        if (f === 'security') return domRisk(d) === 'green' ? 0.1 : 0.92;
+        if (f && f.startsWith('team:')) return d.team === f.split(':')[1] ? 0.92 : 0.12;
+        return 0.85;
+    });
 
-function renderBubbleChart(filter) {
-    const colors = getBubbleColors(BUBBLE_DATA, filter);
-    const opacities = getBubbleOpacity(BUBBLE_DATA, filter);
+    const maxCount = Math.max(...data.map(d => d.count));
 
-    const hoverTexts = BUBBLE_DATA.map(d =>
-        `<b>${d.team}</b> — ${d.workflow}<br>` +
-        `Queries: ${d.count}<br>` +
-        `<span style="color:${GREEN}">Green: ${d.green}</span> · ` +
-        `<span style="color:${YELLOW}">Yellow: ${d.yellow}</span> · ` +
-        `<span style="color:${RED}">Red: ${d.red}</span>`
-    );
-
-    const trace = {
-        x: BUBBLE_DATA.map(d => d.team),
-        y: BUBBLE_DATA.map(d => d.workflow),
-        mode: 'markers',
+    Plotly.react('bubbleChart', [{
+        x: data.map(d => d.team),
+        y: data.map(d => d.workflow),
+        mode: 'markers+text',
         marker: {
-            size: BUBBLE_DATA.map(d => d.count),
+            size: data.map(d => d.count),
             color: colors,
             opacity: opacities,
             sizemode: 'area',
-            sizeref: 2 * 80 / (52 ** 2),
-            sizemin: 6,
-            line: {
-                width: getBubbleBorders(BUBBLE_DATA, filter).map(b => b.width),
-                color: getBubbleBorders(BUBBLE_DATA, filter).map(b => b.color),
-            }
+            sizeref: 2 * maxCount / (52 ** 2),
+            sizemin: 5,
+            line: { width: data.map((d,i) => opacities[i] > 0.5 ? 1 : 0), color: C.grid }
         },
-        text: BUBBLE_DATA.map(d => d.count),
+        text: data.map((d,i) => opacities[i] > 0.5 ? d.count : ''),
         textposition: 'middle center',
-        textfont: {
-            color: BUBBLE_DATA.map((d, i) => opacities[i] > 0.5 ? '#FFFFFF' : 'transparent'),
-            size: 10,
-            family: 'Inter'
-        },
-        hovertext: hoverTexts,
+        textfont: { color: '#fff', size: 10, family: 'Inter' },
+        hovertext: data.map(d =>
+            `<b>${d.team}</b> — ${d.workflow}<br>Queries: ${d.count}<br>` +
+            `<span style="color:${C.green}">Green: ${d.green}</span> · ` +
+            `<span style="color:${C.yellow}">Yellow: ${d.yellow}</span> · ` +
+            `<span style="color:${C.red}">Red: ${d.red}</span>`
+        ),
         hoverinfo: 'text',
         type: 'scatter',
-    };
-
-    const layout = {
-        plot_bgcolor: CHART_BG,
-        paper_bgcolor: 'rgba(0,0,0,0)',
+    }], {
+        plot_bgcolor: C.bg, paper_bgcolor: 'rgba(0,0,0,0)',
         font: { color: '#B0B0C0', size: 11, family: 'Inter' },
         margin: { l: 125, r: 15, t: 5, b: 35 },
-        xaxis: {
-            showgrid: false,
-            title: '',
-            tickfont: { size: 12, color: '#B0B0C0' },
-            categoryorder: 'array',
-            categoryarray: ['Platform', 'Checkout', 'Inventory', 'Payments', 'Mobile'],
-        },
-        yaxis: {
-            showgrid: true,
-            gridcolor: CHART_GRID,
-            title: '',
-            tickfont: { size: 11, color: '#B0B0C0' },
-            categoryorder: 'array',
-            categoryarray: ['Docs & Refactoring', 'Impact Analysis', 'Test Generation', 'Code Understanding'],
-        },
-    };
-
-    const config = { responsive: true, displayModeBar: false };
-
-    Plotly.react('bubbleChart', [trace], layout, config);
+        xaxis: { showgrid: false, title: '', tickfont: { size: 12, color: '#B0B0C0' }, categoryorder: 'array', categoryarray: teamOrder },
+        yaxis: { showgrid: true, gridcolor: C.grid, title: '', tickfont: { size: 11, color: '#B0B0C0' }, categoryorder: 'array', categoryarray: WF_ORDER },
+    }, { responsive: true, displayModeBar: false });
 }
 
-function renderTeamChart(filter) {
-    const teams = [...TEAMS].reverse();
-    const highlightTeam = filter && filter.startsWith('team:') ? filter.split(':')[1] : null;
+// ================================================================
+// TEAM CHART — stacked risk bars
+// ================================================================
+function renderTeams(f) {
+    const teams = [...D.teams].reverse();
+    const highlight = f && f.startsWith('team:') ? f.split(':')[1] : null;
+    const isSec = f === 'security';
 
-    let barColors, barValues;
-
-    if (filter === 'security') {
-        barValues = teams.map(t => t.yellow + t.red);
-        barColors = teams.map(() => YELLOW);
-    } else {
-        barValues = teams.map(t => t.queries);
-        barColors = teams.map(t =>
-            highlightTeam
-                ? (t.name === highlightTeam ? ACCENT : 'rgba(100,100,120,0.25)')
-                : ACCENT
-        );
+    function opacity(t) {
+        if (!highlight) return 0.88;
+        return t.name === highlight ? 0.92 : 0.2;
     }
 
-    const trace = {
-        x: barValues,
+    const traces = [
+        { name:'Green', key:'green', color: C.green },
+        { name:'Yellow', key:'yellow', color: C.yellow },
+        { name:'Red', key:'red', color: C.red },
+    ].map(({ name, key, color }) => ({
+        x: teams.map(t => isSec && key === 'green' ? 0 : t[key]),
         y: teams.map(t => t.name),
-        type: 'bar',
-        orientation: 'h',
-        marker: {
-            color: barColors,
-            line: { width: 0 },
-            opacity: 0.88,
-        },
-        text: barValues,
-        textposition: 'outside',
-        textfont: { color: '#B0B0C0', size: 11, family: 'Inter' },
+        name, type: 'bar', orientation: 'h',
+        marker: { color, opacity: teams.map(t => isSec && key === 'green' ? 0 : opacity(t)) },
+        text: teams.map(t => {
+            const val = isSec && key === 'green' ? 0 : t[key];
+            return val > 4 ? val : '';
+        }),
+        textposition: 'inside',
+        textfont: { color: '#fff', size: 10, family: 'Inter' },
         hoverinfo: 'none',
-    };
+    }));
 
-    const layout = {
-        plot_bgcolor: CHART_BG,
-        paper_bgcolor: 'rgba(0,0,0,0)',
+    Plotly.react('teamChart', traces, {
+        barmode: 'stack',
+        plot_bgcolor: C.bg, paper_bgcolor: 'rgba(0,0,0,0)',
         font: { color: '#B0B0C0', size: 11, family: 'Inter' },
-        margin: { l: 70, r: 40, t: 5, b: 15 },
-        xaxis: {
-            showgrid: true,
-            gridcolor: CHART_GRID,
-            title: '',
-            showticklabels: false,
-        },
-        yaxis: {
-            showgrid: false,
-            title: '',
-            tickfont: { size: 12 },
-        },
-        bargap: 0.35,
-    };
-
-    const config = { responsive: true, displayModeBar: false };
-
-    Plotly.react('teamChart', [trace], layout, config);
+        margin: { l: 70, r: 15, t: 5, b: 15 },
+        xaxis: { showgrid: true, gridcolor: C.grid, title: '', showticklabels: false },
+        yaxis: { showgrid: false, title: '', tickfont: { size: 12 } },
+        bargap: 0.3,
+        showlegend: false,
+    }, { responsive: true, displayModeBar: false });
 }
 
 // ================================================================
-// QUERY PROCESSING
+// QUERY HANDLER — responses computed from data
 // ================================================================
-
-const RESPONSES = {
-    security: {
-        html: `<strong>Security & Risk Events This Week</strong> —
-            <span class="highlight-yellow">127 yellow</span> (review required),
-            <span class="highlight-red">32 red</span> (blocked by harness) across all 5 teams.
-            Highest concentration: Platform and Checkout impact analysis.
-            <span class="highlight-accent">11 incidents prevented</span> by automated policy enforcement.`,
-        filter: 'security'
-    },
-    adoption: {
-        html: `<strong>Team Adoption</strong> —
-            <span class="highlight-accent">Platform</span> leads with <strong>154 queries</strong>
-            from 8 engineers (19.3/engineer, 29% of all activity).
-            Ranking: Platform (154) → Checkout (132) → Inventory (112) → Payments (77) → Mobile (55).
-            Platform's usage is 52% Code Understanding — consistent with legacy onboarding needs.`,
-        filter: 'team:Platform'
-    },
-    onboarding: {
-        html: `<strong>Onboarding Impact</strong> —
-            <span class="highlight-accent">277 Code Understanding queries</span> (52% of activity),
-            directly addressing onboarding time. Platform and Checkout account for 150 of those queries.
-            Projected reduction aligns with DX Research: <strong>91 days → 49 days (46% faster)</strong>.`,
-        filter: null
-    },
-    workflow: {
-        html: `<strong>Workflow Distribution</strong> —
-            Code Understanding: <span class="highlight-accent">277 (52%)</span> ·
-            Test Generation: <strong>139 (26%)</strong> ·
-            Impact Analysis: <strong>74 (14%)</strong> ·
-            Docs & Refactoring: <strong>40 (8%)</strong>.
-            Code Understanding dominates in weeks 1–2, matching the phased rollout plan.`,
-        filter: null
-    },
-    reset: {
-        html: null,
-        filter: null
-    }
-};
-
 function matchQuery(input) {
     const q = input.toLowerCase().trim();
-    if (q.includes('security') || q.includes('risk') || q.includes('red') ||
-        q.includes('yellow') || q.includes('blocked') || q.includes('incident') ||
-        q.includes('flagged') || q.includes('danger')) return 'security';
-    if (q.includes('adoption') || q.includes('most') || q.includes('highest') ||
-        q.includes('active') || q.includes('leading') || q.includes('top team') ||
-        q.includes('which team')) return 'adoption';
-    if (q.includes('onboard') || q.includes('ramp') || q.includes('new dev') ||
-        q.includes('new hire') || q.includes('understanding')) return 'onboarding';
+    if (q.includes('security') || q.includes('risk') || q.includes('red') || q.includes('yellow') ||
+        q.includes('blocked') || q.includes('incident') || q.includes('flagged')) return 'security';
+    if (q.includes('adoption') || q.includes('most') || q.includes('highest') || q.includes('active') ||
+        q.includes('leading') || q.includes('top team') || q.includes('which team')) return 'adoption';
+    if (q.includes('onboard') || q.includes('ramp') || q.includes('new dev') || q.includes('understanding')) return 'onboarding';
     if (q.includes('workflow') || q.includes('distribution') || q.includes('breakdown')) return 'workflow';
     if (q.includes('show all') || q.includes('reset') || q.includes('clear')) return 'reset';
     return null;
 }
 
-function handleQuery() {
-    const input = document.getElementById('chatInput');
-    const responseEl = document.getElementById('chatResponse');
-    const badgeEl = document.getElementById('filterBadge');
-    const query = input.value.trim();
+function genResponse(type) {
+    const r = D.risk, t = D.teams, w = D.workflows, total = D.queries.length;
+    const top2Risk = D.riskCells.slice(0, 2).map(c => `<strong>${c.team}</strong> ${c.workflow.toLowerCase()} (${c.yellow} yellow, ${c.red} red)`).join(' and ');
+    const topTeam = t[0];
+    const cuPct = ((D.cuTotal / total) * 100).toFixed(0);
 
-    if (!query) return;
+    switch(type) {
+        case 'security': return {
+            html: `<strong>Security & Risk Events This Week</strong> —
+                <span class="hl-y">${r.yellow} yellow</span> (review required),
+                <span class="hl-r">${r.red} red</span> (blocked by harness) across all ${t.length} teams.
+                Highest concentration: ${top2Risk}.
+                <span class="hl-a">${r.incidents} incidents prevented</span> by automated policy enforcement.`,
+            filter: 'security'
+        };
+        case 'adoption': return {
+            html: `<strong>Team Adoption</strong> —
+                <span class="hl-a">${topTeam.name}</span> leads with <strong>${topTeam.total} queries</strong>
+                from ${topTeam.engineers} engineers (${(topTeam.total/topTeam.engineers).toFixed(1)}/engineer, ${((topTeam.total/total)*100).toFixed(0)}% of all activity).
+                Ranking: ${t.map(x => x.name + ' (' + x.total + ')').join(' → ')}.
+                ${topTeam.name}'s usage is ${cuPct}% Code Understanding — consistent with legacy onboarding needs.`,
+            filter: 'team:' + topTeam.name
+        };
+        case 'onboarding': return {
+            html: `<strong>Onboarding Impact</strong> —
+                <span class="hl-a">${D.cuTotal} Code Understanding queries</span> (${cuPct}% of activity),
+                directly addressing onboarding time. ${t[0].name} and ${t[1].name} are the heaviest users.
+                Projected reduction aligns with DX Research: <strong>91 days → 49 days (46% faster)</strong>.`,
+            filter: null
+        };
+        case 'workflow': return {
+            html: `<strong>Workflow Distribution</strong> — ${w.map(x =>
+                (x.name === 'Code Understanding' ? '<span class="hl-a">' : '<strong>') +
+                x.name + ': ' + x.count + ' (' + ((x.count/total)*100).toFixed(0) + '%)' +
+                (x.name === 'Code Understanding' ? '</span>' : '</strong>')
+            ).join(' · ')}. Code Understanding dominates in weeks 1–2, matching the phased rollout plan.`,
+            filter: null
+        };
+        default: return { html: null, filter: null };
+    }
+}
 
-    const match = matchQuery(query);
+function ask() {
+    const input = document.getElementById('chatIn');
+    const respEl = document.getElementById('resp');
+    const badgeEl = document.getElementById('badge');
+    const q = input.value.trim();
+    if (!q) return;
 
+    const match = matchQuery(q);
     if (!match) {
-        responseEl.innerHTML = `Try: <strong>"Show me security-related queries this week"</strong>,
+        respEl.innerHTML = `Try: <strong>"Show me security-related queries this week"</strong>,
             <strong>"Which team has highest adoption?"</strong>,
             <strong>"Show onboarding impact"</strong>, or <strong>"Show all"</strong> to reset.`;
-        responseEl.classList.add('visible');
+        respEl.classList.add('vis');
         return;
     }
 
-    const response = RESPONSES[match];
+    const res = genResponse(match);
 
-    // Update response text
-    if (response.html) {
-        responseEl.innerHTML = response.html;
-        responseEl.classList.remove('visible');
-        setTimeout(() => responseEl.classList.add('visible'), 50);
+    if (res.html) {
+        respEl.innerHTML = res.html;
+        respEl.classList.remove('vis');
+        setTimeout(() => respEl.classList.add('vis'), 50);
     } else {
-        responseEl.classList.remove('visible');
-        setTimeout(() => { responseEl.innerHTML = ''; }, 400);
+        respEl.classList.remove('vis');
+        setTimeout(() => { respEl.innerHTML = ''; }, 400);
     }
 
-    // Update filter
-    currentFilter = response.filter;
-    renderBubbleChart(currentFilter);
-    renderTeamChart(currentFilter);
-    updateMetrics(currentFilter);
+    filter = res.filter;
+    renderBubble(filter);
+    renderTeams(filter);
+    renderMetrics(filter);
 
-    // Filter badge
-    if (currentFilter) {
-        const label = currentFilter === 'security'
-            ? 'Showing risk events only'
-            : `Highlighting ${currentFilter.split(':')[1]}`;
-        badgeEl.innerHTML = `<span class="filter-badge">${label}
-            <span class="clear-btn" onclick="clearFilter()">✕</span></span>`;
+    if (filter) {
+        const label = filter === 'security' ? 'Showing risk events only' : 'Highlighting ' + filter.split(':')[1];
+        badgeEl.innerHTML = `<span class="fbadge">${label} <span class="x" onclick="clearF()">✕</span></span>`;
     } else {
         badgeEl.innerHTML = '';
     }
 }
 
-function clearFilter() {
-    currentFilter = null;
-    document.getElementById('chatInput').value = '';
-    document.getElementById('chatResponse').classList.remove('visible');
-    setTimeout(() => { document.getElementById('chatResponse').innerHTML = ''; }, 400);
-    document.getElementById('filterBadge').innerHTML = '';
-    renderBubbleChart(null);
-    renderTeamChart(null);
-    updateMetrics(null);
-}
-
-function updateMetrics(filter) {
-    if (filter === 'security') {
-        document.getElementById('m-total').textContent = '159';
-        document.getElementById('m-safe').textContent = '0.0%';
-        document.getElementById('m-safe-detail').textContent = 'filtered to risk only';
-        document.getElementById('m-review').textContent = '127';
-        document.getElementById('m-blocked').textContent = '32';
-        document.getElementById('m-blocked-detail').textContent = '11 incidents prevented';
-
-        document.querySelector('.metric-card.accent .detail').textContent = 'yellow + red events';
-    } else {
-        document.getElementById('m-total').textContent = '530';
-        document.getElementById('m-safe').textContent = '70.0%';
-        document.getElementById('m-safe-detail').textContent = '371 green queries';
-        document.getElementById('m-review').textContent = '127';
-        document.getElementById('m-blocked').textContent = '32';
-        document.getElementById('m-blocked-detail').textContent = '11 incidents prevented';
-
-        document.querySelector('.metric-card.accent .detail').textContent = 'across 5 teams';
-    }
+function clearF() {
+    filter = null;
+    document.getElementById('chatIn').value = '';
+    document.getElementById('resp').classList.remove('vis');
+    setTimeout(() => { document.getElementById('resp').innerHTML = ''; }, 400);
+    document.getElementById('badge').innerHTML = '';
+    renderBubble(null);
+    renderTeams(null);
+    renderMetrics(null);
 }
 
 // ================================================================
 // INIT
 // ================================================================
+loadData().then(data => {
+    D = data;
+    const m = D.meta;
 
-renderBubbleChart(null);
-renderTeamChart(null);
+    // Header
+    document.getElementById('hdate').textContent =
+        `${m.pilot_start} – ${m.pilot_end} · ${D.queries.length} queries · ${D.totalEngineers} engineers`;
 
-// Focus chat input for immediate typing during demo
-document.getElementById('chatInput').focus();
+    // Hide loader, show dashboard
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('dash').classList.add('ready');
 
+    // Render
+    renderMetrics(null);
+    renderBubble(null);
+    renderTeams(null);
+
+    // Focus for demo
+    document.getElementById('chatIn').focus();
+}).catch(err => {
+    document.getElementById('loader').innerHTML =
+        `<div style="color:${C.red};font-size:1rem;font-weight:600">Data not found</div>
+         <div class="msg">Expected: data/codex_usage.json</div>
+         <div class="msg">Run: cd dashboard && python3 -m http.server 8501</div>`;
+});
 </script>
 </body>
 </html>
