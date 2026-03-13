@@ -486,15 +486,15 @@ def slide_6(c):
     accent_bar(c, 0.8*inch, 1.15*inch, 2.5*inch, 3, color=OAI_GREEN)
 
     # Prompt bar at top
-    rect(c, 0.5*inch, 1.5*inch, 12.3*inch, 0.65*inch,
+    rect(c, 0.5*inch, 1.45*inch, 12.3*inch, 0.55*inch,
          fill=white, stroke=MED_GRAY, stroke_width=1, radius=8)
-    text(c, 0.75*inch, 1.6*inch, 'Prompt:',
+    text(c, 0.75*inch, 1.55*inch, 'Prompt:',
          size=12, font=FONT_BOLD, color=MED_GRAY)
-    text(c, 1.65*inch, 1.6*inch,
+    text(c, 1.65*inch, 1.55*inch,
          'Show adoption by team, workflow mix, and review-required events',
          size=13, font=FONT_ITALIC, color=DARK_TEXT)
 
-    # --- Three metric cards ---
+    # --- Three compact metric cards ---
     metrics = [
         ('74%', 'Weekly active rate', OAI_GREEN),
         ('61%', 'Queries for code understanding', ACCENT_BLUE),
@@ -502,66 +502,80 @@ def slide_6(c):
     ]
     for i, (num, label, color) in enumerate(metrics):
         x = 0.5*inch + i * 4.2*inch
-        rect(c, x, 2.4*inch, 3.9*inch, 1.1*inch,
+        rect(c, x, 2.2*inch, 3.9*inch, 0.85*inch,
              fill=white, stroke=color, stroke_width=1.5, radius=8)
-        text(c, x + 0.25*inch, 2.52*inch, num,
-             size=36, font=FONT_BOLD, color=color)
-        text(c, x + 0.25*inch, 3.05*inch, label,
-             size=13, color=DARK_TEXT)
+        text(c, x + 0.2*inch, 2.35*inch, num,
+             size=28, font=FONT_BOLD, color=color)
+        # Position label to the right of the number
+        num_w = c.stringWidth(num, FONT_BOLD, 28)
+        text(c, x + 0.2*inch + num_w + 0.15*inch, 2.42*inch, label,
+             size=12, color=DARK_TEXT)
 
-    # --- Team adoption bar chart ---
-    rect(c, 0.5*inch, 3.75*inch, 7.8*inch, 2.7*inch,
+    # --- ONE unified stacked bar chart (full width) ---
+    # Team × Workflow breakdown with review indicators
+    chart_top = 3.3*inch
+    chart_h = 3.15*inch
+    rect(c, 0.5*inch, chart_top, 12.3*inch, chart_h,
          fill=white, stroke=MED_GRAY, stroke_width=1, radius=8)
-    text(c, 0.75*inch, 3.85*inch, 'Adoption by Team',
+
+    # Chart title
+    text(c, 0.75*inch, chart_top + 0.1*inch, 'Adoption by Team and Workflow',
          size=14, font=FONT_BOLD, color=DARK_NAVY)
 
-    teams = [
-        ('Platform', 154, OAI_GREEN),
-        ('Checkout', 132, ACCENT_BLUE),
-        ('Inventory', 112, ACCENT_PURPLE),
-        ('Payments', 77, ACCENT_ORANGE),
-        ('Mobile', 55, MED_GRAY),
+    # Data: team → (code_understanding, test_gen, docs_refactor, review_required)
+    team_data = [
+        ('Platform',  82, 42, 30, 3),
+        ('Checkout',  71, 38, 23, 4),
+        ('Inventory', 58, 32, 22, 3),
+        ('Payments',  40, 22, 15, 2),
+        ('Mobile',    26, 18, 11, 0),
     ]
-    max_val = 154
-    bar_left = 2.0*inch
-    bar_max_w = 5.8*inch
+    # Colors: green=understanding, blue=test, purple=docs
+    wf_colors = [OAI_GREEN, ACCENT_BLUE, ACCENT_PURPLE]
+    max_total = 154  # Platform total
+    bar_left = 1.8*inch
+    bar_max_w = 8.5*inch
+    bar_h = 0.32*inch
 
-    cy = 4.25*inch
-    for name, val, color in teams:
-        text(c, 0.75*inch, cy, name, size=11, font=FONT_BOLD, color=DARK_TEXT)
-        bar_w = (val / max_val) * bar_max_w
-        rect(c, bar_left, cy - 0.02*inch, bar_w, 0.28*inch, fill=color, radius=4)
-        text(c, bar_left + bar_w + 0.12*inch, cy, str(val),
-             size=11, font=FONT_BOLD, color=color)
-        cy += 0.42*inch
+    cy = chart_top + 0.5*inch
+    for name, cu, tg, dr, rev in team_data:
+        text(c, 0.75*inch, cy + 0.05*inch, name,
+             size=12, font=FONT_BOLD, color=DARK_TEXT)
+        total = cu + tg + dr
+        # Stacked segments
+        sx = bar_left
+        for val, col in zip([cu, tg, dr], wf_colors):
+            seg_w = (val / max_total) * bar_max_w
+            rect(c, sx, cy - 0.02*inch, seg_w, bar_h, fill=col, radius=0)
+            if val > 18:
+                text(c, sx + seg_w/2 - 0.1*inch, cy + 0.04*inch, str(val),
+                     size=9, font=FONT_BOLD, color=white)
+            sx += seg_w
+        # Round corners on full bar
+        # Total label
+        text(c, sx + 0.1*inch, cy + 0.04*inch, str(total),
+             size=11, font=FONT_BOLD, color=DARK_TEXT)
+        # Review indicator (if any)
+        if rev > 0:
+            text(c, sx + 0.55*inch, cy + 0.04*inch,
+                 f'{rev} review',
+                 size=9, font=FONT_BOLD, color=ACCENT_ORANGE)
+        cy += 0.45*inch
 
-    # --- Right panel: what each audience sees ---
-    rect(c, 8.5*inch, 3.75*inch, 4.3*inch, 2.7*inch,
-         fill=white, stroke=MED_GRAY, stroke_width=1, radius=8)
-
-    text(c, 8.7*inch, 3.88*inch, 'Engineering sees:',
-         size=13, font=FONT_BOLD, color=ACCENT_BLUE)
-    eng_items = [
-        '\u2022  Which workflows teams use most',
-        '\u2022  Where teams need more enablement',
-        '\u2022  Adoption rates by team',
+    # Legend
+    legend_y = chart_top + chart_h - 0.35*inch
+    legend_items = [
+        ('Code Understanding', OAI_GREEN),
+        ('Test Generation', ACCENT_BLUE),
+        ('Docs & Refactoring', ACCENT_PURPLE),
+        ('Review required', ACCENT_ORANGE),
     ]
-    cy = 4.2*inch
-    for item in eng_items:
-        text(c, 8.7*inch, cy, item, size=11, color=DARK_TEXT)
-        cy += 0.25*inch
-
-    text(c, 8.7*inch, 5.05*inch, 'IT sees:',
-         size=13, font=FONT_BOLD, color=ACCENT_ORANGE)
-    it_items = [
-        '\u2022  Where human review is still required',
-        '\u2022  Whether usage matches approved rollout',
-        '\u2022  Risk concentration by team/workflow',
-    ]
-    cy = 5.35*inch
-    for item in it_items:
-        text(c, 8.7*inch, cy, item, size=11, color=DARK_TEXT)
-        cy += 0.25*inch
+    lx = 1.8*inch
+    for lbl, col in legend_items:
+        rect(c, lx, legend_y - 0.02*inch, 0.2*inch, 0.18*inch, fill=col, radius=2)
+        text(c, lx + 0.28*inch, legend_y, lbl,
+             size=10, color=DARK_TEXT)
+        lx += c.stringWidth(lbl, FONT, 10) + 0.55*inch
 
     # Bottom callout
     rect(c, 0.5*inch, 6.65*inch, 12.3*inch, 0.55*inch,
@@ -647,8 +661,21 @@ c = canvas.Canvas(output_path, pagesize=(W, H))
 c.setTitle('Governed Codex Adoption - Enterprise Enablement')
 c.setAuthor('OpenAI Enterprise')
 
+slide_titles = [
+    'Title: Governed Codex Adoption',
+    'Four Problems. One Root Cause.',
+    'Codex in the Workflow',
+    'Your Standards = AI\'s Operating Rules',
+    'Start Read-Only. Scale on Evidence.',
+    'The Evidence Layer',
+    'Next Steps',
+]
+
 slides = [slide_1, slide_2, slide_3, slide_4, slide_5, slide_6, slide_7]
 for i, slide_fn in enumerate(slides):
+    # Add bookmark for this slide (must be added before showPage)
+    c.bookmarkPage(f'slide_{i+1}')
+    c.addOutlineEntry(slide_titles[i], f'slide_{i+1}', level=0)
     slide_fn(c)
     if i < len(slides) - 1:
         c.showPage()
