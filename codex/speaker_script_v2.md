@@ -9,7 +9,7 @@
 
 ## [0:00-0:12] Opening — Hook First
 
-> "I'm [Presenter Name]. The issue here is not whether AI can help engineers. It can. The issue is whether you can roll it out in a way developers actually adopt and leadership can safely scale. This session is about how to do both."
+> "I'm Mike. The issue here is not whether AI can help engineers. It can. The issue is whether you can roll it out in a way developers actually adopt and leadership can safely scale. This session is about how to do both."
 
 [BEAT — let the title slide breathe]
 
@@ -59,13 +59,11 @@
 
 ---
 
-## [1:40-2:00] Slide 6: Same Data. Two Audiences.
+## [1:40-2:00] Slide 6: The Evidence Layer
 
 [ADVANCE SLIDE]
 
-> "The same usage data serves two audiences. Engineering leaders see adoption by workflow, where teams are getting stuck, and which use cases are worth scaling. IT sees whether guardrails are being followed and whether usage patterns match the approved rollout.
-
-> Same data, two audiences, one system. Not 'trust us, developers are being careful.' Observable evidence that governance is working."
+> "The same usage data serves two audiences. Engineering leaders can see adoption by team, workflow mix, and where teams need more enablement. IT can see where human review is still required and whether usage matches the approved rollout. This is not a separate product. It is the kind of operational visibility you can generate from Codex usage data."
 
 ---
 

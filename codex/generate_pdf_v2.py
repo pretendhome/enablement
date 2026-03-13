@@ -475,100 +475,100 @@ def slide_5(c):
 
 
 # ================================================================
-# SLIDE 6: THE VISIBILITY LAYER
+# SLIDE 6: THE EVIDENCE LAYER
 # ================================================================
 def slide_6(c):
     rect(c, 0, 0, W, H, fill=SOFT_WHITE)
     accent_bar(c, 0, 0, W, 5, color=OAI_GREEN)
 
-    text(c, 0.8*inch, 0.45*inch, 'Same Data. Two Audiences.',
+    text(c, 0.8*inch, 0.45*inch, 'The Evidence Layer',
          size=28, font=FONT_BOLD, color=DARK_NAVY)
     accent_bar(c, 0.8*inch, 1.15*inch, 2.5*inch, 3, color=OAI_GREEN)
 
-    # Dashboard mockup panel
-    rect(c, 0.5*inch, 1.5*inch, 7.5*inch, 4.2*inch,
+    # Prompt bar at top
+    rect(c, 0.5*inch, 1.5*inch, 12.3*inch, 0.65*inch,
          fill=white, stroke=MED_GRAY, stroke_width=1, radius=8)
-    text(c, 0.7*inch, 1.58*inch, 'VISIBILITY DASHBOARD',
-         size=11, font=FONT_BOLD, color=MED_GRAY, align='center', max_width=7.1*inch)
+    text(c, 0.75*inch, 1.6*inch, 'Prompt:',
+         size=12, font=FONT_BOLD, color=MED_GRAY)
+    text(c, 1.65*inch, 1.6*inch,
+         'Show adoption by team, workflow mix, and review-required events',
+         size=13, font=FONT_ITALIC, color=DARK_TEXT)
 
-    # Axis labels
-    text(c, 0.65*inch, 5.25*inch, 'Teams \u2192',
-         size=10, font=FONT_ITALIC, color=MED_GRAY)
+    # --- Three metric cards ---
+    metrics = [
+        ('74%', 'Weekly active rate', OAI_GREEN),
+        ('61%', 'Queries for code understanding', ACCENT_BLUE),
+        ('12', 'Requests requiring review', ACCENT_ORANGE),
+    ]
+    for i, (num, label, color) in enumerate(metrics):
+        x = 0.5*inch + i * 4.2*inch
+        rect(c, x, 2.4*inch, 3.9*inch, 1.1*inch,
+             fill=white, stroke=color, stroke_width=1.5, radius=8)
+        text(c, x + 0.25*inch, 2.52*inch, num,
+             size=36, font=FONT_BOLD, color=color)
+        text(c, x + 0.25*inch, 3.05*inch, label,
+             size=13, color=DARK_TEXT)
 
-    # Row labels
-    text(c, 0.75*inch, 2.35*inch, 'Understanding', size=9, color=MED_GRAY)
-    text(c, 0.75*inch, 3.35*inch, 'Test Gen', size=9, color=MED_GRAY)
-    text(c, 0.75*inch, 4.35*inch, 'Docs/Refactor', size=9, color=MED_GRAY)
+    # --- Team adoption bar chart ---
+    rect(c, 0.5*inch, 3.75*inch, 7.8*inch, 2.7*inch,
+         fill=white, stroke=MED_GRAY, stroke_width=1, radius=8)
+    text(c, 0.75*inch, 3.85*inch, 'Adoption by Team',
+         size=14, font=FONT_BOLD, color=DARK_NAVY)
 
-    # Column labels
-    cols = [('Platform', 2.5, ACCENT_BLUE), ('Checkout', 3.8, ACCENT_PURPLE),
-            ('Inventory', 5.1, ACCENT_ORANGE), ('Payments', 6.4, OAI_GREEN)]
-    for name, x, color in cols:
-        text(c, x*inch, 2.0*inch, name, size=9, font=FONT_BOLD, color=color)
+    teams = [
+        ('Platform', 154, OAI_GREEN),
+        ('Checkout', 132, ACCENT_BLUE),
+        ('Inventory', 112, ACCENT_PURPLE),
+        ('Payments', 77, ACCENT_ORANGE),
+        ('Mobile', 55, MED_GRAY),
+    ]
+    max_val = 154
+    bar_left = 2.0*inch
+    bar_max_w = 5.8*inch
 
-    # Bubbles — Understanding row
-    bubbles_u = [(2.7, 2.6, 0.38, OAI_GREEN), (3.95, 2.7, 0.28, OAI_GREEN),
-                 (5.15, 2.75, 0.22, OAI_GREEN), (6.55, 2.65, 0.33, OAI_GREEN)]
-    for bx, by, br, bc in bubbles_u:
-        circle(c, bx*inch, by*inch, br*inch, fill=bc)
+    cy = 4.25*inch
+    for name, val, color in teams:
+        text(c, 0.75*inch, cy, name, size=11, font=FONT_BOLD, color=DARK_TEXT)
+        bar_w = (val / max_val) * bar_max_w
+        rect(c, bar_left, cy - 0.02*inch, bar_w, 0.28*inch, fill=color, radius=4)
+        text(c, bar_left + bar_w + 0.12*inch, cy, str(val),
+             size=11, font=FONT_BOLD, color=color)
+        cy += 0.42*inch
 
-    # Bubbles — Test Gen row
-    bubbles_t = [(2.75, 3.55, 0.24, OAI_GREEN), (3.98, 3.5, 0.26, ACCENT_ORANGE),
-                 (5.25, 3.6, 0.15, ACCENT_ORANGE), (6.6, 3.55, 0.22, OAI_GREEN)]
-    for bx, by, br, bc in bubbles_t:
-        circle(c, bx*inch, by*inch, br*inch, fill=bc)
+    # --- Right panel: what each audience sees ---
+    rect(c, 8.5*inch, 3.75*inch, 4.3*inch, 2.7*inch,
+         fill=white, stroke=MED_GRAY, stroke_width=1, radius=8)
 
-    # Bubbles — Docs row
-    bubbles_d = [(2.75, 4.5, 0.17, ACCENT_ORANGE), (4.0, 4.55, 0.13, ACCENT_RED),
-                 (5.25, 4.6, 0.11, ACCENT_ORANGE), (6.6, 4.5, 0.19, ACCENT_ORANGE)]
-    for bx, by, br, bc in bubbles_d:
-        circle(c, bx*inch, by*inch, br*inch, fill=bc)
-
-    # Legend
-    text(c, 1.0*inch, 4.95*inch,
-         'Bubble size = query volume     Color = risk level (green = safe, orange = review, red = flagged)',
-         size=9, font=FONT_ITALIC, color=MED_GRAY)
-    text(c, 2.7*inch, 5.25*inch, 'Team \u00d7 Workflow \u00d7 Risk',
-         size=12, font=FONT_BOLD, color=DARK_NAVY, align='center', max_width=3.5*inch)
-
-    # VP View box
-    rect(c, 8.3*inch, 1.5*inch, 4.5*inch, 1.95*inch,
-         fill=VP_CALLOUT, stroke=ACCENT_ORANGE, stroke_width=1.5, radius=8)
-    text(c, 8.45*inch, 1.62*inch, 'VP View',
-         size=16, font=FONT_BOLD, color=ACCENT_ORANGE)
-    accent_bar(c, 8.45*inch, 1.9*inch, 1.5*inch, 2, color=ACCENT_ORANGE)
-    vp_items = ['\u2022  Usage patterns across teams', '\u2022  Risk indicators by workflow',
-                '\u2022  Compliance trails, audit-ready', '\u2022  Export for security review']
-    cy = 2.05*inch
-    for item in vp_items:
-        text(c, 8.45*inch, cy, item, size=12, color=DARK_TEXT)
-        cy += 0.27*inch
-
-    # Director View box
-    rect(c, 8.3*inch, 3.65*inch, 4.5*inch, 1.95*inch,
-         fill=DIR_CALLOUT, stroke=ACCENT_BLUE, stroke_width=1.5, radius=8)
-    text(c, 8.45*inch, 3.77*inch, 'Director View',
-         size=16, font=FONT_BOLD, color=ACCENT_BLUE)
-    accent_bar(c, 8.45*inch, 4.05*inch, 1.5*inch, 2, color=ACCENT_BLUE)
-    dir_items = ['\u2022  Adoption rates by team', '\u2022  Bottlenecks and friction points',
-                 '\u2022  Impact metrics (coverage, velocity)', '\u2022  Team performance trends']
+    text(c, 8.7*inch, 3.88*inch, 'Engineering sees:',
+         size=13, font=FONT_BOLD, color=ACCENT_BLUE)
+    eng_items = [
+        '\u2022  Which workflows teams use most',
+        '\u2022  Where teams need more enablement',
+        '\u2022  Adoption rates by team',
+    ]
     cy = 4.2*inch
-    for item in dir_items:
-        text(c, 8.45*inch, cy, item, size=12, color=DARK_TEXT)
-        cy += 0.27*inch
+    for item in eng_items:
+        text(c, 8.7*inch, cy, item, size=11, color=DARK_TEXT)
+        cy += 0.25*inch
+
+    text(c, 8.7*inch, 5.05*inch, 'IT sees:',
+         size=13, font=FONT_BOLD, color=ACCENT_ORANGE)
+    it_items = [
+        '\u2022  Where human review is still required',
+        '\u2022  Whether usage matches approved rollout',
+        '\u2022  Risk concentration by team/workflow',
+    ]
+    cy = 5.35*inch
+    for item in it_items:
+        text(c, 8.7*inch, cy, item, size=11, color=DARK_TEXT)
+        cy += 0.25*inch
 
     # Bottom callout
-    rect(c, 0.5*inch, 5.8*inch, 12.3*inch, 0.6*inch,
+    rect(c, 0.5*inch, 6.65*inch, 12.3*inch, 0.55*inch,
          fill=CALLOUT_BG, stroke=OAI_GREEN, stroke_width=1.5, radius=8)
-    text(c, 0.7*inch, 5.9*inch,
-         'Same data, different views. Shared language for what\'s happening and whether it\'s working.',
-         size=14, font=FONT_BOLD, color=DARK_NAVY, align='center', max_width=12*inch)
-
-    # Bottom accent
-    accent_bar(c, 0.5*inch, 6.6*inch, 12.3*inch, 2, color=OAI_GREEN)
-    text(c, 0.5*inch, 6.75*inch,
-         'Example pilot view: adoption, risk, and workflow mix in one place.',
-         size=14, font=FONT_BOLD_ITALIC, color=OAI_GREEN, align='center', max_width=12.3*inch)
+    text(c, 0.7*inch, 6.73*inch,
+         'This is not a separate product. It is the operational visibility Codex usage data generates.',
+         size=13, font=FONT_BOLD, color=DARK_NAVY, align='center', max_width=12*inch)
 
 
 # ================================================================
