@@ -13,10 +13,29 @@ The reusable asset is the loop:
 - refine
 - advance only on pass
 
+But after two real iterations, the program is larger than the loop alone.
+It also needs:
+- program architecture
+- session state
+- a separate performance loop for recorded artifacts
+- a clear split between reusable method and one-off content
+
 ## Files
 
 - [COACHING_LOOP.md](/home/mical/fde/enablement/codex/COACHING_LOOP.md)
 The core interaction model.
+
+- [PROGRAM_ARCHITECTURE.md](/home/mical/fde/enablement/codex/PROGRAM_ARCHITECTURE.md)
+How the full system fits together end to end.
+
+- [SESSION_STATE.md](/home/mical/fde/enablement/codex/SESSION_STATE.md)
+How to preserve progress and resume cleanly.
+
+- [VIDEO_PERFORMANCE_LOOP.md](/home/mical/fde/enablement/codex/VIDEO_PERFORMANCE_LOOP.md)
+The reusable loop for demos, Looms, briefings, and recorded performance.
+
+- [STARTOVER_REFACTOR.md](/home/mical/fde/enablement/codex/STARTOVER_REFACTOR.md)
+What I would do differently if I were designing this program from scratch.
 
 - [CONTENT_LAYERING.md](/home/mical/fde/enablement/codex/CONTENT_LAYERING.md)
 How to separate reusable framework from company-specific or scenario-specific content.
@@ -46,8 +65,10 @@ This system optimizes for:
 ## What Belongs Here
 
 - reusable coaching workflow
+- reusable video and performance workflow
 - scoring patterns
 - progression logic
+- state management patterns
 - session design
 - enablement interaction models
 
