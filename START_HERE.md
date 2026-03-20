@@ -1,87 +1,22 @@
 # Start Here
 
-You're going to set up an AI coaching workspace that helps you build your own personal AI toolkit. It takes about 5 minutes. After that, the coach guides you through everything.
+**The enablement coach has moved to the Palette repo.**
 
-Pick one path below.
+Setup instructions are now built directly into the coach file itself — no separate guide needed.
 
----
+**Go here**: [`palette/skills/enablement/enablement-coach.md`](../palette/skills/enablement/enablement-coach.md)
 
-## Path A: Claude App or Web (no install needed)
+**On GitHub**: [pretendhome/palette → skills/enablement/enablement-coach.md](https://github.com/pretendhome/palette/tree/main/skills/enablement/enablement-coach.md)
 
-### Step 1 — Open Claude
-
-Go to [claude.ai](https://claude.ai) in your browser, or open the Claude desktop app if you have it.
-
-You need a Claude Pro, Team, or Enterprise account. The free tier does not support Projects.
-
-### Step 2 — Create a project
-
-Click **Projects** in the left sidebar, then **Create Project**.
-
-Name it whatever you want. "My AI Toolkit" works. So does "Coach" or your name.
-
-### Step 3 — Add the coaching instructions
-
-Inside your new project, find **Project Instructions** (sometimes called Custom Instructions or System Prompt). It's the text box at the top that tells Claude how to behave in this project.
-
-Copy the entire contents of this file and paste it in:
-
-**[enablement-coach.md](agentic-enablement-system/onboarding/enablement-coach.md)**
-
-(Open that file, select all, copy, paste into Project Instructions.)
-
-### Step 4 — Say hello
-
-Start a new chat inside your project. Say hello, or "let's go", or anything. The coach takes it from there.
-
-That's it.
+Open the file, follow the setup section at the top (5 minutes), say hello. The coach takes it from there.
 
 ---
 
-## Path B: Claude Code CLI (for technical users)
+## What stays here
 
-If you're comfortable with a terminal:
+This `enablement/` directory is the **development workspace** — build history, iterations, methodology patterns, and decisions. The deployable artifact lives in Palette because that's the system learners are being onboarded into.
 
-```bash
-git clone https://github.com/pretendhome/palette.git
-cd palette
-```
-
-Then from the repo root, navigate to the enablement directory and start Claude Code:
-
-```bash
-cd ../enablement
-claude
-```
-
-Claude Code will load the coaching configuration automatically from the project instructions in this directory. Say hello. The coach takes it from there.
-
----
-
-## What happens next
-
-The coach will ask you 3-5 questions about your work, then build a personalized plan. Each session is 20-40 minutes. You go at your own pace.
-
-You'll build:
-- AI assistants that know your business and preferences
-- A system that remembers across conversations
-- A habit of checking that things are working
-- The ability to build new capabilities on your own
-
-No grades. No deadlines. One step at a time.
-
----
-
-## If you get stuck
-
-- The coach is designed to help you through problems. Just describe what happened.
-- If the coach seems confused, paste your progress file at the start of the conversation.
-- If you lose your progress file, the coach can help you rebuild from what you remember.
-
----
-
-## Updates
-
-The coach gets better over time. If you receive a new version of the coaching instructions, replace the old ones in your Project Instructions. The coach adapts automatically.
-
-Latest version: https://github.com/pretendhome/pretendhome/tree/main/enablement/agentic-enablement-system/onboarding/enablement-coach.md
+- `agentic-enablement-system/iterations/` — 8 iterations of build history
+- `agentic-enablement-system/decisions.md` — Decision log
+- `agentic-enablement-system/HANDOFF.md` — Full context for any agent picking this up
+- `codex/` — Reusable methodology patterns (coaching loops, session state, content layering)
