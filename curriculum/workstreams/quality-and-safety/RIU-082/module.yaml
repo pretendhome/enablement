@@ -1,0 +1,80 @@
+riu_id: "RIU-082"
+name: "LLM Safety Guardrails (Content + Tool Use)"
+workstream: "Quality & Safety"
+journey_stage: "foundation"
+classification: "both"
+difficulty: "critical"
+
+learning_objectives:
+  - "Define policy constraints, evidence requirements, and refusal rules for an LLM-powered system"
+  - "Implement content safety guardrails that block harmful outputs without over-refusal"
+  - "Design tool-use boundaries that constrain what actions an LLM agent can take"
+  - "Evaluate managed guardrail services (Bedrock Guardrails, Lakera Guard) against custom implementations"
+  - "Test guardrails against prompt injection and adversarial inputs"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"   # Convergence Brief — safety requirements must be scoped
+    - "RIU-021"   # Golden Set — need evaluation harness to test guardrails
+
+knowledge_library_entries:
+  primary:
+    - "LIB-082"   # Label/category alignment for safety classification
+  supporting:
+    - "LIB-114"   # LLM-as-judge (for evaluating guardrail effectiveness)
+    - "LIB-001"   # Convergence (defining safety requirements)
+
+service_context:
+  candidate_services:
+    - "AWS Bedrock Guardrails"    # Managed content filtering, PII detection, word filters (FREE tier available)
+    - "Lakera Guard"              # Prompt injection detection, content moderation API
+    - "Anthropic Constitutional AI"  # Built-in safety via system prompts and RLHF
+  integration_recipes:
+    - "../../../palette/buy-vs-build/integrations/bedrock_guardrails_content_filter.yaml"
+    - "../../../palette/buy-vs-build/integrations/lakera_guard_prompt_injection.yaml"
+
+estimated_duration:
+  learning: "6-8 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "service_integration"
+required_artifacts:
+  - "policy_rules.yaml — Complete guardrail policy with content rules, tool-use boundaries, and refusal conditions"
+  - "llm_guardrails.md — Architecture document showing where guardrails sit in the request/response pipeline"
+  - "evidence_requirements.md — What evidence the LLM must cite before making claims"
+  - "adversarial_test_results.md — Results of testing guardrails against 10+ adversarial inputs"
+
+rubric_dimensions:
+  policy_completeness:
+    description: "Policy covers content safety, tool-use boundaries, PII handling, and refusal conditions"
+    levels: [insufficient, basic, competent, expert]
+  implementation_quality:
+    description: "Guardrails are implemented at the right pipeline stage and don't degrade normal performance"
+    levels: [insufficient, basic, competent, expert]
+  adversarial_robustness:
+    description: "Guardrails withstand prompt injection, jailbreak attempts, and indirect manipulation"
+    levels: [insufficient, basic, competent, expert]
+  service_evaluation:
+    description: "Managed services evaluated with cost/quality tradeoff analysis against custom implementation"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 3/4, competent on remaining"
+
+exercises:
+  - id: "RIU-082-EX-01"
+    failure_mode: "silent"
+    scenario: "Your LLM agent has guardrails on direct content but none on tool use. The agent can call an email API. A user crafts a prompt that causes the agent to send emails to external addresses with sensitive internal data. Design tool-use guardrails that prevent this."
+    expected_output: "Tool-use policy with: (1) allowlisted recipient domains, (2) content scanning before send, (3) rate limiting on email tool, (4) human-in-the-loop approval for external recipients. Policy encoded in policy_rules.yaml."
+
+  - id: "RIU-082-EX-02"
+    failure_mode: "loud"
+    scenario: "Your guardrails are blocking 40% of legitimate customer service requests because they trigger false positives on the content filter. Customer satisfaction is dropping. Fix the over-refusal without compromising safety."
+    expected_output: "Root cause analysis identifying which rules are over-triggering. Calibrated thresholds with a precision/recall tradeoff documented. A/B test plan comparing original vs adjusted guardrails. Golden set of borderline cases for regression testing."
+
+  - id: "RIU-082-EX-03"
+    failure_mode: "clustered"
+    scenario: "You need to implement guardrails for a system that serves 3 different user populations: internal employees (trusted), business partners (semi-trusted), and end consumers (untrusted). Each population needs different safety boundaries. Design a tiered guardrail system."
+    expected_output: "Tiered policy architecture with: per-population policy files, escalation rules when a partner request requires consumer-level restriction, shared base policy for universal safety, and monitoring dashboard for per-tier violation rates."

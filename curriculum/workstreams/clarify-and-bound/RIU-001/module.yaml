@@ -1,0 +1,71 @@
+riu_id: "RIU-001"
+name: "Convergence Brief (Semantic Blueprint)"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Create a Convergence Brief that aligns stakeholders on goal, constraints, and non-goals within a single session"
+  - "Apply the 5-section Semantic Blueprint template (Problem, Context, Success Criteria, Non-goals, Next Steps) to an underspecified engagement"
+  - "Identify and classify decisions as ONE-WAY DOOR (irreversible) vs TWO-WAY DOOR (reversible)"
+  - "Detect and resolve scope creep by tracing asks back to the Convergence Brief"
+
+prerequisites:
+  required: []
+  recommended: []
+
+knowledge_library_entries:
+  primary:
+    - "LIB-001"   # How do I force convergence when stakeholders have conflicting definitions of success?
+    - "LIB-088"   # 5-section Convergence Brief template
+    - "LIB-004"   # What goes in a Semantic Blueprint?
+  supporting:
+    - "LIB-002"   # ONE-WAY DOOR vs TWO-WAY DOOR decision classification
+    - "LIB-003"   # How to prevent scope re-litigation
+
+service_context: null  # internal_only — no external services
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "convergence_brief.md — Complete Convergence Brief for a realistic multi-stakeholder scenario"
+  - "assumptions.md — Documented assumptions with risk classifications"
+  - "open_questions.md — Prioritized list of unresolved questions with owners and deadlines"
+
+rubric_dimensions:
+  completeness:
+    description: "All 5 sections present and substantive (Problem, Context, Success Criteria, Non-goals, Next Steps)"
+    levels: [insufficient, basic, competent, expert]
+  stakeholder_alignment:
+    description: "Brief addresses conflicting stakeholder perspectives and converges on shared criteria"
+    levels: [insufficient, basic, competent, expert]
+  decision_classification:
+    description: "ONE-WAY DOOR vs TWO-WAY DOOR decisions correctly identified and classified"
+    levels: [insufficient, basic, competent, expert]
+  scope_discipline:
+    description: "Non-goals are explicit, boundary conditions are clear, scope creep vectors are anticipated"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-001-EX-01"
+    failure_mode: "silent"
+    scenario: "You receive a customer request that says 'We want to add AI to our customer service.' Three stakeholders have different ideas: the CTO wants cost reduction, the VP of CS wants higher CSAT, and the CEO wants a press release. Create a Convergence Brief that forces alignment."
+    expected_output: "A complete Convergence Brief where the success criteria are measurable, non-goals prevent AI-for-press-release scope, and the CEO's narrative goal is redirected into a milestone-based communication plan."
+
+  - id: "RIU-001-EX-02"
+    failure_mode: "loud"
+    scenario: "Mid-engagement, the VP of Engineering rejects the agreed Convergence Brief because it excludes their preferred architecture. The brief was signed off by the CTO. Navigate the stakeholder disagreement without restarting the engagement."
+    expected_output: "Updated assumptions.md documenting the new constraint, a proposed TWO-WAY DOOR compromise tested via a time-boxed PoC, and an escalation path if agreement cannot be reached."
+
+  - id: "RIU-001-EX-03"
+    failure_mode: "clustered"
+    scenario: "A multi-team engagement spans 4 business units with no clear owner. Each team has submitted conflicting requirements. Create a Convergence Brief that identifies the actual decision authority and proposes a governance structure."
+    expected_output: "Convergence Brief with RACI-lite matrix, identified single accountable owner, and explicit scope boundaries per business unit with shared success criteria."

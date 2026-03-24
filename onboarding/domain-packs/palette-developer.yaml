@@ -1,0 +1,99 @@
+# Domain Pack: Palette Developer
+#
+# Onboarding configuration for developers entering the Palette enablement system.
+# Defines: welcome flow, placement assessment, tool setup, first module recommendation.
+
+name: "Palette Developer Onboarding"
+version: "0.1.0"
+
+welcome:
+  headline: "Build AI systems that work in production."
+  subline: "117 real problems. Performance-based assessment. No multiple choice."
+  tone: "Direct, respectful, no jargon. Assume the developer is smart but may be new to enterprise AI."
+
+intake_flow:
+  - step: "welcome"
+    action: "Show welcome message and explain the system"
+    content: |
+      Welcome to Palette Developer Enablement.
+
+      This system teaches you to build enterprise AI systems by working through real problems —
+      the same problems practitioners face in production. There are 117 competency areas organized
+      into learning paths. You'll produce artifacts (not answer quizzes) and be evaluated on
+      demonstrated capability.
+
+      Let's figure out where you should start.
+
+  - step: "background"
+    action: "Collect developer background"
+    questions:
+      - "What's your current role? (e.g., ML engineer, backend dev, product manager, student)"
+      - "Have you built an AI-powered system that's been used by real users? (yes/no)"
+      - "What's your primary goal? (learn foundations / build RAG systems / design multi-agent systems / governance and safety / other)"
+
+  - step: "placement"
+    action: "Run adaptive placement assessment"
+    assessment: "assessment/adaptive/placement_assessment.yaml"
+    skip_if: "Developer self-selects 'learn foundations' and has no prior AI system experience"
+
+  - step: "results"
+    action: "Show placement results and recommended path"
+    content: |
+      Based on your background and diagnostic, here's your starting point:
+
+      **Stage**: {placed_stage}
+      **Recommended Track**: {recommended_track}
+      **First Module**: {first_module}
+
+      You can always adjust — this is a starting point, not a locked path.
+
+  - step: "setup"
+    action: "Configure learning environment"
+    tasks:
+      - "Create progress file at ~/my-ai-toolkit/enablement-progress.md"
+      - "Bookmark the curriculum graph for reference"
+      - "Start first module"
+
+track_recommendations:
+  # Map background + placement to recommended track
+  - background: "ML engineer"
+    placed_stage: "foundation"
+    recommended_track: "AI Foundations"
+    first_module: "RIU-001"
+
+  - background: "ML engineer"
+    placed_stage: "retrieval"
+    recommended_track: "RAG Engineer"
+    first_module: "RIU-021"
+
+  - background: "backend developer"
+    placed_stage: "foundation"
+    recommended_track: "AI Foundations"
+    first_module: "RIU-001"
+
+  - background: "product manager"
+    placed_stage: "foundation"
+    recommended_track: "AI Foundations"
+    first_module: "RIU-001"
+
+  - background: "senior engineer"
+    placed_stage: "orchestration"
+    recommended_track: "Agent Architect"
+    first_module: "RIU-510"
+
+  - background: "security/compliance"
+    placed_stage: "foundation"
+    recommended_track: "AI Governance"
+    first_module: "RIU-082"
+
+progress_tracking:
+  format: "markdown"
+  location: "~/my-ai-toolkit/enablement-progress.md"
+  fields:
+    - current_stage
+    - current_track
+    - modules_completed
+    - modules_in_progress
+    - certification_tier
+    - placement_date
+    - last_session_date

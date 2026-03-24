@@ -1,0 +1,39 @@
+digraph curriculum {
+  rankdir=LR;
+  node [shape=box, style=rounded, fontname="Arial"];
+
+  subgraph cluster_Clarify_and_Bound {
+    label="Clarify & Bound";
+    style=dashed;
+    "RIU-001" [label="RIU-001\nConvergence Brief (Semantic Bl", fillcolor="#4CAF50", style="rounded,filled", fontcolor="white"];
+  }
+
+  subgraph cluster_Quality_and_Safety {
+    label="Quality & Safety";
+    style=dashed;
+    "RIU-021" [label="RIU-021\nGolden Set + Offline Evaluatio", fillcolor="#2196F3", style="rounded,filled", fontcolor="white"];
+    "RIU-082" [label="RIU-082\nLLM Safety Guardrails (Content", fillcolor="#4CAF50", style="rounded,filled", fontcolor="white"];
+  }
+
+  subgraph cluster_Core_Logic {
+    label="Core Logic";
+    style=dashed;
+    "RIU-510" [label="RIU-510\nMulti-Agent Workflow Design", fillcolor="#FF9800", style="rounded,filled", fontcolor="white"];
+  }
+
+  subgraph cluster_Adoption_and_Change {
+    label="Adoption & Change";
+    style=dashed;
+    "RIU-603" [label="RIU-603\nEmployee AI Adoption Program", fillcolor="#9C27B0", style="rounded,filled", fontcolor="white"];
+  }
+
+  "RIU-001" -> "RIU-021" [style=dashed];
+  "RIU-001" -> "RIU-082" [style=dashed];
+  "RIU-021" -> "RIU-082" [style=dashed];
+  "RIU-001" -> "RIU-510" [style=solid];
+  "RIU-022" -> "RIU-510" [style=dashed];
+  "RIU-082" -> "RIU-510" [style=dashed];
+  "RIU-001" -> "RIU-603" [style=solid];
+  "RIU-200" -> "RIU-603" [style=solid];
+  "RIU-082" -> "RIU-603" [style=dashed];
+}

@@ -1,0 +1,86 @@
+# Placement Assessment — determines developer's starting stage
+#
+# Adaptive assessment that places developers into the right entry point
+# in the curriculum graph. Uses a short diagnostic (not a full evaluation)
+# to determine current competency level.
+
+name: "Palette Developer Placement Assessment"
+version: "0.1.0"
+purpose: "Determine the developer's current competency stage to personalize their learning path"
+
+stages:
+  - id: "foundation"
+    description: "Core AI development concepts"
+    entry_if: "New to AI system development or coming from pure ML research"
+  - id: "retrieval"
+    description: "RAG, evaluation, search systems"
+    entry_if: "Has built basic AI systems, needs retrieval and evaluation skills"
+  - id: "orchestration"
+    description: "Multi-agent systems, complex workflows"
+    entry_if: "Has built RAG systems, ready for multi-agent coordination"
+  - id: "specialization"
+    description: "Industry-specific, governance, adoption"
+    entry_if: "Has built production AI systems, deepening in a specific domain"
+
+diagnostic_questions:
+  # Stage 1: Can they scope an AI project?
+  - id: "PLACE-01"
+    stage_gate: "foundation"
+    prompt: |
+      A VP asks you to "add AI to customer service." Three stakeholders want different things.
+      In 2-3 sentences: What is the FIRST artifact you produce, and what must it contain?
+    scoring:
+      foundation: "Mentions scoping or requirements gathering but no specific method"
+      retrieval: "Describes a structured brief or document with goals, constraints, and success criteria"
+      orchestration: "Mentions convergence brief, non-goals, decision classification, and stakeholder alignment"
+
+  # Stage 2: Can they evaluate an AI system?
+  - id: "PLACE-02"
+    stage_gate: "retrieval"
+    prompt: |
+      Your RAG system returns relevant documents but the generated answers are sometimes wrong.
+      How do you systematically measure and improve answer quality?
+    scoring:
+      foundation: "Suggests manual testing or asking users"
+      retrieval: "Describes golden set creation, offline evaluation, and specific metrics"
+      orchestration: "Adds LLM-as-judge, calibration against human evaluators, and regression testing"
+
+  # Stage 3: Can they design multi-agent systems?
+  - id: "PLACE-03"
+    stage_gate: "orchestration"
+    prompt: |
+      You need to build a system where a research agent gathers information, an analysis agent
+      processes it, and a writing agent produces a report. What can go wrong at the handoff
+      between agents, and how do you prevent it?
+    scoring:
+      foundation: "Identifies that agents might produce bad output but no structural solution"
+      retrieval: "Describes input/output validation between agents"
+      orchestration: "Covers state management, failure isolation, explicit handoff contracts, and recovery"
+
+  # Stage 4: Can they handle governance and adoption?
+  - id: "PLACE-04"
+    stage_gate: "specialization"
+    prompt: |
+      Your AI system is deployed and technically working, but employees aren't using it.
+      Training completion is 90%. Satisfaction surveys say "fine." What do you do?
+    scoring:
+      foundation: "Suggests more training or better UI"
+      retrieval: "Identifies gap between training and behavior change"
+      orchestration: "Proposes persona mapping, behavior metrics, and champions program"
+      specialization: "Adds adoption playbook, recipe library, per-persona incentives, and LVMH pattern"
+
+placement_algorithm: |
+  Score each response against the rubric.
+  The developer's stage = the highest stage where they score at-level on ALL previous gates.
+
+  Example: If a developer scores orchestration on PLACE-01 and PLACE-02, but foundation on PLACE-03,
+  they are placed at the retrieval stage (the last stage where they were at-level).
+
+  Edge cases:
+  - All foundation → Start at foundation
+  - All orchestration+ → Start at specialization (skip to advanced)
+  - Mixed scores → Place at the lowest gap (they may have knowledge but not demonstrated competency)
+
+evaluation_method: "ai_rubric"
+evaluator_prompt: "assessment/evaluators/ai_rubric_evaluator_prompt.md"
+estimated_duration: "15-20 minutes"

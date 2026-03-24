@@ -1,0 +1,78 @@
+riu_id: "RIU-603"
+name: "Employee AI Adoption Program"
+workstream: "Adoption & Change"
+journey_stage: "specialization"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Design an AI adoption program that drives measurable behavior change, not just training completion"
+  - "Map employee personas with per-persona incentives, constraints, and pain points"
+  - "Create 5-minute live workflow 'recipes' that demonstrate immediate value per persona"
+  - "Build a champions program that drives peer adoption instead of top-down mandates"
+  - "Define adoption metrics focused on behavior change (confidence, time-to-decision, CSAT impact)"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — adoption needs clear goals
+    - "RIU-200"   # Customer Problem Narrative — need to understand the user's world
+  recommended:
+    - "RIU-082"   # LLM Safety Guardrails — adoption programs need safety guardrails for new users
+
+knowledge_library_entries:
+  primary:
+    - "LIB-088"   # Convergence methodology (applied to adoption goals)
+  supporting:
+    - "LIB-001"   # Stakeholder alignment
+    - "LIB-004"   # Semantic Blueprint for adoption program scoping
+
+service_context: null  # internal_only — adoption design is people + process work
+
+estimated_duration:
+  learning: "6-8 hours"
+  assessment: "4-5 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "persona_map.md — At least 4 employee personas with incentives, constraints, and AI readiness levels"
+  - "adoption_playbook.md — Complete adoption program with phased rollout and success metrics"
+  - "recipe_library/ — Minimum 3 persona-specific 5-minute workflow recipes"
+  - "champions_program.md — Peer champion selection criteria, training, and incentive structure"
+  - "adoption_metrics.md — Dashboard specification measuring behavior change, not just usage counts"
+
+rubric_dimensions:
+  persona_depth:
+    description: "Personas are grounded in real roles with specific incentives — not generic archetypes"
+    levels: [insufficient, basic, competent, expert]
+  behavior_change_focus:
+    description: "Program targets observable behavior change, not training completion or login counts"
+    levels: [insufficient, basic, competent, expert]
+  recipe_quality:
+    description: "Recipes demonstrate immediate, tangible value in under 5 minutes for specific personas"
+    levels: [insufficient, basic, competent, expert]
+  champions_design:
+    description: "Champions program creates peer-driven adoption with clear selection, training, and incentives"
+    levels: [insufficient, basic, competent, expert]
+  metrics_rigor:
+    description: "Metrics distinguish between usage (vanity) and behavior change (impact) with baselines and targets"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 4/5 dimensions"
+  PRODUCTION: "expert on 3/5, competent on remaining"
+
+exercises:
+  - id: "RIU-603-EX-01"
+    failure_mode: "silent"
+    scenario: "An AI customer service tool was deployed 6 months ago. Training was completed. Login rates are 85%. But customer satisfaction hasn't improved and agents report the tool is 'too slow.' The real issue: agents were trained on the tool but never changed their workflow. Design a re-adoption program that targets actual behavior change."
+    expected_output: "Root cause analysis showing training-behavior gap. Redesigned recipes that embed AI into existing workflow (not as a separate step). Before/after workflow comparison showing time savings. Metrics tied to call resolution time and CSAT, not tool logins."
+
+  - id: "RIU-603-EX-02"
+    failure_mode: "loud"
+    scenario: "A retail chain's store managers are actively resisting an AI inventory tool. Three managers have formally complained. The union is watching. The tool is actually good — but the rollout was top-down with no manager input. Design a recovery program."
+    expected_output: "Manager persona map with specific resistance reasons. Champions program recruiting the 2-3 managers who are privately positive. Reframed value proposition (AI assists their judgment, doesn't replace it). Feedback loop where manager input shapes the tool's next iteration. Union communication plan."
+
+  - id: "RIU-603-EX-03"
+    failure_mode: "clustered"
+    scenario: "A company with 4 divisions wants one AI adoption program. But divisions have wildly different AI maturity: Division A has been using AI for 2 years, Division D just started. A single program will bore A and overwhelm D. Design an adaptive program."
+    expected_output: "Maturity assessment framework with 4 levels. Per-division starting points with shared milestones. Cross-division champions exchange program (A's champions mentor D's early adopters). Metrics dashboard showing per-division progress with different baselines but common outcome targets."

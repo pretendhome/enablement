@@ -1,0 +1,79 @@
+riu_id: "RIU-021"
+name: "Golden Set + Offline Evaluation Harness"
+workstream: "Quality & Safety"
+journey_stage: "retrieval"
+classification: "both"
+difficulty: "high"
+
+learning_objectives:
+  - "Design and build a golden set of evaluation cases with expected outputs for an AI system"
+  - "Implement an offline evaluation harness that gates deployments on measurable quality"
+  - "Select appropriate evaluation metrics for different output types (extractive, generative, classification)"
+  - "Apply LLM-as-judge patterns with calibration to scale human evaluation"
+  - "Identify when a golden set is too narrow and systematically expand coverage"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"   # Convergence Brief — need clear success criteria before you can measure quality
+
+knowledge_library_entries:
+  primary:
+    - "LIB-113"   # RAG evaluation end-to-end
+    - "LIB-114"   # LLM-as-judge methodology
+  supporting:
+    - "LIB-045"   # Evaluation metric selection
+    - "LIB-001"   # Convergence (need to define what "good" means before measuring)
+
+service_context:
+  candidate_services:
+    - "Braintrust"       # Eval framework, logging, scoring
+    - "Arize AI"         # Production monitoring + eval
+    - "Ragas"            # RAG-specific eval metrics
+  integration_recipes:
+    - "../../../palette/buy-vs-build/integrations/braintrust_eval_harness.yaml"
+    - "../../../palette/buy-vs-build/integrations/arize_ai_llm_monitoring.yaml"
+
+estimated_duration:
+  learning: "6-8 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "golden_set.jsonl — Minimum 25 evaluation cases with expected outputs and difficulty tags"
+  - "eval_runner/ — Working offline evaluation harness that can be run from CLI"
+  - "eval_report.md — Analysis of results with identified failure patterns and improvement plan"
+
+rubric_dimensions:
+  golden_set_quality:
+    description: "Cases cover edge cases, difficulty spectrum, and failure modes — not just happy path"
+    levels: [insufficient, basic, competent, expert]
+  harness_functionality:
+    description: "Evaluation harness runs end-to-end, produces reproducible results, and gates on thresholds"
+    levels: [insufficient, basic, competent, expert]
+  metric_selection:
+    description: "Metrics are appropriate to the output type and aligned with business success criteria"
+    levels: [insufficient, basic, competent, expert]
+  failure_analysis:
+    description: "Report identifies systematic failure patterns (not just listing errors) with actionable fixes"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 3/4, competent on remaining"
+
+exercises:
+  - id: "RIU-021-EX-01"
+    failure_mode: "silent"
+    scenario: "You're given a RAG system that 'works great' according to the team. Build a golden set and evaluation harness. The catch: the golden set provided by the team only covers 3 document types out of 12. Identify the coverage gap and expand the golden set systematically."
+    expected_output: "Expanded golden set covering all 12 document types with difficulty stratification. Eval report showing that the system performs well on the original 3 types but fails on 4 others — with root cause analysis."
+
+  - id: "RIU-021-EX-02"
+    failure_mode: "loud"
+    scenario: "Two domain experts disagree on what the correct answer should be for 8 out of 25 golden set cases. Ground truth is ambiguous. Design a resolution process and implement an evaluation approach that accounts for legitimate disagreement."
+    expected_output: "Inter-annotator agreement measurement, cases tagged as 'contested' with both acceptable answers, and evaluation scoring that handles ambiguity (e.g., any-correct, graded partial credit)."
+
+  - id: "RIU-021-EX-03"
+    failure_mode: "clustered"
+    scenario: "The system handles both factual extraction and creative summarization. A single evaluation metric consistently rates creative summaries as failures because they don't match exact expected outputs. Design a multi-dimensional evaluation that handles both output types."
+    expected_output: "Separate metric tracks for extractive (precision/recall) and generative (LLM-as-judge with calibrated rubric). Composite score with per-dimension pass/fail thresholds."

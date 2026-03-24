@@ -1,0 +1,67 @@
+# Enablement System — Manifest
+# Single source of truth for current versions and paths
+
+system:
+  name: "Palette Developer Enablement & Certification System"
+  version: "0.1.0"
+  status: "phase-1-scaffold"
+  repo: "github.com/pretendhome/enablement"
+
+palette_source:
+  taxonomy: "../palette/taxonomy/releases/v1.3/palette_taxonomy_v1.3.yaml"
+  knowledge_library: "../palette/knowledge-library/v1.4/palette_knowledge_library_v1.4.yaml"
+  riu_classification: "../palette/buy-vs-build/service-routing/v1.0/riu_classification_v1.0.yaml"
+  service_routing: "../palette/buy-vs-build/service-routing/v1.0/service_routing_v1.0.yaml"
+  relationship_graph: "../palette/RELATIONSHIP_GRAPH.yaml"
+  integrations: "../palette/buy-vs-build/integrations/"
+
+curriculum:
+  competency_areas: 117
+  knowledge_entries: 163
+  workstreams: 6
+  specialized_series: 5
+  learning_paths: 5
+
+certification:
+  tiers: [UNVALIDATED, WORKING, PRODUCTION]
+  tracks:
+    - name: "AI Foundations"
+      stage: foundation
+      target_rius: 12
+    - name: "RAG Engineer"
+      stage: retrieval
+      target_rius: 10
+    - name: "Agent Architect"
+      stage: orchestration
+      target_rius: 12
+    - name: "AI Governance"
+      stage: governance
+      target_rius: 10
+    - name: "AI Operations"
+      stage: ops
+      target_rius: 10
+
+assessment:
+  methodology: "portfolio-based, AI-augmented evaluation"
+  anchor_items_per_module: 3
+  total_items_per_module: 15
+  ai_human_agreement_target: 0.80
+  evaluation_layers: ["automated_checks", "ai_rubric", "human_calibration"]
+
+agents:
+  kiro:
+    role: "scaffolding, rigorous generation"
+    trust_tier: WORKING
+    deliverables: ["module.yaml x117", "rubric.yaml x117", "graph.yaml", "exercise stubs x350"]
+  codex:
+    role: "creative design, coherence audit"
+    trust_tier: WORKING
+    deliverables: ["assessment methodology", "coherence audit", "5 journeys", "capstones", "domain packs"]
+  perplexity:
+    role: "deep research"
+    trust_tier: WORKING
+    deliverables: ["certification research", "competitor analysis", "source enrichment"]
+  claude_code:
+    role: "architecture, orchestration, finishing"
+    trust_tier: WORKING
+    deliverables: ["repo structure", "scripts", "evaluator prompts", "integration", "quality verification"]

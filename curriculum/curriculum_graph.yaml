@@ -1,0 +1,72 @@
+generated_from: enablement/curriculum/workstreams/**/module.yaml
+total_nodes: 5
+total_edges: 9
+entry_points:
+- RIU-001
+- RIU-021
+- RIU-082
+graph:
+  nodes:
+  - id: RIU-001
+    name: Convergence Brief (Semantic Blueprint)
+    workstream: Clarify & Bound
+    journey_stage: foundation
+    classification: internal_only
+    difficulty: high
+    path: curriculum/workstreams/clarify-and-bound/RIU-001/module.yaml
+  - id: RIU-021
+    name: Golden Set + Offline Evaluation Harness
+    workstream: Quality & Safety
+    journey_stage: retrieval
+    classification: both
+    difficulty: high
+    path: curriculum/workstreams/quality-and-safety/RIU-021/module.yaml
+  - id: RIU-082
+    name: LLM Safety Guardrails (Content + Tool Use)
+    workstream: Quality & Safety
+    journey_stage: foundation
+    classification: both
+    difficulty: critical
+    path: curriculum/workstreams/quality-and-safety/RIU-082/module.yaml
+  - id: RIU-510
+    name: Multi-Agent Workflow Design
+    workstream: Core Logic
+    journey_stage: orchestration
+    classification: internal_only
+    difficulty: critical
+    path: curriculum/workstreams/core-logic/RIU-510/module.yaml
+  - id: RIU-603
+    name: Employee AI Adoption Program
+    workstream: Adoption & Change
+    journey_stage: specialization
+    classification: internal_only
+    difficulty: high
+    path: curriculum/workstreams/adoption-and-change/RIU-603/module.yaml
+  edges:
+  - from: RIU-001
+    to: RIU-021
+    type: recommended
+  - from: RIU-001
+    to: RIU-082
+    type: recommended
+  - from: RIU-021
+    to: RIU-082
+    type: recommended
+  - from: RIU-001
+    to: RIU-510
+    type: required
+  - from: RIU-022
+    to: RIU-510
+    type: recommended
+  - from: RIU-082
+    to: RIU-510
+    type: recommended
+  - from: RIU-001
+    to: RIU-603
+    type: required
+  - from: RIU-200
+    to: RIU-603
+    type: required
+  - from: RIU-082
+    to: RIU-603
+    type: recommended

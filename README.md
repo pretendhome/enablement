@@ -1,60 +1,80 @@
-# Enablement
+# Palette Developer Enablement & Certification System
 
-Reusable frameworks for helping people learn, build, and perform — from creating enablement content to deploying coaching systems at scale.
+A competency-based developer education and certification platform built on the [Palette knowledge architecture](https://github.com/pretendhome/palette). Works backwards from 117 real enterprise AI problems to teach developers how to solve them — with performance-based assessment scaled through AI-augmented evaluation.
 
-## Two Parts
+---
 
-### Part 1: Enablement Creation (`codex/`)
+## What This Is
 
-Methodology for creating enablement content for any purpose — training videos, coaching programs, onboarding flows, performance drills. The reusable engine: coaching loops, session state, content layering, video performance patterns.
+This system teaches developers how to build enterprise AI systems by mapping each of 117 real problems (competency areas) to learning objectives, educational content, hands-on exercises, and portfolio-based assessment. It is not a course catalog — it is a competency graph where every node is a real problem, every edge is a prerequisite, and every assessment is a demonstration of ability to solve that problem under realistic conditions.
 
-Built and validated through real interview prep cycles (OpenAI, Perplexity, Glean). The patterns generalize to any skill progression context.
+## How It Works
 
-**Key files:**
-- `codex/COACHING_LOOP.md` — Core 6-step interaction model (orient → narrow → retrieve → judge → repair → advance)
-- `codex/PROGRAM_ARCHITECTURE.md` — Full system design end-to-end
-- `codex/SESSION_STATE.md` — How to preserve and resume progress across sessions
-- `codex/VIDEO_PERFORMANCE_LOOP.md` — Reusable loop for recorded demos, Looms, briefings
-- `codex/CONTENT_LAYERING.md` — How to separate reusable framework from scenario-specific content
-- `codex/USE_CASES.md` — Where the pattern applies beyond interview prep
+1. **Placement** — Adaptive assessment determines the developer's current stage
+2. **Learning path** — Personalized journey through the competency graph
+3. **Module** — Each module teaches one competency area (1 RIU = 1 module)
+4. **Assessment** — Portfolio-based: produce artifacts, not answer questions
+5. **Certification** — Three tiers: UNVALIDATED → WORKING → PRODUCTION
 
-### Part 2: Agentic Enablement System (`agentic-enablement-system/`)
+## Architecture
 
-A complete skill and coaching system that onboards anyone — any role, any domain — to building their own personal AI toolkit. Built in 8 iterations, each addressing one problem: learner profiling, language calibration, learning path generation, coaching loops, safety, memory architecture, generalization, and governance tiers.
+Built on Palette's existing data layers:
 
-The system has two layers:
-- **Engine** (universal) — Learner Lens, coaching loop, progress file, verification patterns, safety principles, language rules. Works for any domain.
-- **Domain Packs** (swappable) — Stage definitions, activities, translation tables, worked examples. Currently ships with Agentic Enablement (default), plus example packs for Product Analytics and CRM Automation.
-
-**Key files:**
-- `agentic-enablement-system/PROMPT.md` — The fully assembled coaching prompt (all 8 iterations)
-- `agentic-enablement-system/onboarding/enablement-coach.md` — Drop-in file for Claude Projects (the deployable artifact)
-- `agentic-enablement-system/iterations/` — Build history (8 iterations, each self-contained)
-- `agentic-enablement-system/decisions.md` — Decision log (7 decisions)
-- `agentic-enablement-system/HANDOFF.md` — Full context for any agent picking this up
-
-## How They Relate
-
-Part 1 provides the **methodology patterns** (coaching loops, session state, content layering).
-Part 2 **applies those patterns** to build a complete deployable system.
-
-The Codex coaching loop became the Enablement Loop (Iteration 4). The session state pattern became the progress file architecture (Iteration 6). The content layering pattern enabled the engine/domain pack separation (Iteration 7).
-
-## Where Things Live
-
-| What | Location | Purpose |
-|---|---|---|
-| Enablement frameworks | `enablement/` (here) | Reusable methodology and build artifacts |
-| Enablement skill | `palette/skills/enablement/` | Palette skill pack — what agents load |
-| Deployable coach | `enablement/agentic-enablement-system/onboarding/enablement-coach.md` | Drop into Claude Project, start coaching |
-| Implementations | `implementations/` (monorepo only) | Specific instances where skills get applied |
-
-## Lineage
-
-| Source | What was used |
+| Palette Layer | Enablement Use |
 |---|---|
-| `codex/COACHING_LOOP.md` | Coaching loop → Enablement Loop (Iteration 4) |
-| `codex/SESSION_STATE.md` | State tracking → Progress file (Iteration 6) |
-| `codex/CONTENT_LAYERING.md` | Layer separation → Engine/domain pack (Iteration 7) |
-| `implementations/education/adaptive-learning-architecture/lenses/` | LENS-CHILD-001 → LearnerLens (Iteration 1) |
-| Real learner conversations | Language calibration, safety principles (Iterations 2, 5) |
+| 117 competency areas (RIUs) | Curriculum backbone — each RIU = 1 learning module |
+| 163 knowledge entries | Content source with evidence tiers and learning progressions |
+| 69 integration recipes | Service integration exercises for "both" classified modules |
+| 9 specialized agents | Evaluation agents + content maintenance |
+| Governance tiers | Certification tier model (UNVALIDATED → WORKING → PRODUCTION) |
+
+## Certification Tracks
+
+| Track | Focus | Stage | RIUs |
+|---|---|---|---|
+| AI Foundations | Core AI development skills | foundation | ~12 |
+| RAG Engineer | Retrieval-augmented generation | retrieval | ~10 |
+| Agent Architect | Multi-agent orchestration | orchestration | ~12 |
+| AI Governance | Safety, compliance, risk | governance | ~10 |
+| AI Operations | MLOps, monitoring, deployment | ops | ~10 |
+
+## Assessment Philosophy
+
+No multiple choice. Every assessment requires the developer to produce artifacts — the same artifacts a practitioner would produce in their actual work:
+
+- **Convergence briefs** — can you scope a problem?
+- **Golden sets and eval harnesses** — can you measure quality?
+- **Architecture designs** — can you design and defend a system?
+- **Guardrail implementations** — can you make a system safe?
+- **Adoption programs** — can you drive organizational change?
+
+Evaluated by a three-layer system:
+1. **Automated checks** — artifacts present, code runs, sources cited
+2. **AI rubric evaluation** — Claude evaluates each dimension with calibration exemplars
+3. **Human calibration** — 10% double-scored, agreement target >80%
+
+## Existing Enablement Assets
+
+This repo also contains the enablement methodology that informed the certification system:
+
+### Enablement Creation (`codex/`)
+Reusable methodology patterns: coaching loops, session state, content layering, video performance patterns. Built and validated through real skill progression cycles.
+
+### Agentic Enablement System (`agentic-enablement-system/`)
+Complete coaching system built in 8 iterations — learner profiling, language calibration, learning paths, coaching loops, safety, memory architecture, governance tiers. The engine/domain-pack architecture that informed the certification track design.
+
+## Status
+
+**Phase 1**: Foundation scaffold in progress. Architecture designed. Module schema defined. Agent assignments distributed.
+
+## Built By
+
+Multi-agent collaboration using the [Palette Peers](https://github.com/pretendhome/palette/tree/main/peers) governed message bus:
+- **Claude Code** (claude.analysis) — Architecture, orchestration, finishing
+- **Kiro** (kiro.design) — Module scaffolding, rubric generation, prerequisite graphs
+- **Codex** (codex.implementation) — Assessment methodology, coherence audits, learning paths
+- **Perplexity** (perplexity.research) — Certification best practices, competitor analysis
+
+---
+
+*Competency mapped. Knowledge structured. Assessment governed. Scaled through automation.*

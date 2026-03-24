@@ -1,0 +1,47 @@
+# Module Schema — every module.yaml must conform to this structure
+# Each module maps 1:1 to a Palette RIU
+
+riu_id: "RIU-XXX"                    # Required. Must match a taxonomy entry.
+name: ""                             # Required. Human-readable name from taxonomy.
+workstream: ""                       # Required. Taxonomy workstream.
+journey_stage: ""                    # Required. One of: foundation, retrieval, orchestration, specialization, evaluation, all
+classification: ""                   # Required. internal_only | both (from riu_classification)
+difficulty: ""                       # Required. low | medium | high | critical
+
+learning_objectives:                 # Required. 3-5 objectives derived from problem_pattern + execution_intent.
+  - ""
+
+prerequisites:
+  required: []                       # RIU IDs. From taxonomy dependencies field.
+  recommended: []                    # RIU IDs. Helpful but not blocking.
+
+knowledge_library_entries:
+  primary: []                        # LIB-XXX IDs. Main content sources.
+  supporting: []                     # LIB-XXX IDs. Additional context.
+
+service_context:                     # Only for classification: both
+  candidate_services: []             # Service names from service_routing
+  integration_recipes: []            # Paths to recipe files
+
+estimated_duration:
+  learning: ""                       # E.g., "4-6 hours"
+  assessment: ""                     # E.g., "2-3 hours"
+
+assessment_type: ""                  # portfolio | architecture_defense | diagnosis | service_integration
+required_artifacts:                  # What the learner must produce
+  - ""
+
+rubric_dimensions:                   # 3-5 dimensions derived from success_conditions
+  dimension_name:
+    description: ""
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: ""                        # E.g., "competent on 3/4 dimensions"
+  PRODUCTION: ""                     # E.g., "expert on 2/4, competent on remaining"
+
+exercises:                           # 2-3 exercises derived from failure_modes
+  - id: ""
+    failure_mode: ""                 # silent | loud | clustered
+    scenario: ""
+    expected_output: ""

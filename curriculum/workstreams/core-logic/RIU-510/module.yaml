@@ -1,0 +1,77 @@
+riu_id: "RIU-510"
+name: "Multi-Agent Workflow Design"
+workstream: "Core Logic"
+journey_stage: "orchestration"
+classification: "internal_only"
+difficulty: "critical"
+
+learning_objectives:
+  - "Design a multi-agent workflow with explicit handoff protocols, state management, and failure isolation"
+  - "Define agent boundaries using the Single Responsibility Principle — each agent does one thing well"
+  - "Implement state management patterns that prevent corruption across agent handoffs"
+  - "Design failure isolation so that one agent's failure does not cascade to the entire workflow"
+  - "Evaluate tradeoffs between sequential, parallel, and hierarchical agent coordination patterns"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — multi-agent workflows require clear scope before design
+  recommended:
+    - "RIU-022"   # Prompt Interface Contract — each agent needs a clear interface
+    - "RIU-082"   # LLM Safety Guardrails — agents need safety boundaries
+
+knowledge_library_entries:
+  primary:
+    - "LIB-113"   # RAG eval (for evaluating agent outputs)
+  supporting:
+    - "LIB-001"   # Convergence (scoping multi-agent systems)
+    - "LIB-088"   # Semantic Blueprint (workflow specification)
+
+service_context: null  # internal_only — agentic design is pure architecture
+
+estimated_duration:
+  learning: "8-10 hours"
+  assessment: "4-5 hours"
+
+assessment_type: "architecture_defense"
+required_artifacts:
+  - "multi_agent_design.md — Complete workflow design with agent roles, boundaries, and coordination pattern"
+  - "agent_handoff_protocol.md — Explicit protocol for how agents pass state, including failure cases"
+  - "workflow_state_schema.json — State schema that tracks workflow progress across agents"
+  - "failure_isolation.md — Analysis of failure modes with containment strategies for each"
+
+rubric_dimensions:
+  agent_boundaries:
+    description: "Each agent has a clear, non-overlapping responsibility with explicit input/output contracts"
+    levels: [insufficient, basic, competent, expert]
+  handoff_protocol:
+    description: "State transitions are explicit, validated, and recoverable — no silent state corruption"
+    levels: [insufficient, basic, competent, expert]
+  failure_isolation:
+    description: "Agent failures are contained — cascading failures are prevented through circuit breakers or fallback paths"
+    levels: [insufficient, basic, competent, expert]
+  coordination_pattern:
+    description: "Coordination pattern (sequential/parallel/hierarchical) is justified with tradeoff analysis"
+    levels: [insufficient, basic, competent, expert]
+  defense_quality:
+    description: "Candidate can articulate and defend design decisions under adversarial questioning"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 4/5 dimensions"
+  PRODUCTION: "expert on 3/5, competent on remaining"
+
+exercises:
+  - id: "RIU-510-EX-01"
+    failure_mode: "silent"
+    scenario: "Two agents in a workflow both write to the same state object. Agent A updates a customer's risk score while Agent B simultaneously updates the same customer's recommendation. Neither checks for concurrent modifications. Design the state management that prevents this."
+    expected_output: "State schema with versioned writes (optimistic concurrency), agent-scoped state partitions, and a merge protocol for shared fields. Include a test scenario that would catch the race condition."
+
+  - id: "RIU-510-EX-02"
+    failure_mode: "loud"
+    scenario: "Agent 3 in a 5-agent pipeline fails with an unrecoverable error. Agents 4 and 5 depend on Agent 3's output. Design the failure isolation and recovery strategy."
+    expected_output: "Circuit breaker pattern with fallback paths. Agent 3 failure triggers: (1) state snapshot preservation, (2) notification to orchestrator, (3) either retry with exponential backoff, degraded output path, or human-in-the-loop escalation. Agents 4-5 receive failure signal, not corrupted data."
+
+  - id: "RIU-510-EX-03"
+    failure_mode: "clustered"
+    scenario: "A multi-agent system has 3 agents that can run in parallel (research, analysis, validation) and 2 that must run sequentially (synthesis, delivery). Design the coordination pattern and defend why you chose parallel vs sequential for each stage."
+    expected_output: "Hybrid coordination design with DAG visualization. Parallel stages have independent state partitions and a join gate. Sequential stages have explicit precondition checks. Tradeoff analysis covers latency, cost, and failure blast radius."
