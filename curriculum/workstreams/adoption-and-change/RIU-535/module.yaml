@@ -1,0 +1,83 @@
+riu_id: RIU-535
+name: AI System Documentation Package
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Create a comprehensive AI system documentation package for compliance, audit, or handoff
+- 'Design the package to satisfy multiple audiences: regulators, auditors, and successor teams'
+- Include technical architecture, data flows, decision rationale, and risk documentation
+- Maintain the package as a living document that stays current with system changes
+prerequisites:
+  required:
+  - RIU-530
+  - RIU-102
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-164
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- documentation_package/
+- technical_specification.md
+- risk_assessment.md
+- operational_procedures.md
+- compliance_evidence.md
+rubric_dimensions:
+  completeness:
+    description: Package covers architecture, data flows, decisions, risks, and compliance requirements
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  freshness:
+    description: Documentation stays current with system changes through update policy and staleness detection
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audience_adaptation:
+    description: Package serves regulators, auditors, and successor teams with appropriate detail
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  accessibility:
+    description: Documentation assembled from a single source with clear inventory and ownership
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-535-EX-01
+  failure_mode: silent
+  scenario: Your documentation package was created at launch and never updated. The system has changed significantly in 6
+    months. An auditor reviews the documentation and finds it does not match the current system. The documentation is worse
+    than no documentation because it is misleading.
+  expected_output: 'Documentation freshness policy: review and update on every significant change. Automated staleness detection:
+    alert when documentation is older than system version. Change log linking system changes to documentation updates.'
+- id: RIU-535-EX-02
+  failure_mode: loud
+  scenario: Your documentation package is technically complete but written for engineers. A regulator cannot understand it.
+    They request a rewrite in plain language. The rewrite takes 3 weeks and delays the compliance review.
+  expected_output: 'Multi-audience documentation: technical (for engineers), operational (for auditors), regulatory (for compliance).
+    Each audience layer self-contained. Plain language summary for non-technical readers.'
+- id: RIU-535-EX-03
+  failure_mode: clustered
+  scenario: Your AI system documentation spans 5 repositories, 3 wikis, and 2 shared drives. No single location has the complete
+    picture. An auditor asks for the complete documentation package. Assembling it takes 2 weeks.
+  expected_output: 'Single-source documentation package with links to detailed sources. Documentation inventory: what exists,
+    where, and who owns it. Assembly script that pulls current versions into a single package. Quarterly completeness audit.'

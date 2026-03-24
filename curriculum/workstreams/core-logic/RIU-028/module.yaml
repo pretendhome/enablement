@@ -1,0 +1,87 @@
+riu_id: RIU-028
+name: Schema-Constrained Generation
+workstream: Core Logic
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Implement schema-constrained generation that forces LLM output to conform to a defined structure
+- Evaluate structured output libraries (Instructor, Outlines, native JSON mode) for reliability
+- Design retry and fallback strategies for when constrained generation fails to produce valid output
+- Test schema constraints against edge cases where the LLM struggles to conform
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-117
+  supporting: []
+service_context:
+  candidate_services:
+  - Instructor (Python, most popular structured output library)
+  - Outlines (grammar-constrained generation)
+  - Anthropic native JSON mode (already in Claude API)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- output_schema.json
+- validator/
+- repair_rules.md
+rubric_dimensions:
+  structural_enforcement:
+    description: Output conforms to schema structure with validation at parse time
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  semantic_quality:
+    description: Constrained fields have meaningful values, not just structurally valid placeholders
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cross_model_compatibility:
+    description: Schema works across multiple LLM providers with appropriate adaptation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  partial_knowledge_handling:
+    description: Schema handles uncertainty gracefully with nullable fields rather than forced hallucination
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-028-EX-01
+  failure_mode: silent
+  scenario: Your schema requires a 'confidence' field as a float between 0 and 1. The LLM consistently returns 0.95 for everything
+    — technically valid but meaningless. The schema is enforced but the semantic quality of constrained fields is not validated.
+  expected_output: 'Schema validation + semantic validation: confidence scores must have variance and correlate with actual
+    accuracy. output_schema.json with both structural and semantic constraints. Calibration test comparing stated confidence
+    vs actual correctness.'
+- id: RIU-028-EX-02
+  failure_mode: loud
+  scenario: Your constrained generation works with GPT-4 but fails 30% of the time with Claude — the model produces valid
+    JSON but with different field naming conventions. Your schema is too rigid for cross-model compatibility.
+  expected_output: 'Model-agnostic schema with field name normalization. Per-model output adapter. Retry with reformatted
+    prompt on schema violation. Service evaluation: Instructor vs Outlines vs native JSON mode across models. Fallback: extract
+    fields from free-text if structured generation fails.'
+- id: RIU-028-EX-03
+  failure_mode: clustered
+  scenario: Your schema has 20 required fields. For complex queries, the LLM fills 18 correctly but hallucinates values for
+    2 fields it doesn't have enough context to answer. The schema forces it to produce something rather than admitting uncertainty.
+    Design the schema that handles partial knowledge.
+  expected_output: 'Schema with nullable fields and explicit ''unknown''/''insufficient_context'' values. Per-field confidence
+    scoring. Partial response handling: accept responses with some fields null rather than forcing hallucination. prompt_templates/
+    with instructions to use null for uncertain fields.'

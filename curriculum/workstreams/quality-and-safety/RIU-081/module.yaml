@@ -1,0 +1,87 @@
+riu_id: RIU-081
+name: End-to-End Smoke Tests (Critical Path)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Create minimal end-to-end smoke tests that validate the critical path in production-like conditions
+- Design smoke test runbooks usable by on-call engineers with no prior context
+- Implement pre-deploy and post-deploy smoke test gates with clear pass/fail criteria
+- Handle async pipeline testing where results are not immediately available
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-024
+  - LIB-027
+  supporting:
+  - LIB-029
+  - LIB-035
+  - LIB-036
+  - LIB-039
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- smoke_tests/
+- smoke_test_runbook.md
+rubric_dimensions:
+  critical_path_coverage:
+    description: Smoke tests cover the actual critical path with representative inputs, not just happy-path hardcoded data
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  runbook_usability:
+    description: Runbook enables on-call engineer with no prior context to run, interpret, and act on smoke test results
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  environment_handling:
+    description: Tests handle environment dependencies explicitly with no silent skips or untracked mocks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  async_awareness:
+    description: Tests correctly handle async pipelines with appropriate waits, timeouts, and per-stage validation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-081-EX-01
+  failure_mode: silent
+  scenario: Your smoke tests use hardcoded test inputs that always succeed. In production, 15% of inputs contain Unicode characters,
+    nested JSON, and null fields that the system mishandles. Smoke tests pass but production errors spike after every deploy.
+  expected_output: 'Smoke test inputs derived from production traffic sampling (anonymized). Input diversity requirements:
+    minimum coverage of Unicode, nested structures, nulls, and boundary values. Smoke test that fails if input diversity drops
+    below threshold.'
+- id: RIU-081-EX-02
+  failure_mode: loud
+  scenario: Your smoke tests depend on a third-party API that's unavailable in the staging environment. Tests fail every time
+    in CI, so the team adds a skip flag. The skip flag is never removed. The third-party integration breaks in production
+    undetected for 2 weeks.
+  expected_output: 'Environment dependency inventory for each smoke test. Mock/stub strategy for unavailable dependencies
+    with periodic live validation. Policy: skip flags require expiry date and owner. Smoke test runbook documenting which
+    tests run in which environment.'
+- id: RIU-081-EX-03
+  failure_mode: clustered
+  scenario: 'Your system has an async pipeline: request → queue → processor → result store. Smoke tests check the request
+    endpoint (passes) and the result store (empty — processor hasn''t run yet). The processor is broken but smoke tests show
+    green because they don''t wait for async completion.'
+  expected_output: 'Async-aware smoke test with polling/callback for pipeline completion. Timeout with clear failure message
+    if pipeline doesn''t complete. Per-stage health checks: queue depth, processor heartbeat, result store write rate. End-to-end
+    latency assertion.'

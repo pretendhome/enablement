@@ -1,0 +1,85 @@
+riu_id: RIU-512
+name: Agent Failure Recovery Pattern
+workstream: Quality & Safety
+journey_stage: orchestration
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Implement failure recovery with retry logic, exponential backoff, and circuit breakers
+- Design fallback agent strategies for when primary agents are unavailable or failing
+- Build degraded operation modes that maintain core functionality during partial failures
+- Ensure permanent failures escalate to human operators with full context for resolution
+prerequisites:
+  required:
+  - RIU-510
+  - RIU-062
+  recommended: []
+knowledge_library_entries:
+  primary: []
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- failure_recovery.md
+- retry_policy.yaml
+- fallback_agents.md
+- degraded_modes.md
+rubric_dimensions:
+  retry_design:
+    description: Retry logic has bounded retries, exponential backoff, and circuit breakers preventing resource waste
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  fallback_strategy:
+    description: Fallback chain covers primary, secondary, degraded, and human escalation with no dropped requests
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  degraded_mode_quality:
+    description: Degraded mode maintains core functionality with clear user communication about limitations
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  coordination:
+    description: Multi-agent failure recovery is coordinated to prevent thundering herd and cascading failures
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-512-EX-01
+  failure_mode: silent
+  scenario: Your agent retry logic has no maximum retry count. When an external API goes down, the agent retries indefinitely,
+    consuming resources and blocking other tasks. The retry loop runs for 3 hours before anyone notices. The agent appears
+    'busy' but is accomplishing nothing.
+  expected_output: retry_policy.yaml with max retries, exponential backoff, and circuit breaker. After N failures, agent enters
+    degraded mode. After circuit breaker trips, all requests to that dependency fail fast. Alert on circuit breaker activation.
+- id: RIU-512-EX-02
+  failure_mode: loud
+  scenario: 'All 3 fallback agents for a critical task are exhausted: primary agent times out, secondary agent returns errors,
+    tertiary agent is offline. The system has no further fallback and the user''s request is dropped. Design the escalation
+    path when all fallbacks fail.'
+  expected_output: 'Escalation ladder: primary → secondary → tertiary → degraded response (cached/static) → human escalation
+    with full context. fallback_agents.md with per-agent health checks. degraded_modes.md defining minimum viable response
+    when all agents fail. User notification when operating in degraded mode.'
+- id: RIU-512-EX-03
+  failure_mode: clustered
+  scenario: A shared dependency (vector database) goes down. All 5 agents in your multi-agent system fail simultaneously because
+    they all depend on it. Each agent's independent retry logic creates a thundering herd that prevents the database from
+    recovering. Design coordinated failure recovery.
+  expected_output: 'Shared circuit breaker for common dependencies. Coordinated backoff: agents stagger retries instead of
+    thundering herd. Dependency health dashboard visible to all agents. Recovery protocol: one agent probes dependency health,
+    others wait for green signal. failure_recovery.md with coordinated recovery procedures.'

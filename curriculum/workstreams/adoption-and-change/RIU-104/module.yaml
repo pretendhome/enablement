@@ -1,0 +1,82 @@
+riu_id: RIU-104
+name: Handoff Bundle (Restartability)
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Create a handoff bundle that enables a new person to restart the engagement from documentation alone
+- 'Include all context needed: decisions made, rationale, current state, open questions, and next steps'
+- Design the bundle for restartability, not just record-keeping
+- Test the bundle by having someone unfamiliar with the engagement read it and identify what they would do next
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-147
+  - LIB-171
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- handoff_bundle/
+- decisions.md
+- open_questions.md
+- next_steps.md
+rubric_dimensions:
+  restartability:
+    description: New person can continue engagement from bundle alone without original team
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  decision_context:
+    description: Decisions documented with rationale, alternatives considered, and rejection reasons
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  navigability:
+    description: Bundle is structured and navigable with clear reading path
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cross_workstream:
+    description: Multi-workstream engagements show dependencies and integration points
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-104-EX-01
+  failure_mode: silent
+  scenario: Your handoff bundle includes all documents created during the engagement. But it does not explain why decisions
+    were made. The new person reads the architecture doc but does not understand why Option B was chosen over Option A. They
+    revisit the decision, wasting 2 weeks.
+  expected_output: 'Decision log with rationale for every significant decision. Rejected alternatives documented with reasons.
+    Current state summary: what is done, what is in progress, what is blocked. Open questions with context.'
+- id: RIU-104-EX-02
+  failure_mode: loud
+  scenario: Your handoff bundle is 500 pages. The new person cannot find what they need. Critical information is buried in
+    meeting notes. The bundle is comprehensive but not navigable.
+  expected_output: 'Structured handoff template: 1-page executive summary, decision log, current state, open questions, next
+    steps. Full documentation as appendix. Table of contents with hyperlinks. Reading guide: what to read first.'
+- id: RIU-104-EX-03
+  failure_mode: clustered
+  scenario: Your engagement involved 3 workstreams running in parallel. Each workstream has its own documents, decisions,
+    and state. The handoff bundle treats them independently. The new person does not understand how the workstreams interact
+    or depend on each other.
+  expected_output: Cross-workstream dependency map. Unified timeline showing parallel progress. Integration points between
+    workstreams documented. Handoff bundle with both per-workstream and cross-workstream views.

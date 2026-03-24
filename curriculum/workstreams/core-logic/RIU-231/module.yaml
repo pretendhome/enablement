@@ -1,0 +1,82 @@
+riu_id: RIU-231
+name: Document Chunking Strategy
+workstream: Core Logic
+journey_stage: retrieval
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design a document chunking strategy that preserves semantic coherence within chunks
+- Implement chunking that handles different document types (prose, tables, code, mixed)
+- Optimize chunk size for retrieval quality vs embedding cost tradeoffs
+- Test chunking quality by measuring retrieval accuracy with different strategies
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-151
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- chunking_strategy.md
+- chunk_validator/
+rubric_dimensions:
+  semantic_coherence:
+    description: Chunks preserve semantic meaning with no critical information split across boundaries
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  format_handling:
+    description: Tables, code, lists, and mixed formats chunked as atomic units with context preserved
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  size_optimization:
+    description: Chunk size optimized for retrieval quality with adaptive sizing based on document characteristics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  retrieval_impact:
+    description: Chunking strategy validated by measuring retrieval accuracy improvement
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-231-EX-01
+  failure_mode: silent
+  scenario: Your chunking splits documents at fixed 500-token boundaries. A critical paragraph explaining a contract clause
+    is split across two chunks. Neither chunk alone makes sense. Retrieval returns one half, and the AI gives an incomplete
+    answer. The user doesn't know information was lost at the chunk boundary.
+  expected_output: 'Semantic chunking: split at paragraph/section boundaries, not fixed token counts. Overlap between chunks
+    to preserve boundary context. Chunk coherence test: can each chunk be understood independently? Retrieval test comparing
+    fixed vs semantic chunking on answer quality.'
+- id: RIU-231-EX-02
+  failure_mode: loud
+  scenario: Your chunking strategy works for prose but destroys tables. A financial report table is split into rows across
+    5 chunks. Each chunk has random table rows without headers. The AI can't interpret the data. Design chunking for mixed-format
+    documents.
+  expected_output: 'Format-aware chunking: detect tables, code blocks, and lists as atomic units. Table chunks include headers
+    with every chunk. Code blocks kept intact. Mixed-format document parser that identifies format boundaries before chunking.'
+- id: RIU-231-EX-03
+  failure_mode: clustered
+  scenario: Your document corpus has 50K documents ranging from 100 tokens to 500K tokens. Small documents are over-chunked
+    (1 chunk per sentence), large documents are under-chunked (chunks too big for embedding model context). Design adaptive
+    chunking.
+  expected_output: 'Adaptive chunk sizing based on document length and density. Minimum and maximum chunk sizes. Hierarchical
+    chunking for large documents: section → subsection → paragraph. Chunk size optimization: measure retrieval quality at
+    different sizes and find the sweet spot.'

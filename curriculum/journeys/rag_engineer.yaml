@@ -1,0 +1,50 @@
+track: "RAG Engineer"
+stage_focus: "retrieval"
+capstone_reference: "../../assessment/capstones/rag_engineer_capstone.md"
+estimated_total_duration: "65-85 hours"
+
+entry_requirements:
+  placement_stage: "Foundation complete or equivalent"
+  prerequisites:
+    - "AI Foundations track, or proven competence in RIU-001, RIU-006, RIU-022, and RIU-080"
+  expected_baseline:
+    - "Can define success metrics for an AI feature"
+    - "Can work with schemas, prompts, and test fixtures"
+
+key_riu_ids:
+  - "RIU-001"
+  - "RIU-006"
+  - "RIU-021"
+  - "RIU-026"
+  - "RIU-027"
+  - "RIU-032"
+  - "RIU-033"
+  - "RIU-080"
+  - "RIU-086"
+  - "RIU-524"
+
+module_sequence:
+  - riu_id: "RIU-001"
+    rationale: "Reconfirm scope and user intent before retrieval design starts."
+  - riu_id: "RIU-006"
+    rationale: "RAG quality is meaningless without explicit success metrics and acceptance checks."
+  - riu_id: "RIU-021"
+    rationale: "Build the evaluation harness before tuning retrieval so progress can be measured."
+  - riu_id: "RIU-026"
+    rationale: "Introduce hybrid similarity as the first retrieval mechanism."
+  - riu_id: "RIU-027"
+    rationale: "Improve ranking quality after baseline retrieval exists."
+  - riu_id: "RIU-032"
+    rationale: "Teach structured extraction from retrieved context, using RIU-021 as the evaluation backbone."
+  - riu_id: "RIU-033"
+    rationale: "Add soft classification and abstention patterns for downstream routing and analytics."
+  - riu_id: "RIU-080"
+    rationale: "Lock retrieval and extraction interfaces with contract tests."
+  - riu_id: "RIU-086"
+    rationale: "Expand beyond a narrow golden set with regression and metamorphic checks."
+  - riu_id: "RIU-524"
+    rationale: "Close with production quality monitoring so retrieval drift is visible after deployment."
+
+ordering_notes:
+  - "The track is intentionally evaluation-first. Learners should not optimize retrieval before they can measure failure patterns."
+  - "RIU-524 is deferred until the end because monitoring is most useful once a full retrieval pipeline exists."

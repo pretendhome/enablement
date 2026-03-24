@@ -1,0 +1,49 @@
+track: "AI Foundations"
+slug: "ai_foundations"
+stage_focus: "foundation"
+tier: "WORKING"
+
+description: "The default on-ramp. Teaches practitioners to bound ambiguous engagements, define success, manage decisions, and implement basic AI safety controls."
+
+capstone_reference: "../../assessment/capstones/ai_foundations_capstone.md"
+journey_reference: "../../curriculum/journeys/ai_foundations.yaml"
+
+estimated_duration:
+  learning: "50-65 hours"
+  assessment: "20-25 hours"
+  total: "70-90 hours"
+
+entry_requirements:
+  prior_tier: "UNVALIDATED"
+  prerequisites: []
+  expected_baseline:
+    - "Can participate in technical discovery conversations"
+    - "Can read basic architecture and requirements documents"
+
+riu_sequence:
+  - "RIU-001"  # Convergence Brief
+  - "RIU-002"  # Stakeholder Map + RACI-lite
+  - "RIU-003"  # Decision Log + One-Way Door Registry
+  - "RIU-004"  # Problem → Workstream Decomposition
+  - "RIU-005"  # Scope Freeze + Phased Delivery Contract
+  - "RIU-006"  # Success Metrics Charter
+  - "RIU-007"  # Constraint Profile Capture
+  - "RIU-008"  # Assumptions Register
+  - "RIU-009"  # Risk Register + Mitigation Plan
+  - "RIU-022"  # Prompt Interface Contract
+  - "RIU-080"  # Contract Tests (Input/Output)
+  - "RIU-082"  # LLM Safety Guardrails
+
+riu_count: 12
+
+certification_thresholds:
+  per_module: "competent on 3/4 rubric dimensions (per module threshold)"
+  capstone: "competent on all integrated dimensions"
+
+career_positioning:
+  target_roles:
+    - "Junior AI Engineer"
+    - "AI-curious Software Engineer"
+    - "Technical Project Manager entering AI"
+  value_proposition: "Proves you can take an ambiguous AI request and turn it into a bounded, testable, safety-aware delivery plan"
+  differentiator: "Portfolio-based — shows real artifacts, not exam scores"

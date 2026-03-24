@@ -1,0 +1,86 @@
+riu_id: RIU-511
+name: Agent State Management Pattern
+workstream: Core Logic
+journey_stage: orchestration
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design agent state management that persists context across multi-step tasks
+- Implement state serialization that enables checkpoint/restore for long-running agent workflows
+- Handle state conflicts when multiple agents operate on shared state concurrently
+- Build state cleanup procedures that prevent memory leaks and stale state accumulation
+prerequisites:
+  required:
+  - RIU-510
+  recommended: []
+knowledge_library_entries:
+  primary:
+    - LIB-097   # What must be logged in decisions.md for restartability?
+  supporting:
+    - LIB-077   # How do I implement advanced agent reasoning frameworks for production deployment?
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- state_management.md
+- checkpoint_schema.json
+- recovery_procedures.md
+- state_validators/
+rubric_dimensions:
+  persistence:
+    description: State persisted with checkpoint/restore enabling recovery from crashes
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scalability:
+    description: State size managed with compaction and tiering to prevent memory issues in long sessions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  concurrency:
+    description: Concurrent state access handled with conflict detection and resolution
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cleanup:
+    description: Stale state cleaned up with lifecycle management preventing accumulation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-511-EX-01
+  failure_mode: silent
+  scenario: Your agent maintains conversation state in memory. After 2 hours of interaction, the state grows to 50MB. The
+    agent slows down as it processes increasingly large context. Eventually it hits a memory limit and silently drops old
+    state, losing critical context from early in the conversation.
+  expected_output: 'State size monitoring with alerts. State compaction: summarize old context while preserving key decisions.
+    Tiered state: hot (recent, in-memory), warm (older, serialized), cold (archived). State size budget per agent with compaction
+    triggers.'
+- id: RIU-511-EX-02
+  failure_mode: loud
+  scenario: Your agent crashes mid-task. When restarted, it has no memory of what it was doing. The user must re-explain the
+    entire context. The agent has no checkpoint/restore capability.
+  expected_output: 'Checkpoint serialization after each significant state change. Restore procedure that loads last checkpoint
+    on restart. State schema versioning for backward compatibility. Recovery test: crash agent mid-task, restore, verify it
+    continues correctly.'
+- id: RIU-511-EX-03
+  failure_mode: clustered
+  scenario: Two agents work on the same project concurrently. Agent A updates the project plan while Agent B updates the task
+    list. Both read the shared state, make changes, and write back. Agent B's write overwrites Agent A's changes. Design concurrent
+    state management.
+  expected_output: 'Optimistic concurrency: version stamps on shared state, conflict detection on write. Merge strategy for
+    non-conflicting changes. Conflict resolution: last-writer-wins for independent fields, human resolution for conflicting
+    fields. State locking for critical sections.'

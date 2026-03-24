@@ -1,0 +1,82 @@
+riu_id: RIU-100
+name: Capability Statement (What/Why/How)
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Write a capability statement that clearly communicates what the AI system does, why it exists, and how it works
+- 'Design the statement for multiple audiences: technical, business, and executive'
+- Include explicit limitations and non-capabilities to set accurate expectations
+- Test the statement by having someone unfamiliar with the system read it and explain back what they understood
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-027
+  - LIB-044
+  supporting:
+  - LIB-045
+  - LIB-047
+  - LIB-048
+  - LIB-049
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- capability_statement.md
+rubric_dimensions:
+  clarity:
+    description: Statement clearly communicates what, why, and how for target audience
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  limitation_transparency:
+    description: Limitations and non-capabilities explicitly documented with examples
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audience_adaptation:
+    description: Statement adapted for technical, business, and executive audiences
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  testability:
+    description: Statement tested with unfamiliar readers for comprehension accuracy
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-100-EX-01
+  failure_mode: silent
+  scenario: Your capability statement says the system can answer any question about company policy. Users ask questions outside
+    the trained domain and get confident but wrong answers. The statement overpromised because limitations were not documented.
+  expected_output: 'Capability statement with explicit scope: what it can do, what it cannot do, and where it might be wrong.
+    Limitation section with specific examples. User-facing version with clear boundaries.'
+- id: RIU-100-EX-02
+  failure_mode: loud
+  scenario: Your capability statement is a 20-page technical document. The sales team cannot explain the product to customers.
+    The executive team cannot explain it to the board. The statement is accurate but unusable.
+  expected_output: 'Tiered capability statement: 1-paragraph executive summary, 1-page business overview, full technical document.
+    Each tier self-contained. Tested with target audience for comprehension.'
+- id: RIU-100-EX-03
+  failure_mode: clustered
+  scenario: Your AI platform has 5 capabilities that interact. The capability statement describes each independently. Users
+    do not understand how capabilities combine or conflict. A user tries to use Capability A and Capability C together, which
+    produces unexpected results.
+  expected_output: 'Capability interaction matrix: which capabilities work together, which conflict. Combined capability examples.
+    Known interaction issues documented. User guide showing recommended capability combinations.'

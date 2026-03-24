@@ -1,0 +1,77 @@
+riu_id: RIU-607
+name: Context Compaction for Long Engagements
+workstream: Core Logic
+journey_stage: specialization
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Design a context compaction strategy that preserves critical information while reducing token usage
+- Implement summarization checkpoints that capture decision history, open questions, and current state
+- Evaluate compaction quality by measuring information loss against downstream task performance
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-147
+  - LIB-171
+  supporting:
+  - LIB-172
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- Updated MEMORY.md
+- Daily log entry with continuation note
+- Updated decisions.md
+rubric_dimensions:
+  information_preservation:
+    description: Critical information (decision history, rationale, constraints) preserved through compaction
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  task_awareness:
+    description: Compaction respects active working context and doesn't disrupt in-progress tasks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_session_quality:
+    description: Cascading compaction across sessions preserves engagement-level context
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 3 dimensions, with mandatory competence in information_preservation
+  PRODUCTION: expert on 2/3, competent on remaining
+exercises:
+- id: RIU-607-EX-01
+  failure_mode: silent
+  scenario: Your long engagement has 50K tokens of context. You compact it to 5K tokens using summarization. The summary captures
+    decisions made but drops the reasoning behind them. When a decision is questioned later, the agent can't explain why it
+    was made — the rationale was lost in compaction.
+  expected_output: 'Compaction template preserving: decisions + rationale, open questions, constraints, and current state.
+    Information loss test: ask questions about compacted context and measure answer quality vs full context. Tiered compaction:
+    recent context full, older context summarized, ancient context archived.'
+- id: RIU-607-EX-02
+  failure_mode: loud
+  scenario: Your compaction runs automatically every 10K tokens. During a critical debugging session, the compaction summarizes
+    away the error logs and stack traces that the agent was analyzing. The agent loses its working context mid-task.
+  expected_output: 'Task-aware compaction: don''t compact active working context. Compaction triggers based on context age,
+    not just size. Protected context zones: mark critical sections as non-compactable. Manual compaction override for the
+    human to control timing.'
+- id: RIU-607-EX-03
+  failure_mode: clustered
+  scenario: A multi-day engagement involves 5 work sessions. Each session's context must be compacted for the next session.
+    By session 5, the compacted context has been summarized 4 times. Critical details from session 1 are completely lost through
+    cascading summarization.
+  expected_output: 'Hierarchical compaction: session summaries + engagement-level summary. Key artifacts preserved verbatim
+    (decisions.md, convergence brief). Compaction quality test: can session 5 agent answer questions about session 1 decisions?
+    Append-only decision log that survives all compaction.'

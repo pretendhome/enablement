@@ -1,0 +1,85 @@
+riu_id: RIU-232
+name: Deduplication System
+workstream: Core Logic
+journey_stage: retrieval
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Implement a deduplication system that identifies duplicates across exact, near-exact, and semantic similarity
+- Design merge strategies that preserve the best version without data loss
+- Handle false merge prevention for items that are similar but legitimately distinct
+- Test deduplication at scale with metrics for precision (no false merges) and recall (no missed duplicates)
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-151
+  - LIB-152
+  supporting:
+  - LIB-163
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- dedup_strategy.md
+- dedup_rules.yaml
+- dedup_tests/
+rubric_dimensions:
+  match_accuracy:
+    description: Duplicates detected across exact, fuzzy, and semantic similarity with calibrated confidence
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  false_merge_prevention:
+    description: Similar but distinct records preserved with multi-field matching and human review for ambiguous cases
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scale_handling:
+    description: Deduplication works at production scale with blocking strategies and incremental processing
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  merge_quality:
+    description: Merged records preserve best data from each source with conflict resolution rules
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-232-EX-01
+  failure_mode: silent
+  scenario: Your deduplication uses exact string matching. Two customer records — 'John Smith, 123 Main St' and 'Jon Smith,
+    123 Main Street' — are not detected as duplicates. The customer gets duplicate communications and conflicting account
+    information.
+  expected_output: 'Multi-level matching: exact → fuzzy string (edit distance) → phonetic (Soundex/Metaphone) → address normalization.
+    Confidence scoring per match level. Human review queue for medium-confidence matches. Dedup metrics: precision and recall
+    on labeled test set.'
+- id: RIU-232-EX-02
+  failure_mode: loud
+  scenario: Your deduplication aggressively merges records. It merges 'John Smith at Company A' with 'John Smith at Company
+    B' — two different people with the same name. The merged record has conflicting data. The false merge causes incorrect
+    billing.
+  expected_output: 'Merge criteria requiring multiple matching fields (name + address OR name + email OR name + phone). Blocking
+    strategy: only compare records within the same partition (e.g., same zip code). Merge preview with human approval for
+    ambiguous cases. Undo capability for false merges.'
+- id: RIU-232-EX-03
+  failure_mode: clustered
+  scenario: Your system ingests data from 3 sources with different schemas and ID systems. The same entity appears in all
+    3 with different field names, formats, and completeness. Design cross-source deduplication at 10M records.
+  expected_output: Schema normalization layer before dedup. Blocking strategy to reduce comparison space (10M × 10M is infeasible).
+    Incremental dedup for new records against existing corpus. Cross-source entity resolution with source-priority rules for
+    conflicting fields. Performance benchmark at 10M scale.

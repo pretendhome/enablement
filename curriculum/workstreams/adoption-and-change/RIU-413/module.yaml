@@ -1,0 +1,84 @@
+riu_id: RIU-413
+name: Customer Value Demo Creation
+workstream: Adoption & Change
+journey_stage: specialization
+classification: both
+difficulty: medium
+learning_objectives:
+- Create a customer value demo that demonstrates measurable impact on the customer's specific problem
+- Design the demo using the customer's own data or realistic proxies
+- Build the demo narrative around business outcomes, not technical features
+- Handle demo failures gracefully with prepared fallback scenarios
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-125
+  - LIB-127
+  supporting: []
+service_context:
+  candidate_services:
+  - Gamma (AI-native slides/presentations, very high signal)
+  - Lovable (AI-generated app demos, high signal)
+  - Canva AI (presentation design, medium signal)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- demo_script.md
+- demo_environment/
+- demo_data/
+rubric_dimensions:
+  customer_relevance:
+    description: Demo uses customer-specific data and addresses their specific problem
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  outcome_focus:
+    description: Demo narrative centered on business outcomes, not technical features
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  measurement_credibility:
+    description: Improvement metrics have transparent, reproducible methodology
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audience_handling:
+    description: Demo serves multiple decision-makers with appropriate depth per audience
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-413-EX-01
+  failure_mode: silent
+  scenario: Your demo uses generic sample data. The customer watches politely but does not connect it to their problem. The
+    demo is technically impressive but fails to demonstrate value for their specific situation.
+  expected_output: Demo using customer's own data (anonymized if needed) or realistic proxies matching their domain. Before/after
+    comparison showing measurable improvement. Customer-specific success metrics in the demo.
+- id: RIU-413-EX-02
+  failure_mode: loud
+  scenario: Your demo shows a 50% improvement metric. The customer asks how you measured it. You cannot explain the methodology.
+    The impressive number loses credibility because the measurement is not transparent.
+  expected_output: Measurement methodology documented and presented alongside results. Baseline definition explained. Confidence
+    interval on improvement claims. Reproducible measurement that customer can verify independently.
+- id: RIU-413-EX-03
+  failure_mode: clustered
+  scenario: 'Your customer has 3 decision-makers: technical lead (wants to see how it works), business owner (wants to see
+    ROI), and procurement (wants to see cost comparison). A single demo cannot satisfy all three in 30 minutes.'
+  expected_output: 'Modular demo: 10 min shared value proposition, then audience-specific deep dives. Pre-demo discovery to
+    understand each decision-maker''s priorities. Leave-behind materials tailored per decision-maker.'

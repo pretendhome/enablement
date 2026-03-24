@@ -3,8 +3,9 @@
 
 system:
   name: "Palette Developer Enablement & Certification System"
-  version: "0.1.0"
-  status: "phase-1-scaffold"
+  version: "0.3.0"
+  status: "phase-2-hardening"
+  updated: "2026-03-24"
   repo: "github.com/pretendhome/enablement"
 
 palette_source:
@@ -17,7 +18,7 @@ palette_source:
 
 curriculum:
   competency_areas: 117
-  knowledge_entries: 163
+  knowledge_entries: 167
   workstreams: 6
   specialized_series: 5
   learning_paths: 5
@@ -48,20 +49,48 @@ assessment:
   ai_human_agreement_target: 0.80
   evaluation_layers: ["automated_checks", "ai_rubric", "human_calibration"]
 
+validation:
+  integrity: "PASS (4 warnings — zero-KL modules pending)"
+  integrity_checks: 6
+  prerequisites: "PASS (no cycles in required or recommended, DAG valid)"
+  coverage: "117/117 RIUs (100%), 134/167 KL (80.2%)"
+  modules_hand_crafted: 117
+  modules_templated: 0
+  calibration_exemplars: 1 reference (RIU-002), 2 legacy (pending revision)
+  threshold_engine: "assessment/evaluators/threshold_engine.py (89/89 tests, all 11 patterns)"
+  demo_runner: "scripts/demo_runner.py (6 commands, threshold engine integrated)"
+  golden_path: "examples/RIU-002-golden-path/"
+  architectural_plan: "docs/ARCHITECTURAL_IMPROVEMENT_PLAN.md"
+
+scripts:
+  integrity: "python3 scripts/integrity.py"
+  coverage: "python3 scripts/coverage_report.py"
+  prerequisites: "python3 scripts/prerequisite_validator.py"
+  demo: "python3 scripts/demo_runner.py"
+  graph: "python3 scripts/generate_curriculum_graph.py"
+
 agents:
   kiro:
-    role: "scaffolding, rigorous generation"
+    role: "scaffolding, rigorous generation, infrastructure"
     trust_tier: WORKING
-    deliverables: ["module.yaml x117", "rubric.yaml x117", "graph.yaml", "exercise stubs x350"]
+    delivered: ["117 module.yaml (all hand-crafted)", "exercise enrichment (94 modules)", "Codex MCP fix", "stress test (24 checks)", "3 tier files", "5 track files", "Mistral MCP diagnosis"]
+    current_task: "KIRO_TASK_003 — zero-KL fixes, threshold engine → demo_runner wiring, tier/track validation"
   codex:
-    role: "creative design, coherence audit"
+    role: "creative design, coherence audit, assessment synthesis"
     trust_tier: WORKING
-    deliverables: ["assessment methodology", "coherence audit", "5 journeys", "capstones", "domain packs"]
+    delivered: ["assessment methodology", "coherence audit", "5 journeys", "5 capstones", "post-fix audit", "Layer 2 harness spec", "system retrospective"]
+    current_task: "CODEX_TASK_004 — calibration exemplars (5 modules), prompt assembly module"
+  mistral:
+    role: "content generation, structured data, QA"
+    trust_tier: WORKING
+    delivered: ["RIU-001 calibration exemplars (draft, revision pending)", "system review (10 strategic observations)"]
+    current_task: "MISTRAL_TASK_002 — Open Badges 3.0 credential schemas"
   perplexity:
     role: "deep research"
     trust_tier: WORKING
-    deliverables: ["certification research", "competitor analysis", "source enrichment"]
+    delivered: ["certification research", "competitor analysis", "source enrichment", "AI-augmented assessment research"]
   claude_code:
     role: "architecture, orchestration, finishing"
     trust_tier: WORKING
-    deliverables: ["repo structure", "scripts", "evaluator prompts", "integration", "quality verification"]
+    delivered: ["repo structure", "scripts (5→6 checks)", "evaluator prompts", "demo runner", "golden-path example", "Mistral file relay", "traceability fixes (15→0)", "reference calibration exemplar (RIU-002)", "threshold engine (89/89)", "validator hardening (8→14 checks)", "KL loader fix (131→167)", "critical defect repair (4 modules)", "architectural improvement plan"]
+    current_task: "Iteration 4-5 orchestration, credential workflow, integration test"

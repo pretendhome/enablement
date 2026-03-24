@@ -1,0 +1,74 @@
+riu_id: "RIU-002"
+name: "Stakeholder Map + RACI-lite"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Map all deciders, influencers, and approvers for an AI engagement and identify hidden stakeholders"
+  - "Construct a RACI-lite matrix that assigns clear ownership to every key decision and artifact"
+  - "Design an escalation path that prevents deadlock when stakeholders disagree"
+  - "Detect implicit approvers who appear late and preemptively include them in the stakeholder map"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"   # Convergence Brief — stakeholder mapping is more effective after goals are clear
+
+knowledge_library_entries:
+  primary:
+    - "LIB-001"   # How do I force convergence when stakeholders have conflicting definitions of success?
+    - "LIB-003"   # How do I scope an AI pilot when the customer says 'we need AI everywhere'?
+    - "LIB-010"   # When should I escalate to reset/reframe vs continue converging?
+  supporting:
+    - "LIB-004"   # What artifacts prove convergence has been achieved before implementation starts?
+    - "LIB-005"   # How do I handle requirements that change weekly in an enterprise AI deployment?
+    - "LIB-007"   # How do I identify when a customer request is actually 3 separate problems disguised as one?
+    - "LIB-012"   # What's the checklist for 'good enough' convergence before moving to architecture?
+
+service_context: null  # internal_only — organizational mapping is Palette's domain
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "stakeholder_map.md — Complete stakeholder map with roles, influence levels, and decision authority"
+  - "raci_lite.md — RACI-lite matrix covering all key decisions and artifacts with single accountable owner per row"
+  - "escalation_path.md — Escalation protocol with triggers, paths, and deadlock resolution mechanisms"
+
+rubric_dimensions:
+  stakeholder_coverage:
+    description: "All relevant stakeholders identified including hidden influencers and late-stage approvers"
+    levels: [insufficient, basic, competent, expert]
+  ownership_clarity:
+    description: "Every key decision and artifact has exactly one accountable owner with no ambiguity"
+    levels: [insufficient, basic, competent, expert]
+  escalation_design:
+    description: "Escalation path has clear triggers, defined paths, and prevents deadlock"
+    levels: [insufficient, basic, competent, expert]
+  practical_applicability:
+    description: "Map and RACI are actionable — team can use them immediately without further clarification"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-002-EX-01"
+    failure_mode: "silent"
+    scenario: "You're 3 weeks into an AI deployment. The CTO approved the architecture. Suddenly, the VP of Compliance (who was never in any meeting) blocks deployment because the data handling violates internal policy. Retroactively build the stakeholder map that would have caught this, and design the process to prevent it next time."
+    expected_output: "Updated stakeholder map with compliance, legal, and security stakeholders identified via a systematic discovery checklist. RACI-lite showing Compliance as Consulted on data architecture decisions. Process change: stakeholder discovery interview template that surfaces regulatory and policy stakeholders."
+
+  - id: "RIU-002-EX-02"
+    failure_mode: "loud"
+    scenario: "Two VPs both claim to be the decision-maker for the AI budget. One controls the technology budget, the other controls the business unit budget. The project needs both. They disagree on priorities. Build a RACI-lite that resolves the authority conflict and an escalation path for the current deadlock."
+    expected_output: "RACI-lite with split accountability: VP Technology is Accountable for technical decisions, VP Business is Accountable for business requirements. Shared decisions require joint sign-off with a 48-hour SLA. Escalation to their shared executive if deadlocked. Immediate action: facilitated alignment session with both VPs using the Convergence Brief as the forcing function."
+
+  - id: "RIU-002-EX-03"
+    failure_mode: "clustered"
+    scenario: "A regulated financial services company has 6 stakeholder groups across 3 countries. Each country has different regulatory requirements. The global CISO, regional compliance officers, and local business owners all have veto power on different aspects. Create a stakeholder map and RACI-lite that handles this multi-layered governance."
+    expected_output: "Tiered stakeholder map: global (CISO, CTO), regional (compliance officers), local (business owners). RACI-lite with decision domains: global architecture decisions → CISO accountable, regional compliance → regional officer accountable, local business rules → local owner accountable. Cross-tier escalation path with defined SLAs per tier. Explicit documentation of which decisions require multi-tier approval."

@@ -1,0 +1,85 @@
+riu_id: RIU-140
+name: Competitive/Alternatives Scan (Landscape)
+workstream: Clarify & Bound
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Conduct a competitive landscape scan identifying alternatives, substitutes, and emerging threats
+- Design the scan methodology to surface non-obvious competitors and adjacent market entrants
+- Produce actionable competitive intelligence, not just a list of competitors
+- Update the scan periodically with change detection for new entrants and exits
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-058
+  - LIB-066
+  supporting:
+  - LIB-067
+  - LIB-068
+  - LIB-069
+  - LIB-070
+service_context:
+  candidate_services:
+  - Perplexity (already integrated, best for current competitive landscape)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- competitive_scan.md
+- alternatives_matrix.md
+rubric_dimensions:
+  coverage:
+    description: Scan covers direct competitors, adjacent entrants, substitutes, and build-vs-buy options
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  actionability:
+    description: Intelligence is actionable with specific implications for product and strategy decisions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  freshness:
+    description: Scan has refresh mechanism with change detection for new entrants and shifts
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  segmentation:
+    description: Multi-segment markets analyzed with segment-specific competitive dynamics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-140-EX-01
+  failure_mode: silent
+  scenario: Your competitive scan lists 10 direct competitors. It misses an adjacent market player that just pivoted into
+    your space. The threat is invisible because your scan only looked at current competitors, not potential entrants.
+  expected_output: 'Scan methodology covering: direct competitors, adjacent market players, open-source alternatives, internal
+    build options. Entrant detection: monitor funding rounds, product launches, and pivots in adjacent markets.'
+- id: RIU-140-EX-02
+  failure_mode: loud
+  scenario: Your competitive scan is 6 months old. A competitor launched a major feature that changes the landscape. Your
+    team makes decisions based on stale intelligence. The scan has no refresh mechanism.
+  expected_output: 'Scan refresh schedule: quarterly full scan, monthly change detection. Automated monitoring for competitor
+    announcements. Change log showing what shifted since last scan.'
+- id: RIU-140-EX-03
+  failure_mode: clustered
+  scenario: Your product competes in 3 market segments. Each segment has different competitors. A scan that treats all segments
+    equally misses segment-specific threats. Design the multi-segment competitive scan.
+  expected_output: Per-segment competitive analysis with segment-specific threat assessment. Cross-segment competitors identified.
+    Segment prioritization based on revenue and strategic importance.

@@ -1,0 +1,85 @@
+riu_id: RIU-327
+name: AuthN/AuthZ Integration
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Design authentication and authorization for AI systems where agents act on behalf of users
+- Implement token handling with secure storage, rotation, and revocation
+- Handle distributed service authentication where multiple services need coordinated auth
+- 'Test auth flows including edge cases: expired tokens, revoked permissions, concurrent sessions'
+prerequisites:
+  required:
+  - RIU-066
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-157
+  - LIB-161
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- auth_design.md
+- auth_implementation/
+- auth_tests/
+rubric_dimensions:
+  token_security:
+    description: Tokens have appropriate TTL, rotation, revocation, and secure storage with no long-lived credentials
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  auth_reliability:
+    description: Authentication and authorization flows handle concurrent access, token refresh races, and transient failures gracefully
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  distributed_coordination:
+    description: Multi-service auth is coordinated with unified logging and correlation across providers
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  test_coverage:
+    description: 'Auth tests cover edge cases: expiry, revocation, concurrent refresh, and cross-service flows'
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in token_security and auth_reliability
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-327-EX-01
+  failure_mode: silent
+  scenario: Your AI agent authenticates with a long-lived API token stored in an environment variable. The token has no expiry.
+    An employee who created the token leaves the company. The token remains active with their permissions for 8 months. Nobody
+    notices because the agent works fine.
+  expected_output: 'Token lifecycle policy: maximum TTL, mandatory rotation schedule, revocation on personnel change. auth_design.md
+    with token management procedures. Automated alert for tokens approaching max age. Service account ownership tracking.'
+- id: RIU-327-EX-02
+  failure_mode: loud
+  scenario: Your auth system rejects 20% of legitimate requests because token refresh races with concurrent requests. Multiple
+    agent instances share a token; when one refreshes, the others' requests fail with 401 until they also refresh. Users see
+    intermittent auth errors.
+  expected_output: 'Token refresh coordination: shared token cache with atomic refresh. Graceful handling of 401 during refresh
+    window (retry with backoff). auth_tests/ covering concurrent refresh scenarios. Circuit breaker for auth failures to prevent
+    cascade.'
+- id: RIU-327-EX-03
+  failure_mode: clustered
+  scenario: Your system has 5 microservices, each authenticating independently with different auth providers (OAuth for user-facing,
+    mTLS for service-to-service, API keys for external APIs). A security audit requires unified auth logging across all services.
+    Design the coordinated auth architecture.
+  expected_output: Unified auth event schema across all providers. Centralized auth log aggregation. Per-service auth configuration
+    in auth_implementation/. Correlation ID linking user request to all downstream service auth events. auth_tests/ covering
+    cross-service auth flows.

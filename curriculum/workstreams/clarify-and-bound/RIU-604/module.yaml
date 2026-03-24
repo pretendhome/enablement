@@ -1,0 +1,85 @@
+riu_id: RIU-604
+name: AI ROI Quantification Framework
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Build an AI ROI quantification framework that captures both tangible and intangible value
+- Design measurement methodology that attributes outcomes to AI specifically
+- 'Handle the attribution problem: separating AI impact from other concurrent changes'
+- Present ROI in terms stakeholders understand with appropriate confidence intervals
+prerequisites:
+  required:
+  - RIU-006
+  - RIU-020
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-135
+  - LIB-169
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- roi_framework.md
+- baseline_metrics.md
+- three_bucket_model.xlsx
+- budget_trajectory.md
+- tco_comparison.md
+rubric_dimensions:
+  attribution:
+    description: AI impact separated from confounding factors with appropriate methodology
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  value_capture:
+    description: Both tangible and intangible value captured with per-dimension measurement
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  confidence:
+    description: ROI presented with confidence intervals and sensitivity analysis, not point estimates
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  granularity:
+    description: Per-use-case ROI tracked with platform-level aggregation and portfolio view
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-604-EX-01
+  failure_mode: silent
+  scenario: Your ROI calculation shows 30% cost reduction after AI deployment. But the company also restructured the team
+    and changed processes simultaneously. The 30% cannot be attributed to AI alone. The ROI is overstated.
+  expected_output: 'Attribution methodology: A/B test or before/after with control group. Confounding factor identification.
+    ROI with confidence interval, not point estimate. Sensitivity analysis on attribution assumptions.'
+- id: RIU-604-EX-02
+  failure_mode: loud
+  scenario: Your ROI framework only captures cost savings. The AI also improved customer satisfaction, reduced employee burnout,
+    and enabled new product features. The CFO sees a modest ROI and questions the investment because intangible value is not
+    captured.
+  expected_output: 'Multi-dimensional ROI: cost savings, revenue impact, quality improvement, employee productivity, strategic
+    optionality. Per-dimension measurement methodology. Stakeholder-specific ROI views: CFO sees financial, CTO sees technical,
+    CEO sees strategic.'
+- id: RIU-604-EX-03
+  failure_mode: clustered
+  scenario: Your AI platform serves 5 use cases. Each contributes to ROI differently. Some are cost-saving, some are revenue-generating,
+    some are risk-reducing. A single ROI number for the platform obscures per-use-case performance.
+  expected_output: Per-use-case ROI tracking with platform-level aggregation. Shared infrastructure cost allocation across
+    use cases. Underperforming use case identification. Portfolio ROI view showing contribution per use case.

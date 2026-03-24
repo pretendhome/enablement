@@ -1,0 +1,86 @@
+riu_id: RIU-323
+name: Message Queue Integration Pattern
+workstream: Interfaces & Inputs
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Design message queue integration with appropriate queue selection, partitioning, and ordering guarantees
+- Implement dead letter queue handling for messages that fail processing
+- Handle message ordering, deduplication, and exactly-once processing semantics
+- 'Monitor queue health: depth, processing latency, and consumer lag'
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-158
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- queue_integration_design.md
+- consumer_pattern.md
+- error_handling.md
+- queue_monitoring.md
+rubric_dimensions:
+  ordering:
+    description: Message ordering guaranteed where needed with out-of-order detection and handling
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  idempotency:
+    description: Message processing is idempotent with deduplication and exactly-once semantics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  failure_handling:
+    description: Failed messages routed to DLQ with retry policy and monitoring
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  load_management:
+    description: Queue load balanced across consumers with auto-scaling and backpressure
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-323-EX-01
+  failure_mode: silent
+  scenario: 'Your message queue processes order events. Two events for the same order arrive out of order: ''order_shipped''
+    arrives before ''order_placed.'' Your consumer processes them in arrival order, creating an inconsistent state. No error
+    is raised because each message is individually valid.'
+  expected_output: 'Message ordering strategy: partition by order ID to guarantee per-order ordering. Out-of-order detection:
+    sequence numbers per entity. Reordering buffer for late-arriving messages. Test suite with deliberately out-of-order message
+    sequences.'
+- id: RIU-323-EX-02
+  failure_mode: loud
+  scenario: A consumer crashes while processing a message. The message is retried. But the consumer already wrote partial
+    results before crashing. The retry processes the message again, creating duplicate records. Design idempotent message
+    processing.
+  expected_output: 'Idempotency key per message. Processing check: skip if already processed. Transactional outbox pattern:
+    write result + mark processed atomically. Dead letter queue for messages that fail after N retries. Monitoring for DLQ
+    depth.'
+- id: RIU-323-EX-03
+  failure_mode: clustered
+  scenario: Your system has 3 consumers processing from the same queue. During a traffic spike, Consumer A falls behind. Messages
+    pile up. Consumer B and C are idle because messages are partitioned and A's partition has all the traffic. Design the
+    load balancing strategy.
+  expected_output: Dynamic partition rebalancing based on consumer lag. Auto-scaling consumers based on queue depth. Partition
+    strategy that distributes load evenly. Consumer lag monitoring with alert when any consumer falls behind SLA. Backpressure
+    mechanism to slow producers when consumers can't keep up.

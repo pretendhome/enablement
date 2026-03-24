@@ -1,0 +1,82 @@
+riu_id: RIU-122
+name: Batch Pipeline Safety Pattern (Checkpointing)
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Implement batch pipeline checkpointing enabling restart from last successful point
+- Design durable checkpoint storage independent from pipeline output
+- Handle partial batch failures with per-record error routing
+- Test checkpoint recovery by simulating failures at different stages
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-055
+  - LIB-057
+  supporting:
+  - LIB-058
+  - LIB-059
+  - LIB-063
+  - LIB-075
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- batch_semantics.md
+- checkpointing_design.md
+- batch_tests/
+rubric_dimensions:
+  checkpoint_design:
+    description: Checkpoints enable restart from last successful point without reprocessing
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  durability:
+    description: Checkpoint storage is durable and independent from pipeline output
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  partial_failure:
+    description: Partial failures handled with per-record error routing and continuation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  recovery_testing:
+    description: Recovery tested by simulating failures at different pipeline stages
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-122-EX-01
+  failure_mode: silent
+  scenario: Pipeline fails at record 800K of 1M. Restarts from beginning, reprocessing 800K records with duplicates.
+  expected_output: Per-batch checkpoint every N records. Checkpoint contains last processed ID and state. Restart from checkpoint.
+    Deduplication for reprocessed records.
+- id: RIU-122-EX-02
+  failure_mode: loud
+  scenario: Checkpoint writes to same database as output. Database outage loses both. Checkpoint is stale on recovery.
+  expected_output: Checkpoint storage independent from output. Write-ahead log for durability. Checkpoint validation on restart.
+    Fallback to full reprocess if corrupted.
+- id: RIU-122-EX-03
+  failure_mode: clustered
+  scenario: 'Stage 3 fails for 10% of records. Pipeline is all-or-nothing: entire batch retried. 90% of records unnecessarily
+    reprocessed.'
+  expected_output: 'Per-record error handling: failed records to error queue, successful records continue. Per-stage checkpoint.
+    Error report per stage. Independent retry of failed records.'

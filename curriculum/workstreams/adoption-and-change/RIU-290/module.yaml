@@ -1,0 +1,80 @@
+riu_id: RIU-290
+name: Internal Demo Narrative (Problem→Value→Limits)
+workstream: Adoption & Change
+journey_stage: specialization
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Build an internal demo narrative that shows problem, value, and limitations in a compelling sequence
+- Design the demo to be reproducible and not dependent on live system availability
+- Include failure cases in the demo to build trust through transparency
+- 'Adapt the demo for different internal audiences: engineering, product, leadership'
+prerequisites:
+  required:
+  - RIU-001
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-154
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- demo_narrative.md
+- value_proposition.md
+- limitations.md
+- next_decisions.md
+rubric_dimensions:
+  narrative_quality:
+    description: Demo tells a compelling problem-to-value story with honest limitations
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  reproducibility:
+    description: Demo is reproducible with fallbacks for live system failures
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  trust_building:
+    description: Demo includes failure cases and limitations to build trust through transparency
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audience_adaptation:
+    description: Demo adapted for different audiences with appropriate depth and emphasis
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-290-EX-01
+  failure_mode: silent
+  scenario: Your demo shows the AI system working perfectly on cherry-picked examples. Leadership is impressed and sets unrealistic
+    expectations. When the system is deployed, it fails on real-world inputs that differ from demo examples. Trust is damaged.
+  expected_output: 'Demo includes: happy path, edge cases, and known failure modes. Explicit limitations section. Representative
+    examples from actual data, not cherry-picked. Post-demo Q&A addressing what it cannot do.'
+- id: RIU-290-EX-02
+  failure_mode: loud
+  scenario: Your demo depends on a live API call. During the demo to the CEO, the API times out. The demo fails. There is
+    no fallback. Design the resilient demo.
+  expected_output: Pre-recorded fallback for every live demo step. Cached responses for demo scenarios. Demo environment isolated
+    from production. Demo rehearsal checklist including failure scenario practice.
+- id: RIU-290-EX-03
+  failure_mode: clustered
+  scenario: 'Your demo must serve 3 audiences in the same week: engineering (wants technical depth), product (wants user impact),
+    leadership (wants business value). A single demo cannot satisfy all three. Design the multi-audience demo strategy.'
+  expected_output: 'Modular demo: shared intro + audience-specific deep dive. Per-audience emphasis: engineering sees architecture,
+    product sees UX, leadership sees ROI. Shared demo script with audience-specific branches.'

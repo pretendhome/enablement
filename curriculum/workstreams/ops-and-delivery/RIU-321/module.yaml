@@ -1,0 +1,79 @@
+riu_id: RIU-321
+name: Database Migration Strategy
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Design database migration strategy for schema changes, data migration, and rollback
+- Implement zero-downtime migration for production databases under load
+- Handle large-table data migration (100M+ rows) without blocking operations
+- Document migration as ONE-WAY DOOR with rollback plan
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-156
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- migration_strategy.md
+- rollback_plan.md
+- validation_tests/
+- migration_monitoring.md
+rubric_dimensions:
+  impact_analysis:
+    description: All consumers of changed schema identified before migration
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  zero_downtime:
+    description: Migration executed without blocking production operations
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  rollback_plan:
+    description: Rollback documented with point-of-no-return clearly identified
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  decision_documentation:
+    description: Migration documented as ONE-WAY DOOR with rationale and approval
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-321-EX-01
+  failure_mode: silent
+  scenario: Migration renames a column. App code updated but background job still references old name. Writes silently fail.
+    Data loss undetected for a week.
+  expected_output: 'Migration impact analysis: search all code for changed schema references. Dual-write period. Migration
+    checklist. ONE-WAY DOOR flag with rollback plan.'
+- id: RIU-321-EX-02
+  failure_mode: loud
+  scenario: CREATE INDEX on 500M-row table locks it for 3 hours. All writes blocked. Users see errors.
+  expected_output: 'Online index creation. Migration duration estimate. Maintenance window for non-online migrations. Rollback:
+    DROP INDEX.'
+- id: RIU-321-EX-03
+  failure_mode: clustered
+  scenario: Migration involves 3 tables with foreign keys. Too large for single transaction. Partial migration breaks referential
+    integrity.
+  expected_output: 'Phased migration: add columns, backfill, add constraints, remove old. Integrity checks between phases.
+    Point-of-no-return identification. Per-phase rollback plan.'

@@ -1,0 +1,84 @@
+riu_id: RIU-023
+name: Deterministic-First Pipeline Split
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Identify which parts of a pipeline can be handled deterministically vs require LLM inference
+- Design a pipeline split that maximizes deterministic processing to reduce cost and improve reliability
+- Implement routing logic that sends requests to the appropriate path based on complexity
+- Measure the quality/cost tradeoff of deterministic vs LLM processing for each request type
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-018
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- pipeline_split.md
+- deterministic_modules/
+- llm_modules/
+- fallback_rules.yaml
+rubric_dimensions:
+  classification_accuracy:
+    description: Requests correctly classified as deterministic vs LLM-required with minimal misrouting
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cost_optimization:
+    description: Deterministic path used for all eligible requests with measurable cost reduction
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  quality_preservation:
+    description: Pipeline split maintains output quality with monitoring for misclassification
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  pipeline_design:
+    description: Pipeline architecture minimizes sequential LLM calls with parallelization and early exit
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-023-EX-01
+  failure_mode: silent
+  scenario: Your AI pipeline sends every request to an LLM, including simple lookups that could be answered from a database.
+    60% of requests are deterministic lookups costing $0.02 each via LLM when they could cost $0.0001 via database. Nobody
+    notices because the system works — it's just 200x more expensive than necessary for most requests.
+  expected_output: 'Request classification: deterministic (database lookup), semi-deterministic (template + lookup), LLM-required
+    (reasoning needed). Router that sends each request to cheapest sufficient path. Cost comparison dashboard showing per-path
+    spend.'
+- id: RIU-023-EX-02
+  failure_mode: loud
+  scenario: Your deterministic path handles 70% of requests. But the routing logic misclassifies 5% of complex requests as
+    'simple,' sending them to the deterministic path where they get wrong answers. Users report incorrect responses. The router
+    is too aggressive.
+  expected_output: 'Confidence-based routing: requests with ambiguous classification go to LLM path (safe default). Misclassification
+    monitoring with feedback loop. Quality comparison between deterministic and LLM answers for borderline cases. Router threshold
+    tuning based on error rate.'
+- id: RIU-023-EX-03
+  failure_mode: clustered
+  scenario: Your pipeline has 5 stages. Stages 1, 3, and 5 are deterministic. Stages 2 and 4 require LLM. The current architecture
+    sends everything through all 5 stages sequentially. Redesign to parallelize deterministic stages and minimize LLM calls.
+  expected_output: 'Pipeline DAG with parallel deterministic stages. Early exit: if stage 1 (deterministic) fully answers
+    the query, skip stages 2-5. Partial LLM: only invoke LLM for the specific sub-task that needs it. Latency and cost comparison:
+    sequential vs optimized pipeline.'

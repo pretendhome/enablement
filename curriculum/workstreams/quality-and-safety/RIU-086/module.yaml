@@ -1,0 +1,89 @@
+riu_id: RIU-086
+name: Regression Suite (Golden + Metamorphic)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Build a regression suite combining golden set cases with metamorphic test invariants
+- Design metamorphic relations that catch regressions even when golden set is incomplete
+- Handle model update regressions where behavior changes across the entire output distribution
+- Maintain test suite health by detecting and replacing brittle tests
+prerequisites:
+  required:
+  - RIU-021
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-134
+  - LIB-135
+  supporting:
+  - LIB-139
+  - LIB-140
+  - LIB-144
+  - LIB-145
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- regression_suite/
+- invariants.md
+rubric_dimensions:
+  invariant_design:
+    description: Metamorphic invariants catch distributional regressions beyond what golden set covers
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  test_robustness:
+    description: Tests use semantic equivalence where appropriate, minimizing false failures from brittle assertions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  model_update_handling:
+    description: Suite handles model updates with bidirectional analysis and per-domain regression tracking
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  suite_maintenance:
+    description: Test suite health monitored with brittleness tracking and automated golden set refresh
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-086-EX-01
+  failure_mode: silent
+  scenario: Your golden set has 50 test cases that all pass after a model update. But the model now gives slightly different
+    (but still 'correct') answers for 30% of production queries. Users notice the change. Your invariants were too weak to
+    detect distributional shift.
+  expected_output: 'Metamorphic invariants: paraphrase invariance (same question, different wording → same answer), negation
+    sensitivity (negated question → different answer), monotonicity (more context → better answer). Distribution-level checks
+    comparing pre/post update output statistics.'
+- id: RIU-086-EX-02
+  failure_mode: loud
+  scenario: Your regression suite has 200 tests. After a model update, 40 tests fail. Investigation shows 35 are brittle (exact
+    string matching on outputs that are semantically equivalent) and 5 are real regressions. The team spends 2 days triaging.
+    Design a less brittle suite.
+  expected_output: 'Semantic equivalence scoring replacing exact match for generative outputs. Brittleness classification:
+    tests tagged as ''exact'', ''semantic'', or ''invariant''. Automated triage: semantic tests re-scored with LLM-as-judge
+    before human review. Brittleness budget: max 10% of suite can be exact-match.'
+- id: RIU-086-EX-03
+  failure_mode: clustered
+  scenario: You update from GPT-4 to GPT-4.5. The new model is better overall but worse on a specific domain (legal text extraction).
+    Your regression suite catches the legal regression but also shows 50 'improvements' where the new model gives better answers
+    than the golden set expected. How do you handle bidirectional changes?
+  expected_output: 'Bidirectional regression analysis: regressions (worse) vs improvements (better) vs neutral. Per-domain
+    regression tracking. Golden set update policy: improvements auto-accepted after human spot-check, regressions block until
+    investigated. Model comparison report with domain-level breakdown.'

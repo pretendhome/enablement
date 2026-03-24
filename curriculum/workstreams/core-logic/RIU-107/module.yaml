@@ -1,0 +1,83 @@
+riu_id: RIU-107
+name: Financial Crisis Detection
+workstream: Core Logic
+journey_stage: specialization
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Implement financial crisis detection signals from structured and unstructured data sources
+- Design alert thresholds that distinguish genuine crisis signals from market noise
+- Build escalation procedures that route crisis detections to appropriate decision-makers
+- Test detection accuracy against historical crisis events and near-miss scenarios
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-149
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- cash_flow_model.xlsx
+- crisis_analysis.md
+- funding_requirements.md
+rubric_dimensions:
+  signal_coverage:
+    description: Detection monitors multiple channels including leading indicators, not just lagging market data
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  alert_precision:
+    description: Alerts distinguish genuine crises from transient anomalies with multi-signal confirmation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  correlation_analysis:
+    description: Related signals clustered into events with root cause attribution
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  escalation_design:
+    description: Crisis detections routed to appropriate decision-makers with actionable context
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-107-EX-01
+  failure_mode: silent
+  scenario: Your crisis detection monitors stock prices and news sentiment. A slow-building liquidity crisis develops over
+    3 weeks through interbank lending markets — a channel your system doesn't monitor. By the time it shows up in stock prices
+    and news, the crisis is already acute.
+  expected_output: 'Multi-channel monitoring: market data, news sentiment, regulatory filings, interbank rates, credit spreads.
+    Signal correlation across channels. Slow-build detection using trend analysis, not just threshold breaches.'
+- id: RIU-107-EX-02
+  failure_mode: loud
+  scenario: Your system fires a crisis alert based on a single anomalous data point (flash crash that recovers in 5 minutes).
+    The alert triggers an emergency response that costs $50K in analyst time. It was a false alarm. Design the alert system
+    that handles transient anomalies.
+  expected_output: 'Multi-signal confirmation: crisis alert requires N of M signals to fire. Transient anomaly filter: wait
+    for persistence before alerting. Alert severity tiers: watch (single signal) → warning (multiple signals) → crisis (confirmed
+    and persistent). Cost tracking per false alarm.'
+- id: RIU-107-EX-03
+  failure_mode: clustered
+  scenario: A geopolitical event triggers simultaneous signals across 5 markets, 3 currencies, and 12 sectors. Your system
+    fires 50 individual alerts. Analysts are overwhelmed and can't distinguish the root cause from the symptoms. Design the
+    correlated crisis detection.
+  expected_output: 'Event clustering: group related signals into a single crisis event. Root cause attribution: identify the
+    primary trigger vs cascading effects. Unified crisis dashboard showing event timeline, affected markets, and causal chain.
+    Analyst triage view with prioritized action items.'

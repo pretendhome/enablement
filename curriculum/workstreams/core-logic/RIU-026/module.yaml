@@ -1,0 +1,91 @@
+riu_id: RIU-026
+name: Hybrid Similarity (Enums + Embeddings)
+workstream: Core Logic
+journey_stage: retrieval
+classification: both
+difficulty: high
+learning_objectives:
+- Design a hybrid similarity system combining enum-based exact matching with embedding-based semantic matching
+- Implement scoring that appropriately weights exact matches vs semantic similarity
+- Evaluate vector database services for production embedding storage and retrieval
+- Handle edge cases where enum matching and embedding matching disagree
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-113
+  supporting: []
+service_context:
+  candidate_services:
+  - Pinecone (managed vector DB, production-ready)
+  - Qdrant (OSS + managed, high performance)
+  - Weaviate (OSS + managed, hybrid search native)
+  - pgvector (Postgres extension, simplest for existing PG users)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- similarity_index/
+- neighbor_service/
+- reason_codes.md
+rubric_dimensions:
+  hybrid_scoring:
+    description: Scoring appropriately weights exact vs semantic matching with tunable parameters
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  performance:
+    description: Retrieval meets latency budget with appropriate tiering between fast and semantic paths
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Vector DB services evaluated with production-relevant benchmarks and cost analysis
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  edge_case_handling:
+    description: Disagreements between matching methods handled with clear resolution rules
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-026-EX-01
+  failure_mode: silent
+  scenario: Your hybrid search returns results that are semantically similar but miss exact keyword matches that users expect.
+    A user searches for 'Python 3.12 release notes' and gets results about 'Python programming best practices' (semantically
+    similar) instead of the actual release notes (exact match). The embedding similarity score is higher than the keyword
+    relevance.
+  expected_output: 'Hybrid scoring: exact match boost that overrides semantic similarity when keywords match. Scoring formula
+    with tunable weights. Test suite with queries where exact match should win vs where semantic should win. A/B test comparing
+    hybrid vs keyword-only vs semantic-only.'
+- id: RIU-026-EX-02
+  failure_mode: loud
+  scenario: Your vector database returns 500ms latency for similarity queries during peak traffic, exceeding your 200ms budget.
+    The enum-based path returns in 5ms. Users experience inconsistent response times depending on which path handles their
+    query.
+  expected_output: 'Tiered retrieval: enum path first (fast), embedding path only if enum results are insufficient. Latency
+    budget per path. Vector DB evaluation: Pinecone vs Qdrant vs pgvector for your latency requirements. Caching strategy
+    for frequent embedding queries.'
+- id: RIU-026-EX-03
+  failure_mode: clustered
+  scenario: 'Your product catalog has 500K items with both structured attributes (category, brand, price) and unstructured
+    descriptions. Users search with mixed queries: ''red Nike shoes under $100'' combines enum filters (brand=Nike, price<100)
+    with semantic matching (red shoes). Design the hybrid retrieval.'
+  expected_output: 'Two-phase retrieval: structured filter first (narrow to candidates), then semantic ranking within candidates.
+    Combined scoring with per-attribute weights. Index design supporting both filter and vector operations. Performance benchmark
+    at 500K scale.'

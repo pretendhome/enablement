@@ -1,0 +1,81 @@
+riu_id: RIU-602
+name: AI Use Case Prioritization Matrix
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Build an AI use case prioritization matrix based on business impact, feasibility, and risk
+- Evaluate use cases with quantified criteria rather than subjective judgment
+- Handle stakeholder politics where every team believes their use case is highest priority
+- Create a living prioritization that updates as new information emerges
+prerequisites:
+  required:
+  - RIU-001
+  - RIU-004
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-167
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- use_case_inventory.md
+- prioritization_matrix.xlsx
+- ranked_use_cases.md
+- responsible_ai_assessment.md
+rubric_dimensions:
+  criteria_rigor:
+    description: Prioritization uses quantified multi-criteria scoring, not subjective judgment
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  feasibility_assessment:
+    description: Feasibility (data readiness, technical complexity) assessed before impact scoring
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  stakeholder_management:
+    description: Prioritization has executive buy-in with transparent override process
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  dependency_handling:
+    description: Use case dependencies identified with sequencing that respects prerequisites
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-602-EX-01
+  failure_mode: silent
+  scenario: Your prioritization ranks use cases by expected ROI. The highest-ROI use case requires data that does not exist
+    yet. Feasibility was not factored in. The team spends 6 months on data acquisition before any AI work begins.
+  expected_output: 'Multi-criteria scoring: impact (ROI, strategic value) x feasibility (data readiness, technical complexity)
+    x risk (regulatory, reputational). Feasibility assessment before ROI calculation.'
+- id: RIU-602-EX-02
+  failure_mode: loud
+  scenario: 'The CEO''s pet project is ranked #7. The CEO overrides the prioritization. The team works on a low-impact project
+    while high-impact opportunities wait. The prioritization framework has no executive buy-in.'
+  expected_output: 'Executive alignment session before prioritization. Transparent scoring criteria agreed upfront. Override
+    process: allowed but documented with rationale. Opportunity cost of overrides made visible.'
+- id: RIU-602-EX-03
+  failure_mode: clustered
+  scenario: 20 use cases across 5 departments. Each department submitted their top 4. Dependencies exist between use cases
+    (Use Case 7 requires Use Case 3 to be done first). A flat ranking ignores dependencies.
+  expected_output: 'Dependency-aware prioritization: identify prerequisite use cases. Sequencing that respects dependencies.
+    Portfolio view: balanced investment across departments. Quarterly re-prioritization with new data.'

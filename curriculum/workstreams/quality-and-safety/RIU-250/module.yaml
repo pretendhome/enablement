@@ -1,0 +1,87 @@
+riu_id: RIU-250
+name: Security Review Packet
+workstream: Quality & Safety
+journey_stage: specialization
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Compile a security review packet that passes enterprise security review without delays
+- Create a threat model with data flows, attack vectors, and mitigations
+- Document permissions matrix showing every system access with justification
+- Anticipate common security review objections and address them proactively in the packet
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-153
+  - LIB-160
+  supporting:
+  - LIB-164
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- security_review_packet/
+- threat_model.md
+- data_flow_diagram.md
+- permissions_matrix.md
+rubric_dimensions:
+  completeness:
+    description: Packet covers all data flows, permissions, and system boundaries including background processes
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  framework_alignment:
+    description: Packet maps to customer's specific compliance framework with control-level detail
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  threat_model_quality:
+    description: Threat model identifies realistic attack vectors with mitigations and residual risk documentation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  review_efficiency:
+    description: Packet anticipates common reviewer questions and minimizes back-and-forth cycles
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-250-EX-01
+  failure_mode: silent
+  scenario: Your security review packet lists all API endpoints but omits the background job that syncs customer data to an
+    analytics warehouse every night. The security reviewer approves the packet. Six months later, an audit discovers unreviewed
+    data movement. The threat model was incomplete.
+  expected_output: 'Comprehensive data flow diagram including background jobs, cron tasks, and async pipelines. Checklist:
+    ''Does data leave the primary system boundary?'' applied to every component. threat_model.md covering all data movement,
+    not just API endpoints.'
+- id: RIU-250-EX-02
+  failure_mode: loud
+  scenario: Your security review packet is rejected because it doesn't address the customer's specific compliance framework
+    (SOC 2 Type II). The reviewer sends back 47 questions. You spend 2 weeks answering them. Design the packet that anticipates
+    framework-specific requirements.
+  expected_output: Pre-review questionnaire identifying customer's compliance framework. Framework-specific sections in the
+    packet (SOC 2, ISO 27001, HIPAA mappings). FAQ section addressing common reviewer questions. permissions_matrix.md with
+    framework-specific control mappings.
+- id: RIU-250-EX-03
+  failure_mode: clustered
+  scenario: Your AI system integrates with 5 customer systems across 3 regulated industries (healthcare, finance, government).
+    Each has different security review requirements, different compliance frameworks, and different approval timelines. Create
+    a unified security review packet.
+  expected_output: 'Base security packet with industry-specific addenda. Per-industry compliance mapping. Unified threat model
+    with industry-specific risk overlays. Timeline management: parallel reviews with dependency tracking. Escalation path
+    for conflicting requirements across industries.'

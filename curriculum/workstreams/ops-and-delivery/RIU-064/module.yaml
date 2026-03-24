@@ -1,0 +1,89 @@
+riu_id: RIU-064
+name: Feature Flags + Kill Switch Integration
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Implement feature flags that enable gradual rollout and instant rollback of AI features
+- Design kill switches for AI components that can be activated without deployment
+- 'Build flag lifecycle management: creation, rollout, cleanup of stale flags'
+- Test kill switch activation to verify it works before you need it in an emergency
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-119
+  supporting: []
+service_context:
+  candidate_services:
+  - LaunchDarkly (enterprise, most mature)
+  - Statsig (stats-driven rollouts, strong among AI practitioners)
+  - Unleash (OSS, self-hosted option)
+  - Vercel Flags (if on Vercel)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- flags.yaml
+- kill_switch.md
+- rollout_plan.md
+rubric_dimensions:
+  rollout_control:
+    description: Feature flags enable gradual rollout with percentage-based targeting and instant rollback
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  kill_switch_reliability:
+    description: Kill switches tested regularly and verified to work without breaking fallback paths
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  lifecycle_management:
+    description: Flags have owners, expiry dates, and cleanup process preventing stale flag accumulation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  interaction_handling:
+    description: Feature flag interactions documented and tested to prevent unexpected combined behavior
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-064-EX-01
+  failure_mode: silent
+  scenario: Your team creates feature flags but never cleans them up. After 18 months, there are 200 flags in the codebase.
+    150 are permanently 'on' and should be removed. The remaining 50 have unclear ownership. A developer accidentally toggles
+    a stale flag, causing unexpected behavior.
+  expected_output: 'Flag lifecycle policy: every flag has an owner, creation date, and expected removal date. Stale flag detection:
+    alert on flags older than N days without activity. Quarterly flag cleanup review. Flag registry with ownership and status.'
+- id: RIU-064-EX-02
+  failure_mode: loud
+  scenario: Your AI system has a kill switch. During an incident, the on-call engineer activates it. But the kill switch was
+    never tested — it disables the AI component but also breaks the fallback path because the fallback depends on a shared
+    config that the kill switch also disables.
+  expected_output: 'Kill switch testing: quarterly drill activating each kill switch in staging. Kill switch isolation: disabling
+    AI component doesn''t affect fallback path. Kill switch runbook with expected behavior and verification steps. Post-activation
+    checklist.'
+- id: RIU-064-EX-03
+  failure_mode: clustered
+  scenario: Your system has 3 AI features behind flags, each at different rollout percentages (10%, 50%, 100%). A user can
+    be in the treatment group for Feature A but control group for Feature B. The interaction between features creates unexpected
+    behavior that neither feature's A/B test captures.
+  expected_output: 'Feature interaction matrix: document known interactions between flagged features. Holdout group: users
+    who see no experimental features (clean baseline). Interaction testing: test feature combinations, not just individual
+    features. Flag dependency tracking: Feature C requires Feature A to be enabled.'

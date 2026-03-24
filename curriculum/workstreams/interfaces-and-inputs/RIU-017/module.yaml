@@ -1,0 +1,71 @@
+riu_id: "RIU-017"
+name: "Connector Spec (Source/Target)"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Define a connector spec covering auth, pagination, rate limits, retries, and error handling"
+  - "Design mapping rules that deterministically transform source data to target schema"
+  - "Implement retry and backoff strategies that handle transient failures without data loss"
+  - "Document ops expectations including monitoring, alerting, and failure recovery procedures"
+
+prerequisites:
+  required:
+    - "RIU-010"
+    - "RIU-011"
+  recommended: []
+
+knowledge_library_entries:
+  primary:
+    - "LIB-024"
+  supporting:
+    - "LIB-026"
+    - "LIB-030"
+
+service_context: null
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "connector_spec.md — Complete connector specification with auth, pagination, rate limits, retries, mapping, error handling"
+  - "mapping_rules.yaml — Deterministic mapping rules from source to target schema"
+  - "connector_tests/ — Tests covering happy path, rate limiting, pagination edge cases, and error recovery"
+
+rubric_dimensions:
+  spec_completeness:
+    description: "Spec covers auth, pagination, rate limits, retries, mapping, and error handling end-to-end"
+    levels: [insufficient, basic, competent, expert]
+  mapping_determinism:
+    description: "Mapping rules are deterministic, testable, and handle all source field variations"
+    levels: [insufficient, basic, competent, expert]
+  resilience_design:
+    description: "Retry and backoff strategies handle transient failures without data loss or duplication"
+    levels: [insufficient, basic, competent, expert]
+  ops_readiness:
+    description: "Monitoring, alerting, and failure recovery procedures are explicit and actionable"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-017-EX-01"
+    failure_mode: "silent"
+    scenario: "Your connector paginates through an API using offset-based pagination. The source data changes between pages, causing duplicates and missed records. Design the connector spec that handles this."
+    expected_output: "Connector spec with cursor-based pagination preference. Deduplication strategy for offset fallback. Tests simulating mid-pagination data changes."
+
+  - id: "RIU-017-EX-02"
+    failure_mode: "loud"
+    scenario: "Your connector hits a rate limit ban from the source API after a burst of retries during an outage. The ban lasts 24 hours. Design the retry and rate limit strategy that prevents this."
+    expected_output: "Exponential backoff with jitter. Rate limit budget tracking. Circuit breaker pattern. Alerting before approaching rate limit threshold."
+
+  - id: "RIU-017-EX-03"
+    failure_mode: "clustered"
+    scenario: "A large enterprise account has 10M records across 50 API endpoints with different auth mechanisms, rate limits, and pagination styles. Design a unified connector spec."
+    expected_output: "Per-endpoint configuration with shared auth layer. Adaptive rate limiting per endpoint. Parallel pagination with global throughput budget. Failure isolation so one endpoint's issues don't block others."

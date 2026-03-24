@@ -1,0 +1,86 @@
+riu_id: RIU-324
+name: Caching Strategy Design
+workstream: Core Logic
+journey_stage: retrieval
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design a caching strategy that balances hit rate, freshness, and memory constraints
+- Implement cache key design that maximizes reuse without serving wrong results
+- Handle cache warming for cold starts and new deployments
+- Monitor cache effectiveness with hit rate, latency impact, and cost savings metrics
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-143
+  - LIB-159
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- caching_strategy.md
+- invalidation_rules.md
+- ttl_configuration.yaml
+- cache_monitoring.md
+rubric_dimensions:
+  key_design:
+    description: Cache keys maximize reuse through normalization without serving incorrect results
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  warming_strategy:
+    description: Cold starts handled with pre-warming to prevent latency spikes on deployment
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  capacity_management:
+    description: Cache capacity managed with tiering and admission policies for oversized working sets
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  effectiveness_monitoring:
+    description: Hit rate, latency impact, and cost savings tracked with optimization feedback loop
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-324-EX-01
+  failure_mode: silent
+  scenario: Your cache key is based on the full request body. Two semantically identical requests with different whitespace
+    or field ordering get different cache keys. Your cache hit rate is 15% when it should be 60%. The cache is working but
+    the key design wastes most of its potential.
+  expected_output: 'Normalized cache keys: canonicalize request before hashing (sort fields, trim whitespace, normalize case).
+    Cache key design document with normalization rules. Hit rate monitoring before/after normalization. Test suite with semantically
+    equivalent requests that should share cache keys.'
+- id: RIU-324-EX-02
+  failure_mode: loud
+  scenario: You deploy a new version of your service. The cache is cold. Response times spike from 200ms to 2 seconds for
+    the first 30 minutes as the cache warms up. Users complain about slow performance after every deployment.
+  expected_output: 'Cache warming strategy: pre-populate cache with top-N queries before traffic cutover. Blue-green deployment
+    with cache pre-warming on green before switching. Gradual traffic shift to allow organic warming. Cold start latency budget
+    in deployment runbook.'
+- id: RIU-324-EX-03
+  failure_mode: clustered
+  scenario: Your cache has a 10GB memory limit. Your working set is 50GB. The cache evicts entries constantly, and the hit
+    rate drops to 5% during peak hours when the working set is largest. Design the caching strategy for a working set that
+    exceeds cache capacity.
+  expected_output: 'Tiered caching: hot items in memory (L1), warm items in Redis (L2), cold items uncached. Admission policy:
+    only cache items accessed N+ times. Eviction policy tuned for your access pattern (LRU vs LFU). Working set analysis showing
+    access frequency distribution.'

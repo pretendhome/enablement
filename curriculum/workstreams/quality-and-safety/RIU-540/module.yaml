@@ -1,0 +1,89 @@
+riu_id: RIU-540
+name: Validation Gate Design
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design validation gates with explicit pass/fail criteria and evidence requirements
+- Implement gate enforcement that blocks progression on failure without bypass paths
+- Handle time pressure scenarios where stakeholders push to skip validation gates
+- Build gate result documentation that supports audit trail and post-mortem analysis
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-022
+  - LIB-029
+  supporting:
+  - LIB-037
+  - LIB-038
+  - LIB-041
+  - LIB-053
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- validation_gate.md
+- criteria_checklist.md
+- evidence_requirements.md
+- gate_results/
+rubric_dimensions:
+  criteria_clarity:
+    description: Gate criteria are explicit, measurable, and machine-verifiable where possible
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  enforcement_strength:
+    description: Gate cannot be bypassed or rubber-stamped without verifiable evidence
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  exception_handling:
+    description: False positives and disputed findings handled with documented process and SLA
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  pressure_resilience:
+    description: Gate process handles time pressure with tiered criteria, not by skipping validation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-540-EX-01
+  failure_mode: silent
+  scenario: Your validation gate checks 5 criteria. The team marks all 5 as 'pass' without running the actual checks because
+    the gate is a manual checklist with no enforcement. The gate exists on paper but provides no actual quality assurance.
+  expected_output: 'Automated evidence collection: each criterion requires machine-verifiable evidence (test results, scan
+    reports, metric thresholds). validation_gate.md with per-criterion evidence requirements. Gate cannot be marked ''pass''
+    without attached evidence artifacts.'
+- id: RIU-540-EX-02
+  failure_mode: loud
+  scenario: Your gate criteria include 'security scan passes with zero critical findings.' A critical finding is discovered
+    but the security team says it's a false positive. The gate blocks the release for 3 days while the false positive is investigated.
+    The CEO asks why the release is delayed.
+  expected_output: 'False positive handling process: security team can reclassify findings with documented rationale. Reclassification
+    requires second reviewer. criteria_checklist.md with exception handling procedures. Escalation path for disputed findings
+    with SLA.'
+- id: RIU-540-EX-03
+  failure_mode: clustered
+  scenario: It's the end of quarter. Three releases are queued behind validation gates. Each gate takes 2 days. Leadership
+    pressures the team to run gates in parallel or skip non-critical criteria. Design the gate process that handles time pressure
+    without compromising quality.
+  expected_output: 'Gate parallelization rules: which criteria can run concurrently. Fast-track gate for low-risk releases
+    with reduced criteria set. evidence_requirements.md with tiered criteria: mandatory (never skip) vs recommended (can defer
+    with documented risk acceptance). Time pressure is not a valid reason to skip mandatory criteria.'

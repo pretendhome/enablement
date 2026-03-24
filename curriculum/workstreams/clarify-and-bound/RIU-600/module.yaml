@@ -1,0 +1,84 @@
+riu_id: RIU-600
+name: Multi-Brand AI Strategy Framework
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Design a multi-brand AI strategy framework that balances brand autonomy with shared infrastructure
+- Identify shared capabilities vs brand-specific customizations
+- Create governance model for AI decisions that affect multiple brands
+- Build business case for shared AI investment across brands
+prerequisites:
+  required:
+  - RIU-001
+  - RIU-002
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-165
+  - LIB-166
+  supporting:
+  - LIB-170
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- multi_brand_strategy.md
+- brand_landscape_map.md
+- shared_vs_specific_capabilities.md
+- federated_governance_model.md
+- per_brand_convergence_briefs/
+rubric_dimensions:
+  brand_differentiation:
+    description: Strategy preserves brand-specific AI behavior while leveraging shared infrastructure
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  governance:
+    description: Governance model resolves cross-brand conflicts with clear decision authority
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  business_case:
+    description: Shared investment justified with cost savings and capability improvement metrics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  consolidation:
+    description: Consolidation strategy identifies shared vs brand-specific components with migration plan
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-600-EX-01
+  failure_mode: silent
+  scenario: Your multi-brand strategy treats all brands identically. But Brand A (luxury) needs different AI behavior than
+    Brand B (budget). The shared AI gives luxury customers a budget experience. Brand differentiation is lost.
+  expected_output: Per-brand AI behavior profiles. Shared infrastructure with brand-specific configuration layers. Brand voice
+    and behavior requirements documented per brand.
+- id: RIU-600-EX-02
+  failure_mode: loud
+  scenario: Two brand teams disagree on AI investment priority. Brand A wants chatbot, Brand B wants recommendation engine.
+    No governance model exists to resolve the conflict. Both projects stall.
+  expected_output: AI governance council with brand representation. Investment prioritization framework. Shared vs brand-specific
+    budget allocation. Conflict resolution process with escalation path.
+- id: RIU-600-EX-03
+  failure_mode: clustered
+  scenario: 5 brands each built their own AI solutions independently. Now leadership wants consolidation. Each brand has different
+    tech stacks, data formats, and vendor relationships. Design the consolidation strategy.
+  expected_output: 'Current state inventory per brand. Consolidation opportunity analysis: what can be shared vs what must
+    stay brand-specific. Migration roadmap with per-brand timeline. Cost savings projection from consolidation.'

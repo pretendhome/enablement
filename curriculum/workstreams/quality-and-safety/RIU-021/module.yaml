@@ -13,9 +13,9 @@ learning_objectives:
   - "Identify when a golden set is too narrow and systematically expand coverage"
 
 prerequisites:
-  required: []
-  recommended:
+  required:
     - "RIU-001"   # Convergence Brief — need clear success criteria before you can measure quality
+  recommended: []
 
 knowledge_library_entries:
   primary:
@@ -46,7 +46,7 @@ required_artifacts:
 
 rubric_dimensions:
   golden_set_quality:
-    description: "Cases cover edge cases, difficulty spectrum, and failure modes — not just happy path"
+    description: "Cases cover edge cases, difficulty spectrum, and failure modes — not just happy path — and coverage gaps are identified and expanded systematically"
     levels: [insufficient, basic, competent, expert]
   harness_functionality:
     description: "Evaluation harness runs end-to-end, produces reproducible results, and gates on thresholds"
@@ -54,13 +54,16 @@ rubric_dimensions:
   metric_selection:
     description: "Metrics are appropriate to the output type and aligned with business success criteria"
     levels: [insufficient, basic, competent, expert]
+  calibration_and_adjudication:
+    description: "Ambiguous cases, calibration exemplars, inter-rater disagreement, and human-review escalation are handled explicitly rather than assumed away"
+    levels: [insufficient, basic, competent, expert]
   failure_analysis:
     description: "Report identifies systematic failure patterns (not just listing errors) with actionable fixes"
     levels: [insufficient, basic, competent, expert]
 
 certification_tier_thresholds:
-  WORKING: "competent on 3/4 dimensions"
-  PRODUCTION: "expert on 3/4, competent on remaining"
+  WORKING: "competent on 4/5 dimensions"
+  PRODUCTION: "expert on 3/5, competent on remaining"
 
 exercises:
   - id: "RIU-021-EX-01"

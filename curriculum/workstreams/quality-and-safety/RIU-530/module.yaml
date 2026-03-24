@@ -1,0 +1,90 @@
+riu_id: RIU-530
+name: AI System Risk Classification
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Classify AI system risk level per EU AI Act categories (unacceptable, high, limited, minimal)
+- Map system capabilities to regulatory requirements based on risk classification
+- Document classification rationale with evidence supporting the chosen risk level
+- Handle multi-jurisdiction scenarios where different frameworks assign different risk levels
+prerequisites:
+  required:
+  - RIU-012
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-008
+  - LIB-061
+  supporting:
+  - LIB-066
+  - LIB-067
+  - LIB-069
+  - LIB-071
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- risk_classification.md
+- regulatory_mapping.md
+- compliance_requirements.md
+rubric_dimensions:
+  classification_accuracy:
+    description: Risk level correctly assigned per applicable framework with component-level granularity
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  regulatory_mapping:
+    description: Specific regulatory articles and requirements mapped to system capabilities
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  documentation_quality:
+    description: Classification rationale documented with evidence and reviewed by appropriate authority
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_jurisdiction:
+    description: Multi-jurisdiction scenarios handled with clear compliance strategy per region
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in classification_accuracy and regulatory_mapping
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-530-EX-01
+  failure_mode: silent
+  scenario: Your AI system is classified as 'limited risk' because it's a chatbot. But it also makes automated decisions about
+    customer credit limits based on conversation analysis. The credit decision component is high-risk under EU AI Act, but
+    it's embedded in the chatbot and wasn't classified separately.
+  expected_output: 'Component-level risk classification: chatbot interface (limited) vs credit decision engine (high-risk).
+    risk_classification.md with per-component analysis. Compliance requirements mapped to the highest-risk component. Evidence
+    that each component was independently assessed.'
+- id: RIU-530-EX-02
+  failure_mode: loud
+  scenario: Your risk classification says 'high-risk' but the product team disputes it, arguing the system is only 'limited
+    risk' because it provides recommendations, not decisions. The regulator disagrees. Design the classification process that
+    resolves ambiguity.
+  expected_output: Classification decision tree with clear criteria at each branch. regulatory_mapping.md showing which specific
+    AI Act articles apply. External legal review for disputed classifications. Decision recorded in decisions.md as a ONE-WAY
+    DOOR with rationale.
+- id: RIU-530-EX-03
+  failure_mode: clustered
+  scenario: Your AI system operates in the EU (AI Act), US (no federal AI law, state-level varies), and Singapore (AI Governance
+    Framework). Each jurisdiction has different risk categories and requirements. The same system is 'high-risk' in EU, unregulated
+    in most US states, and 'medium' in Singapore.
+  expected_output: 'Per-jurisdiction risk classification matrix. Compliance strategy: meet highest standard globally or per-jurisdiction
+    compliance. compliance_requirements.md with jurisdiction-specific obligations. Cost analysis of global vs per-jurisdiction
+    approach.'

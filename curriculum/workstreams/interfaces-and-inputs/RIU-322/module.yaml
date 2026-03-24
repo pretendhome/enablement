@@ -1,0 +1,87 @@
+riu_id: RIU-322
+name: Authentication/Authorization Integration
+workstream: Interfaces & Inputs
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Integrate authentication (SSO/OAuth/SAML) into an AI application securely
+- 'Handle token lifecycle: issuance, refresh, revocation, and expiry'
+- Design auth flows for both human users and AI agents acting on behalf of users
+- 'Test auth integration including edge cases: expired tokens, revoked access, concurrent sessions'
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-157
+  - LIB-161
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- auth_integration_design.md
+- session_management.md
+- token_handling.md
+- security_checklist.md
+rubric_dimensions:
+  token_security:
+    description: Tokens stored securely with rotation, binding, and appropriate expiry
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  agent_auth:
+    description: AI agents authenticate with delegated permissions and audit trail linking to authorizing user
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_provider:
+    description: Multiple auth providers unified with consistent session management and revocation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  edge_case_coverage:
+    description: 'Auth edge cases tested: expiry, revocation, concurrent sessions, provider outages'
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in token_security and agent_auth
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-322-EX-01
+  failure_mode: silent
+  scenario: Your OAuth integration stores refresh tokens in browser localStorage. An XSS vulnerability allows an attacker
+    to steal refresh tokens. The tokens have no expiry and grant full API access. The breach goes undetected because token
+    usage looks normal.
+  expected_output: 'Secure token storage: httpOnly cookies for web, secure enclave for mobile. Refresh token rotation: each
+    use issues a new token and invalidates the old one. Token binding to device/session. Anomaly detection for token usage
+    patterns.'
+- id: RIU-322-EX-02
+  failure_mode: loud
+  scenario: Your SSO integration works for individual users but breaks when an AI agent needs to act on behalf of a user.
+    The agent can't authenticate because SSO requires interactive browser login. Users must manually re-authenticate every
+    time the agent needs access.
+  expected_output: 'Service account pattern for agent access with delegated permissions. OAuth device flow or client credentials
+    for non-interactive auth. Permission scoping: agent gets subset of user''s permissions. Audit trail linking agent actions
+    to authorizing user.'
+- id: RIU-322-EX-03
+  failure_mode: clustered
+  scenario: 'Your system supports 3 auth providers: corporate SSO (SAML), social login (OAuth), and API keys (for partners).
+    Each has different session management, token formats, and revocation mechanisms. A user can be authenticated via any provider.
+    Design the unified auth layer.'
+  expected_output: 'Auth abstraction layer: normalize all providers to internal session token. Per-provider adapter handling
+    token format differences. Unified session management regardless of auth provider. Revocation propagation: revoking access
+    in any provider invalidates the internal session.'

@@ -1,0 +1,63 @@
+tier: "PRODUCTION"
+display_name: "Palette Expert Practitioner"
+description: "Expert across multiple tracks. Can lead AI system design, defend architecture decisions, and mentor others."
+
+criteria:
+  entry:
+    - "Hold WORKING certification in 2+ tracks"
+    - "Pass architecture defense assessment"
+    - "Contribute 3+ peer reviews of WORKING-tier submissions"
+    - "Score expert on majority of rubric dimensions across tracks"
+  evidence_required: "portfolio + architecture defense + peer review contributions"
+  assessment_layers: [1, 2, 3]  # All layers — Layer 3 is mandatory (not sampled)
+  capstone_required: true
+  architecture_defense_required: true
+  human_review: "mandatory — 100% of PRODUCTION submissions reviewed by human"
+
+badge:
+  name: "Palette Expert Practitioner"
+  type: "OpenBadge3.0"
+  issuer: "Palette Enablement System"
+  image: "badges/production.svg"
+  description: "Holder has demonstrated expert-level AI system competency across multiple domains with architecture defense and peer review."
+  criteria_url: "https://palette.dev/certification/production"
+  alignment:
+    - target_name: "Palette Expert Practitioner"
+      target_framework: "Palette RIU Taxonomy v1.3"
+      target_description: "Cross-track expert competency with architecture defense"
+  extensions:
+    ace_credit: "Pending ACE evaluation"
+    competency_metadata:
+      tracks_completed: "{track_list}"
+      architecture_defense: true
+      peer_reviews_contributed: "{count}"
+      assessment_method: "portfolio + AI rubric + mandatory human review + architecture defense"
+
+validity:
+  duration: "2 years"
+  renewal:
+    method: "Continuing practice evidence or re-defense"
+    options:
+      - "Submit architecture defense for a new project (updated taxonomy version)"
+      - "Complete a new track at WORKING level"
+      - "Contribute 5+ peer reviews in the renewal period"
+    grace_period: "90 days after expiry"
+
+architecture_defense:
+  format: "Live presentation or async written defense"
+  duration: "45-60 minutes (live) or equivalent written submission"
+  requirements:
+    - "Present a real or realistic AI system design"
+    - "Defend ONE-WAY DOOR decisions with documented rationale"
+    - "Address cross-cutting concerns: safety, cost, observability, governance"
+    - "Respond to adversarial questions about tradeoffs and failure modes"
+  evaluation:
+    - "Evaluated by human reviewer (mandatory)"
+    - "Scored against architecture defense rubric"
+    - "Must demonstrate expert-level reasoning, not just competent execution"
+
+notes:
+  - "PRODUCTION is the highest tier — reserved for practitioners who can lead and mentor"
+  - "Architecture defense is the distinguishing assessment — it tests judgment under pressure"
+  - "Peer review contributions ensure PRODUCTION holders give back to the community"
+  - "100% human review is non-negotiable at this tier"

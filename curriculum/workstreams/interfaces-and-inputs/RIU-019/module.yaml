@@ -1,0 +1,75 @@
+riu_id: "RIU-019"
+name: "Data Lineage Sketch (Minimal)"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "both"
+difficulty: "medium"
+
+learning_objectives:
+  - "Produce a minimal lineage diagram showing source→processing→sink with owners at each stage"
+  - "Identify gaps in lineage that create compliance or debugging blind spots"
+  - "Evaluate data lineage tools against manual sketching for complex multi-service pipelines"
+  - "Design lineage documentation that supports both compliance audits and incident debugging"
+
+prerequisites:
+  required:
+    - "RIU-013"
+  recommended: []
+
+knowledge_library_entries:
+  primary:
+    - "LIB-116"
+  supporting:
+    - "LIB-133"
+
+service_context:
+  candidate_services:
+    - "dbt"
+    - "DataHub"
+    - "OpenLineage + Marquez"
+  integration_recipes:
+    - "../../../palette/buy-vs-build/integrations/dbt_lineage_tracking.yaml"
+    - "../../../palette/buy-vs-build/integrations/datahub_lineage_discovery.yaml"
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "data_lineage.md — Lineage narrative with source→processing→sink and owners per stage"
+  - "lineage_diagram.md — Visual lineage diagram (Mermaid or equivalent)"
+
+rubric_dimensions:
+  lineage_completeness:
+    description: "All data flows from source to sink are documented with no unknown processing steps"
+    levels: [insufficient, basic, competent, expert]
+  ownership_mapping:
+    description: "Every stage has a named owner responsible for data quality and availability"
+    levels: [insufficient, basic, competent, expert]
+  service_evaluation:
+    description: "Lineage tools evaluated with tradeoff analysis against manual documentation"
+    levels: [insufficient, basic, competent, expert]
+  debugging_utility:
+    description: "Lineage documentation enables rapid root cause analysis during incidents"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-019-EX-01"
+    failure_mode: "silent"
+    scenario: "Your AI system produces wrong recommendations. The data looks correct at the source and correct at the output. Somewhere in the middle, a processing step silently filters 20% of records. Build the lineage sketch that would have made this visible."
+    expected_output: "Lineage diagram showing every processing step with record count checkpoints. The silent filter identified as an undocumented step. Monitoring recommendation for record count drift between stages."
+
+  - id: "RIU-019-EX-02"
+    failure_mode: "loud"
+    scenario: "A compliance auditor asks 'where does this customer's data go after it enters your system?' You don't know. Build the lineage documentation that answers this question for any customer record."
+    expected_output: "End-to-end lineage from ingestion to all sinks (storage, logs, analytics, model training). Per-stage data retention and deletion policies. Compliance-ready narrative answering 'where does data X go?'"
+
+  - id: "RIU-019-EX-03"
+    failure_mode: "clustered"
+    scenario: "A multi-service pipeline spans 8 microservices across 3 teams. No single team knows the full data flow. Each team documents their own service but not the handoffs. Build a unified lineage sketch."
+    expected_output: "Cross-team lineage diagram with handoff points explicitly documented. Per-handoff data contract references. Service evaluation: manual sketch vs dbt/DataHub for ongoing lineage tracking. Owner assignment for each handoff point."

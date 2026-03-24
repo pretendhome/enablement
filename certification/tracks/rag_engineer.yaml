@@ -1,0 +1,51 @@
+track: "RAG Engineer"
+slug: "rag_engineer"
+stage_focus: "retrieval"
+tier: "WORKING"
+
+description: "Teaches practitioners to build, evaluate, and operate retrieval-augmented generation systems with production-quality evaluation and monitoring."
+
+capstone_reference: "../../assessment/capstones/rag_engineer_capstone.md"
+journey_reference: "../../curriculum/journeys/rag_engineer.yaml"
+
+estimated_duration:
+  learning: "45-60 hours"
+  assessment: "20-25 hours"
+  total: "65-85 hours"
+
+entry_requirements:
+  prior_tier: "WORKING (AI Foundations) or equivalent"
+  prerequisites:
+    - "RIU-001"
+    - "RIU-006"
+    - "RIU-022"
+    - "RIU-080"
+  expected_baseline:
+    - "Can define success metrics for an AI feature"
+    - "Can work with schemas, prompts, and test fixtures"
+
+riu_sequence:
+  - "RIU-001"  # Convergence Brief (reconfirm scope)
+  - "RIU-006"  # Success Metrics Charter
+  - "RIU-021"  # Golden Set + Offline Evaluation Harness
+  - "RIU-026"  # Hybrid Similarity (Enums + Embeddings)
+  - "RIU-027"  # Reranking Layer (Post-Retrieval)
+  - "RIU-032"  # Extraction Pattern (Structured from Unstructured)
+  - "RIU-033"  # Classification Pattern (Soft Labels)
+  - "RIU-080"  # Contract Tests (Input/Output)
+  - "RIU-086"  # Regression Suite (Golden + Metamorphic)
+  - "RIU-524"  # LLM Output Quality Monitoring
+
+riu_count: 10
+
+certification_thresholds:
+  per_module: "competent on 3/4 rubric dimensions (per module threshold)"
+  capstone: "competent on all integrated dimensions"
+
+career_positioning:
+  target_roles:
+    - "RAG Engineer"
+    - "AI Search Engineer"
+    - "ML Engineer (NLP/retrieval focus)"
+  value_proposition: "Proves you can build a retrieval pipeline with evaluation-first methodology and production monitoring"
+  differentiator: "Evaluation-first approach — builds the harness before tuning the pipeline"

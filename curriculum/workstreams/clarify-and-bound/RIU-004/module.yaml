@@ -1,0 +1,76 @@
+riu_id: "RIU-004"
+name: "Problem → Workstream Decomposition"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Decompose an ambiguous customer problem into candidate workstreams and RIUs without premature commitment"
+  - "Generate a broad candidate set that avoids silent narrowing — surface gaps explicitly"
+  - "Present candidates so a human can select or decline quickly with clear tradeoffs"
+  - "Distinguish between problems that are genuinely one problem vs multiple problems disguised as one"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — decomposition requires clear problem statement first
+  recommended:
+    - "RIU-002"   # Stakeholder Map — knowing who owns what helps decomposition
+
+knowledge_library_entries:
+  primary:
+    - "LIB-007"   # How do I identify when a customer request is actually 3 separate problems disguised as one?
+    - "LIB-003"   # How do I scope an AI pilot when the customer says 'we need AI everywhere'?
+    - "LIB-011"   # How do I create a semantic blueprint that non-technical stakeholders can validate?
+  supporting:
+    - "LIB-004"   # What artifacts prove convergence has been achieved before implementation starts?
+    - "LIB-009"   # How do I document tribal knowledge that exists only in stakeholder heads?
+    - "LIB-020"   # What's the best format for documenting 'tribal knowledge' so it's machine-readable?
+    - "LIB-035"   # What's the minimum viable data dictionary for an AI deployment?
+    - "LIB-167"   # How do I build an AI use case prioritization matrix?
+
+service_context: null  # internal_only — task decomposition is an Architect/Researcher function
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "candidate_workstreams.yaml — Broad set of candidate workstreams with rationale for inclusion"
+  - "candidate_rius.yaml — Candidate RIUs per workstream with dependencies and priority signals"
+  - "decomposition_rationale.md — Explanation of decomposition logic, gaps surfaced, and what was intentionally excluded"
+
+rubric_dimensions:
+  breadth_without_narrowing:
+    description: "Candidate set is broad and avoids premature narrowing — gaps are surfaced explicitly"
+    levels: [insufficient, basic, competent, expert]
+  human_decidability:
+    description: "Candidates are presented so a human can select or decline quickly with clear tradeoffs"
+    levels: [insufficient, basic, competent, expert]
+  problem_separation:
+    description: "Compound problems are correctly identified and separated into distinct workstreams"
+    levels: [insufficient, basic, competent, expert]
+  gap_surfacing:
+    description: "Missing information, unknown domains, and areas requiring research are explicitly called out"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-004-EX-01"
+    failure_mode: "silent"
+    scenario: "A customer says 'We need an AI-powered knowledge base for our support team.' You decompose it into retrieval, indexing, and UI workstreams. But you silently narrowed: you assumed text-only content, English-only, and internal-only access. The customer actually has video tutorials, multilingual docs, and wants customer-facing search too. Redo the decomposition without narrowing."
+    expected_output: "Expanded candidate_workstreams.yaml with content types (text, video, images), languages, and access tiers as explicit dimensions. Each assumption that was previously silent is now a candidate workstream or a flagged gap. Decomposition rationale explains what was initially missed and why."
+
+  - id: "RIU-004-EX-02"
+    failure_mode: "loud"
+    scenario: "You present 12 candidate workstreams to the customer. They're overwhelmed and say 'this is too much, just tell us what to do.' The decomposition is technically correct but not human-decidable. Restructure the same content so the customer can make decisions in under 30 minutes."
+    expected_output: "Restructured candidates into 3 tiers: Must-Have (3 workstreams), Should-Have (4 workstreams), Could-Have (5 workstreams). Each tier has a 1-sentence justification. Decision matrix showing impact vs effort for each. Recommended Phase 0 scope highlighted."
+
+  - id: "RIU-004-EX-03"
+    failure_mode: "clustered"
+    scenario: "A healthcare company asks for 'AI-powered clinical decision support.' This is actually 5 problems: clinical NLP, drug interaction checking, diagnostic suggestion, workflow integration, and regulatory compliance. Each has different stakeholders, timelines, and risk profiles. Decompose into workstreams that can be independently scoped and delivered."
+    expected_output: "5 distinct workstreams with independent scope, stakeholders, and delivery timelines. Dependency map showing which workstreams block others. Risk classification per workstream (regulatory compliance is ONE-WAY DOOR). Recommended sequencing with rationale. Explicit gaps: 'We don't know enough about the EHR integration constraints to scope workstream 4.'"

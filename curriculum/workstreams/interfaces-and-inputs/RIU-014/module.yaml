@@ -1,0 +1,72 @@
+riu_id: "RIU-014"
+name: "Data Sampling + Edge-Case Catalog"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Collect representative data samples covering the full distribution of production inputs"
+  - "Catalog edge cases systematically by category (encoding, format, volume, semantics)"
+  - "Convert edge cases into executable tests that prevent regression"
+  - "Identify sampling bias and design strategies to surface rare but critical data patterns"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-011"
+
+knowledge_library_entries:
+  primary:
+    - "LIB-009"
+    - "LIB-014"
+  supporting:
+    - "LIB-017"
+    - "LIB-020"
+    - "LIB-022"
+    - "LIB-023"
+    - "LIB-036"
+    - "LIB-044"
+
+service_context: null
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "edge_case_catalog.md — Categorized catalog with severity, frequency, and reproduction steps"
+  - "edge_case_samples/ — Representative samples for each cataloged edge case"
+  - "edge_case_tests/ — Executable tests derived from edge cases that gate deployment"
+
+rubric_dimensions:
+  sample_coverage:
+    description: "Samples cover the full distribution including rare encodings, formats, and boundary conditions"
+    levels: [insufficient, basic, competent, expert]
+  catalog_completeness:
+    description: "Edge cases categorized by type with severity, frequency, and impact assessment"
+    levels: [insufficient, basic, competent, expert]
+  test_effectiveness:
+    description: "Tests are executable, catch regressions, and produce clear failure messages"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/3 dimensions"
+  PRODUCTION: "expert on 2/3, competent on remaining"
+
+exercises:
+  - id: "RIU-014-EX-01"
+    failure_mode: "silent"
+    scenario: "Your AI text extraction pipeline works on English documents. In production, 8% contain mixed-language content (English + Mandarin + Arabic). The pipeline silently drops non-Latin characters. Build the edge case catalog and tests."
+    expected_output: "Edge case catalog with encoding/language categories. Sample documents with mixed scripts. Tests validating character preservation across Unicode blocks."
+
+  - id: "RIU-014-EX-02"
+    failure_mode: "loud"
+    scenario: "Your team cannot access production data due to compliance restrictions. You only have synthetic test data. Design a sampling strategy that maximizes edge case coverage without production access."
+    expected_output: "Sampling strategy using schema analysis, stakeholder interviews, synthetic data generation targeting boundary conditions, and gap analysis of untestable scenarios."
+
+  - id: "RIU-014-EX-03"
+    failure_mode: "clustered"
+    scenario: "An internationalization project handles dates, currencies, addresses, and phone numbers across 12 countries with different formats and optional/required field rules. Build a comprehensive edge case catalog."
+    expected_output: "Per-country format catalog. Cross-country edge cases (dual-country addresses, multi-currency transactions). Test matrix covering all country × field combinations."

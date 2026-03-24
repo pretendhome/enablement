@@ -1,0 +1,91 @@
+riu_id: RIU-533
+name: Fundamental Rights Impact Assessment (FRIA)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Conduct a Fundamental Rights Impact Assessment per EU AI Act requirements for high-risk systems
+- Map AI system capabilities to specific fundamental rights that may be affected
+- Gather stakeholder input from affected populations and rights experts
+- Document mitigation measures with effectiveness tracking and review schedule
+prerequisites:
+  required:
+  - RIU-530
+  - RIU-012
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-031
+  - LIB-048
+  supporting:
+  - LIB-067
+  - LIB-073
+  - LIB-074
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- fria_report.md
+- rights_mapping.md
+- stakeholder_input.md
+- mitigation_measures.md
+rubric_dimensions:
+  rights_coverage:
+    description: All applicable fundamental rights assessed with no major omissions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  stakeholder_engagement:
+    description: Affected populations and rights experts consulted with documented input
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  mitigation_effectiveness:
+    description: Mitigations are implemented (not just documented) with effectiveness tracking
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  jurisdiction_handling:
+    description: Multi-jurisdiction variations addressed with per-country analysis where needed
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in rights_coverage and mitigation_effectiveness
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-533-EX-01
+  failure_mode: silent
+  scenario: Your FRIA covers privacy and non-discrimination but omits freedom of expression. Your content moderation AI blocks
+    legitimate political speech in certain languages because the safety filter was trained primarily on English. The rights
+    impact was missed because the assessment didn't consider linguistic bias as a freedom of expression issue.
+  expected_output: 'Comprehensive rights checklist covering all EU Charter rights. rights_mapping.md with per-right analysis
+    including linguistic and cultural dimensions. Stakeholder input from multilingual user groups. Mitigation: language-specific
+    safety thresholds.'
+- id: RIU-533-EX-02
+  failure_mode: loud
+  scenario: Your FRIA identifies a significant impact on the right to work (AI-assisted hiring decisions). A workers' rights
+    organization publicly objects to your system. The media picks it up. Your mitigation measures exist on paper but haven't
+    been implemented. Design the FRIA process that prevents this gap.
+  expected_output: 'FRIA with implementation tracking: each mitigation has owner, deadline, and verification method. stakeholder_input.md
+    with documented engagement from affected groups. Public transparency report on FRIA findings. mitigation_measures.md with
+    implementation status dashboard.'
+- id: RIU-533-EX-03
+  failure_mode: clustered
+  scenario: Your AI system deploys across 5 EU member states. Each has different national interpretations of fundamental rights.
+    A feature legal in Germany is challenged in France. The FRIA was done at EU level without considering national variations.
+    Conduct a multi-jurisdiction FRIA.
+  expected_output: EU-level base FRIA with per-member-state addenda. National rights interpretation differences documented.
+    Per-country mitigation variations where needed. Legal review per jurisdiction. fria_report.md with unified structure and
+    jurisdiction-specific sections.

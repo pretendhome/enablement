@@ -1,0 +1,93 @@
+riu_id: RIU-083
+name: Red Team Scenarios (Abuse + Failure)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Define red-team scenarios covering abuse patterns, adversarial inputs, and dangerous failure modes
+- Run red-team exercises as a pre-launch gate with documented results and mitigations
+- Identify gaps in scenario coverage that create a false sense of security
+- Design mitigations that address root causes rather than individual attack vectors
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-037
+  - LIB-038
+  supporting:
+  - LIB-040
+  - LIB-042
+  - LIB-043
+service_context:
+  candidate_services:
+  - Garak (OSS LLM vulnerability scanner, standard tool)
+  - Promptfoo (red-teaming + CI integration)
+  - Anthropic's constitutional AI evals (if using Claude)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- redteam_scenarios.md
+- redteam_results.md
+- mitigations.md
+rubric_dimensions:
+  scenario_coverage:
+    description: Scenario coverage spans all attack categories and input modalities with explicit gaps documented to prevent false security
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  mitigation_quality:
+    description: Mitigations address root causes, not just individual vectors, with defense-in-depth approach
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  process_rigor:
+    description: Red-teaming is a repeatable process with versioned scenarios, not a one-time exercise
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  launch_gate_clarity:
+    description: Pass/fail criteria are explicit and severity classification prevents subjective deadlocks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-083-EX-01
+  failure_mode: silent
+  scenario: Your red-team exercise covers 20 prompt injection scenarios and passes all of them. The team declares the system
+    safe. In production, an attacker uses a multi-turn conversation to gradually escalate permissions — a pattern not in your
+    scenario set. The scenario set was incomplete but nobody knew.
+  expected_output: Scenario coverage matrix mapping attack categories (injection, escalation, exfiltration, social engineering,
+    multi-turn). Gap analysis showing which categories are untested. Continuous red-teaming schedule (not one-time). Scenario
+    set versioned and expanded after each incident.
+- id: RIU-083-EX-02
+  failure_mode: loud
+  scenario: 'Your red-team results show 3 critical vulnerabilities. The product team pushes back: ''These are unrealistic
+    scenarios that real users would never try.'' The launch is delayed while the team argues about which findings matter.
+    Design the process that prevents this deadlock.'
+  expected_output: 'Risk classification framework for red-team findings: critical (blocks launch), high (mitigate before launch),
+    medium (mitigate within 30 days), low (backlog). Severity criteria based on impact × likelihood, not subjective judgment.
+    Escalation path when product and security disagree.'
+- id: RIU-083-EX-03
+  failure_mode: clustered
+  scenario: Your AI system accepts text, images, and file uploads. Red-teaming focused on text prompts only. An attacker uploads
+    a PDF with embedded prompt injection in the OCR layer, bypassing all text-based guardrails. Design a cross-modal red-team
+    exercise.
+  expected_output: 'Multi-modal attack scenario matrix: text × image × file × API. Per-modality attack vectors documented.
+    Cross-modal attack patterns (e.g., injection via OCR, steganography, metadata). Red-team exercise covering all input modalities
+    with combined attack scenarios.'

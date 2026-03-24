@@ -1,0 +1,83 @@
+riu_id: RIU-201
+name: Competitive/Alternatives Research
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: both
+difficulty: medium
+learning_objectives:
+- Research competitive alternatives and substitutes for the proposed AI solution
+- Evaluate build-vs-buy options with total cost of ownership analysis
+- Present alternatives objectively including options that compete with your recommendation
+- Document why the recommended approach was chosen over alternatives
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-123
+  - LIB-125
+  supporting:
+  - LIB-126
+service_context:
+  candidate_services:
+  - Perplexity (already integrated, highest signal)
+  - Tavily (research-focused search API)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- competitive_analysis.md
+- feature_comparison.md
+rubric_dimensions:
+  coverage:
+    description: Alternatives include commercial, open-source, build, and hybrid options
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  objectivity:
+    description: Alternatives presented objectively including options competing with recommendation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cost_analysis:
+    description: Total cost of ownership analyzed per alternative including maintenance and opportunity cost
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  decision_rationale:
+    description: Recommended approach justified against alternatives with explicit tradeoff documentation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-201-EX-01
+  failure_mode: silent
+  scenario: Your alternatives research lists 5 commercial products but omits the open-source option that would cost 80% less.
+    The research is biased toward commercial solutions because those are easier to find.
+  expected_output: 'Research methodology covering: commercial products, open-source alternatives, internal build options,
+    hybrid approaches. Total cost of ownership per alternative including maintenance and opportunity cost.'
+- id: RIU-201-EX-02
+  failure_mode: loud
+  scenario: Your research recommends a specific vendor. The customer already evaluated that vendor and rejected them for compliance
+    reasons you did not know about. The recommendation damages credibility.
+  expected_output: 'Pre-research discovery: ask customer what they have already evaluated and why they rejected it. Constraint-aware
+    research that filters out non-viable options upfront. Research report showing eliminated options with reasons.'
+- id: RIU-201-EX-03
+  failure_mode: clustered
+  scenario: The customer needs differ across 3 use cases. No single alternative is best for all 3. Your research presents
+    a single recommendation that is a compromise for all use cases. Design the multi-use-case alternatives analysis.
+  expected_output: Per-use-case alternative evaluation. Best-fit recommendation per use case. Unified platform option with
+    per-use-case tradeoff analysis. Decision matrix showing which alternative wins for which use case.

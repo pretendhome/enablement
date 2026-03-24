@@ -1,0 +1,69 @@
+riu_id: "RIU-016"
+name: "API Contract Review + Versioning Plan"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Review an existing API contract for compatibility risks and undeclared breaking changes"
+  - "Define versioning and compatibility rules that protect existing consumers"
+  - "Identify undeclared breaking changes that would silently break downstream clients"
+  - "Design a safe API evolution path with deprecation timelines and migration guides"
+
+prerequisites:
+  required:
+    - "RIU-015"
+  recommended: []
+
+knowledge_library_entries:
+  primary:
+    - "LIB-028"
+    - "LIB-032"
+  supporting:
+    - "LIB-026"
+
+service_context: null
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "api_contract_review.md — Review with identified risks and compatibility issues"
+  - "versioning_plan.md — Versioning rules, deprecation timelines, and migration guides"
+
+rubric_dimensions:
+  risk_identification:
+    description: "All compatibility risks and undeclared breaking changes identified with impact assessment"
+    levels: [insufficient, basic, competent, expert]
+  versioning_rules:
+    description: "Versioning rules are explicit, enforceable, and protect existing consumers"
+    levels: [insufficient, basic, competent, expert]
+  evolution_safety:
+    description: "Deprecation timelines and migration guides enable safe evolution without surprise breakage"
+    levels: [insufficient, basic, competent, expert]
+  client_impact:
+    description: "Impact on each client type assessed and mitigated"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-016-EX-01"
+    failure_mode: "silent"
+    scenario: "An API endpoint changes a timestamp from ISO 8601 to Unix epoch in a 'minor' release. Three mobile clients break silently — they parse the field but display wrong dates. Design the versioning plan that prevents this."
+    expected_output: "Contract review identifying format change as breaking. Versioning plan classifying format changes as major. Backward compatibility layer serving both formats during migration."
+
+  - id: "RIU-016-EX-02"
+    failure_mode: "loud"
+    scenario: "A partner rejects your v2 API because you removed a deprecated field they still use. The deprecation notice was in release notes they never read. Design the deprecation process."
+    expected_output: "Deprecation policy with minimum notice period, active consumer detection, per-consumer migration tracking, and hard removal only after all consumers migrate."
+
+  - id: "RIU-016-EX-03"
+    failure_mode: "clustered"
+    scenario: "Your API serves mobile clients (can't force-update), web clients (instant update), and batch ETL (quarterly update). You need to ship a breaking change. Design a versioning strategy for all three cadences."
+    expected_output: "Multi-version serving: v1 and v2 simultaneously. Per-consumer migration timeline. Sunset policy with monitoring of remaining v1 traffic. Feature flags for gradual mobile rollout."

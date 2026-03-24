@@ -1,0 +1,86 @@
+riu_id: RIU-029
+name: Tool-Calling Safety Envelope
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Define a tool allowlist that constrains which tools an AI agent can invoke and with what parameters
+- Implement rate limits and argument validation that prevent unsafe tool calls
+- Design audit logging that captures tool invocations without leaking sensitive arguments
+- Ensure safe-by-default execution where unrecognized tools or arguments are blocked
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-138
+  - LIB-160
+  supporting:
+  - LIB-161
+  - LIB-172
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- tool_allowlist.yaml
+- tool_limits.md
+- tool_audit_requirements.md
+rubric_dimensions:
+  allowlist_precision:
+    description: Tool allowlist constrains both which tools and what arguments are permitted, with no unsafe gaps
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  rate_limit_design:
+    description: Rate limits prevent external service abuse while maintaining agent functionality under load
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audit_completeness:
+    description: Audit logging captures all tool invocations with redacted sensitive arguments
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  safe_defaults:
+    description: Unrecognized tools, arguments, or patterns are blocked by default with clear error messages
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in allowlist_precision and safe_defaults
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-029-EX-01
+  failure_mode: silent
+  scenario: Your AI agent has access to a database query tool. A user crafts a prompt that causes the agent to run 'DROP TABLE
+    users' as part of a 'cleanup' action. The tool allowlist permits SQL execution but doesn't validate query content. No
+    alert fires.
+  expected_output: tool_allowlist.yaml with per-tool argument validation rules. SQL tool restricted to SELECT only (or parameterized
+    queries from approved list). Argument scanning that blocks destructive operations. Audit log entry for every tool call
+    including full arguments.
+- id: RIU-029-EX-02
+  failure_mode: loud
+  scenario: Your audit logging system captures full tool call arguments including API keys, passwords, and PII that users
+    paste into prompts. A security audit discovers sensitive data in plaintext logs. The logging was meant to help debugging
+    but created a compliance violation.
+  expected_output: 'Audit logging spec with argument redaction rules: API keys masked, PII fields hashed, passwords never
+    logged. Redaction applied before log write. Retroactive scan of existing logs for sensitive data. Updated tool_audit_requirements.md.'
+- id: RIU-029-EX-03
+  failure_mode: clustered
+  scenario: Your multi-agent system has 5 agents each with tool access. During a traffic spike, agents make 500 concurrent
+    API calls to an external service, triggering a rate limit ban. The ban affects all agents, not just the one that caused
+    the spike. Design the safety envelope.
+  expected_output: Global rate limit budget shared across agents with per-agent quotas. Circuit breaker that trips before
+    external rate limit is hit. Priority queue for tool calls during constrained periods. Fallback behavior when tools are
+    rate-limited.

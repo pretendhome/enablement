@@ -1,0 +1,82 @@
+riu_id: RIU-068
+name: Canary Rollout + Error Budget Gate
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Design canary rollout with automated quality monitoring and error budget gates
+- Implement instant rollback via traffic routing when canary quality degrades
+- Handle multi-component canary where dependent services must be coordinated
+- Ensure canary traffic is representative of production distribution
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-119
+  supporting: []
+service_context:
+  candidate_services:
+  - Statsig (feature flags + error budgets, AI-native)
+  - LaunchDarkly (mature canary support)
+  - Argo Rollouts (Kubernetes-native progressive delivery)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- canary_plan.md
+- error_budget.md
+- rollback_criteria.md
+rubric_dimensions:
+  traffic_management:
+    description: Canary traffic is representative with staged promotion and per-stage quality checks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  rollback_speed:
+    description: Rollback is instant via traffic routing, not redeployment
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  error_budget:
+    description: Error budget gates automatically halt rollout on quality degradation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_component:
+    description: Canary coordinated across dependent components with backward compatibility
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-068-EX-01
+  failure_mode: silent
+  scenario: Your 5% canary traffic was not representative - it missed a query pattern that only appears at scale. The new
+    version fails at 100%.
+  expected_output: Canary traffic representativeness check. Minimum canary duration based on traffic diversity. Staged promotion
+    with quality checks at each stage.
+- id: RIU-068-EX-02
+  failure_mode: loud
+  scenario: Your rollback takes 15 minutes because it requires redeployment. During those 15 minutes, 5% of users see errors.
+  expected_output: Instant rollback via traffic routing. Old version stays running during canary. Rollback = shift traffic
+    back in seconds.
+- id: RIU-068-EX-03
+  failure_mode: clustered
+  scenario: New API version sends messages in a new format. Old workers cannot process them. 5% of background jobs fail during
+    canary.
+  expected_output: Coordinated canary across dependent components. Message format backward compatibility. Per-component canary
+    with dependency-aware promotion.

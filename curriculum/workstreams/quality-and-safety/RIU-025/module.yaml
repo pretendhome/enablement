@@ -1,0 +1,84 @@
+riu_id: RIU-025
+name: Freshness/Staleness Rules (Deterministic)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Implement freshness classes that categorize data by acceptable staleness thresholds
+- Design downrank/omit rules that prevent stale recommendations from reaching users
+- Build orphan detection using last-seen snapshots to identify removed or abandoned records
+- Verify that staleness cases are covered in the evaluation harness with deterministic tests
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-137
+  - LIB-159
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- freshness_rules.yaml
+- orphan_detector/
+- staleness_tests/
+rubric_dimensions:
+  freshness_classification:
+    description: Data entities categorized into freshness classes with appropriate staleness thresholds per use case
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  orphan_detection:
+    description: Orphan detection correctly identifies removed records without false-orphaning during sync outages
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  staleness_coverage:
+    description: Staleness cases covered in evaluation harness with deterministic, reproducible tests
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  operational_safety:
+    description: Downrank and omit rules prevent stale recommendations from reaching users; freshness degrades gracefully under sync failures
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-025-EX-01
+  failure_mode: silent
+  scenario: Your recommendation engine surfaces products that were discontinued 3 months ago. The product catalog has no 'deleted_at'
+    field — items simply stop appearing in sync batches. Users see recommendations for items they can't buy, but no error
+    is raised anywhere.
+  expected_output: freshness_rules.yaml with per-entity freshness classes (real-time, daily, weekly). Orphan detector using
+    last-seen snapshots that flags entities missing from 2+ consecutive syncs. Staleness tests proving discontinued products
+    are omitted within one sync cycle.
+- id: RIU-025-EX-02
+  failure_mode: loud
+  scenario: Your orphan detection marks 40% of the catalog as 'stale' after a sync partner has a 6-hour outage. The system
+    removes thousands of valid products from search results. Customer support is overwhelmed.
+  expected_output: 'False-orphaning prevention: minimum consecutive misses before orphan classification (not single-miss).
+    Sync health check that detects partner outages before applying staleness rules. Rollback procedure to restore falsely
+    orphaned records.'
+- id: RIU-025-EX-03
+  failure_mode: clustered
+  scenario: 'Three data sources sync on different schedules: Source A every 5 minutes, Source B daily at 2am, Source C weekly
+    on Sundays. A query joins all three. On Monday morning, Source B has fresh data, Source C is 6 days stale, and Source
+    A has a backlog from weekend traffic. Design freshness rules for this multi-source scenario.'
+  expected_output: 'Per-source freshness classes with independent staleness thresholds. Join-level freshness policy: query
+    result freshness = min(source freshness). Dashboard showing per-source sync lag. Alert when any source exceeds its staleness
+    SLA.'

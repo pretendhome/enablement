@@ -46,6 +46,7 @@ Write 3-5 objectives. Each must:
 - Start with an action verb (design, implement, evaluate, defend, identify)
 - Be measurable through the assessment
 - Map to a specific rubric dimension
+- Or map to an explicit acceptance criterion in a required artifact when a dedicated dimension is not appropriate
 - Derive from `problem_pattern` and `execution_intent`
 
 ## Rubric Dimensions
@@ -54,6 +55,8 @@ Write 3-5 dimensions. Each must:
 - Derive from a `success_conditions` field (execution, outcome, safety_quality)
 - Have exactly 4 levels: [insufficient, basic, competent, expert]
 - Include a clear description of what each level looks like
+- Explicitly score calibration/evidence design for testing, evaluation, guardrail, or review-gate modules
+- Explicitly score adaptation when the clustered failure mode involves multiple actors, environments, or populations
 
 ## Exercises
 
@@ -77,14 +80,20 @@ For `classification: internal_only` modules:
 
 - **WORKING**: Competent on most dimensions (typically 3/4 or 4/5)
 - **PRODUCTION**: Expert on majority, competent on rest
+- For critical safety, governance, privacy, or one-way-door modules, name mandatory dimensions and do not allow passing with a weak core-control dimension
 
 ## Quality Checks
 
 Before submitting, verify:
 - [ ] `riu_id` matches taxonomy entry exactly
 - [ ] All learning objectives are measurable
+- [ ] Every learning objective maps to a rubric dimension or explicit artifact acceptance criterion
 - [ ] All failure modes from RIU are covered by exercises
 - [ ] Rubric dimensions map to success conditions
+- [ ] Thresholds match module risk and mandatory control dimensions are named when needed
+- [ ] Critical modules have strong enough prerequisites for the required artifacts
+- [ ] Evaluation/safety modules include a calibration or evidence-oriented rubric dimension
+- [ ] Clustered multi-actor or multi-environment modules include an adaptation rubric dimension
 - [ ] Service context is present iff classification is `both`
 - [ ] Prerequisites match taxonomy `dependencies` field
 - [ ] YAML is valid and conforms to module-schema.yaml

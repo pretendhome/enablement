@@ -91,6 +91,34 @@ def find_self_references(modules):
     return self_refs
 
 
+def detect_recommended_cycles(modules):
+    """Detect cycles in recommended prerequisites (separate from required)."""
+    WHITE, GRAY, BLACK = 0, 1, 2
+    color = {riu_id: WHITE for riu_id in modules}
+    cycles = []
+
+    def dfs(node, path):
+        color[node] = GRAY
+        prereqs = modules[node].get('prerequisites', {})
+        for req in prereqs.get('recommended', []) or []:
+            if isinstance(req, str) and req.startswith('#'):
+                continue  # Skip comment lines in YAML
+            if req not in modules:
+                continue
+            if color[req] == GRAY:
+                cycle_start = path.index(req)
+                cycles.append(path[cycle_start:] + [req])
+            elif color[req] == WHITE:
+                dfs(req, path + [req])
+        color[node] = BLACK
+
+    for riu_id in modules:
+        if color[riu_id] == WHITE:
+            dfs(riu_id, [riu_id])
+
+    return cycles
+
+
 def find_max_depth(modules):
     """Find the longest prerequisite chain."""
     cache = {}
@@ -175,11 +203,22 @@ def run_validation():
     else:
         print(f"   [PASS] No self-references")
 
-    # 4. Chain depth
+    # 4. Recommended prerequisite cycles
+    rec_cycles = detect_recommended_cycles(modules)
+    print(f"\n4. RECOMMENDED PREREQUISITE CYCLES")
+    if rec_cycles:
+        print(f"   [WARN] {len(rec_cycles)} cycle(s) in recommended prerequisites:")
+        for cycle in rec_cycles:
+            print(f"   → {' → '.join(cycle)}")
+        # Warnings, not errors — recommended prereqs are non-blocking
+    else:
+        print(f"   [PASS] No cycles in recommended prerequisites")
+
+    # 5. Chain depth
     depths = find_max_depth(modules)
     max_depth_id = max(depths, key=depths.get) if depths else None
     max_depth = depths.get(max_depth_id, 0) if max_depth_id else 0
-    print(f"\n4. CHAIN DEPTH")
+    print(f"\n5. CHAIN DEPTH")
     print(f"   Maximum prerequisite chain: {max_depth} (module: {max_depth_id})")
     print(f"   Threshold: {MAX_CHAIN_DEPTH}")
     if max_depth > MAX_CHAIN_DEPTH:
@@ -187,6 +226,11 @@ def run_validation():
         errors += 1
     else:
         print(f"   [PASS] Within acceptable depth")
+
+    # 6. Recommended cycle summary
+    if rec_cycles:
+        print(f"\n   NOTE: {len(rec_cycles)} recommended prereq cycle(s) found (non-blocking)")
+        print(f"   Fix by removing one direction of the recommended relationship.")
 
     # Summary
     print(f"\n{'=' * 60}")

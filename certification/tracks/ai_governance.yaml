@@ -1,0 +1,48 @@
+track: "AI Governance"
+slug: "ai_governance"
+stage_focus: "governance"
+tier: "WORKING"
+
+description: "Teaches practitioners to classify AI risk, detect bias, implement explainability, conduct rights assessments, and prepare audit-ready documentation."
+
+capstone_reference: "../../assessment/capstones/ai_governance_capstone.md"
+journey_reference: "../../curriculum/journeys/ai_governance.yaml"
+
+estimated_duration:
+  learning: "50-70 hours"
+  assessment: "20-25 hours"
+  total: "70-95 hours"
+
+entry_requirements:
+  prior_tier: "WORKING (AI Foundations) or equivalent"
+  prerequisites:
+    - "RIU-001"
+  expected_baseline:
+    - "Can read system design and operational documentation"
+    - "Can reason about risk, control design, and stakeholder sign-off"
+
+riu_sequence:
+  - "RIU-001"  # Convergence Brief
+  - "RIU-021"  # Golden Set + Offline Evaluation Harness
+  - "RIU-082"  # LLM Safety Guardrails
+  - "RIU-087"  # Human Review Gate (One-Way Doors)
+  - "RIU-530"  # AI System Risk Classification
+  - "RIU-531"  # Algorithmic Bias Detection
+  - "RIU-532"  # AI Explainability Framework
+  - "RIU-533"  # Fundamental Rights Impact Assessment
+  - "RIU-534"  # AI Audit Trail Requirements
+  - "RIU-535"  # AI System Documentation Package
+
+riu_count: 10
+
+certification_thresholds:
+  per_module: "competent on 3/4 rubric dimensions (per module threshold)"
+  capstone: "competent on all integrated dimensions"
+
+career_positioning:
+  target_roles:
+    - "AI Governance Lead"
+    - "AI Ethics & Compliance Specialist"
+    - "Responsible AI Engineer"
+  value_proposition: "Proves you can navigate AI regulation, implement governance controls, and prepare audit-ready documentation"
+  differentiator: "Evidence-first — governance backed by measurable evaluation, not just policy documents"

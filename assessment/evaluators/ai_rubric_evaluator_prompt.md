@@ -60,6 +60,16 @@ evaluation:
 4. **Insufficient requires explanation.** If scoring insufficient, explain what is missing and what would move it to basic.
 5. **Don't double-penalize.** If a single weakness affects multiple dimensions, score each dimension on its own terms.
 6. **Flag uncertainty.** If you're uncertain between two levels, flag it in calibration_note for human review.
+7. **Confidence scoring.** For each dimension, include a confidence score (high/medium/low). Low confidence triggers automatic escalation to human review. This is mandatory — research shows LLM expert agreement is only 64-68%, so honest uncertainty reporting is essential for system integrity.
+8. **Bias awareness.** Score substance, not length (verbosity bias). Use absolute scoring against the rubric, not relative ranking (position bias). Do not favor responses that resemble your own training patterns (self-preference bias).
+
+## Escalation Triggers
+
+The following automatically escalate a submission to human review (Layer 3):
+- Any dimension scored with **low confidence**
+- Any submission where the overall result is **borderline** (e.g., exactly at the WORKING threshold)
+- Any submission where **2+ dimensions** are scored at adjacent levels with medium confidence
+- Any **PRODUCTION-tier** evaluation (all PRODUCTION submissions require human sign-off)
 
 ## Certification Threshold Check
 

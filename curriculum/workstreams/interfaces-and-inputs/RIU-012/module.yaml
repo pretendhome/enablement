@@ -1,0 +1,82 @@
+riu_id: "RIU-012"
+name: "PII/Compliance Triage (Controls Plan)"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "both"
+difficulty: "critical"
+
+learning_objectives:
+  - "Classify data sensitivity levels and define minimization/redaction rules per field"
+  - "Design audit logging requirements that satisfy compliance without leaking sensitive data"
+  - "Implement a controls plan mapping regulatory requirements to technical safeguards"
+  - "Evaluate automated PII detection services against manual classification for cost and accuracy"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"
+    - "RIU-011"
+
+knowledge_library_entries:
+  primary:
+    - "LIB-122"
+    - "LIB-043"
+  supporting:
+    - "LIB-008"
+    - "LIB-035"
+    - "LIB-138"
+    - "LIB-153"
+    - "LIB-164"
+
+service_context:
+  candidate_services:
+    - "AWS Comprehend"
+    - "Microsoft Presidio"
+    - "Google Cloud DLP"
+  integration_recipes:
+    - "../../../palette/buy-vs-build/integrations/aws_comprehend_pii_detection.yaml"
+    - "../../../palette/buy-vs-build/integrations/presidio_pii_redaction.yaml"
+
+estimated_duration:
+  learning: "6-8 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "service_integration"
+required_artifacts:
+  - "compliance_triage.md — Sensitivity classification per field with regulatory mapping (HIPAA/PCI/GDPR)"
+  - "data_minimization_plan.md — Minimization and redaction rules with safe processing allowlist"
+  - "audit_logging_requirements.md — Audit logging spec capturing compliance events without leaking PII"
+
+rubric_dimensions:
+  sensitivity_classification:
+    description: "Every field classified with regulatory mapping and no disallowed fields processed"
+    levels: [insufficient, basic, competent, expert]
+  controls_completeness:
+    description: "Controls plan covers minimization, redaction, audit logging, and safe processing allowlist"
+    levels: [insufficient, basic, competent, expert]
+  service_evaluation:
+    description: "Automated PII detection services evaluated with accuracy/cost tradeoff against manual classification"
+    levels: [insufficient, basic, competent, expert]
+  compliance_path:
+    description: "Compliance review path is clear with explicit approval gates and documentation trail"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on all 4 dimensions, with mandatory competence in sensitivity_classification and controls_completeness"
+  PRODUCTION: "expert on 3/4, competent on remaining"
+
+exercises:
+  - id: "RIU-012-EX-01"
+    failure_mode: "silent"
+    scenario: "Your AI system logs full request/response pairs for debugging. Six months later, a compliance audit reveals PII in plaintext logs. Design the audit logging requirements that would have prevented this."
+    expected_output: "Audit logging spec with field-level redaction rules, PII detection scan on log output, retention policy with auto-purge, and retroactive remediation plan."
+
+  - id: "RIU-012-EX-02"
+    failure_mode: "loud"
+    scenario: "A HIPAA-regulated client discovers your AI pipeline processes patient names in a non-BAA-covered environment. Produce the compliance triage that should have existed and a remediation plan."
+    expected_output: "Compliance triage with HIPAA field mapping, BAA-covered vs non-covered environment inventory, data flow showing where PHI crosses boundaries, and remediation plan."
+
+  - id: "RIU-012-EX-03"
+    failure_mode: "clustered"
+    scenario: "Your system serves US (HIPAA), EU (GDPR), and payment (PCI-DSS) customers. Each regulation has different requirements for the same fields. Design a unified controls plan satisfying all three."
+    expected_output: "Unified controls matrix with most-restrictive-wins policy. Per-region data residency rules. Service evaluation comparing Comprehend, Presidio, and Cloud DLP for multi-regulation detection."

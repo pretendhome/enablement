@@ -1,0 +1,93 @@
+riu_id: RIU-084
+name: Data Quality Checks (Nulls, Duplicates, Ranges)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Implement data quality checks for nulls, duplicates, range violations, and type mismatches
+- Design threshold-based alerting that distinguishes real anomalies from seasonal variation
+- Surface data quality issues loudly to operators before they impact downstream AI outputs
+- Prevent silent degradation by validating data at ingestion, not just at query time
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-030
+  - LIB-032
+  supporting:
+  - LIB-035
+  - LIB-036
+  - LIB-040
+  - LIB-041
+service_context:
+  candidate_services:
+  - Great Expectations (OSS, most widely used DQ framework)
+  - dbt tests (if dbt already in use for SQL pipelines)
+  - Soda (managed + OSS, good DX)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- data_quality_rules.yaml
+- dq_checks/
+- anomaly_report.md
+rubric_dimensions:
+  check_coverage:
+    description: Checks cover nulls, duplicates, ranges, types, and referential integrity with per-field calibration
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  threshold_calibration:
+    description: Thresholds calibrated per field based on historical data and downstream impact, not arbitrary defaults
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  alert_quality:
+    description: Alerts distinguish real anomalies from expected patterns with minimal false positives
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  prevention_timing:
+    description: Quality issues caught at ingestion before downstream impact, not discovered retroactively
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-084-EX-01
+  failure_mode: silent
+  scenario: Your data quality thresholds allow up to 5% null values per field. A slow data source degradation pushes nulls
+    from 3% to 4.9% over 6 months — always under threshold. AI output quality drops steadily but no alert fires. The threshold
+    was too lax for this field.
+  expected_output: Per-field threshold calibration based on historical baseline + impact analysis. Trend detection that alerts
+    on sustained increases even within threshold. data_quality_rules.yaml with field-specific thresholds and trend sensitivity.
+- id: RIU-084-EX-02
+  failure_mode: loud
+  scenario: 'Your data quality checks fire 200 alerts on Monday morning every week. The cause: a batch job runs Sunday night
+    and temporarily creates duplicates that are resolved by 9am. The team mutes the alerts. A real duplicate issue goes unnoticed
+    for 3 weeks.'
+  expected_output: Time-aware alerting that accounts for known batch schedules. Alert suppression windows with automatic re-enable.
+    Separate alert channels for 'expected transient' vs 'unexpected persistent'. anomaly_report.md distinguishing scheduled
+    patterns from real issues.
+- id: RIU-084-EX-03
+  failure_mode: clustered
+  scenario: Your e-commerce AI sees a 40% drop in transaction volume every December 26th. Data quality checks flag this as
+    an anomaly. But it's normal seasonal behavior. Meanwhile, a real data pipeline failure on December 27th is dismissed as
+    'seasonal.' Design checks that handle seasonality.
+  expected_output: Seasonal baseline model with per-day-of-year expected ranges. Anomaly detection relative to seasonal baseline,
+    not absolute threshold. Calendar-aware rules in data_quality_rules.yaml. Separate handling for 'seasonal deviation' vs
+    'pipeline failure' with different alert severity.

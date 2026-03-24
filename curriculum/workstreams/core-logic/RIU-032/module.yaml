@@ -1,0 +1,86 @@
+riu_id: RIU-032
+name: Extraction Pattern (Structured from Unstructured)
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Implement structured extraction from unstructured text using schema-constrained generation
+- Design extraction pipelines that handle ambiguous, incomplete, and contradictory source text
+- Build validation that catches extraction errors before they propagate downstream
+- Test extraction quality across document types, languages, and formatting variations
+prerequisites:
+  required:
+  - RIU-028
+  - RIU-021
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-136
+  - LIB-139
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- extraction_schema.json
+- extractor/
+- extraction_eval.jsonl
+rubric_dimensions:
+  extraction_accuracy:
+    description: Extracted fields are correct with entity disambiguation and locale awareness
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  validation_coverage:
+    description: Extraction errors caught before downstream propagation with ambiguity flagging
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_document_handling:
+    description: Different document types handled with appropriate per-type extraction strategies
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  edge_case_robustness:
+    description: Extraction handles ambiguous, incomplete, and contradictory source text gracefully
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-032-EX-01
+  failure_mode: silent
+  scenario: Your extraction pipeline pulls company names from news articles. It correctly extracts 'Apple Inc.' but also extracts
+    'Apple' from 'apple pie recipe' in a food section. The entity disambiguation is missing — the pipeline extracts strings
+    without understanding context.
+  expected_output: 'Entity disambiguation layer: extracted entities validated against known entity database. Confidence scoring
+    per extraction. Context window analysis to distinguish entity mentions from common words. Extraction tests with ambiguous
+    entity names.'
+- id: RIU-032-EX-02
+  failure_mode: loud
+  scenario: Your extraction schema requires 'date', 'amount', and 'currency' from invoices. A batch of invoices uses European
+    date format (DD/MM/YYYY) while your parser expects US format (MM/DD/YYYY). 30% of dates are wrong. The error is obvious
+    for dates like 25/03/2026 but silent for ambiguous dates like 03/04/2026.
+  expected_output: Locale-aware extraction with format detection. Ambiguous date flagging (dates where DD and MM are both
+    ≤12). Extraction validation against source document. Test suite with multi-locale documents.
+- id: RIU-032-EX-03
+  failure_mode: clustered
+  scenario: 'Your system extracts structured data from 5 document types: contracts, invoices, emails, reports, and forms.
+    Each has different layouts, terminology, and extraction challenges. A single extraction prompt handles all 5 poorly. Design
+    the multi-document extraction architecture.'
+  expected_output: 'Document classifier → per-type extraction prompt. Per-type schema with shared base fields. Per-type validation
+    rules. Extraction quality metrics per document type. Fallback: unknown document types routed to generic extractor with
+    human review flag.'

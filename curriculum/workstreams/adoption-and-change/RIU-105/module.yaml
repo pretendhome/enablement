@@ -1,0 +1,78 @@
+riu_id: RIU-105
+name: Executive Update (Status/Risks/Decisions)
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Write executive updates that communicate status, risks, and decisions needed in under 2 minutes of reading
+- Design the update format to surface blockers and decisions, not just progress
+- 'Handle bad news delivery: frame problems with proposed solutions'
+- Adapt update detail level for different executive audiences
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-148
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- executive_update.md
+rubric_dimensions:
+  conciseness:
+    description: Update communicates status, risks, and decisions in under 2 minutes of reading
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  risk_transparency:
+    description: Risks surfaced proactively before they become problems
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  decision_focus:
+    description: Decisions needed are clearly stated with context and recommended action
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  consistency:
+    description: Multi-workstream updates use consistent format enabling cross-workstream comparison
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-105-EX-01
+  failure_mode: silent
+  scenario: Your executive update says everything is on track. But you have 3 risks that could delay the project by 2 weeks.
+    You did not mention them because they are not yet problems. When they materialize, the executive is surprised and trust
+    is damaged.
+  expected_output: 'Risk section in every update: current risks with likelihood, impact, and mitigation. Traffic light status:
+    green/yellow/red with criteria for each. Rule: yellow risks reported before they become red.'
+- id: RIU-105-EX-02
+  failure_mode: loud
+  scenario: Your executive update is 5 pages with detailed technical information. The CEO reads the first paragraph and asks
+    what is the one thing I need to know. The update buries the lead.
+  expected_output: 'Executive update template: 3-line summary (status, key risk, decision needed), then details. Decision-first
+    format: if a decision is needed, lead with it. One page maximum for executive audience.'
+- id: RIU-105-EX-03
+  failure_mode: clustered
+  scenario: Your project has 5 workstreams. Each workstream lead writes their own update section. The combined update is inconsistent
+    in format, detail level, and risk assessment. The executive cannot compare workstream status.
+  expected_output: 'Standardized per-workstream template: status, progress, risks, decisions needed. Consistent traffic light
+    criteria across workstreams. Cross-workstream summary showing overall project health. Update review before sending to
+    ensure consistency.'

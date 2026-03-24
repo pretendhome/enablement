@@ -1,0 +1,75 @@
+riu_id: "RIU-006"
+name: "Success Metrics Charter"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Define outcome metrics, leading indicators, and acceptance checks that make success measurable"
+  - "Align metrics with stakeholders so acceptance decisions are fast and unambiguous"
+  - "Detect when metrics are being gamed and design metrics that resist gaming"
+  - "Handle the case where no baseline data exists and metrics must be established from scratch"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — metrics must align with agreed goals
+  recommended:
+    - "RIU-002"   # Stakeholder Map — need to know who defines success
+    # RIU-005 removed: was creating a recommended-prereq cycle (RIU-005 ↔ RIU-006). RIU-005 → RIU-006 is the natural direction.
+
+knowledge_library_entries:
+  primary:
+    - "LIB-015"   # How do I turn 'we'll know it when we see it' into measurable acceptance criteria?
+    - "LIB-004"   # What artifacts prove convergence has been achieved before implementation starts?
+    - "LIB-011"   # How do I create a semantic blueprint that non-technical stakeholders can validate?
+  supporting:
+    - "LIB-010"   # When should I escalate to reset/reframe vs continue converging?
+    - "LIB-022"   # What testing strategy validates that AI behavior matches human expert judgment?
+    - "LIB-149"   # How do I detect financial crises hidden in revenue projections?
+    - "LIB-169"   # How do I build a defensible AI ROI quantification framework?
+
+service_context: null  # internal_only — metrics definition requires contextual judgment
+
+estimated_duration:
+  learning: "3-5 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "success_metrics_charter.md — Complete metrics charter with outcome metrics, leading indicators, and baselines"
+  - "acceptance_checks.md — Pass/fail acceptance criteria tied to each metric with measurement methodology"
+
+rubric_dimensions:
+  metric_quality:
+    description: "Metrics are outcome-focused, measurable, and aligned with business goals — not vanity metrics"
+    levels: [insufficient, basic, competent, expert]
+  stakeholder_alignment:
+    description: "Metrics charter is agreed by all relevant stakeholders with no ambiguity about what success looks like"
+    levels: [insufficient, basic, competent, expert]
+  gaming_resistance:
+    description: "Metrics are designed to resist gaming — leading indicators cross-check outcome metrics"
+    levels: [insufficient, basic, competent, expert]
+  baseline_handling:
+    description: "Approach for establishing baselines when no historical data exists is practical and time-bounded"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-006-EX-01"
+    failure_mode: "silent"
+    scenario: "The team reports 95% accuracy on their AI classification system. Everyone is happy. But the metric is gamed: the test set only includes easy cases, and the 5% errors are all in the highest-value category (fraud detection). The system is actually failing on the cases that matter most. Design a metrics charter that would have caught this."
+    expected_output: "Metrics charter with stratified accuracy (per-category, per-difficulty), precision/recall on high-value categories specifically, and a 'business impact' metric that weights errors by cost. Leading indicator: distribution of test cases vs production cases. Acceptance check: accuracy on the hardest 10% of cases must exceed threshold."
+
+  - id: "RIU-006-EX-02"
+    failure_mode: "loud"
+    scenario: "The customer wants to measure AI chatbot success by 'customer satisfaction.' But there's no baseline CSAT data, the survey response rate is 8%, and the chatbot handles both simple FAQs and complex complaints. Define a metrics charter that handles the missing baseline and mixed use cases."
+    expected_output: "Metrics charter with: (1) 2-week baseline measurement sprint before AI deployment, (2) stratified metrics by query complexity (FAQ vs complaint), (3) proxy metrics for low-survey-response scenarios (resolution time, escalation rate, repeat contact rate), (4) acceptance criteria that account for baseline uncertainty with confidence intervals."
+
+  - id: "RIU-006-EX-03"
+    failure_mode: "clustered"
+    scenario: "Four stakeholders each define success differently: the CEO wants revenue impact, the CTO wants system reliability, the VP of CS wants CSAT improvement, and the data team wants model accuracy. Create a unified metrics charter that satisfies all four without creating 40 metrics nobody tracks."
+    expected_output: "Unified charter with 3 tiers: (1) North Star metric (1 metric everyone agrees on), (2) Stakeholder metrics (1 per stakeholder, 4 total), (3) Diagnostic metrics (tracked but not reported upward). Mapping showing how each stakeholder's concern connects to the North Star. Acceptance criteria: North Star + all 4 stakeholder metrics must pass. Dashboard mockup showing the hierarchy."

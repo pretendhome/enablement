@@ -1,0 +1,68 @@
+riu_id: "RIU-009"
+name: "Risk Register + Mitigation Plan"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Maintain a risk register with identified risks, owners, mitigations, and trigger conditions"
+  - "Assign risk owners and ensure mitigations are actionable, not aspirational"
+  - "Design a cadence for risk review that prevents the register from going stale"
+  - "Escalate risks that have materialized or whose probability has increased"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — risks are relative to agreed goals and scope
+  recommended:
+    - "RIU-007"   # Constraint Profile — constraints that aren't met become risks
+    - "RIU-008"   # Assumptions Register — disproved assumptions become risks
+
+knowledge_library_entries:
+  primary:
+    - "LIB-024"   # How do I integrate with an undocumented legacy API that 'just works' in production?
+    - "LIB-027"   # What failure handling patterns work for brittle third-party integrations?
+  supporting:
+    - "LIB-008"   # What questions surface hidden constraints that will block AI deployment later?
+    - "LIB-012"   # What's the checklist for 'good enough' convergence before moving to architecture?
+
+service_context: null  # internal_only — risk identification and mitigation planning is contextual judgment work
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "risk_register.md — Complete risk register with at least 8 risks, each with probability, impact, owner, mitigation, and trigger condition"
+
+rubric_dimensions:
+  risk_identification:
+    description: "Risks are specific and actionable — not generic ('things might go wrong') but concrete ('API provider may deprecate v2 endpoint in Q3')"
+    levels: [insufficient, basic, competent, expert]
+  mitigation_quality:
+    description: "Mitigations are actionable with specific steps, owners, and timelines — not aspirational ('we'll figure it out')"
+    levels: [insufficient, basic, competent, expert]
+  escalation_timeliness:
+    description: "Trigger conditions are defined so risks are escalated before they materialize, not after"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/3 dimensions"
+  PRODUCTION: "expert on 2/3, competent on remaining"
+
+exercises:
+  - id: "RIU-009-EX-01"
+    failure_mode: "silent"
+    scenario: "The risk register hasn't been updated in 6 weeks. The team says 'nothing has changed.' But: the primary data source added rate limiting last week, the ML engineer who built the model gave notice, and the customer's compliance team published new AI guidelines. None of these are in the register. Audit the register and add the missing risks."
+    expected_output: "Updated risk register with 3 new risks: (1) API rate limiting — impact on throughput, mitigation: caching layer + rate limit monitoring, (2) key person dependency — model knowledge concentrated in departing engineer, mitigation: knowledge transfer sprint before last day, (3) new compliance requirements — may require architecture changes, mitigation: compliance review within 1 week. Each risk has trigger condition for escalation."
+
+  - id: "RIU-009-EX-02"
+    failure_mode: "loud"
+    scenario: "A risk you identified 4 weeks ago has materialized: the third-party API the system depends on is returning 500 errors 15% of the time. The mitigation in the register says 'implement retry logic.' But retry logic was never actually built. The system is degraded in production. Manage the incident and fix the risk register process."
+    expected_output: "Immediate incident response: circuit breaker to prevent cascading failures, fallback to cached responses, customer communication. Post-mortem: mitigation was documented but never assigned an owner or deadline. Updated risk register process: every mitigation must have an owner, implementation deadline, and verification check. New risk register entry for 'mitigation implementation gap' with weekly audit cadence."
+
+  - id: "RIU-009-EX-03"
+    failure_mode: "clustered"
+    scenario: "A tight-timeline project has 12 identified risks. The team can only mitigate 4 before the deadline. The remaining 8 are accepted risks. But 3 of the accepted risks are ONE-WAY DOORs — if they materialize, the project cannot recover. Prioritize the risk mitigations and design contingency plans for the accepted ONE-WAY DOOR risks."
+    expected_output: "Risk prioritization matrix: 3 ONE-WAY DOOR risks mitigated first (non-negotiable), 1 highest-probability TWO-WAY DOOR risk mitigated fourth. Remaining 8 risks with explicit acceptance rationale and contingency plans. The 3 ONE-WAY DOOR contingency plans include: rollback procedures, blast radius containment, and escalation triggers. Decision recorded in decisions.md: 'Accepting 8 risks due to timeline constraint — ONE-WAY DOOR risks are mitigated, TWO-WAY DOOR risks have contingency plans.'"

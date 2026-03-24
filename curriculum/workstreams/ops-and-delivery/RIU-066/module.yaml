@@ -1,0 +1,88 @@
+riu_id: RIU-066
+name: Secrets Handling + Rotation Expectations
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: critical
+learning_objectives:
+- Implement secrets handling with secure storage, access controls, and rotation policies
+- Design secret rotation that doesn't cause downtime during the rotation window
+- 'Handle secret sprawl: identify and consolidate secrets across services and environments'
+- Build secret access auditing that tracks which services access which secrets
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-120
+  - LIB-124
+  supporting: []
+service_context:
+  candidate_services:
+  - HashiCorp Vault (most comprehensive, OSS + Cloud)
+  - AWS Secrets Manager (if AWS-native)
+  - GCP Secret Manager (if GCP-native)
+  - Doppler (developer-friendly managed secrets)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- secrets_plan.md
+- rotation_playbook.md
+- secret_smoketests/
+rubric_dimensions:
+  storage_security:
+    description: Secrets stored in vault with no plaintext in code, configs, or version history
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  rotation_safety:
+    description: Secret rotation causes zero downtime with dual-secret overlap window
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  inventory_completeness:
+    description: All secrets inventoried with owner, rotation schedule, and access controls
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  access_auditing:
+    description: Secret access tracked with per-service audit trail and anomaly detection
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-066-EX-01
+  failure_mode: silent
+  scenario: Your API keys are stored in environment variables on the server. A developer copies the .env file to debug locally.
+    The file ends up in a git commit. The secret is now in version history permanently. Nobody notices because the key still
+    works.
+  expected_output: 'Secret scanning in CI: block commits containing secrets. .env files in .gitignore with pre-commit hook
+    enforcement. Secret storage in vault (not env vars). Rotation policy: rotate any secret that may have been exposed.'
+- id: RIU-066-EX-02
+  failure_mode: loud
+  scenario: Your secret rotation script updates the secret in the vault but the application caches the old secret. During
+    the rotation window, the app uses the old (now invalid) secret and all requests fail for 5 minutes until the cache refreshes.
+  expected_output: 'Dual-secret rotation: new secret active before old secret is revoked. Application secret refresh on rotation
+    event (not just cache TTL). Rotation testing in staging before production. Zero-downtime rotation procedure.'
+- id: RIU-066-EX-03
+  failure_mode: clustered
+  scenario: Your system has 50 secrets across 5 services and 3 environments. Each service manages its own secrets differently.
+    Some use vault, some use env vars, some use config files. A security audit requires a complete inventory. Nobody knows
+    all the secrets.
+  expected_output: 'Centralized secret inventory: every secret registered with owner, rotation schedule, and access list.
+    Secret consolidation: migrate all secrets to vault. Per-service secret access audit. Orphan secret detection: secrets
+    that exist but aren''t used.'

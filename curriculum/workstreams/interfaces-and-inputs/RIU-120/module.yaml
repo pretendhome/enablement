@@ -1,0 +1,84 @@
+riu_id: RIU-120
+name: Integration Mode Selection (Batch vs Stream vs Hybrid)
+workstream: Interfaces & Inputs
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Evaluate batch, stream, and hybrid integration modes for specific data flow requirements
+- Design integration mode selection criteria based on latency, volume, and consistency needs
+- Implement the selected integration mode with appropriate error handling and monitoring
+- Document the mode selection rationale as a ONE-WAY DOOR decision with tradeoff analysis
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-055
+  - LIB-056
+  supporting:
+  - LIB-057
+  - LIB-059
+  - LIB-060
+  - LIB-061
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- integration_mode.md
+- tradeoff_analysis.md
+rubric_dimensions:
+  mode_selection:
+    description: Integration mode selected based on explicit latency, volume, and consistency criteria
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cost_efficiency:
+    description: Mode matches actual requirements without over-engineering or under-delivering
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  decision_documentation:
+    description: Mode selection documented as ONE-WAY DOOR with tradeoff analysis and rationale
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  hybrid_design:
+    description: Hybrid architecture handles mixed requirements with appropriate mode per flow
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-120-EX-01
+  failure_mode: silent
+  scenario: Your team chose batch integration because it was simpler. The business needs near-real-time updates for fraud
+    detection. Fraudulent transactions are detected 6 hours late (next batch run). The mode selection was never evaluated
+    against latency requirements.
+  expected_output: 'Mode selection matrix: latency requirement × data volume × consistency need → recommended mode. Fraud
+    detection flagged as real-time requirement. Decision documented as ONE-WAY DOOR with latency impact analysis.'
+- id: RIU-120-EX-02
+  failure_mode: loud
+  scenario: Your team chose streaming for everything. The streaming infrastructure costs 10x more than batch for data that
+    only needs daily updates. 80% of data flows don't need real-time processing. The architecture is over-engineered.
+  expected_output: 'Per-flow mode assessment: which flows actually need streaming vs batch. Cost comparison per mode. Hybrid
+    architecture: streaming for time-sensitive flows, batch for everything else. Cost savings projection.'
+- id: RIU-120-EX-03
+  failure_mode: clustered
+  scenario: Your system has 20 data flows. 5 need real-time, 10 need hourly, 5 need daily. The team wants a single integration
+    mode for simplicity. But no single mode satisfies all requirements without over-spending or under-delivering. Design the
+    hybrid architecture.
+  expected_output: 'Flow classification into tiers: real-time (streaming), near-real-time (micro-batch), daily (batch). Shared
+    infrastructure where possible. Per-tier SLA and monitoring. Migration path for flows that change tier requirements.'

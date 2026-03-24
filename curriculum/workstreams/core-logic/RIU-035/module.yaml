@@ -1,0 +1,86 @@
+riu_id: RIU-035
+name: Caching Strategy + Invalidation Plan
+workstream: Core Logic
+journey_stage: retrieval
+classification: both
+difficulty: high
+learning_objectives:
+- Design a caching strategy that reduces latency and cost for repeated or similar requests
+- Implement cache invalidation rules that prevent stale data from being served
+- Evaluate caching services (Redis, Upstash, Momento) for production requirements
+- Handle cache warming, cold starts, and thundering herd scenarios
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-118
+  supporting: []
+service_context:
+  candidate_services:
+  - Upstash Redis (serverless Redis, pay-per-use, no cold starts)
+  - Redis Cloud (managed Redis for high throughput)
+  - Momento Cache (serverless, simple API)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- cache_plan.md
+- invalidation_rules.yaml
+rubric_dimensions:
+  invalidation_correctness:
+    description: Cache invalidation prevents stale data with event-driven purging and TTL as safety net
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  thundering_herd_prevention:
+    description: Cache expiry handled with jitter, single-flight, and background refresh to prevent origin overload
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_layer_consistency:
+    description: Multi-layer cache maintains consistency with version stamping and ordered invalidation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Caching services evaluated with production benchmarks for latency, cost, and consistency
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-035-EX-01
+  failure_mode: silent
+  scenario: Your cache serves product recommendations. A product is discontinued but the cache TTL is 24 hours. For up to
+    24 hours, users see recommendations for products they can't buy. The cache is working correctly — the invalidation rules
+    are wrong.
+  expected_output: 'Event-driven invalidation: product status change triggers cache purge. TTL as safety net, not primary
+    invalidation. Invalidation rules per entity type. Test: change product status and verify cache updates within SLA.'
+- id: RIU-035-EX-02
+  failure_mode: loud
+  scenario: Your cache expires at midnight. At 00:01, 10,000 concurrent requests hit the origin simultaneously (thundering
+    herd). The origin server crashes under load. Design the cache strategy that prevents this.
+  expected_output: 'Staggered TTL with jitter (not all keys expire simultaneously). Cache stampede protection: single-flight
+    pattern (one request refreshes, others wait). Background refresh before expiry. Circuit breaker on origin when cache miss
+    rate spikes.'
+- id: RIU-035-EX-03
+  failure_mode: clustered
+  scenario: 'Your system has 3 cache layers: in-memory (L1), Redis (L2), and CDN (L3). A data update must invalidate all 3
+    layers. But invalidation propagation is not atomic — for a brief window, L1 has new data, L2 has old data, and L3 has
+    older data. Users see inconsistent results depending on which layer serves them.'
+  expected_output: 'Multi-layer invalidation protocol with ordering guarantees. Version stamping: each response includes data
+    version, client rejects stale versions. Invalidation monitoring: alert when layers are out of sync beyond SLA. Service
+    evaluation: managed cache vs self-hosted for multi-layer consistency.'

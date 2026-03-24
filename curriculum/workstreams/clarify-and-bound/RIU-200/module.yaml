@@ -1,0 +1,84 @@
+riu_id: RIU-200
+name: Customer Problem Narrative (JTBD + Constraints)
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Craft a customer problem narrative using Jobs-to-Be-Done framework with explicit constraints
+- Distinguish between stated needs and actual needs through structured discovery
+- Document constraints that will shape the solution space before solutioning begins
+- Validate the problem narrative with the customer to confirm alignment
+prerequisites:
+  required:
+  - RIU-001
+  - RIU-002
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-150
+  - LIB-168
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- customer_narrative.md
+- jtbd_analysis.md
+- symptom_map.md
+rubric_dimensions:
+  jtbd_depth:
+    description: Problem captured as job-to-be-done with outcomes, not just stated solution request
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  stakeholder_coverage:
+    description: Multiple stakeholder perspectives captured including end users, not just sponsors
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  constraint_documentation:
+    description: Constraints documented before solutioning with explicit impact on solution space
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  validation:
+    description: Problem narrative validated with customer confirming alignment on the actual problem
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-200-EX-01
+  failure_mode: silent
+  scenario: Your problem narrative captures what the customer said they want (a chatbot). But the actual job-to-be-done is
+    reducing support ticket volume. A chatbot might not be the best solution. The narrative captured the stated need, not
+    the underlying job.
+  expected_output: 'JTBD interview technique: ask about outcomes, not solutions. Problem narrative with: job statement, current
+    alternatives, switching triggers, constraints. Validation: customer confirms the job, not just the stated request.'
+- id: RIU-200-EX-02
+  failure_mode: loud
+  scenario: Your problem narrative is approved by the project sponsor. But the end users (support agents) have a completely
+    different view of the problem. The narrative reflects management perspective, not user reality. Implementation fails because
+    it solves the wrong problem.
+  expected_output: 'Multi-stakeholder problem discovery: sponsor, end users, and affected parties. Conflicting perspectives
+    documented explicitly. Problem narrative validated with each stakeholder group independently.'
+- id: RIU-200-EX-03
+  failure_mode: clustered
+  scenario: Your customer has 5 departments each with different problems. They want a single AI solution for all 5. The problems
+    are related but have different constraints, success criteria, and urgency. A single narrative cannot capture all 5 without
+    losing specificity.
+  expected_output: 'Per-department problem narrative with shared context section. Priority ranking across departments. Dependency
+    analysis: which problems must be solved first. Phased approach recommendation with per-department success criteria.'

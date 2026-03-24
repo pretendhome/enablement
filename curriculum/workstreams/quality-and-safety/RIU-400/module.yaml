@@ -1,0 +1,88 @@
+riu_id: RIU-400
+name: KB Content Audit (Coverage + Gaps)
+workstream: Quality & Safety
+journey_stage: specialization
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Audit a knowledge base for coverage gaps, duplication, staleness, and structural issues
+- Design a coverage analysis that maps KB content to user needs and identifies blind spots
+- Prioritize fixes based on user impact and effort, not just content volume
+- Produce actionable remediation plan with owners, timelines, and success metrics
+prerequisites:
+  required:
+  - RIU-001
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-163
+  - LIB-170
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- kb_audit_report.md
+- coverage_analysis.md
+- duplication_report.md
+- staleness_analysis.md
+- prioritized_fixes.md
+rubric_dimensions:
+  coverage_depth:
+    description: Audit measures actual utility (usage-weighted coverage) not just topic existence
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  issue_identification:
+    description: Gaps, duplications, staleness, and structural issues identified with specific examples
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  prioritization_quality:
+    description: Fixes prioritized by user impact with effort estimates, not by ease of implementation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  remediation_actionability:
+    description: Remediation plan has owners, timelines, success metrics, and is executable without further clarification
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-400-EX-01
+  failure_mode: silent
+  scenario: Your KB audit shows 95% topic coverage. But 40% of user queries hit the same 10 articles, and 60% of articles
+    have zero views in 6 months. The coverage metric hides the fact that most content is irrelevant. Design the audit that
+    measures actual utility, not just existence.
+  expected_output: 'Usage-weighted coverage analysis: topic coverage × query frequency. Identification of high-traffic gaps
+    (queries with no good article). Staleness analysis based on last-updated date AND last-viewed date. coverage_analysis.md
+    with utility-weighted metrics.'
+- id: RIU-400-EX-02
+  failure_mode: loud
+  scenario: Your audit identifies 200 issues. The content team has bandwidth for 20 fixes per month. They start with the easiest
+    fixes (typos, formatting) instead of the highest-impact ones (missing articles for top queries). After 3 months, user
+    satisfaction hasn't improved.
+  expected_output: 'Impact-weighted prioritization: fixes ranked by (query frequency × severity). Priority tiers: P0 (missing
+    content for top 20 queries), P1 (outdated content for top 50), P2 (duplication), P3 (formatting). prioritized_fixes.md
+    with effort estimates and expected impact per fix.'
+- id: RIU-400-EX-03
+  failure_mode: clustered
+  scenario: A company has 3 KBs from 3 acquired companies. Each covers similar topics with different terminology, conflicting
+    advice, and different structures. Users don't know which KB to search. Audit all three and produce a unified remediation
+    plan.
+  expected_output: 'Cross-KB duplication report with conflict identification. Terminology mapping across KBs. Unified taxonomy
+    proposal. Migration plan: which articles to merge, redirect, or deprecate. duplication_report.md with per-topic conflict
+    resolution recommendations.'

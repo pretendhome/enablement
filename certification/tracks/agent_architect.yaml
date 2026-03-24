@@ -1,0 +1,54 @@
+track: "Agent Architect"
+slug: "agent_architect"
+stage_focus: "orchestration"
+tier: "WORKING"
+
+description: "Teaches practitioners to design, secure, and operate multi-agent AI systems with explicit state management, failure recovery, and capability boundaries."
+
+capstone_reference: "../../assessment/capstones/agent_architect_capstone.md"
+journey_reference: "../../curriculum/journeys/agent_architect.yaml"
+
+estimated_duration:
+  learning: "60-80 hours"
+  assessment: "25-30 hours"
+  total: "85-110 hours"
+
+entry_requirements:
+  prior_tier: "WORKING (AI Foundations) or equivalent"
+  prerequisites:
+    - "RIU-001"
+    - "RIU-022"
+    - "RIU-080"
+  recommended:
+    - "RAG Engineer through RIU-021 for evaluation literacy"
+  expected_baseline:
+    - "Can define bounded workflows and explicit output contracts"
+    - "Can reason about failure modes and operational tradeoffs"
+
+riu_sequence:
+  - "RIU-001"  # Convergence Brief
+  - "RIU-003"  # Decision Log + One-Way Door Registry
+  - "RIU-021"  # Golden Set + Offline Evaluation Harness
+  - "RIU-022"  # Prompt Interface Contract
+  - "RIU-029"  # Tool-Calling Safety Envelope
+  - "RIU-082"  # LLM Safety Guardrails
+  - "RIU-510"  # Multi-Agent Workflow Design
+  - "RIU-511"  # Agent State Management Pattern
+  - "RIU-513"  # Inter-Agent Communication Protocol
+  - "RIU-512"  # Agent Failure Recovery Pattern
+  - "RIU-514"  # Agent Capability Boundary Enforcement
+  - "RIU-062"  # Incident Containment & Recovery Plan
+
+riu_count: 12
+
+certification_thresholds:
+  per_module: "competent on 3/4 rubric dimensions (per module threshold)"
+  capstone: "competent on all integrated dimensions; architecture defense component"
+
+career_positioning:
+  target_roles:
+    - "AI Architect"
+    - "Multi-Agent Systems Engineer"
+    - "AI Platform Engineer"
+  value_proposition: "Proves you can design agent systems with safety boundaries, state management, and failure recovery"
+  differentiator: "Safety-first — guardrails and boundaries before autonomy"

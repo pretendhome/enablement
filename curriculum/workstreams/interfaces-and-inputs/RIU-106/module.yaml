@@ -1,0 +1,87 @@
+riu_id: RIU-106
+name: Comparable Organization Research
+workstream: Interfaces & Inputs
+journey_stage: specialization
+classification: both
+difficulty: medium
+learning_objectives:
+- Research comparable organizations to identify patterns, benchmarks, and lessons learned
+- Design research methodology that produces actionable insights, not just data collection
+- Evaluate research services (Perplexity, Crunchbase, PitchBook) for depth and accuracy
+- Synthesize findings into a format that directly informs decision-making
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-123
+  - LIB-126
+  supporting: []
+service_context:
+  candidate_services:
+  - Perplexity (already integrated, highest signal for research)
+  - Crunchbase (startup funding data)
+  - PitchBook (private company financials, enterprise)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- comparable_organizations.md
+- financial_benchmarks.md
+rubric_dimensions:
+  research_depth:
+    description: Comparables analyzed with sufficient depth to inform decisions, not just surface-level mentions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  source_quality:
+    description: Sources are recent, corroborated, and confidence-tagged
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  actionability:
+    description: Findings synthesized into actionable insights with clear implications for client's situation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  gap_transparency:
+    description: Gaps in comparable landscape explicitly documented rather than hidden
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-106-EX-01
+  failure_mode: silent
+  scenario: Your comparable org research finds 10 companies that 'use AI for customer service.' But the comparison is surface-level
+    — you don't know their scale, tech stack, or outcomes. The research looks comprehensive but provides no actionable insight
+    for your client's specific situation.
+  expected_output: 'Research template with mandatory depth: company size, use case specifics, tech stack, outcomes (quantified),
+    lessons learned. Comparison matrix with apples-to-apples metrics. Gap analysis: what''s comparable vs what''s different
+    from client''s situation.'
+- id: RIU-106-EX-02
+  failure_mode: loud
+  scenario: Your research cites a competitor's AI implementation as a success story. The client points out that the competitor
+    actually shut down that project 6 months ago. Your sources were outdated. Trust in the research is damaged.
+  expected_output: 'Source recency requirements: no sources older than 12 months without verification. Multi-source corroboration
+    for key claims. Source confidence tagging: verified, reported, unconfirmed. Research methodology document showing how
+    claims were validated.'
+- id: RIU-106-EX-03
+  failure_mode: clustered
+  scenario: Your client operates in a niche industry (specialty chemicals). There are no direct AI comparables. The closest
+    comparables are from adjacent industries (pharma, manufacturing) with different regulatory and operational constraints.
+    Design the research approach for sparse comparable landscapes.
+  expected_output: 'Adjacent industry mapping with transferability analysis. Per-comparable: what transfers vs what doesn''t.
+    Composite benchmark from multiple partial comparables. Explicit gaps where no comparable exists.'

@@ -1,0 +1,72 @@
+riu_id: "RIU-005"
+name: "Scope Freeze + Phased Delivery Contract"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Define Phase 0/1/2 deliverables with acceptance criteria that bound scope without killing momentum"
+  - "Create a phased delivery contract where Phase 0 delivers value quickly and Phase 2 remains optional"
+  - "Detect and prevent phase creep — scope expanding within a phase without explicit approval"
+  - "Handle the case where a customer rejects phased delivery and demands everything at once"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — phasing requires clear goals
+    - "RIU-004"   # Problem → Workstream Decomposition — need workstreams before phasing
+  recommended:
+    - "RIU-006"   # Success Metrics Charter — acceptance criteria need measurable metrics
+
+knowledge_library_entries:
+  primary:
+    - "LIB-003"   # How do I scope an AI pilot when the customer says 'we need AI everywhere'?
+    - "LIB-007"   # How do I identify when a customer request is actually 3 separate problems disguised as one?
+  supporting:
+    - "LIB-115"   # How do I know when prompting alone is insufficient and I need to advance to the next stage?
+
+service_context: null  # internal_only — phased scope definition is pure delivery methodology
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "phase_plan.md — Phase 0/1/2 plan with deliverables, timelines, and dependencies between phases"
+  - "acceptance_criteria.md — Measurable acceptance criteria per phase with pass/fail thresholds"
+  - "scope_change_protocol.md — Process for handling scope changes including approval gates and impact assessment"
+
+rubric_dimensions:
+  phase_structure:
+    description: "Phase 0 delivers quick value, Phase 1 is bounded, Phase 2 is optional — each phase is independently valuable"
+    levels: [insufficient, basic, competent, expert]
+  acceptance_criteria:
+    description: "Criteria are measurable, testable, and aligned with stakeholder expectations"
+    levels: [insufficient, basic, competent, expert]
+  scope_discipline:
+    description: "Phase creep vectors are anticipated and the scope change protocol prevents silent expansion"
+    levels: [insufficient, basic, competent, expert]
+  stakeholder_management:
+    description: "Phased approach is presented as value delivery, not limitation — customer sees benefit of phasing"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-005-EX-01"
+    failure_mode: "silent"
+    scenario: "Phase 0 was scoped as 'basic Q&A chatbot over internal docs.' Two weeks in, the team has added document summarization, email integration, and a feedback loop — all without updating the phase plan. The timeline hasn't changed. Identify the phase creep, assess impact, and propose a correction."
+    expected_output: "Phase creep audit showing 3 additions that were never approved. Impact assessment: timeline now 5 weeks instead of 3, and email integration is a ONE-WAY DOOR (requires API credentials and data access). Corrected phase plan moving summarization and email to Phase 1, with updated acceptance criteria for the original Phase 0 scope."
+
+  - id: "RIU-005-EX-02"
+    failure_mode: "loud"
+    scenario: "The customer's CEO rejects your phased approach: 'We're paying for the full solution, not a pilot. Deliver everything in 8 weeks.' The full scope realistically requires 16 weeks. You cannot simply agree. Design a response that preserves the relationship while maintaining delivery integrity."
+    expected_output: "Reframed proposal showing Phase 0 as 'production-ready core' (not 'pilot'), delivered in 4 weeks with measurable business value. Phase 1 as 'full capability' in weeks 5-8. Phase 2 as 'optimization' post-launch. Risk analysis showing what happens if everything is attempted in 8 weeks (quality, reliability, support burden). Explicit ONE-WAY DOOR flag: committing to 8-week full delivery without phasing."
+
+  - id: "RIU-005-EX-03"
+    failure_mode: "clustered"
+    scenario: "A paid engagement has 4 deliverables but the customer's requirements document is missing critical details for 2 of them. You can't freeze scope because you don't fully understand it yet. Design a phased approach that handles incomplete requirements without blocking delivery of the known deliverables."
+    expected_output: "Phase plan with known deliverables in Phase 0 (start immediately), unknown deliverables in Phase 1 (start after requirements discovery). Requirements discovery sprint defined as a parallel workstream with specific outputs and timeline. Acceptance criteria for Phase 0 that don't depend on the unknown deliverables. Escalation trigger: if requirements discovery reveals the unknowns are ONE-WAY DOORs that affect Phase 0 architecture."

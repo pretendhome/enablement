@@ -1,0 +1,85 @@
+riu_id: RIU-521
+name: LLM Model Version Management
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Implement LLM model version management with tracking, comparison, and rollback
+- Design version testing against production workloads before promotion
+- Handle provider deprecation with migration planning
+- Monitor for unexpected behavior changes from provider updates
+prerequisites:
+  required:
+  - RIU-252
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-128
+  supporting: []
+service_context:
+  candidate_services:
+  - OpenRouter (500+ models, $40M funded, 5% markup)
+  - LiteLLM (OSS self-hosted, ~3-5ms overhead, 100+ models)
+  - Vercel AI Gateway (if on Vercel, Guillermo Rauch signal)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- model_version_registry.md
+- compatibility_matrix.md
+- migration_plan.md
+- model_fallback.yaml
+rubric_dimensions:
+  version_tracking:
+    description: Model versions pinned and tracked per request
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  testing_rigor:
+    description: New versions validated against production workloads before promotion
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  deprecation_management:
+    description: Deprecations handled proactively with migration playbook
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_provider:
+    description: Multiple providers managed with monitoring for unexpected behavior changes and normalized version tracking
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-521-EX-01
+  failure_mode: silent
+  scenario: LLM provider silently updates model. System behavior changes subtly. Nobody notices for 2 weeks because model
+    version is not tracked per request.
+  expected_output: Model version pinning. Version tracking per request. Automated quality comparison on new versions. Alert
+    on unexpected behavior changes.
+- id: RIU-521-EX-02
+  failure_mode: loud
+  scenario: Provider deprecates your model version with 30 days notice. Evaluation takes 3 weeks. Only 1 week left for migration
+    and testing.
+  expected_output: Deprecation monitoring. Pre-evaluation of upcoming versions. Migration playbook. Buffer time in migration
+    plan.
+- id: RIU-521-EX-03
+  failure_mode: clustered
+  scenario: 3 LLM providers with different versioning schemes and deprecation policies. Provider update breaks prompt tuned
+    for old version.
+  expected_output: Per-provider version tracking. Prompt-model compatibility matrix. Automated regression test on version
+    change. Provider abstraction layer.

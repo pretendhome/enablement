@@ -1,0 +1,85 @@
+riu_id: RIU-320
+name: Third-Party API Integration Pattern
+workstream: Interfaces & Inputs
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Design a third-party API integration pattern with auth, error handling, rate limiting, and retry logic
+- Implement circuit breakers that prevent cascading failures when third-party APIs are unavailable
+- Handle API versioning and deprecation from third-party providers
+- Monitor third-party API health and cost independently from your own system metrics
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-155
+  - LIB-158
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- api_integration_design.md
+- circuit_breaker_config.yaml
+- rate_limit_strategy.md
+- fallback_procedures.md
+rubric_dimensions:
+  error_handling:
+    description: Errors from third-party APIs handled with circuit breakers, retries, and graceful degradation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  contract_validation:
+    description: API responses validated against expected schema with deprecation monitoring
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_provider:
+    description: Multiple providers handled with per-provider adapters and shared framework
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  monitoring:
+    description: Third-party API health and cost monitored independently with per-provider dashboards
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-320-EX-01
+  failure_mode: silent
+  scenario: Your integration with a payment API works fine for months. The provider silently deprecates a field you depend
+    on. Your system continues to work but the field returns null instead of the expected value. Payment reconciliation is
+    off by small amounts that accumulate.
+  expected_output: 'Response validation: verify all expected fields are present and non-null. Deprecation monitoring: track
+    provider changelog and API version announcements. Contract test against provider''s API. Alert on unexpected null values
+    in previously reliable fields.'
+- id: RIU-320-EX-02
+  failure_mode: loud
+  scenario: The third-party API goes down for 2 hours. Your system has no circuit breaker — it keeps retrying, consuming resources
+    and blocking user requests. When the API comes back, your retry backlog creates a thundering herd that triggers the provider's
+    rate limiter.
+  expected_output: 'Circuit breaker: after N failures, stop calling API and return cached/degraded response. Exponential backoff
+    with jitter. Rate limit budget tracking. Graceful degradation: what the user sees when the API is down.'
+- id: RIU-320-EX-03
+  failure_mode: clustered
+  scenario: Your system integrates with 5 third-party APIs. Each has different auth mechanisms, rate limits, error formats,
+    and SLAs. A single integration layer handles all 5 with the same retry logic. But API-C needs different retry behavior
+    than API-A. Design the multi-provider integration architecture.
+  expected_output: 'Per-provider adapter with provider-specific: auth, retry policy, rate limit budget, error mapping. Shared
+    integration framework with pluggable adapters. Per-provider health dashboard. Cost tracking per provider.'

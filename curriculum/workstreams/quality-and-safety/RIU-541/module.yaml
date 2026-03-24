@@ -1,0 +1,85 @@
+riu_id: RIU-541
+name: Compliance Audit Preparation
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Prepare an audit package with organized evidence, gap analysis, and remediation tracking
+- Design evidence collection that maps to specific audit framework controls
+- Identify evidence gaps before the auditor does and prepare remediation plans
+- Handle multi-framework audits where the same evidence satisfies multiple controls
+prerequisites:
+  required:
+  - RIU-534
+  recommended: []
+knowledge_library_entries:
+  primary: []
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- audit_preparation.md
+- evidence_inventory.md
+- gap_analysis.md
+- remediation_tracker.md
+rubric_dimensions:
+  evidence_organization:
+    description: Evidence mapped to specific controls with clear traceability and no orphaned documents
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  gap_detection:
+    description: Gaps identified proactively through self-assessment before auditor discovery
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  remediation_tracking:
+    description: Every gap has a tracked remediation with owner, deadline, and verification method
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_framework_efficiency:
+    description: Shared evidence leveraged across frameworks with framework-specific supplements
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-541-EX-01
+  failure_mode: silent
+  scenario: Your evidence inventory lists 50 documents. The auditor asks for evidence of 'continuous monitoring.' You have
+    monitoring dashboards but no documented evidence that anyone reviews them. The monitoring exists but the evidence of its
+    use doesn't.
+  expected_output: 'Evidence requirements mapped to audit controls: not just ''does the control exist'' but ''is there evidence
+    the control is actively used.'' evidence_inventory.md with per-control evidence type (policy, implementation, operation,
+    review). Gap: operational evidence for monitoring controls.'
+- id: RIU-541-EX-02
+  failure_mode: loud
+  scenario: 'The auditor finds a critical gap: your access review process hasn''t been executed in 8 months. The policy says
+    quarterly reviews. You have the policy document but no evidence of execution. The audit finding is ''material weakness.''
+    Design the preparation process that catches this.'
+  expected_output: 'Pre-audit self-assessment: for each control, verify policy exists AND execution evidence exists AND execution
+    is within required frequency. gap_analysis.md with traffic-light status per control. remediation_tracker.md with owner
+    and deadline for each gap. Self-assessment run 60 days before audit.'
+- id: RIU-541-EX-03
+  failure_mode: clustered
+  scenario: Your company faces SOC 2 Type II, ISO 27001, and HIPAA audits in the same quarter. Each framework has different
+    control structures but overlapping requirements. The team is preparing three separate evidence packages. Design the unified
+    approach.
+  expected_output: 'Control mapping matrix: SOC 2 controls → ISO 27001 controls → HIPAA safeguards. Unified evidence repository
+    with per-framework tags. audit_preparation.md with shared evidence items and framework-specific supplements. Timeline
+    showing parallel audit preparation with shared workstreams.'

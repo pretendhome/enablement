@@ -1,0 +1,88 @@
+riu_id: RIU-027
+name: Reranking Layer (Post-Retrieval)
+workstream: Core Logic
+journey_stage: retrieval
+classification: both
+difficulty: medium
+learning_objectives:
+- Implement a reranking layer that improves retrieval quality after initial candidate selection
+- Evaluate reranking services (Cohere Rerank, Voyage AI, BGE) for accuracy and latency tradeoffs
+- Design fallback behavior when the reranker is unavailable or exceeds latency budget
+- Measure reranking lift to justify the additional latency and cost
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-113
+  - LIB-141
+  supporting: []
+service_context:
+  candidate_services:
+  - Cohere Rerank (API, strongest signal among practitioners)
+  - Voyage AI (embeddings + reranking)
+  - BGE Reranker (OSS, self-hosted option)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- reranker_module/
+- explainability_rules.md
+- rerank_eval.md
+rubric_dimensions:
+  lift_measurement:
+    description: Reranking lift measured per query type with conditional invocation for low-lift categories
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  resilience:
+    description: Fallback chain ensures results are always returned even when reranker is unavailable
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Reranking services evaluated with production-relevant accuracy, latency, and cost benchmarks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  adaptive_behavior:
+    description: Reranking adapts to load with graceful quality degradation under pressure
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-027-EX-01
+  failure_mode: silent
+  scenario: Your reranker improves NDCG@10 by 8% on your evaluation set. But the evaluation set is biased toward queries where
+    reranking helps. For 40% of production queries (simple factual lookups), the reranker adds 100ms latency without changing
+    the ranking. You're paying for reranking on queries that don't benefit.
+  expected_output: 'Per-query-type reranking lift measurement. Conditional reranking: skip for query types with <2% lift.
+    Cost-benefit analysis per query category. A/B test showing reranking impact on user satisfaction by query type.'
+- id: RIU-027-EX-02
+  failure_mode: loud
+  scenario: Your reranking API provider has an outage. Your system has no fallback — it returns an error instead of unranked
+    results. Users see failures for 2 hours. Design the resilient reranking architecture.
+  expected_output: 'Fallback chain: reranker API → local lightweight reranker → original retrieval order. Circuit breaker
+    on reranker API. Latency timeout: if reranker doesn''t respond in N ms, return original order. Monitoring showing reranker
+    availability and fallback activation rate.'
+- id: RIU-027-EX-03
+  failure_mode: clustered
+  scenario: Your system retrieves 100 candidates and reranks them. During a traffic spike, the reranker queue backs up. Latency
+    goes from 100ms to 2 seconds. Reducing candidates to 20 fixes latency but hurts quality because good results are in positions
+    21-100. Design the adaptive reranking.
+  expected_output: 'Adaptive candidate count based on load: 100 at normal load, 50 at high load, 20 at critical load. Two-stage
+    reranking: fast lightweight rerank of 100 → detailed rerank of top 30. Load-based routing between reranking tiers. Quality
+    monitoring per tier to quantify degradation.'

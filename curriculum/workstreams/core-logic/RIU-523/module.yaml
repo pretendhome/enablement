@@ -1,0 +1,91 @@
+riu_id: RIU-523
+name: LLM Response Caching Strategy
+workstream: Core Logic
+journey_stage: retrieval
+classification: both
+difficulty: medium
+learning_objectives:
+- Design a semantic caching strategy for LLM responses that handles similar (not just identical) queries
+- Implement cache key generation using embedding similarity for semantic matching
+- Handle cache invalidation when underlying knowledge changes
+- Evaluate semantic caching services (GPTCache, Upstash Vector) for production requirements
+prerequisites:
+  required:
+  - RIU-035
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-118
+  supporting: []
+service_context:
+  candidate_services:
+  - GPTCache (OSS semantic cache)
+  - Upstash Vector (serverless semantic cache on Redis)
+  - Momento Cache (serverless, semantic search add-on)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- caching_strategy.md
+- cache_config.yaml
+- invalidation_rules.md
+- cache_metrics.md
+rubric_dimensions:
+  semantic_matching:
+    description: Similarity threshold tuned to maximize hits while preventing false matches on similar-but-different queries
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  invalidation:
+    description: Cache invalidated on knowledge changes with entity-tagged purging
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  context_awareness:
+    description: 'Caching scoped appropriately: global for factual, per-session for conversational'
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Semantic caching services evaluated with production benchmarks for accuracy and latency
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-523-EX-01
+  failure_mode: silent
+  scenario: Your semantic cache matches 'What is the capital of France?' with 'What is France's capital city?' (correct).
+    But it also matches 'What is the capital of France?' with 'What is the capital of Germany?' because the embeddings are
+    too similar. The cache serves wrong answers for similar-but-different queries.
+  expected_output: 'Similarity threshold tuning: too low = cache misses, too high = false matches. Entity-aware caching: extract
+    key entities and require entity match in addition to semantic similarity. False match monitoring with user feedback loop.
+    Test suite with similar-but-different query pairs.'
+- id: RIU-523-EX-02
+  failure_mode: loud
+  scenario: Your cache stores LLM responses for product questions. A product's price changes. The cache serves the old price
+    for 24 hours (TTL). Customers see wrong prices and complain. Semantic caching makes invalidation harder because there's
+    no exact key to purge.
+  expected_output: 'Entity-tagged cache entries: each entry tagged with entities it references. Entity change event → purge
+    all entries referencing that entity. TTL as safety net, not primary invalidation. Invalidation monitoring: time between
+    entity change and cache purge.'
+- id: RIU-523-EX-03
+  failure_mode: clustered
+  scenario: Your semantic cache works well for factual queries but poorly for conversational queries where context matters.
+    'Tell me more' cached from one conversation is served in a different conversation where 'more' means something completely
+    different. Design context-aware semantic caching.
+  expected_output: 'Context-scoped caching: conversation ID included in cache scope. Factual queries cached globally, conversational
+    queries cached per-session. Cache key includes relevant context window, not just the current query. Service evaluation:
+    GPTCache vs Upstash Vector for context-aware caching.'

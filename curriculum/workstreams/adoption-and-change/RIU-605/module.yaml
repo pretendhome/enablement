@@ -1,0 +1,82 @@
+riu_id: RIU-605
+name: Cross-Brand Knowledge Transfer
+workstream: Adoption & Change
+journey_stage: specialization
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design a knowledge transfer framework for sharing AI learnings across brands or business units
+- Identify transferable patterns vs context-specific solutions that should not be transferred
+- Build knowledge sharing mechanisms that scale without requiring direct person-to-person transfer
+- Measure knowledge transfer effectiveness by tracking adoption of shared patterns
+prerequisites:
+  required:
+  - RIU-600
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-170
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- cross_brand_pattern_library.md
+- brand_learning_catalog.md
+- transfer_playbook.md
+- quarterly_review_template.md
+rubric_dimensions:
+  transferability_assessment:
+    description: Patterns assessed for transferability with context requirements documented
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  adaptation_guidance:
+    description: Transfer includes adaptation guide for receiving context, not just the pattern
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scalability:
+    description: Knowledge sharing scales through searchable libraries, not just presentations
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  effectiveness_tracking:
+    description: Transfer effectiveness measured by adoption rate and outcomes in receiving teams
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-605-EX-01
+  failure_mode: silent
+  scenario: Your knowledge transfer shares a successful prompt engineering pattern from Brand A to Brand B. Brand B applies
+    it without adaptation. It fails because Brand B has different data characteristics. The pattern was transferred without
+    the context needed to adapt it.
+  expected_output: 'Transfer package includes: pattern, context it works in, context it does not work in, adaptation guide.
+    Transferability assessment per pattern. Receiving team validates pattern against their context before adoption.'
+- id: RIU-605-EX-02
+  failure_mode: loud
+  scenario: Your knowledge transfer is a quarterly presentation. Attendance drops from 50 to 5 over 3 quarters. The presentations
+    are too generic to be actionable. Knowledge transfer becomes a checkbox exercise.
+  expected_output: 'Actionable transfer format: specific patterns with copy-paste implementation guides. Pull-based transfer:
+    searchable pattern library that teams access when they need it. Success stories with measurable outcomes to motivate adoption.'
+- id: RIU-605-EX-03
+  failure_mode: clustered
+  scenario: 5 brands each developed AI solutions independently. Each has unique learnings. Cross-brand transfer requires understanding
+    5 different contexts. No single person understands all 5. Design the scalable cross-brand knowledge transfer.
+  expected_output: 'Pattern library with standardized format per brand. Cross-brand pattern matching: identify similar problems
+    solved differently. Annual cross-brand review to identify transfer opportunities. Transfer effectiveness tracking: which
+    patterns were adopted and with what results.'

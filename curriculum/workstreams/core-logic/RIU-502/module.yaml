@@ -1,0 +1,91 @@
+riu_id: RIU-502
+name: Audio Processing Integration
+workstream: Core Logic
+journey_stage: specialization
+classification: both
+difficulty: medium
+learning_objectives:
+- Integrate audio processing (STT, TTS, audio analysis) into an AI pipeline
+- Evaluate audio services (Whisper, Deepgram, AssemblyAI) for accuracy, latency, and language support
+- 'Handle audio quality variations: background noise, accents, multiple speakers, poor microphones'
+- Design real-time vs batch audio processing with appropriate latency tradeoffs
+prerequisites:
+  required:
+  - RIU-500
+  recommended: []
+knowledge_library_entries:
+  primary:
+    - LIB-076   # How do I orchestrate multimodal data pipelines for enterprise AI systems?
+  supporting:
+    - LIB-023   # How do I build a decision tree from unstructured interview transcripts? (audio transcription patterns)
+service_context:
+  candidate_services:
+  - Wispr Flow (voice input, highest signal, Palette Telegram bot integration)
+  - OpenAI Whisper (open-source, already referenced in Palette)
+  - Deepgram (production STT, good accuracy + low latency)
+  - AssemblyAI (STT + audio intelligence)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- audio_pipeline.md
+- audio_preprocessor/
+- transcription_integration.md
+- audio_validation_tests/
+rubric_dimensions:
+  quality_handling:
+    description: Audio quality variations (noise, accents, multi-speaker) handled with preprocessing and per-environment tracking
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  latency_management:
+    description: Real-time vs batch processing selected appropriately with streaming for low-latency use cases
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Audio services evaluated per language and use case with accuracy/latency/cost tradeoffs
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_language:
+    description: Multi-language support with per-language quality tracking and model routing
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-502-EX-01
+  failure_mode: silent
+  scenario: Your speech-to-text system works well in quiet environments. In production, 40% of audio comes from call centers
+    with background noise, hold music, and overlapping speakers. Word error rate jumps from 5% to 25% but no quality metric
+    catches it because you only measure aggregate WER.
+  expected_output: 'Per-environment quality tracking: quiet, noisy, multi-speaker. Audio preprocessing: noise reduction, speaker
+    diarization. Quality threshold per environment. Alert when any environment''s WER exceeds threshold. Test suite with noisy
+    audio samples.'
+- id: RIU-502-EX-02
+  failure_mode: loud
+  scenario: Your real-time transcription adds 3 seconds of latency. Users in a live meeting see their words appear with a
+    noticeable delay. The accuracy is excellent but the latency makes it unusable for real-time use cases.
+  expected_output: 'Streaming transcription with partial results (show words as they''re recognized, refine later). Latency
+    budget: <500ms for partial, <2s for final. Service comparison: Whisper (batch, high accuracy) vs Deepgram (streaming,
+    lower latency). Mode selection: real-time vs batch based on use case.'
+- id: RIU-502-EX-03
+  failure_mode: clustered
+  scenario: Your system processes audio in 12 languages. English and Spanish work well. Mandarin, Arabic, and Hindi have 3x
+    higher error rates. The same model handles all languages. Design the multi-language audio processing architecture.
+  expected_output: 'Language detection → language-specific model routing. Per-language quality benchmarks. Fallback: low-confidence
+    languages routed to human transcription. Service evaluation per language: Whisper vs Deepgram vs AssemblyAI language support
+    comparison. Cost model per language.'

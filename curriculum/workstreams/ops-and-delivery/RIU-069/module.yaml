@@ -1,0 +1,84 @@
+riu_id: RIU-069
+name: Runbook (Day-2 Operations)
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Create runbooks for day-2 operations usable by on-call engineers under pressure
+- Design runbook structure with specific commands, decision trees, and escalation paths
+- Include AI-specific runbook entries for model degradation and prompt failures
+- Test runbooks through incident drills to verify they work
+prerequisites:
+  required:
+  - RIU-061
+  - RIU-062
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-045
+  - LIB-047
+  supporting:
+  - LIB-049
+  - LIB-051
+  - LIB-053
+  - LIB-056
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- runbook.md
+- known_issues.md
+rubric_dimensions:
+  specificity:
+    description: Runbook steps are specific with exact commands, queries, and thresholds
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  ai_coverage:
+    description: 'AI-specific issues covered: model degradation, prompt failures, data quality, cost spikes'
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  usability:
+    description: Runbook usable under pressure with decision trees and clear escalation paths
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  validation:
+    description: Runbooks tested through incident drills before real incidents
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-069-EX-01
+  failure_mode: silent
+  scenario: Your runbook says check the logs for errors. The on-call engineer sees 10,000 log lines and does not know what
+    to look for. The issue takes 2 hours instead of 15 minutes.
+  expected_output: 'Specific runbook steps: exact log query, exact metric, exact threshold. Decision tree format. No assumed
+    knowledge. Tested by junior engineer.'
+- id: RIU-069-EX-02
+  failure_mode: loud
+  scenario: Your runbook covers infrastructure issues but not AI-specific issues. Model returning gibberish has no runbook
+    entry. On-call engineer has no guidance.
+  expected_output: 'AI-specific runbook sections: model quality degradation, prompt failure patterns, data pipeline issues,
+    cost spike response. Per-issue detection, diagnosis, remediation, escalation.'
+- id: RIU-069-EX-03
+  failure_mode: clustered
+  scenario: A complex incident involves 3 simultaneous issues. The runbook has entries for each individually but no guidance
+    for correlated failures.
+  expected_output: Correlated failure runbook with unified diagnosis. Root cause decision tree. Triage priority guidance.
+    Incident drill covering multi-issue scenarios.

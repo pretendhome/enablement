@@ -50,6 +50,9 @@ rubric_dimensions:
   recipe_quality:
     description: "Recipes demonstrate immediate, tangible value in under 5 minutes for specific personas"
     levels: [insufficient, basic, competent, expert]
+  rollout_adaptivity:
+    description: "Rollout sequencing, support model, and enablement pacing are adapted to different personas and maturity levels rather than imposed uniformly"
+    levels: [insufficient, basic, competent, expert]
   champions_design:
     description: "Champions program creates peer-driven adoption with clear selection, training, and incentives"
     levels: [insufficient, basic, competent, expert]
@@ -58,8 +61,8 @@ rubric_dimensions:
     levels: [insufficient, basic, competent, expert]
 
 certification_tier_thresholds:
-  WORKING: "competent on 4/5 dimensions"
-  PRODUCTION: "expert on 3/5, competent on remaining"
+  WORKING: "competent on 5/6 dimensions"
+  PRODUCTION: "expert on 3/6, competent on remaining"
 
 exercises:
   - id: "RIU-603-EX-01"

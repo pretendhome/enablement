@@ -57,8 +57,13 @@ def extract_riu_ids(taxonomy):
 
 
 def extract_kl_ids(knowledge_lib):
-    """Extract all LIB IDs from knowledge library."""
-    return [q['id'] for q in knowledge_lib.get('library_questions', [])]
+    """Extract all LIB IDs from knowledge library (all sections)."""
+    ids = []
+    for section in ['library_questions', 'gap_additions', 'context_specific_questions']:
+        for q in knowledge_lib.get(section, []):
+            if 'id' in q:
+                ids.append(q['id'])
+    return ids
 
 
 def run_coverage_report():
@@ -116,6 +121,28 @@ def run_coverage_report():
     print(f"   Referenced by modules:  {len(kl_referenced)}")
     print(f"   Utilization:            {100*len(kl_referenced)/total_kl:.1f}%")
     print(f"   Target:                 >80%")
+
+    # KL cross-validation
+    if KNOWLEDGE_PATH.exists():
+        dangling = kl_referenced - all_kl_ids
+        unused = all_kl_ids - kl_referenced
+        zero_kl = [m.get('riu_id', '?') for m in modules
+                    if not (m.get('knowledge_library_entries', {}) or {}).get('primary')
+                    and not (m.get('knowledge_library_entries', {}) or {}).get('supporting')]
+
+        if dangling:
+            print(f"   [WARN] {len(dangling)} dangling KL ref(s) (referenced but don't exist):")
+            for d in sorted(dangling):
+                refs = [m.get('riu_id', '?') for m in modules
+                        if d in (m.get('knowledge_library_entries', {}) or {}).get('primary', [])
+                        or d in (m.get('knowledge_library_entries', {}) or {}).get('supporting', [])]
+                print(f"     {d} ← referenced by {', '.join(refs)}")
+        if zero_kl:
+            print(f"   [INFO] {len(zero_kl)} module(s) with zero KL references: {', '.join(sorted(zero_kl))}")
+        if unused and len(unused) <= 20:
+            print(f"   [INFO] {len(unused)} unused KL entries: {', '.join(sorted(unused))}")
+        elif unused:
+            print(f"   [INFO] {len(unused)} KL entries not referenced by any module")
 
     # Workstream distribution
     ws_counts = Counter(m.get('workstream', 'Unknown') for m in modules)

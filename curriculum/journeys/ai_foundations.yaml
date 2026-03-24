@@ -1,0 +1,56 @@
+track: "AI Foundations"
+stage_focus: "foundation"
+capstone_reference: "../../assessment/capstones/ai_foundations_capstone.md"
+estimated_total_duration: "70-90 hours"
+
+entry_requirements:
+  placement_stage: "UNVALIDATED or equivalent prior experience"
+  prerequisites:
+    - "No formal RIU prerequisite. This is the default on-ramp track."
+  expected_baseline:
+    - "Can participate in technical discovery conversations"
+    - "Can read basic architecture and requirements documents"
+
+key_riu_ids:
+  - "RIU-001"
+  - "RIU-002"
+  - "RIU-003"
+  - "RIU-004"
+  - "RIU-005"
+  - "RIU-006"
+  - "RIU-007"
+  - "RIU-008"
+  - "RIU-009"
+  - "RIU-022"
+  - "RIU-080"
+  - "RIU-082"
+
+module_sequence:
+  - riu_id: "RIU-001"
+    rationale: "Start with convergence. Every later module assumes clear goals, constraints, and non-goals."
+  - riu_id: "RIU-002"
+    rationale: "Add ownership and escalation paths early so later plans have named decision-makers."
+  - riu_id: "RIU-003"
+    rationale: "Introduce decision logging before higher-risk design and delivery commitments appear."
+  - riu_id: "RIU-004"
+    rationale: "Teach broad problem decomposition before learners freeze scope or choose implementations."
+  - riu_id: "RIU-005"
+    rationale: "Convert decomposition into phased delivery boundaries and acceptance criteria."
+  - riu_id: "RIU-006"
+    rationale: "Define measurable success before evaluation, testing, or production design work."
+  - riu_id: "RIU-007"
+    rationale: "Make constraints explicit before learners propose architectures that ignore cost, latency, or compliance."
+  - riu_id: "RIU-008"
+    rationale: "Force assumptions into the open so downstream testing and governance have something to validate."
+  - riu_id: "RIU-009"
+    rationale: "Close the scoping cluster with owned risks and mitigations."
+  - riu_id: "RIU-022"
+    rationale: "Once the problem is bounded, teach prompt contracts and output schemas as the first implementation control."
+  - riu_id: "RIU-080"
+    rationale: "Add contract tests so learners can enforce interface stability before shipping."
+  - riu_id: "RIU-082"
+    rationale: "Finish the foundations track with safety controls, refusal rules, and tool-use boundaries."
+
+ordering_notes:
+  - "This track intentionally front-loads Clarify & Bound because it is the dependency spine for the rest of the system."
+  - "RIU-082 is placed last because effective guardrails depend on explicit scope, interfaces, and tests."

@@ -1,0 +1,84 @@
+riu_id: RIU-067
+name: Database Migration Safety Wrapper
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: critical
+learning_objectives:
+- Design database migration safety wrappers that prevent data loss during schema changes
+- Implement rollback procedures for failed migrations
+- Handle large-table migrations without downtime using online DDL techniques
+- Test migrations against production-scale data before executing in production
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-121
+  supporting: []
+service_context:
+  candidate_services:
+  - Flyway (Java ecosystem, widely used)
+  - Liquibase (multi-database, enterprise features)
+  - Alembic (Python/SQLAlchemy ecosystem)
+  - Prisma Migrate (if using Prisma ORM)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- migration_plan.md
+- backfill_scripts/
+- compatibility_matrix.md
+rubric_dimensions:
+  safety:
+    description: Migrations prevent data loss with rollback scripts and pre-migration validation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  zero_downtime:
+    description: Large-table migrations use online DDL with lock duration budgets
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scale_testing:
+    description: Migrations tested against production-scale data before execution
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cross_service:
+    description: Cross-service migration dependencies identified and coordinated
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in safety and zero_downtime
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-067-EX-01
+  failure_mode: silent
+  scenario: Your migration adds a NOT NULL column without a default value. It works in staging (small dataset). In production,
+    the migration fails on 10M rows and leaves the database in a partially migrated state.
+  expected_output: 'Migration testing against production-scale data copy. Pre-migration validation. Staged migration: add
+    column nullable, backfill, add constraint. Rollback script for every migration.'
+- id: RIU-067-EX-02
+  failure_mode: loud
+  scenario: Your migration locks a critical table for 45 minutes during a schema change. All queries time out. The migration
+    should have used online DDL.
+  expected_output: Online DDL for large tables. Lock duration budget. Migration impact assessment. Maintenance window scheduling
+    for migrations requiring locks.
+- id: RIU-067-EX-03
+  failure_mode: clustered
+  scenario: Service A migrates a column type that Services B and C depend on. Both break. No cross-service migration coordination
+    exists.
+  expected_output: Cross-service migration coordination with dependency analysis. Migration ordering across services. Backward-compatible
+    migrations during transition.

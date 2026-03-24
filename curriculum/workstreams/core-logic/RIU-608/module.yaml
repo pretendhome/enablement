@@ -1,0 +1,73 @@
+riu_id: RIU-608
+name: Workflow Definition for Multi-Agent Engagements
+workstream: Core Logic
+journey_stage: orchestration
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Define workflow specifications that coordinate multiple AI agents with clear handoff points
+- Design inter-agent communication protocols with message schemas and routing rules
+- Implement human checkpoint gates at one-way door decisions within multi-agent workflows
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-172
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- workflow.yaml
+rubric_dimensions:
+  handoff_quality:
+    description: Inter-agent handoffs use structured schemas with validation preventing misinterpretation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  failure_recovery:
+    description: Workflow recovers from agent failures with checkpointing and retry without full restart
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  parallel_coordination:
+    description: Parallel agents coordinated with incremental merge and timeout handling
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 2/3 dimensions
+  PRODUCTION: expert on 2/3, competent on remaining
+exercises:
+- id: RIU-608-EX-01
+  failure_mode: silent
+  scenario: Your multi-agent workflow has Agent A (research) hand off to Agent B (implementation). Agent A's output is a free-text
+    summary. Agent B misinterprets the requirements because the handoff format is ambiguous. The implementation doesn't match
+    the research findings but nobody catches it until review.
+  expected_output: 'Structured handoff schema: research agent outputs structured findings with explicit requirements, constraints,
+    and open questions. Handoff validation: receiving agent confirms understanding before proceeding. Handoff template with
+    required fields.'
+- id: RIU-608-EX-02
+  failure_mode: loud
+  scenario: Your workflow has 4 agents in sequence. Agent 3 fails. The workflow has no error handling — it stops entirely.
+    Agents 1 and 2's work is lost because there's no checkpoint. The entire workflow must restart from scratch.
+  expected_output: 'Per-agent checkpointing: each agent''s output saved before handoff. Failure recovery: restart from last
+    successful checkpoint. Retry policy per agent. Workflow state machine with explicit failure transitions. Human escalation
+    when retries exhausted.'
+- id: RIU-608-EX-03
+  failure_mode: clustered
+  scenario: Your workflow involves 3 agents working in parallel on different aspects of a problem. They need to merge their
+    results. Agent A finishes in 5 minutes, Agent B in 30 minutes, Agent C in 2 hours. The merge step waits for all three,
+    blocking Agent A's results for 2 hours. Design the parallel workflow.
+  expected_output: 'Async workflow with partial result delivery: Agent A''s results available immediately. Merge strategy:
+    incremental merge as each agent completes. Timeout policy: if Agent C exceeds SLA, merge A+B results and flag C''s contribution
+    as pending. Workflow visualization showing parallel execution and merge points.'

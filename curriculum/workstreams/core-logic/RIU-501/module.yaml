@@ -1,0 +1,92 @@
+riu_id: RIU-501
+name: Image/Vision Processing Integration
+workstream: Core Logic
+journey_stage: specialization
+classification: both
+difficulty: medium
+learning_objectives:
+- Integrate image/vision processing into an AI pipeline with appropriate model selection
+- Design image preprocessing that handles format, resolution, and quality variations
+- Evaluate vision services (Claude Vision, Rekognition, Seedance) for task-specific requirements
+- Handle vision model failures and edge cases (blurry images, unusual formats, adversarial inputs)
+prerequisites:
+  required:
+  - RIU-500
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-016
+  supporting: []
+service_context:
+  candidate_services:
+  - Claude Vision (already integrated, best for image understanding)
+  - Seedance (AI video/image generation, very high signal)
+  - Higgsfield AI (video generation, high signal)
+  - Leonardo AI (image generation, medium signal)
+  - AWS Rekognition (managed image analysis, enterprise)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- image_pipeline.md
+- image_preprocessor/
+- vision_model_integration.md
+- image_validation_tests/
+rubric_dimensions:
+  preprocessing:
+    description: Image quality, format, and orientation handled before model inference
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Vision services evaluated on task-specific benchmarks with cost/quality tradeoffs
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  error_handling:
+    description: Vision failures handled gracefully with fallback to human review for low-confidence results
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cost_control:
+    description: Vision API costs controlled with deduplication, rate limiting, and budget guards
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-501-EX-01
+  failure_mode: silent
+  scenario: 'Your vision model processes product images for an e-commerce catalog. It works well on professional photos but
+    fails on user-uploaded images: blurry, poorly lit, wrong orientation. 30% of user images get incorrect classifications.
+    The model never reports low confidence — it just gives wrong answers confidently.'
+  expected_output: 'Image quality assessment before model inference: blur detection, lighting check, orientation correction.
+    Confidence calibration for user-uploaded vs professional images. Fallback: low-quality images routed to human review.
+    Test suite with degraded image quality samples.'
+- id: RIU-501-EX-02
+  failure_mode: loud
+  scenario: Your vision API costs $0.01 per image. A bug in the upload pipeline sends the same image 1000 times. You process
+    all 1000 copies at $10 per duplicate image. No deduplication exists in the vision pipeline.
+  expected_output: Image deduplication via perceptual hashing before API call. Rate limiting per source. Cost monitoring with
+    per-source spend tracking. Alert on unusual volume from any single source. Budget guard that pauses processing when daily
+    spend exceeds threshold.
+- id: RIU-501-EX-03
+  failure_mode: clustered
+  scenario: 'Your system needs to process images, generate image descriptions, and create image variations. Each task needs
+    a different model: Claude Vision for understanding, DALL-E for generation, Rekognition for object detection. Design the
+    multi-model vision pipeline.'
+  expected_output: 'Task router: classify image task type → route to appropriate model. Per-model error handling and fallback.
+    Unified image preprocessing shared across models. Service evaluation comparing models on each task. Cost optimization:
+    use cheapest sufficient model per task.'

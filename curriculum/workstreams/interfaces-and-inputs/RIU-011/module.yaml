@@ -1,0 +1,72 @@
+riu_id: "RIU-011"
+name: "Data Contract Freeze (Schemas + Samples)"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Define a versioned data contract with schemas, constraints, and validation rules"
+  - "Collect and validate representative sample payloads against the frozen contract"
+  - "Implement schema validators that catch drift before it reaches downstream systems"
+  - "Design contract evolution rules that prevent breaking changes across sources"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"
+
+knowledge_library_entries:
+  primary:
+    - "LIB-026"
+    - "LIB-030"
+  supporting:
+    - "LIB-035"
+    - "LIB-039"
+    - "LIB-116"
+
+service_context: null
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "data_contract.yaml — Versioned data contract with field schemas, constraints, and validation rules"
+  - "sample_payloads/ — Representative samples covering happy path, edge cases, and boundary conditions"
+  - "schema_validators/ — Runnable validators that enforce the contract against incoming data"
+
+rubric_dimensions:
+  contract_completeness:
+    description: "Contract covers all fields with types, constraints, nullability, and semantic descriptions"
+    levels: [insufficient, basic, competent, expert]
+  sample_representativeness:
+    description: "Samples cover edge cases, multi-source joins, and boundary conditions"
+    levels: [insufficient, basic, competent, expert]
+  validator_effectiveness:
+    description: "Validators catch schema drift, missing fields, and type mismatches with clear error messages"
+    levels: [insufficient, basic, competent, expert]
+  versioning_strategy:
+    description: "Contract has explicit versioning with backward compatibility rules and migration paths"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-011-EX-01"
+    failure_mode: "silent"
+    scenario: "A data source silently adds a new optional field and changes a date format from ISO 8601 to Unix timestamp. Your pipeline doesn't break — it just produces wrong results. Design a contract and validator that catches this drift."
+    expected_output: "Data contract with explicit date format constraints. Validator rejecting unknown fields in strict mode. Alerting strategy for schema drift detection in production."
+
+  - id: "RIU-011-EX-02"
+    failure_mode: "loud"
+    scenario: "The data team delivers sample payloads from a test environment with synthetic data. Production has 3x more fields, different encodings, and nullable fields never null in test. Build a contract accounting for production reality."
+    expected_output: "Contract with production-derived field inventory. Gap analysis between test and production schemas. Validation suite running against both environments."
+
+  - id: "RIU-011-EX-03"
+    failure_mode: "clustered"
+    scenario: "Three source systems use different field names for the same concept ('customer_id', 'cust_id', 'client_number'). Create a unified data contract normalizing across sources while preserving provenance."
+    expected_output: "Canonical schema with field aliases per source. Mapping table from each source to canonical. Validators per source that normalize before downstream processing. Provenance tracking per record."

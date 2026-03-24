@@ -1,0 +1,89 @@
+riu_id: RIU-063
+name: Performance & Load Characterization
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Characterize system performance under load with latency percentiles, throughput limits, and resource utilization
+- Identify performance bottlenecks through systematic load testing
+- Design capacity planning based on load characterization results
+- Establish performance baselines that detect degradation after changes
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-025
+  - LIB-027
+  supporting:
+  - LIB-029
+  - LIB-031
+  - LIB-037
+  - LIB-040
+service_context:
+  candidate_services:
+  - k6 (OSS + cloud, most developer-friendly load testing)
+  - Grafana k6 Cloud (managed k6 with dashboards)
+  - Locust (OSS Python, flexible for custom scenarios)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- perf_envelope.md
+- load_tests/
+- bottleneck_report.md
+rubric_dimensions:
+  traffic_realism:
+    description: Load tests use production-representative traffic patterns including bursts and hot spots
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  metric_depth:
+    description: Performance characterized with extended percentiles and resource utilization, not just averages
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  bottleneck_identification:
+    description: Performance bottlenecks identified through systematic analysis including resource contention
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  capacity_planning:
+    description: Capacity plan derived from load characterization with scaling recommendations
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-063-EX-01
+  failure_mode: silent
+  scenario: Your system handles 100 RPS in load testing. In production, it degrades at 80 RPS because load testing used uniform
+    request distribution while production has bursty traffic with hot spots. The load test didn't represent real traffic patterns.
+  expected_output: 'Production traffic replay for load testing. Burst pattern simulation. Hot spot analysis: which endpoints/queries
+    consume disproportionate resources. Load test report comparing test traffic vs production traffic distribution.'
+- id: RIU-063-EX-02
+  failure_mode: loud
+  scenario: Your load test shows p50 latency of 200ms and p99 of 500ms. Stakeholders approve. In production, p99.9 is 15 seconds
+    — a long tail that affects 0.1% of users (1000 requests/day). The load test didn't measure tail latency.
+  expected_output: 'Extended percentile measurement: p50, p95, p99, p99.9, max. Tail latency investigation: what causes the
+    long tail. Timeout configuration based on tail latency. SLA definition including tail latency targets.'
+- id: RIU-063-EX-03
+  failure_mode: clustered
+  scenario: 'Your system has 5 components. Each is individually fast. But under load, they compete for shared resources (CPU,
+    memory, database connections). The system degrades non-linearly: 2x traffic causes 5x latency. Design the load characterization
+    that captures resource contention.'
+  expected_output: 'Component-level and system-level load testing. Resource contention analysis: identify shared bottlenecks.
+    Saturation point identification per resource. Capacity planning with contention-aware scaling recommendations.'

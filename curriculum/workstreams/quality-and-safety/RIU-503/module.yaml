@@ -1,0 +1,84 @@
+riu_id: RIU-503
+name: Cross-Modal Validation Pattern
+workstream: Quality & Safety
+journey_stage: specialization
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Implement cross-modal validation that checks consistency between outputs from different modalities
+- Design confidence scoring for cross-modal agreement and disagreement detection
+- Handle edge cases where modalities legitimately disagree (ambiguous content, artistic interpretation)
+- Build alerting for high-confidence cross-modal mismatches that indicate system errors
+prerequisites:
+  required:
+  - RIU-500
+  - RIU-021
+  recommended: []
+knowledge_library_entries:
+  primary: []
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- cross_modal_validation.md
+- consistency_checks/
+- disagreement_handling.md
+rubric_dimensions:
+  consistency_detection:
+    description: Cross-modal inconsistencies detected with appropriate sensitivity per content type
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  confidence_scoring:
+    description: Agreement/disagreement scored with calibrated confidence that minimizes false alerts
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  edge_case_handling:
+    description: Legitimate disagreements (artistic content, localization) handled without false positives
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  alert_quality:
+    description: High-confidence mismatches trigger actionable alerts with clear context for reviewers
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-503-EX-01
+  failure_mode: silent
+  scenario: Your system generates image captions and also extracts text from images via OCR. For 5% of images, the caption
+    says 'a sunset over the ocean' but the OCR extracts text showing it's actually a product label with orange coloring. The
+    inconsistency goes undetected because caption and OCR run independently.
+  expected_output: Cross-modal consistency check comparing caption semantics against OCR content. Confidence scoring for agreement
+    level. Alert when caption and OCR outputs are semantically contradictory. consistency_checks/ with test cases for caption-OCR
+    disagreement.
+- id: RIU-503-EX-02
+  failure_mode: loud
+  scenario: Your cross-modal validation threshold is too strict. It flags 25% of art images as 'inconsistent' because abstract
+    art descriptions legitimately differ from literal image content. The validation queue overwhelms human reviewers.
+  expected_output: 'Content-type-aware thresholds: strict for product images, relaxed for artistic content. Category detection
+    before validation. disagreement_handling.md with per-category policies. Escalation only for high-confidence mismatches
+    in strict categories.'
+- id: RIU-503-EX-03
+  failure_mode: clustered
+  scenario: Your system processes video with audio, visual, and text (subtitle) tracks. A dubbed video has English audio but
+    Japanese subtitles and Korean on-screen text. All three modalities give different 'language' signals. Design cross-modal
+    validation for multi-language multimedia.
+  expected_output: Per-track language detection with expected agreement matrix. Dubbed/subtitled content detection as a valid
+    disagreement pattern. Cross-modal validation rules that account for localization. Alert only when disagreement doesn't
+    match known localization patterns.

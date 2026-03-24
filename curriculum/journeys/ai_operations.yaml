@@ -1,0 +1,51 @@
+track: "AI Operations"
+stage_focus: "ops"
+capstone_reference: "../../assessment/capstones/ai_operations_capstone.md"
+estimated_total_duration: "75-100 hours"
+
+entry_requirements:
+  placement_stage: "Foundation complete"
+  prerequisites:
+    - "AI Foundations track or equivalent"
+    - "Recommended: RAG Engineer through RIU-021 for evaluation literacy"
+  expected_baseline:
+    - "Can read deployment plans and troubleshoot system behavior"
+    - "Can work with alerts, logs, and release controls"
+
+key_riu_ids:
+  - "RIU-060"
+  - "RIU-061"
+  - "RIU-062"
+  - "RIU-063"
+  - "RIU-064"
+  - "RIU-065"
+  - "RIU-068"
+  - "RIU-069"
+  - "RIU-070"
+  - "RIU-085"
+
+module_sequence:
+  - riu_id: "RIU-060"
+    rationale: "Start by defining the deployment envelope and release gates."
+  - riu_id: "RIU-061"
+    rationale: "Observability comes next because every later operational control depends on visibility."
+  - riu_id: "RIU-063"
+    rationale: "Characterize performance before rollout decisions are made."
+  - riu_id: "RIU-085"
+    rationale: "Bound latency and cost before the system reaches production traffic."
+  - riu_id: "RIU-064"
+    rationale: "Add feature flags and kill switches to make deployment risk reversible."
+  - riu_id: "RIU-065"
+    rationale: "Environment parity is easier to enforce once the release envelope is known."
+  - riu_id: "RIU-068"
+    rationale: "Use canary rollout and objective rollback criteria once observability and reversibility exist."
+  - riu_id: "RIU-070"
+    rationale: "Define SLOs and alert thresholds after canary and error-budget mechanics are in place."
+  - riu_id: "RIU-062"
+    rationale: "Formalize incident containment once the operating envelope and rollback tools are known."
+  - riu_id: "RIU-069"
+    rationale: "Close with a day-2 runbook so another operator can run the system without the original builder."
+
+ordering_notes:
+  - "This track optimizes for safe productionization rather than feature speed."
+  - "RIU-062 appears late because incident response should be designed against the real deployment and monitoring controls, not in abstraction."

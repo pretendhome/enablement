@@ -1,0 +1,85 @@
+riu_id: RIU-326
+name: Threat Model + Attack Surface Map
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Create a threat model identifying attack vectors specific to AI systems (prompt injection, data poisoning, model extraction)
+- Map the attack surface including all entry points, data flows, and trust boundaries
+- Design mitigations that address root causes with defense-in-depth layering
+- Document residual risks with acceptance criteria and monitoring requirements
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-153
+  - LIB-160
+  supporting:
+  - LIB-164
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- threat_model.md
+- attack_surface_map.md
+- mitigations.md
+rubric_dimensions:
+  threat_identification:
+    description: Threats cover both traditional and AI-specific attack vectors with no major category gaps
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  attack_surface_mapping:
+    description: All entry points, data flows, and trust boundaries mapped with component-level detail
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  mitigation_depth:
+    description: Mitigations use defense-in-depth with prioritization based on risk scoring
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  residual_risk_handling:
+    description: Accepted risks documented with monitoring requirements and review schedule
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-326-EX-01
+  failure_mode: silent
+  scenario: Your threat model covers network-level attacks and API authentication but doesn't consider AI-specific threats.
+    An attacker discovers they can extract training data by crafting specific prompts. The threat was overlooked because the
+    model used a traditional web app threat framework.
+  expected_output: 'AI-specific threat categories added: prompt injection, data extraction, model inversion, training data
+    poisoning, adversarial inputs. threat_model.md with both traditional and AI-specific attack vectors. attack_surface_map.md
+    showing AI-specific entry points.'
+- id: RIU-326-EX-02
+  failure_mode: loud
+  scenario: Your threat model identifies 30 attack vectors. The engineering team says mitigating all 30 would take 6 months
+    and delay launch by a quarter. The security team insists all must be addressed. Design the prioritization framework.
+  expected_output: 'Risk scoring: impact × likelihood × exploitability. Tiered mitigations: must-fix (top 10), should-fix
+    (next 10), accept-risk (bottom 10). Residual risk documentation with monitoring for accepted risks. mitigations.md with
+    implementation timeline aligned to launch.'
+- id: RIU-326-EX-03
+  failure_mode: clustered
+  scenario: 'Your AI system is a distributed architecture: API gateway → load balancer → 3 microservices → 2 databases → external
+    LLM API → customer webhook. Each component has its own attack surface. Trust boundaries are unclear between internal services.
+    Map the full attack surface.'
+  expected_output: 'Component-level attack surface map with trust boundaries between every pair. Data flow diagram showing
+    where data crosses trust boundaries. Per-boundary threat analysis. Defense-in-depth: each boundary has independent validation.
+    Monitoring at every trust boundary crossing.'

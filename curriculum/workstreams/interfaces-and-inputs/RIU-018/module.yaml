@@ -1,0 +1,68 @@
+riu_id: "RIU-018"
+name: "Schema Mapping Table (Source→Target)"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Create a mapping table with transforms, defaults, and provenance for every field"
+  - "Validate mappings against representative samples to catch implicit transforms"
+  - "Design conflict resolution rules for optional fields and multi-source mappings"
+  - "Document mapping decisions with rationale to support auditability"
+
+prerequisites:
+  required:
+    - "RIU-011"
+  recommended: []
+
+knowledge_library_entries:
+  primary:
+    - "LIB-134"
+  supporting:
+    - "LIB-026"
+    - "LIB-030"
+    - "LIB-039"
+
+service_context: null
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "schema_mapping.csv — Complete field mapping with source, target, transform, default, and provenance"
+  - "transform_rules.yaml — Executable transform rules with validation constraints"
+  - "mapping_tests/ — Tests validating mappings against representative samples"
+
+rubric_dimensions:
+  mapping_completeness:
+    description: "Every source field mapped to target with explicit transform, default, and nullability rules"
+    levels: [insufficient, basic, competent, expert]
+  transform_correctness:
+    description: "Transforms are deterministic, handle edge cases, and produce expected output for all samples"
+    levels: [insufficient, basic, competent, expert]
+  auditability:
+    description: "Mapping decisions documented with rationale and provenance supports traceability"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/3 dimensions"
+  PRODUCTION: "expert on 2/3, competent on remaining"
+
+exercises:
+  - id: "RIU-018-EX-01"
+    failure_mode: "silent"
+    scenario: "A mapping implicitly converts currency amounts by truncating decimals instead of rounding. Financial reports are off by small amounts that accumulate. Build the mapping table and tests that catch implicit transforms."
+    expected_output: "Mapping table with explicit rounding rules per currency field. Tests comparing truncation vs rounding output. Validation constraint enforcing decimal precision."
+
+  - id: "RIU-018-EX-02"
+    failure_mode: "loud"
+    scenario: "Source and target teams disagree on how to map a 'status' field. Source has 8 statuses, target has 5. Three source statuses have no clear target equivalent. Resolve the mapping disagreement."
+    expected_output: "Mapping table with explicit many-to-one rules. Unmappable statuses handled with default + alert. Decision rationale documented. Stakeholder sign-off on lossy mappings."
+
+  - id: "RIU-018-EX-03"
+    failure_mode: "clustered"
+    scenario: "Three source systems have optional fields that are required in the target. Each source populates different subsets. Design a mapping strategy that handles missing required fields across sources."
+    expected_output: "Per-source mapping with fallback chain for required fields. Default value strategy with data quality flags. Cross-source enrichment rules. Tests covering all combinations of missing fields."

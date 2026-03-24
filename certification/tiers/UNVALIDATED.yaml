@@ -1,0 +1,38 @@
+tier: "UNVALIDATED"
+display_name: "Palette Learner"
+description: "Entered the system. Placement complete. Learning in progress."
+
+criteria:
+  entry:
+    - "Complete registration and accept code of conduct"
+    - "Complete placement diagnostic (self-assessment or automated)"
+  evidence_required: "none"
+  assessment_layers: [1]  # Automated checks only
+
+badge:
+  name: "Palette AI Learner"
+  type: "OpenBadge3.0"
+  issuer: "Palette Enablement System"
+  image: "badges/unvalidated.svg"
+  description: "Holder has entered the Palette Developer Enablement system and completed placement."
+  criteria_url: "https://palette.dev/certification/unvalidated"
+  alignment:
+    - target_name: "AI Foundations Orientation"
+      target_framework: "Palette RIU Taxonomy v1.3"
+      target_description: "Placement into the Palette competency system"
+
+validity:
+  duration: "none"  # No expiry — learner status persists until promotion
+  renewal: "not applicable"
+
+progression:
+  next_tier: "WORKING"
+  requirements:
+    - "Complete one certification track (8-15 RIUs + capstone)"
+    - "Score competent on required rubric dimensions per track thresholds"
+    - "Pass Layer 1 (automated) and Layer 2 (AI rubric) evaluation"
+
+notes:
+  - "UNVALIDATED is not a failure state — it is the default starting position"
+  - "Learners may attempt modules in any order within a track"
+  - "Placement diagnostic recommends a starting track but does not restrict access"

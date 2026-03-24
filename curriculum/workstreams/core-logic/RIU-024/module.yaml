@@ -1,0 +1,83 @@
+riu_id: RIU-024
+name: Sidecar Augmentation Pattern
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Design a sidecar augmentation pattern that enhances existing systems without modifying them
+- Implement sidecar integration with clear interface boundaries and failure isolation
+- Handle sidecar failures gracefully so the primary system continues operating
+- Measure sidecar value-add to justify the additional complexity and latency
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-136
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- sidecar_schema.json
+- sidecar_writer/
+- sidecar_reader/
+rubric_dimensions:
+  isolation:
+    description: Sidecar failures don't affect primary system operation with proper timeout and fallback
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  value_measurement:
+    description: Sidecar value-add measured and conditional invocation avoids unnecessary latency
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  interface_design:
+    description: Clear interface boundaries between primary system and sidecar with no tight coupling
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_sidecar_coordination:
+    description: Multiple sidecars coordinated with parallel execution and priority-based degradation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-024-EX-01
+  failure_mode: silent
+  scenario: Your AI sidecar enriches search results with semantic relevance scores. The sidecar adds 150ms latency. For 80%
+    of queries, the sidecar's scores match the original ranking exactly — it adds latency without changing results. The sidecar
+    is running but providing no value for most queries.
+  expected_output: 'Value measurement: track how often sidecar changes the final output. Conditional invocation: skip sidecar
+    for query types where it rarely changes results. A/B test comparing with-sidecar vs without-sidecar user satisfaction.
+    Cost-benefit dashboard.'
+- id: RIU-024-EX-02
+  failure_mode: loud
+  scenario: Your sidecar crashes and the primary system has a hard dependency on it — requests fail entirely when the sidecar
+    is down. The sidecar was supposed to be optional augmentation but became a critical path dependency.
+  expected_output: 'Sidecar as optional enhancement: primary system returns results with or without sidecar. Timeout + fallback:
+    if sidecar doesn''t respond in N ms, proceed without it. Health check and circuit breaker for sidecar. Monitoring showing
+    sidecar availability vs primary system availability.'
+- id: RIU-024-EX-03
+  failure_mode: clustered
+  scenario: 'Your system has 3 sidecars: semantic enrichment, PII detection, and cost estimation. Each adds latency. Under
+    load, the combined sidecar latency exceeds the user''s tolerance. But each sidecar is individually valuable. Design the
+    multi-sidecar architecture.'
+  expected_output: 'Parallel sidecar execution (not sequential). Priority-based sidecar invocation: under load, run only high-priority
+    sidecars. Latency budget allocation per sidecar. Graceful degradation: drop lowest-priority sidecar first when budget
+    is exceeded.'

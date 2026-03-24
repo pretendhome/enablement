@@ -1,0 +1,94 @@
+riu_id: RIU-061
+name: Observability Baseline
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Design an observability baseline covering metrics, logs, and traces for an AI system
+- Implement structured logging that enables efficient debugging without excessive volume
+- Build dashboards that surface actionable signals, not just raw data
+- Configure alerting that distinguishes real issues from noise
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-024
+  - LIB-025
+  supporting:
+  - LIB-026
+  - LIB-027
+  - LIB-028
+  - LIB-030
+service_context:
+  candidate_services:
+  - Datadog (full-stack APM, highest market signal)
+  - Honeycomb (distributed tracing, excellent DX)
+  - Grafana + Prometheus (OSS, self-hosted, most flexible)
+  - AWS CloudWatch (if already on AWS)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- observability_baseline.md
+- dashboards/
+- alerts.md
+- logging_spec.md
+rubric_dimensions:
+  metric_coverage:
+    description: Metrics cover all pipeline stages with per-stage latency and quality tracking
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  log_quality:
+    description: Structured logging enables efficient debugging with appropriate detail level
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  dashboard_actionability:
+    description: Dashboards surface actionable signals with cross-service correlation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  alert_precision:
+    description: Alerts distinguish real issues from noise with severity tiers and correlation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-061-EX-01
+  failure_mode: silent
+  scenario: Your system logs request/response pairs but not the intermediate steps (retrieval, ranking, generation). When
+    output quality drops, you can see the bad output but can't determine which step caused it. The observability gap between
+    input and output is invisible until you need to debug.
+  expected_output: 'Per-stage observability: metrics and traces for each pipeline step. Trace correlation: link input → retrieval
+    → ranking → generation → output. Per-stage latency and quality metrics. Dashboard showing where in the pipeline quality
+    degrades.'
+- id: RIU-061-EX-02
+  failure_mode: loud
+  scenario: Your alerting fires 50 alerts per day. The team is overwhelmed and starts ignoring alerts. A real production issue
+    (database connection pool exhaustion) is buried in noise. Alert fatigue causes a 4-hour outage that should have been caught
+    in minutes.
+  expected_output: 'Alert hygiene: review and tune every alert quarterly. Alert severity tiers with different notification
+    channels. Noise budget: max N low-severity alerts per day. Alert correlation: group related alerts into incidents.'
+- id: RIU-061-EX-03
+  failure_mode: clustered
+  scenario: Your AI system spans 8 microservices across 3 teams. Each team has their own logging format, metric naming convention,
+    and dashboard. Debugging a cross-service issue requires checking 8 different dashboards. Design the unified observability
+    stack.
+  expected_output: 'Shared observability standards: log format, metric naming, trace propagation. Unified dashboard with cross-service
+    views. Distributed tracing with correlation IDs across all services. Per-team views within the unified platform.'

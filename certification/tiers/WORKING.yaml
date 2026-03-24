@@ -1,0 +1,55 @@
+tier: "WORKING"
+display_name: "Palette Certified Practitioner"
+description: "Demonstrated competence on one certification track. Can deliver AI systems under guidance."
+
+criteria:
+  entry:
+    - "Complete one full certification track (all modules in sequence)"
+    - "Pass capstone assessment for the track"
+    - "Score competent or above on all required rubric dimensions per module thresholds"
+  evidence_required: "portfolio"
+  assessment_layers: [1, 2, 3]  # Automated + AI rubric + 10% human sample
+  capstone_required: true
+  human_review: "10% fixed sample + confidence-based escalation"
+
+badge:
+  name: "Palette Certified Practitioner — {track_name}"
+  type: "OpenBadge3.0"
+  issuer: "Palette Enablement System"
+  image: "badges/working_{track_slug}.svg"
+  description: "Holder has demonstrated competence in {track_name} through portfolio-based assessment."
+  criteria_url: "https://palette.dev/certification/working/{track_slug}"
+  alignment:
+    - target_name: "{track_name}"
+      target_framework: "Palette RIU Taxonomy v1.3"
+      target_description: "Track-specific competency across 8-15 RIUs with capstone"
+  extensions:
+    ace_credit: "Pending ACE evaluation"
+    competency_metadata:
+      rius_demonstrated: "{track_riu_ids}"
+      capstone_completed: true
+      assessment_method: "portfolio + AI rubric + human sample"
+
+validity:
+  duration: "2 years"
+  renewal:
+    method: "Continuing evidence or re-assessment"
+    options:
+      - "Submit 2 new portfolio artifacts demonstrating continued practice"
+      - "Complete a refresher capstone (updated for current taxonomy version)"
+      - "Earn PRODUCTION tier (supersedes WORKING)"
+    grace_period: "90 days after expiry"
+
+progression:
+  next_tier: "PRODUCTION"
+  requirements:
+    - "Complete 2+ certification tracks at WORKING level"
+    - "Pass architecture defense assessment (live or async)"
+    - "Contribute to peer review (review 3+ submissions)"
+    - "All PRODUCTION submissions require mandatory human sign-off (Layer 3)"
+
+notes:
+  - "WORKING is the primary professional credential — most practitioners target this tier"
+  - "Track-specific badge issued per completed track"
+  - "Multiple WORKING badges can be earned across different tracks"
+  - "Capstone integrates all track RIUs into a single realistic project"

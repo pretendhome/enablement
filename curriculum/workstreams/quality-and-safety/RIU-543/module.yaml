@@ -1,0 +1,92 @@
+riu_id: RIU-543
+name: Drift Detection Configuration
+workstream: Quality & Safety
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Configure drift detection for data distribution, model behavior, and system performance
+- Design detection thresholds that catch meaningful drift while filtering seasonal patterns
+- Build response procedures that triage drift alerts into actionable categories
+- Handle gradual drift that stays within thresholds but accumulates over time
+prerequisites:
+  required:
+  - RIU-542
+  - RIU-524
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-130
+  supporting: []
+service_context:
+  candidate_services:
+  - Arize AI (LLM + ML monitoring, drift detection)
+  - WhyLabs (OSS + managed, data/model drift)
+  - Evidently AI (OSS + cloud, data + model drift, comprehensive)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- drift_detection.md
+- drift_metrics.yaml
+- detection_thresholds.md
+- response_procedures.md
+rubric_dimensions:
+  detection_coverage:
+    description: Drift detected across data, model, and performance dimensions with independent monitors
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  threshold_calibration:
+    description: Thresholds catch meaningful drift while filtering known patterns (seasonal, weekly)
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cumulative_tracking:
+    description: Gradual drift detected through cumulative comparison against training baseline
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  response_procedures:
+    description: Drift alerts triaged into actionable categories with clear response procedures per type
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-543-EX-01
+  failure_mode: silent
+  scenario: 'Your drift detection monitors input feature distributions. Over 3 months, the distribution shifts gradually —
+    each week''s change is within threshold. But the cumulative shift is massive: the model is now operating on data very
+    different from training. No single alert fired because each increment was small.'
+  expected_output: 'Cumulative drift tracking: compare current distribution against original training baseline, not just previous
+    week. drift_metrics.yaml with both incremental and cumulative thresholds. Trend detection that alerts on sustained directional
+    shift even within per-period thresholds.'
+- id: RIU-543-EX-02
+  failure_mode: loud
+  scenario: Your drift detection fires alerts every Monday because weekend traffic patterns differ from weekday patterns.
+    The team receives 52 false positive alerts per year. They create a suppression rule for Mondays. A real Monday data pipeline
+    failure goes undetected because Monday alerts are suppressed.
+  expected_output: 'Time-aware baselines: separate weekday and weekend distributions. detection_thresholds.md with per-time-period
+    baselines. Suppression rules with automatic expiry and mandatory review. Separate alert channels for ''known pattern deviation''
+    vs ''unknown deviation.'''
+- id: RIU-543-EX-03
+  failure_mode: clustered
+  scenario: Your system has data drift, concept drift, and performance drift happening simultaneously after a major customer
+    onboarding. New customer data has different characteristics, the relationship between features and outcomes is different,
+    and latency increases due to volume. All three drift types interact. Design the multi-dimensional drift detection.
+  expected_output: 'Independent drift detectors for data, concept, and performance with correlation analysis. Root cause attribution:
+    which drift type is primary vs secondary. response_procedures.md with triage decision tree. drift_detection.md covering
+    all three drift types with interaction effects.'

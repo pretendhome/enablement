@@ -1,0 +1,88 @@
+riu_id: RIU-085
+name: Cost/Latency Budget Envelope
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Define cost and latency budgets with per-component allocation and total envelope
+- Implement guards that enforce budgets with automatic fallback to cheaper/faster alternatives
+- Design alerting that triggers before budget exhaustion, not after
+- Handle burst traffic scenarios where budgets are temporarily exceeded without service degradation
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-137
+  - LIB-143
+  supporting:
+  - LIB-145
+  - LIB-155
+  - LIB-159
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- budget_envelope.md
+- cost_guards/
+- latency_alerts.md
+rubric_dimensions:
+  budget_precision:
+    description: Budgets defined per component with clear allocation and total envelope, not just aggregate limits
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  guard_effectiveness:
+    description: Guards enforce budgets automatically with graceful fallback, not just alerting
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  alert_timing:
+    description: Alerts fire before budget exhaustion with enough lead time to take action
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  burst_handling:
+    description: Burst traffic handled with tiered degradation that preserves service quality during peaks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-085-EX-01
+  failure_mode: silent
+  scenario: Your AI system has a $500/day LLM API budget. Nobody enforces it. A prompt engineering change doubles token usage.
+    The monthly bill goes from $15K to $30K. Finance discovers it 3 weeks later. Design the budget envelope that prevents
+    this.
+  expected_output: budget_envelope.md with per-component cost allocation. Real-time cost tracking with hourly budget consumption
+    rate. Alert at 70% daily budget. Hard cutoff at 100% with fallback to cheaper model. Dashboard showing cost per request
+    and daily burn rate.
+- id: RIU-085-EX-02
+  failure_mode: loud
+  scenario: Your latency budget is 200ms p95. You add a reranking step that pushes p95 to 350ms. The latency alert fires constantly.
+    The team increases the budget to 400ms to stop the alerts. Users start complaining about slow responses. The budget was
+    right; the implementation was wrong.
+  expected_output: 'Latency budget decomposition: retrieval (50ms) + reranking (80ms) + generation (70ms). Per-component latency
+    tracking. Policy: budget changes require justification and user impact analysis. Fallback: skip reranking under load to
+    stay within budget.'
+- id: RIU-085-EX-03
+  failure_mode: clustered
+  scenario: Black Friday traffic is 10x normal. Your per-request cost budget works fine at normal load, but burst traffic
+    exhausts the daily budget by 2pm. The system falls back to a cheaper model that gives worse results during peak shopping
+    hours. Design the burst handling strategy.
+  expected_output: 'Tiered budget with burst allowance: normal daily budget + burst reserve (activated by traffic threshold).
+    Graceful degradation ladder: full model → cached responses → cheaper model → static fallback. Pre-scaling plan for known
+    traffic events. Post-burst budget reconciliation.'

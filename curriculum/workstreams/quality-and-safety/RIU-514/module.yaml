@@ -1,0 +1,86 @@
+riu_id: RIU-514
+name: Agent Capability Boundary Enforcement
+workstream: Quality & Safety
+journey_stage: orchestration
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Define capability boundaries that constrain agents to their designated role and scope
+- Implement action validation that blocks out-of-scope operations before execution
+- Design boundary violation handling that logs, alerts, and escalates without silent breaches
+- Handle edge cases where legitimate actions appear to violate boundaries due to ambiguous scope
+prerequisites:
+  required:
+  - RIU-029
+  - RIU-510
+  recommended: []
+knowledge_library_entries:
+  primary: []
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- capability_boundaries.md
+- action_allowlist.yaml
+- boundary_validators/
+- violation_handling.md
+rubric_dimensions:
+  boundary_definition:
+    description: Capability boundaries explicitly defined per agent with default-deny for unclassified actions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  enforcement_reliability:
+    description: Boundary validation runs before every action with no bypass paths or default-allow gaps
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  violation_handling:
+    description: Violations logged, alerted, and escalated with full context and no silent breaches
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  workflow_coverage:
+    description: Boundaries enforced across multi-agent handoffs with no gaps between agent transitions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in boundary_definition and enforcement_reliability
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-514-EX-01
+  failure_mode: silent
+  scenario: Your 'researcher' agent has an allowlist of permitted actions. Over time, new tools are added to the system but
+    not added to any agent's allowlist. The researcher agent discovers it can invoke these unclassified tools because the
+    boundary check defaults to 'allow' for unknown actions.
+  expected_output: 'Default-deny policy: unknown actions blocked. action_allowlist.yaml with explicit per-agent permissions.
+    New tool onboarding process requiring boundary classification before deployment. boundary_validators/ that reject unclassified
+    actions.'
+- id: RIU-514-EX-02
+  failure_mode: loud
+  scenario: Your builder agent needs to read a config file to complete a task, but the boundary policy only allows writing
+    files, not reading. The agent is blocked from a legitimate action. The user is frustrated because the boundary is too
+    restrictive for the actual workflow.
+  expected_output: 'Boundary review process: when legitimate actions are blocked, log the request and allow temporary override
+    with human approval. capability_boundaries.md with per-role action matrix reviewed quarterly. Feedback loop: blocked legitimate
+    actions trigger boundary review.'
+- id: RIU-514-EX-03
+  failure_mode: clustered
+  scenario: Your multi-agent system has 4 agents with overlapping capabilities. Agent A can read files, Agent B can write
+    files, Agent C can execute commands. A complex task requires all three capabilities in sequence. No single agent can complete
+    it, and the handoff between agents creates gaps where boundary enforcement is unclear.
+  expected_output: 'Workflow-level boundary enforcement: task decomposition with per-step agent assignment and boundary validation.
+    Handoff protocol with explicit capability transfer. violation_handling.md covering inter-agent boundary enforcement. No
+    capability gaps between handoff points.'

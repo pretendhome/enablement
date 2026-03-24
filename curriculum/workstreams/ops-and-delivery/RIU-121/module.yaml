@@ -1,0 +1,83 @@
+riu_id: RIU-121
+name: Webhook Reliability Pattern (Retries + Idempotency)
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Implement webhook reliability with retry logic, idempotency keys, and delivery confirmation
+- Design exponential backoff preventing receiver overload during outages
+- Handle webhook payload versioning for evolving schemas
+- Monitor delivery success rate per receiver
+prerequisites:
+  required:
+  - RIU-015
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-055
+  - LIB-056
+  supporting:
+  - LIB-057
+  - LIB-059
+  - LIB-062
+  - LIB-063
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- webhook_spec.md
+- retry_policy.md
+- idempotency_design.md
+- webhook_tests/
+rubric_dimensions:
+  idempotency:
+    description: Webhook delivery is idempotent with deduplication keys
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  retry_design:
+    description: Exponential backoff prevents overwhelming receivers with circuit breaker
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  delivery_monitoring:
+    description: Per-receiver delivery success rate tracked with alerting
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  receiver_management:
+    description: Per-receiver configuration handles adaptive retry, payload format differences, and schema/version transitions without breaking delivery
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-121-EX-01
+  failure_mode: silent
+  scenario: Receiver processes webhook but sends no acknowledgment. System retries 5 times. Receiver processes all 5, creating
+    duplicate orders.
+  expected_output: Idempotency key in every payload. Receiver-side deduplication. Delivery confirmation protocol with timeout.
+- id: RIU-121-EX-02
+  failure_mode: loud
+  scenario: Receiver down for 2 hours. System retries every 10 seconds (720 attempts). Receiver overwhelmed on recovery.
+  expected_output: Exponential backoff with jitter. Max retry limit with dead letter queue. Circuit breaker after N consecutive
+    failures.
+- id: RIU-121-EX-03
+  failure_mode: clustered
+  scenario: 50 receivers with different reliability and format requirements. Single delivery system uses same retry policy
+    for all.
+  expected_output: Per-receiver delivery configuration. Receiver health tracking. Webhook delivery dashboard per receiver.
+    Receiver onboarding checklist.

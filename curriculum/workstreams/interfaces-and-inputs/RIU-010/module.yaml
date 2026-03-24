@@ -1,0 +1,71 @@
+riu_id: "RIU-010"
+name: "Access & Permissions Readiness Checklist"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Design a least-privilege access checklist covering credentials, network paths, and data movement constraints"
+  - "Implement smoke tests that validate read/write boundaries before delivery begins"
+  - "Identify over-privileged tokens and reduce them to minimum required scope"
+  - "Document network requirements including VPN/VPC paths and firewall rules"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"
+
+knowledge_library_entries:
+  primary:
+    - "LIB-132"
+    - "LIB-153"
+  supporting:
+    - "LIB-157"
+    - "LIB-161"
+
+service_context: null
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "access_checklist.md — Least-privilege access checklist with per-system credentials, scopes, and expiry"
+  - "access_smoketests/ — Runnable smoke tests validating read/write boundaries for each system"
+  - "network_requirements.md — Network topology requirements including VPN/VPC, firewall rules, and egress paths"
+
+rubric_dimensions:
+  least_privilege:
+    description: "Every credential scoped to minimum required access with no over-privileged tokens"
+    levels: [insufficient, basic, competent, expert]
+  smoke_test_coverage:
+    description: "Smoke tests cover all access paths and fail loudly on permission errors"
+    levels: [insufficient, basic, competent, expert]
+  network_documentation:
+    description: "Network requirements are complete, actionable, and account for enterprise VPN/VPC constraints"
+    levels: [insufficient, basic, competent, expert]
+  audit_readiness:
+    description: "Checklist supports audit trail with explicit expiry dates and rotation policies"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-010-EX-01"
+    failure_mode: "silent"
+    scenario: "You're given a service account token with admin access to a production database. The team says 'it works, don't touch it.' Audit the token, identify over-privileged scopes, and produce a least-privilege replacement with smoke tests."
+    expected_output: "Audit showing admin vs required permissions. New token with read-only on required tables. Smoke tests validating all delivery queries succeed with reduced scope."
+
+  - id: "RIU-010-EX-02"
+    failure_mode: "loud"
+    scenario: "Day 1 of delivery: your team cannot reach the customer's API because it sits behind a VPN requiring a hardware token your team doesn't have. Produce the network requirements document that should have existed before kickoff."
+    expected_output: "Network requirements covering VPN access, hardware token provisioning, IP allowlisting, and fallback options. Timeline for provisioning with escalation path."
+
+  - id: "RIU-010-EX-03"
+    failure_mode: "clustered"
+    scenario: "An enterprise client has 4 environments across 2 cloud providers with different IAM systems and access policies. Build a unified access checklist and smoke test suite covering all environments."
+    expected_output: "Per-environment access checklist with IAM mapping. Cross-environment smoke test suite. Gap analysis of inconsistent policies. Remediation plan for alignment."

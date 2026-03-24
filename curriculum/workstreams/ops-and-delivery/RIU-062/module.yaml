@@ -1,0 +1,88 @@
+riu_id: RIU-062
+name: Incident Containment & Recovery Plan
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Design an incident containment plan that limits blast radius during AI system failures
+- Implement recovery procedures that restore service with minimal data loss
+- Build incident communication templates for different stakeholder audiences
+- Conduct incident drills that validate the plan works before a real incident
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-019
+  - LIB-024
+  supporting:
+  - LIB-025
+  - LIB-027
+  - LIB-028
+  - LIB-029
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- incident_runbook.md
+- kill_switch.md
+- customer_comms_templates.md
+rubric_dimensions:
+  detection_speed:
+    description: Incidents detected quickly including silent correctness failures via quality sampling
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  containment_effectiveness:
+    description: Blast radius limited with circuit breakers and graceful degradation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  recovery_procedures:
+    description: Recovery procedures documented, tested, and executable within SLA
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  communication:
+    description: Incident communication templates ready for different audiences with appropriate detail
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-062-EX-01
+  failure_mode: silent
+  scenario: 'Your AI system has a subtle bug: it returns plausible but incorrect answers for 5% of queries. No error is raised.
+    Users don''t report it because the answers look reasonable. The incident goes undetected for 3 weeks. Design the detection
+    mechanism for silent correctness failures.'
+  expected_output: 'Automated quality sampling: randomly verify AI outputs against ground truth. Statistical process control:
+    detect when error rate shifts. User feedback loop: easy mechanism to report ''this answer seems wrong.'' Quality monitoring
+    dashboard with trend detection.'
+- id: RIU-062-EX-02
+  failure_mode: loud
+  scenario: Your AI system goes down completely during a product demo for a key customer. The on-call engineer is in a different
+    timezone and takes 45 minutes to respond. The demo fails. Design the incident response that minimizes time-to-recovery.
+  expected_output: Incident severity classification with response time SLAs. On-call rotation with timezone coverage. Automated
+    incident detection and paging. Pre-written customer communication templates. Runbook for common failure modes with step-by-step
+    recovery.
+- id: RIU-062-EX-03
+  failure_mode: clustered
+  scenario: 'A cascading failure: your vector database goes down, which causes the retrieval service to fail, which causes
+    the generation service to return errors, which causes the API gateway to return 500s. Each service''s monitoring fires
+    independently. Nobody sees the root cause. Design the cascading failure containment.'
+  expected_output: 'Dependency-aware incident detection: identify root cause service. Circuit breakers at each service boundary.
+    Graceful degradation: if retrieval fails, return cached results. Cascading failure drill: simulate dependency failure
+    and verify containment.'

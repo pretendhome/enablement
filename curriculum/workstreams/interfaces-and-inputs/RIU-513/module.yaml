@@ -1,0 +1,93 @@
+riu_id: RIU-513
+name: Inter-Agent Communication Protocol
+workstream: Interfaces & Inputs
+journey_stage: orchestration
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Design an inter-agent communication protocol with message schemas, routing, and delivery guarantees
+- Implement message authentication to prevent agent impersonation
+- Handle message ordering and delivery in async multi-agent environments
+- Document the protocol as a ONE-WAY DOOR decision with versioning strategy
+prerequisites:
+  required:
+  - RIU-510
+  - RIU-011
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-050
+  - LIB-070
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- communication_protocol.md
+- message_schema.json
+- protocol_validators/
+- communication_tests/
+rubric_dimensions:
+  schema_design:
+    description: Message schemas are structured with explicit types, preventing misinterpretation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  delivery_guarantees:
+    description: Messages delivered reliably with timeout, retry, and dead letter handling
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  authentication:
+    description: Agent identity verified on messages preventing impersonation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scalability:
+    description: Communication architecture scales with agent count without quadratic message growth
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  versioning_strategy:
+    description: Protocol documented as a one-way door decision with explicit versioning and migration plan
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 4/5 dimensions
+  PRODUCTION: expert on 3/5, competent on remaining
+exercises:
+- id: RIU-513-EX-01
+  failure_mode: silent
+  scenario: Your agents communicate via free-text messages. Agent A sends 'process the data' to Agent B. Agent B interprets
+    'process' as 'analyze' when Agent A meant 'transform.' The miscommunication produces wrong results but both agents report
+    success.
+  expected_output: 'Structured message schema with explicit action types, parameters, and expected outputs. Message validation
+    at send and receive. Acknowledgment protocol: receiving agent confirms understanding before executing. Protocol spec with
+    message type catalog.'
+- id: RIU-513-EX-02
+  failure_mode: loud
+  scenario: Agent A sends a message to Agent B, but Agent B has crashed. The message is lost. Agent A waits indefinitely for
+    a response. The workflow hangs with no timeout or error handling.
+  expected_output: 'Message delivery guarantees: at-least-once with acknowledgment. Timeout on message send with retry. Dead
+    letter handling for undeliverable messages. Health check: agents verify peer availability before sending critical messages.'
+- id: RIU-513-EX-03
+  failure_mode: clustered
+  scenario: Your 5-agent system has agents communicating in a mesh pattern (any-to-any). Message volume grows quadratically.
+    Some messages arrive out of order. Two agents send conflicting instructions to a third agent simultaneously. Design the
+    communication architecture.
+  expected_output: 'Message bus with topic-based routing (not point-to-point mesh). Message ordering per conversation thread.
+    Conflict detection: alert when an agent receives contradictory instructions. Priority system for conflicting messages.
+    Protocol versioning as ONE-WAY DOOR decision.'

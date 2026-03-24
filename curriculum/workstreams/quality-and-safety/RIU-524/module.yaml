@@ -1,0 +1,93 @@
+riu_id: RIU-524
+name: LLM Output Quality Monitoring
+workstream: Quality & Safety
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Implement automated quality monitoring with representative sampling of LLM outputs
+- Design quality scoring that detects drift before it impacts end users
+- Configure drift alerts with appropriate sensitivity to avoid both missed drift and false alarms
+- Handle model update scenarios where quality characteristics change across the entire distribution
+prerequisites:
+  required:
+  - RIU-021
+  - RIU-061
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-114
+  - LIB-130
+  supporting: []
+service_context:
+  candidate_services:
+  - Braintrust (production eval + quality monitoring)
+  - Arize AI (ML + LLM observability, drift detection)
+  - Whylogs / WhyLabs (OSS + managed data quality + LLM)
+  - Helicone (observability + quality scoring)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- quality_monitoring.md
+- sampling_strategy.md
+- quality_scores.md
+- drift_alerts.yaml
+rubric_dimensions:
+  sampling_design:
+    description: Sampling strategy is stratified by category with minimum sample sizes ensuring no blind spots
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scoring_comprehensiveness:
+    description: Quality scoring covers correctness, style, format, and calibration — not just accuracy
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  drift_sensitivity:
+    description: Drift detection calibrated to catch real degradation while filtering routine model update noise
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  operational_integration:
+    description: Monitoring integrated into operations with clear escalation paths and investigation procedures
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-524-EX-01
+  failure_mode: silent
+  scenario: Your quality monitoring samples 1% of responses randomly. A specific query category (legal questions) degrades
+    significantly after a model update, but it's only 3% of total traffic. Your random sampling rarely catches legal queries.
+    Quality drift goes undetected for the affected users.
+  expected_output: 'Stratified sampling: per-category sample rates proportional to importance, not just traffic volume. sampling_strategy.md
+    with category definitions and minimum sample sizes. Quality scores tracked per category with independent drift thresholds.'
+- id: RIU-524-EX-02
+  failure_mode: loud
+  scenario: Your quality threshold triggers an alert every time the LLM provider does routine model updates (weekly). Each
+    alert requires manual investigation. The team starts ignoring alerts. A real quality degradation is missed because it
+    looks like another routine alert.
+  expected_output: 'Baseline recalibration after known model updates. Alert classification: ''expected change'' (model update)
+    vs ''unexpected drift'' (no known cause). drift_alerts.yaml with suppression windows for scheduled updates. Mandatory
+    investigation for unexpected drift regardless of alert fatigue.'
+- id: RIU-524-EX-03
+  failure_mode: clustered
+  scenario: 'You switch from GPT-4 to Claude for cost savings. Overall quality scores are similar, but the output style is
+    completely different: shorter responses, different formatting, different confidence calibration. Your quality metrics
+    show ''no drift'' but users report the system ''feels different.'' Design monitoring that catches style drift.'
+  expected_output: 'Multi-dimensional quality scoring: correctness, style consistency, format compliance, confidence calibration.
+    Per-dimension drift detection. quality_scores.md with style metrics (response length distribution, formatting patterns,
+    hedging language frequency). User feedback correlation with automated scores.'

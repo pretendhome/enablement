@@ -1,0 +1,77 @@
+riu_id: "RIU-008"
+name: "Assumptions Register"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Record assumptions explicitly with validation plans, owners, and expiry conditions"
+  - "Classify assumptions by risk — flag assumptions tied to ONE-WAY DOOR decisions for immediate validation"
+  - "Design testable validation plans that can confirm or disprove assumptions within bounded time"
+  - "Detect assumptions that have been forgotten or silently treated as facts"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — assumptions are relative to agreed goals
+  recommended:
+    - "RIU-003"   # Decision Log — assumptions that drive decisions must be cross-referenced
+    - "RIU-007"   # Constraint Profile — constraints often start as assumptions
+
+knowledge_library_entries:
+  primary:
+    - "LIB-004"   # What artifacts prove convergence has been achieved before implementation starts?
+    - "LIB-009"   # How do I document tribal knowledge that exists only in stakeholder heads?
+    - "LIB-012"   # What's the checklist for 'good enough' convergence before moving to architecture?
+  supporting:
+    - "LIB-005"   # How do I handle requirements that change weekly in an enterprise AI deployment?
+    - "LIB-014"   # What's the best way to model exception-heavy workflows in AI systems?
+    - "LIB-017"   # How do I capture human judgment that's based on years of experience, not explicit rules?
+    - "LIB-019"   # How do I version control business rules that change frequently?
+    - "LIB-020"   # What's the best format for documenting 'tribal knowledge' so it's machine-readable?
+    - "LIB-021"   # How do I handle business rules that conflict across departments?
+
+service_context: null  # internal_only — assumption documentation is a Palette protocol
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "assumptions.md — Complete assumptions register with at least 10 assumptions, each with validation plan, owner, expiry, and risk classification"
+  - "assumption_tests.md — Testable validation plans for the 3 highest-risk assumptions with specific pass/fail criteria"
+
+rubric_dimensions:
+  assumption_visibility:
+    description: "Assumptions are explicit, not buried in prose or treated as facts"
+    levels: [insufficient, basic, competent, expert]
+  validation_planning:
+    description: "Each assumption has a concrete, time-bounded validation plan with pass/fail criteria"
+    levels: [insufficient, basic, competent, expert]
+  risk_classification:
+    description: "Assumptions tied to ONE-WAY DOOR decisions are flagged for immediate validation"
+    levels: [insufficient, basic, competent, expert]
+  staleness_detection:
+    description: "Process exists to revisit assumptions on cadence and detect ones that have silently become facts or been disproved"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-008-EX-01"
+    failure_mode: "silent"
+    scenario: "An AI system was built assuming the customer's data is clean and well-structured. Nobody wrote this down. Six weeks in, you discover 30% of records have missing fields, inconsistent date formats, and duplicate entries. The architecture doesn't handle dirty data. Retroactively build the assumptions register that would have caught this, and design the validation test that would have run in week 1."
+    expected_output: "Assumptions register with 'data is clean and well-structured' as a HIGH-RISK assumption tied to the data pipeline architecture (ONE-WAY DOOR). Validation test: sample 100 records from each data source, check for completeness, format consistency, and duplicates. Pass criteria: <5% missing fields, <1% format inconsistencies. This test would have taken 2 hours in week 1 and saved 6 weeks of rework."
+
+  - id: "RIU-008-EX-02"
+    failure_mode: "loud"
+    scenario: "The team assumed the customer's API returns data in under 200ms. The architecture depends on this for real-time processing. In production, the API averages 800ms with spikes to 3 seconds. The assumption was never validated. The architecture is now a ONE-WAY DOOR — it can't be easily changed to handle async processing. Design the assumptions register entry and the validation test that should have existed."
+    expected_output: "Assumptions register entry: 'Customer API responds in <200ms' — CRITICAL risk, tied to real-time architecture decision (ONE-WAY DOOR). Validation test: 1000 API calls over 24 hours measuring p50, p95, p99 latency. Pass criteria: p95 < 200ms. This test would have revealed the 800ms average before the architecture was committed. Remediation plan for the current situation: async processing adapter with queue."
+
+  - id: "RIU-008-EX-03"
+    failure_mode: "clustered"
+    scenario: "A fast-moving team has been working for 4 weeks with no assumptions register. You audit the codebase, design docs, and Slack history and find 15 implicit assumptions. 3 are already disproved, 5 are untested, and 7 are confirmed. Build the register retroactively and prioritize which untested assumptions to validate first."
+    expected_output: "Complete assumptions register with all 15 assumptions categorized: 3 DISPROVED (with impact assessment and remediation plan), 5 UNTESTED (prioritized by risk — ONE-WAY DOOR assumptions first), 7 CONFIRMED (with evidence). Validation sprint plan for the 5 untested assumptions with specific tests, owners, and 1-week deadline. Triage: which of the 3 disproved assumptions requires immediate architecture change vs can be worked around."

@@ -1,0 +1,86 @@
+riu_id: RIU-070
+name: SLO/SLI Definition + Alert Thresholds
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: critical
+learning_objectives:
+- Define SLOs and SLIs that measure what users actually care about
+- Implement alert thresholds based on error budget consumption rate
+- Design SLO dashboards showing burn rate and remaining error budget
+- Handle SLO negotiation with stakeholders using tradeoff analysis
+prerequisites:
+  required:
+  - RIU-061
+  - RIU-068
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-026
+  - LIB-027
+  supporting:
+  - LIB-031
+  - LIB-129
+service_context:
+  candidate_services:
+  - Datadog SLOs (integrated with monitoring)
+  - Honeycomb SLOs (trace-based, highly accurate)
+  - Grafana SLOs (OSS, flexible)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- slo_sli.md
+- alert_thresholds.md
+rubric_dimensions:
+  sli_relevance:
+    description: SLIs measure what users care about including AI-specific quality metrics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  error_budget:
+    description: Error budget tracked with burn rate alerting and consumption-based policy
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  dashboard_clarity:
+    description: SLO dashboards show burn rate, remaining budget, and trend
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  stakeholder_alignment:
+    description: SLOs negotiated with tradeoff analysis and tiered targets
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-070-EX-01
+  failure_mode: silent
+  scenario: Your SLO is 99.9% availability by HTTP 200. The system returns 200 for every request but 5% contain incorrect
+    AI content. SLO is met but users are unhappy.
+  expected_output: 'User-centric SLIs: correctness, latency, relevance. Multi-dimensional SLO. SLO definition workshop with
+    stakeholders.'
+- id: RIU-070-EX-02
+  failure_mode: loud
+  scenario: Error budget consumed by day 15 due to a single outage. Team freezes all deployments for 15 days. Development
+    velocity drops to zero.
+  expected_output: Nuanced error budget policy. Budget consumption rate alerting. Separate budgets for different failure types.
+    Post-breach review process.
+- id: RIU-070-EX-03
+  failure_mode: clustered
+  scenario: 5 SLOs across different dimensions conflict. Optimizing latency hurts cost. Stakeholders want all at 99.9%.
+  expected_output: SLO tradeoff analysis showing cost of each 9. Tiered SLOs by criticality. SLO dependency map. Quarterly
+    review with data-driven adjustment.

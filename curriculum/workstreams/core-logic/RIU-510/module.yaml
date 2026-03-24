@@ -44,7 +44,7 @@ rubric_dimensions:
     description: "Each agent has a clear, non-overlapping responsibility with explicit input/output contracts"
     levels: [insufficient, basic, competent, expert]
   handoff_protocol:
-    description: "State transitions are explicit, validated, and recoverable — no silent state corruption"
+    description: "State transitions are explicit, schema-validated, versioned, and recoverable — no silent state corruption or interface drift across handoffs"
     levels: [insufficient, basic, competent, expert]
   failure_isolation:
     description: "Agent failures are contained — cascading failures are prevented through circuit breakers or fallback paths"

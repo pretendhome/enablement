@@ -1,0 +1,58 @@
+track: "Agent Architect"
+stage_focus: "orchestration"
+capstone_reference: "../../assessment/capstones/agent_architect_capstone.md"
+estimated_total_duration: "85-110 hours"
+
+entry_requirements:
+  placement_stage: "Foundation complete; retrieval experience recommended"
+  prerequisites:
+    - "AI Foundations track or equivalent"
+    - "RIU-022 Prompt Interface Contract or equivalent explicit interface-contract experience"
+    - "Strongly recommended: RAG Engineer through RIU-021"
+  expected_baseline:
+    - "Can define bounded workflows and explicit output contracts"
+    - "Can reason about failure modes and operational tradeoffs"
+
+key_riu_ids:
+  - "RIU-001"
+  - "RIU-003"
+  - "RIU-021"
+  - "RIU-022"
+  - "RIU-029"
+  - "RIU-082"
+  - "RIU-510"
+  - "RIU-511"
+  - "RIU-512"
+  - "RIU-513"
+  - "RIU-514"
+  - "RIU-062"
+
+module_sequence:
+  - riu_id: "RIU-001"
+    rationale: "Agent systems fail quickly when scope is vague."
+  - riu_id: "RIU-003"
+    rationale: "One-way-door decisions need to be logged before orchestration complexity increases."
+  - riu_id: "RIU-021"
+    rationale: "Establish evaluation before tuning multi-agent behavior."
+  - riu_id: "RIU-022"
+    rationale: "Prompt and schema contracts come before agent handoff contracts. This is treated as a hard gate for the journey."
+  - riu_id: "RIU-029"
+    rationale: "Constrain tool use before agent autonomy expands."
+  - riu_id: "RIU-082"
+    rationale: "Add content and tool guardrails before full orchestration."
+  - riu_id: "RIU-510"
+    rationale: "Design the core workflow once contracts, evaluation, and safety boundaries exist."
+  - riu_id: "RIU-511"
+    rationale: "Persist and validate state after the workflow topology is defined."
+  - riu_id: "RIU-513"
+    rationale: "Formalize inter-agent messages once state and roles are clear."
+  - riu_id: "RIU-512"
+    rationale: "Add recovery and degraded modes after normal-path coordination is working."
+  - riu_id: "RIU-514"
+    rationale: "Harden capability boundaries after the main orchestration paths exist."
+  - riu_id: "RIU-062"
+    rationale: "End with incident containment because agent systems require explicit recovery and communication plans."
+
+ordering_notes:
+  - "The journey treats RIU-022 as effectively required before RIU-510 even though the module file marks it recommended."
+  - "RIU-512 is sequenced after RIU-513 so recovery is designed against an explicit communication protocol rather than an informal one."

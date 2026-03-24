@@ -1,0 +1,85 @@
+riu_id: RIU-601
+name: AI Operating Model Design
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Design an AI operating model defining roles, processes, and decision rights for AI initiatives
+- Establish the boundary between centralized AI platform and decentralized business unit AI
+- Create staffing model for AI operations including build, run, and improve phases
+- Define escalation paths for AI incidents, ethics issues, and strategic decisions
+prerequisites:
+  required:
+  - RIU-001
+  - RIU-002
+  - RIU-600
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-165
+  - LIB-166
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- operating_model.md
+- decision_rights_matrix.md
+- team_topology.md
+- budget_allocation_model.md
+rubric_dimensions:
+  model_clarity:
+    description: Operating model clearly defines roles, processes, and decision rights
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  centralization_balance:
+    description: Balance between centralized platform and decentralized business unit autonomy
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  ownership:
+    description: AI lifecycle ownership explicitly assigned with no gaps between teams
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  incentive_alignment:
+    description: Cross-team incentives aligned on shared outcomes with escalation paths for incidents, ethics issues, and strategic decisions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-601-EX-01
+  failure_mode: silent
+  scenario: Your AI operating model centralizes all AI development. Business units wait 6 months for the central team to build
+    what they need. Shadow AI projects emerge as business units build their own solutions without governance.
+  expected_output: 'Federated operating model: central platform team provides infrastructure, business units build on top.
+    Self-service capabilities with guardrails. Shadow AI detection and onboarding process.'
+- id: RIU-601-EX-02
+  failure_mode: loud
+  scenario: Your operating model has no clear owner for AI model quality in production. The data science team built it, the
+    engineering team deployed it, and the ops team monitors infrastructure but not model quality. Quality degrades and nobody
+    is responsible.
+  expected_output: 'RACI for AI lifecycle: build, deploy, monitor, improve. Model quality ownership explicitly assigned. Handoff
+    protocol between teams with quality acceptance criteria.'
+- id: RIU-601-EX-03
+  failure_mode: clustered
+  scenario: 'Your organization has 3 AI teams: research, engineering, and product. Each has different incentives. Research
+    optimizes for model quality, engineering for reliability, product for user satisfaction. These goals conflict. Design
+    the operating model that aligns incentives.'
+  expected_output: 'Shared success metrics across teams. Joint planning process. Incentive alignment: all teams measured on
+    user outcomes. Cross-functional AI review board for tradeoff decisions.'

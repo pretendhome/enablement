@@ -1,0 +1,77 @@
+riu_id: RIU-330
+name: Error Messaging Standards
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Define error messaging standards that help users recover from failures
+- Design error messages with appropriate technical detail for the target audience
+- Implement error codes that enable support teams to diagnose issues quickly
+- Test error messages with real users to verify they are understandable and actionable
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-162
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- error_standards.md
+- error_templates/
+rubric_dimensions:
+  user_recovery:
+    description: Error messages help users understand what happened and what to do next
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  security:
+    description: Error messages do not expose internal details, credentials, or infrastructure
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  consistency:
+    description: Error messages follow consistent standards across the entire system
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  support_efficiency:
+    description: Error codes enable support teams to diagnose issues without user back-and-forth
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-330-EX-01
+  failure_mode: silent
+  scenario: 'Your AI system returns generic error: Something went wrong. Please try again. The user tries again 5 times. The
+    error is actually a rate limit. The user has no idea what to do differently. Support ticket filed.'
+  expected_output: 'Error taxonomy: user errors, system errors, rate limits, auth failures. Per-category message template
+    with: what happened, why, and what to do. Error codes for support team diagnosis.'
+- id: RIU-330-EX-02
+  failure_mode: loud
+  scenario: 'Your error message exposes internal details: Database connection failed: postgres://admin:password@prod-db:5432.
+    The error leaks credentials and infrastructure details to the user.'
+  expected_output: 'Error message sanitization: no internal details in user-facing messages. Separate internal error log with
+    full details. Error message review checklist: no credentials, no internal URLs, no stack traces in user-facing output.'
+- id: RIU-330-EX-03
+  failure_mode: clustered
+  scenario: Your system has 50 different error messages written by 10 developers. Each has different tone, detail level, and
+    format. Some are helpful, some are cryptic. Users see inconsistent error experiences. Design the error messaging standards.
+  expected_output: 'Error message style guide: tone, format, required elements. Error message template library. Review process
+    for new error messages. User testing of error messages for comprehension and actionability.'

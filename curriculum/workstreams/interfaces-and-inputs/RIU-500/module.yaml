@@ -1,0 +1,87 @@
+riu_id: RIU-500
+name: Multimodal Data Pipeline Design
+workstream: Interfaces & Inputs
+journey_stage: specialization
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Design a multimodal data pipeline that handles text, images, audio, and video in a unified architecture
+- Implement format normalization and quality validation for each modality at ingestion
+- Handle cross-modal references (e.g., image referenced in text, audio transcript linked to video)
+- Design the pipeline for extensibility so new modalities can be added without redesigning the architecture
+prerequisites:
+  required:
+  - RIU-011
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-016
+  - LIB-017
+  supporting:
+  - LIB-018
+  - LIB-050
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- multimodal_pipeline_design.md
+- modality_handlers/
+- cross_modal_validation.md
+rubric_dimensions:
+  modality_coverage:
+    description: All modalities in input data detected and processed with no silent drops
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  pipeline_isolation:
+    description: Per-modality processing isolated so failures in one modality don't block others
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cross_modal_linking:
+    description: Cross-modal references maintained through the pipeline with traceability
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  extensibility:
+    description: Architecture supports adding new modalities without redesigning existing pipeline
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-500-EX-01
+  failure_mode: silent
+  scenario: Your multimodal pipeline processes documents with embedded images. The text extraction works but images are silently
+    dropped because the pipeline only handles text. Users get answers based on text alone, missing critical information in
+    diagrams, charts, and screenshots.
+  expected_output: 'Modality detection at ingestion: identify all modalities present in each document. Per-modality processing
+    pipeline with cross-modal linking. Completeness check: alert when a modality is detected but not processed. Test with
+    documents containing embedded images, tables, and diagrams.'
+- id: RIU-500-EX-02
+  failure_mode: loud
+  scenario: Your pipeline receives a 4K video file (2GB). The video processing step runs out of memory and crashes, blocking
+    the entire pipeline. Text and image processing for other documents is also blocked because they share the same pipeline.
+  expected_output: 'Per-modality resource limits and isolation. Video preprocessing: resolution reduction, frame sampling
+    before full processing. Pipeline isolation: video processing failure doesn''t block text/image processing. Resource-based
+    routing: large files to high-memory workers.'
+- id: RIU-500-EX-03
+  failure_mode: clustered
+  scenario: Your pipeline handles text, images, and audio. A new requirement adds video and 3D model support. The pipeline
+    architecture assumes fixed modalities — adding new ones requires rewriting the routing, storage, and processing layers.
+    Design the extensible multimodal architecture.
+  expected_output: 'Plugin-based modality handlers: each modality is a pluggable processor. Shared pipeline framework with
+    modality-agnostic routing, storage, and monitoring. New modality onboarding checklist. Cross-modal linking protocol that
+    works for any modality combination.'

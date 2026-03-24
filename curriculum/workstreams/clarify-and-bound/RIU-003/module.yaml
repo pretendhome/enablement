@@ -1,0 +1,74 @@
+riu_id: "RIU-003"
+name: "Decision Log + One-Way Door Registry"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Maintain a decisions.md log that captures every material decision with rationale, alternatives considered, and reversibility classification"
+  - "Classify decisions as ONE-WAY DOOR (irreversible) vs TWO-WAY DOOR (reversible) with explicit justification"
+  - "Detect decisions made informally (in chat, meetings, or hallway conversations) and ensure they are recorded"
+  - "Design a decision log that enables full restartability — a new person can read it and continue the engagement"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"   # Convergence Brief — decisions are more meaningful when goals are clear
+
+knowledge_library_entries:
+  primary:
+    - "LIB-002"   # What's the difference between a ONE-WAY DOOR and TWO-WAY DOOR decision?
+    - "LIB-004"   # What artifacts prove convergence has been achieved before implementation starts?
+    - "LIB-012"   # What's the checklist for 'good enough' convergence before moving to architecture?
+  supporting:
+    - "LIB-003"   # How do I scope an AI pilot when the customer says 'we need AI everywhere'?
+    - "LIB-006"   # What's the minimum viable convergence brief for a 2-week AI proof of concept?
+    - "LIB-010"   # When should I escalate to reset/reframe vs continue converging?
+    - "LIB-145"   # How do I implement a human review gate for one-way door decisions?
+    - "LIB-147"   # How do I create a handoff bundle that enables restartability?
+
+service_context: null  # internal_only — decisions.md maintenance is a Palette protocol
+
+estimated_duration:
+  learning: "3-5 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "decisions.md — Complete decision log for a realistic engagement with at least 8 decisions, including both ONE-WAY and TWO-WAY DOOR classifications"
+  - "one_way_door_registry.md — Registry of all irreversible decisions with rationale, impact assessment, and approval chain"
+
+rubric_dimensions:
+  decision_capture:
+    description: "Every material decision is recorded with rationale, alternatives considered, and date"
+    levels: [insufficient, basic, competent, expert]
+  reversibility_classification:
+    description: "ONE-WAY DOOR vs TWO-WAY DOOR correctly identified with explicit justification for each"
+    levels: [insufficient, basic, competent, expert]
+  restartability:
+    description: "A new person can read the decision log and understand the full decision history without additional context"
+    levels: [insufficient, basic, competent, expert]
+  informal_detection:
+    description: "Decisions made outside formal channels are identified and retroactively captured"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-003-EX-01"
+    failure_mode: "silent"
+    scenario: "You inherit an AI project mid-flight. The previous lead left no decision log. The team says 'we just went with what felt right.' You discover the system is using a specific embedding model, a particular chunking strategy, and a custom re-ranker — but nobody can explain why. Reconstruct the decision log from artifacts and interviews."
+    expected_output: "Reconstructed decisions.md with inferred decisions, marked as [RECONSTRUCTED]. Each entry includes the likely rationale, whether it's a ONE-WAY or TWO-WAY DOOR, and what would need to change to reverse it. At least 2 decisions flagged as silent ONE-WAY DOORs that the team didn't realize were irreversible."
+
+  - id: "RIU-003-EX-02"
+    failure_mode: "loud"
+    scenario: "Two decisions in the log directly contradict each other. Decision #3 says 'we will use a single LLM provider for cost control.' Decision #7 says 'we will use provider A for summarization and provider B for classification because of quality differences.' The team didn't notice the contradiction. Resolve it and update the log."
+    expected_output: "Updated decisions.md with Decision #7 explicitly superseding Decision #3, including rationale for the change. The original Decision #3 is preserved (not deleted) with a note pointing to #7. Analysis of whether the multi-provider approach is a ONE-WAY DOOR (vendor lock-in, different prompt formats, separate billing)."
+
+  - id: "RIU-003-EX-03"
+    failure_mode: "clustered"
+    scenario: "A fast-moving prototype team makes 15 decisions in 2 weeks. Most happen in Slack threads and standup meetings. The prototype is now being promoted to production. Create a decision log retroactively, classify each decision's reversibility, and flag the ones that became ONE-WAY DOORs when the prototype became production."
+    expected_output: "Complete decisions.md with all 15 decisions captured from Slack/meeting sources. At least 4 decisions reclassified from TWO-WAY to ONE-WAY DOOR due to production promotion (e.g., database schema, API contracts, data retention policy). Each reclassified decision includes the trigger that made it irreversible and the cost of reversal."

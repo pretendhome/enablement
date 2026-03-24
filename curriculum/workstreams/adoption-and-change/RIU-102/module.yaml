@@ -1,0 +1,84 @@
+riu_id: RIU-102
+name: Enablement Pack (Docs/Examples/How-To)
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Create an enablement pack that allows users to self-serve without live support
+- Design documentation that covers common tasks, troubleshooting, and edge cases
+- Build examples that users can copy and adapt for their specific needs
+- Test the enablement pack by having a new user complete tasks using only the pack
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-045
+  - LIB-047
+  supporting:
+  - LIB-051
+  - LIB-052
+  - LIB-054
+  - LIB-056
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- enablement_pack/
+- examples/
+- troubleshooting.md
+rubric_dimensions:
+  task_orientation:
+    description: Documentation organized by user tasks, not system structure
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  self_service:
+    description: Users can complete common tasks and troubleshoot errors without live support
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  example_quality:
+    description: Examples are copy-paste ready and adaptable to user-specific needs
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  persona_coverage:
+    description: Pack serves multiple user personas with appropriate depth per persona
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-102-EX-01
+  failure_mode: silent
+  scenario: Your enablement pack has comprehensive API documentation. But users cannot figure out how to accomplish their
+    actual task because the docs describe endpoints, not workflows. The pack is technically complete but practically useless.
+  expected_output: 'Task-oriented documentation: organized by what users want to accomplish, not by API structure. Step-by-step
+    guides for top 10 user tasks. Copy-paste examples for each task.'
+- id: RIU-102-EX-02
+  failure_mode: loud
+  scenario: Your enablement pack works for the initial setup. But when users hit an error, there is no troubleshooting guide.
+    They file support tickets for issues that could be self-served. Support volume is 3x higher than expected.
+  expected_output: 'Troubleshooting section covering top 20 error messages with resolution steps. FAQ based on actual support
+    tickets. Error message design: each error includes a link to relevant troubleshooting guide.'
+- id: RIU-102-EX-03
+  failure_mode: clustered
+  scenario: 'Your enablement pack serves 3 user personas: developers (API integration), analysts (dashboard usage), and admins
+    (configuration). A single pack tries to serve all three. Developers skip the admin sections, analysts are confused by
+    API docs. Design the multi-persona enablement pack.'
+  expected_output: 'Per-persona enablement tracks with shared getting-started guide. Persona detection: guide users to their
+    track. Cross-persona references where tasks span personas. Tested with representative user from each persona.'

@@ -1,0 +1,88 @@
+riu_id: RIU-542
+name: Observability Stack Design
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Design observability stack for AI systems covering metrics, logs, traces, and AI-specific signals
+- 'Implement AI-specific observability: quality scoring, hallucination detection, cost tracking'
+- Build correlation between infrastructure and AI quality metrics
+- Manage observability data volume without losing debugging capability
+prerequisites:
+  required:
+  - RIU-061
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-129
+  supporting: []
+service_context:
+  candidate_services:
+  - Datadog (full-stack, widest coverage)
+  - Honeycomb (tracing-first, excellent for distributed systems)
+  - Grafana + Prometheus (OSS, maximum flexibility)
+  - New Relic (APM + logs + infra, competitive pricing)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- observability_design.md
+- metrics_catalog.md
+- logging_spec.md
+- tracing_spec.md
+- dashboard_specs/
+- alerting_rules.yaml
+rubric_dimensions:
+  ai_observability:
+    description: AI-specific signals monitored alongside infrastructure metrics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  data_management:
+    description: Observability volume managed with tiered logging and smart sampling
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cross_service:
+    description: Unified observability across all services with correlation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  cost_efficiency:
+    description: Observability costs managed with tiered retention
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-542-EX-01
+  failure_mode: silent
+  scenario: Observability monitors infrastructure but not AI quality. Infrastructure green but AI output quality degraded.
+    Quality issues invisible.
+  expected_output: 'AI-specific metrics: quality score, hallucination rate, retrieval relevance. Correlation dashboard. Alert
+    when AI quality drops even if infrastructure healthy.'
+- id: RIU-542-EX-02
+  failure_mode: loud
+  scenario: 'Prompt/response logging captures everything: 10TB/month at $5K. Most logs never queried. Relevant logs buried
+    in volume during incidents.'
+  expected_output: 'Tiered logging: full detail for errors, summary for routine. Retention tiers. Smart sampling. Cost tracking
+    per tier.'
+- id: RIU-542-EX-03
+  failure_mode: clustered
+  scenario: 8 services with different observability tools. Debugging requires checking 4 dashboards, 3 log systems, 2 tracing
+    tools.
+  expected_output: Unified observability platform. Single trace ID across all services. Standardized metric naming and log
+    format. Cross-service correlation.

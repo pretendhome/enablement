@@ -1,0 +1,82 @@
+riu_id: RIU-034
+name: Ranking Explanation Rules (Reason Codes)
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Implement ranking explanation rules that generate human-readable reason codes for each ranked result
+- Design reason codes that are faithful to the actual ranking factors, not post-hoc rationalizations
+- Build explanation templates that adapt to different audiences (end user vs analyst vs auditor)
+- Test explanation quality by verifying reason codes change when ranking factors change
+prerequisites:
+  required:
+  - RIU-027
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-136
+  - LIB-141
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- reason_codes.md
+- explainability_rules.yaml
+rubric_dimensions:
+  faithfulness:
+    description: Reason codes reflect actual ranking factors with verifiable attribution
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audience_adaptation:
+    description: Explanations adapted to audience with appropriate detail level and no sensitive exposure
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  factor_selection:
+    description: Most influential factors highlighted rather than overwhelming with all factors
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  testability:
+    description: Reason codes verified by changing factors and confirming explanation changes accordingly
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-034-EX-01
+  failure_mode: silent
+  scenario: Your ranking system generates reason codes like 'Highly relevant to your query.' Every result gets the same generic
+    explanation. The reason codes don't reflect actual ranking factors (recency, popularity, semantic match). Users can't
+    understand why one result ranks above another.
+  expected_output: 'Per-factor reason codes: ''Ranked #1 because: exact keyword match (40%), published this week (30%), high
+    engagement (30%).'' Factor attribution from actual ranking weights. Test: change a factor and verify reason code changes.'
+- id: RIU-034-EX-02
+  failure_mode: loud
+  scenario: Your reason codes expose internal ranking signals that are commercially sensitive ('Ranked higher because this
+    is a paid placement'). A user screenshots the explanation and posts it on social media. Design reason codes that are transparent
+    without exposing business logic.
+  expected_output: 'Audience-appropriate explanation layers: internal (full factor breakdown), external (user-friendly reasons
+    without commercial signals). Prohibited factors list for external explanations. Review process for new reason code templates.'
+- id: RIU-034-EX-03
+  failure_mode: clustered
+  scenario: Your ranking combines 8 factors. For any given result, 2-3 factors dominate. But the reason code template shows
+    all 8 factors, overwhelming users. For different query types, different factors matter. Design adaptive reason codes.
+  expected_output: 'Top-K factor selection: show only the 2-3 most influential factors per result. Per-query-type factor importance
+    profiles. Adaptive templates that emphasize different factors for different contexts. User testing showing comprehension
+    rates for different explanation lengths.'

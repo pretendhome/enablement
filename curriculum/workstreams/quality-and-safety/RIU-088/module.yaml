@@ -1,0 +1,90 @@
+riu_id: RIU-088
+name: Privacy Redaction Pipeline
+workstream: Quality & Safety
+journey_stage: foundation
+classification: both
+difficulty: critical
+learning_objectives:
+- Implement a redaction pipeline that removes PII from logs, prompts, and stored artifacts
+- Design redaction rules that minimize sensitive data without destroying analytical utility
+- Test redaction coverage to ensure no sensitive fields leak through free-text or unstructured content
+- Handle over-redaction scenarios where aggressive rules harm system debugging capability
+prerequisites:
+  required:
+  - RIU-012
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-122
+  supporting: []
+service_context:
+  candidate_services:
+  - Microsoft Presidio (OSS, production-ready PII redaction)
+  - AWS Comprehend (managed PII detection)
+  - spaCy + custom NER (OSS, customizable)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- redaction_rules.yaml
+- redaction_tests/
+- privacy_runbook.md
+rubric_dimensions:
+  structured_coverage:
+    description: All known PII fields redacted with field-specific rules and no gaps in structured data
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  unstructured_detection:
+    description: Free-text PII detected using NER and pattern matching with acceptable false positive rate
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  utility_preservation:
+    description: Redaction preserves analytical and debugging utility without over-redacting non-sensitive content
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  compliance_mapping:
+    description: Redaction rules mapped to specific regulations with per-category retention and audit trail
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in structured_coverage and unstructured_detection
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-088-EX-01
+  failure_mode: silent
+  scenario: Your redaction pipeline handles structured fields (name, email, SSN) correctly. But users paste sensitive information
+    into free-text 'notes' fields and chat messages. The pipeline doesn't scan unstructured text. PII sits in logs for months
+    undetected.
+  expected_output: redaction_rules.yaml with both structured field rules and NER-based free-text scanning. Regex patterns
+    for common PII formats (SSN, phone, email) applied to all text fields. Confidence threshold for NER detections. Test suite
+    with planted PII in free-text to verify detection.
+- id: RIU-088-EX-02
+  failure_mode: loud
+  scenario: 'Your redaction pipeline is too aggressive: it redacts product names that look like person names (''Johnson &
+    Johnson''), city names in addresses, and numeric IDs that match SSN patterns. Support engineers can''t debug issues because
+    critical context is redacted.'
+  expected_output: 'Allowlist for known false positives (product names, city names). Context-aware redaction: ''Johnson''
+    in a name field → redact, ''Johnson & Johnson'' in a product field → keep. Redaction levels: full (for logs), partial
+    (for debugging), none (for authorized investigators). privacy_runbook.md with access procedures.'
+- id: RIU-088-EX-03
+  failure_mode: clustered
+  scenario: Your system processes customer support transcripts containing names, account numbers, medical conditions, and
+    financial details — all in free-text conversation format. Different fields have different retention requirements (HIPAA
+    for medical, PCI for financial). Design the multi-regulation redaction pipeline.
+  expected_output: 'Multi-category redaction: medical PII (HIPAA rules), financial PII (PCI rules), general PII (GDPR rules).
+    Per-category retention periods. Redaction applied at ingestion with category tags. Audit trail showing what was redacted
+    and under which regulation. Test transcripts covering all PII categories.'

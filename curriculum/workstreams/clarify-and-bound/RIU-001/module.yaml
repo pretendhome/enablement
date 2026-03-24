@@ -35,6 +35,7 @@ required_artifacts:
   - "convergence_brief.md — Complete Convergence Brief for a realistic multi-stakeholder scenario"
   - "assumptions.md — Documented assumptions with risk classifications"
   - "open_questions.md — Prioritized list of unresolved questions with owners and deadlines"
+  - "change_requests.md — Log of new asks traced back to the brief with accept/defer/escalate decisions"
 
 rubric_dimensions:
   completeness:
@@ -47,7 +48,7 @@ rubric_dimensions:
     description: "ONE-WAY DOOR vs TWO-WAY DOOR decisions correctly identified and classified"
     levels: [insufficient, basic, competent, expert]
   scope_discipline:
-    description: "Non-goals are explicit, boundary conditions are clear, scope creep vectors are anticipated"
+    description: "Non-goals are explicit, boundary conditions are clear, scope creep vectors are anticipated, and new asks are traced back to the brief with explicit accept/defer/escalate handling"
     levels: [insufficient, basic, competent, expert]
 
 certification_tier_thresholds:

@@ -1,0 +1,84 @@
+riu_id: RIU-522
+name: Token Budget Management
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: both
+difficulty: medium
+learning_objectives:
+- Implement token budget management controlling LLM costs without degrading quality
+- Design per-request token allocation based on task complexity
+- Build token usage monitoring with budget overrun alerting
+- Handle budget exhaustion with graceful fallback
+prerequisites:
+  required:
+  - RIU-085
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-025
+  - LIB-128
+  supporting: []
+service_context:
+  candidate_services:
+  - Helicone (usage tracking + cost attribution)
+  - OpenRouter (built-in cost tracking across models)
+  - LiteLLM (cost tracking + budget limits)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- token_budget.md
+- cost_attribution.md
+- optimization_strategies.md
+- budget_alerts.yaml
+rubric_dimensions:
+  cost_tracking:
+    description: Token usage tracked per request with real-time dashboard and burn rate alerting
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  adaptive_allocation:
+    description: Budget adapts to task complexity without degrading quality
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  budget_enforcement:
+    description: Budget enforced gracefully with fallback rather than hard truncation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  multi_feature:
+    description: Budget allocated across features with priority-based rebalancing
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-522-EX-01
+  failure_mode: silent
+  scenario: Prompt change adds think step by step to every request, doubling output tokens. Monthly costs double. Nobody notices
+    until invoice arrives.
+  expected_output: Per-request token tracking with real-time cost dashboard. Daily burn rate alert. Per-prompt-template token
+    baseline with drift detection.
+- id: RIU-522-EX-02
+  failure_mode: loud
+  scenario: Token budget limits output to 500 tokens. Complex question needs 2000. Response truncated mid-sentence.
+  expected_output: 'Adaptive token allocation by complexity. Graceful truncation: summarize rather than cut off. User notification
+    when budget-constrained.'
+- id: RIU-522-EX-03
+  failure_mode: clustered
+  scenario: 5 features share $50K/month budget. Chatbot consumes 80%. Other features starved.
+  expected_output: Per-feature budget allocation. Real-time per-feature tracking. Priority queue when budget tight. Low-priority
+    features fall back to cheaper model.

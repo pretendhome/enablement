@@ -1,0 +1,50 @@
+track: "AI Operations"
+slug: "ai_operations"
+stage_focus: "ops"
+tier: "WORKING"
+
+description: "Teaches practitioners to deploy, monitor, and operate AI systems in production with deployment gates, observability, incident response, and SLO management."
+
+capstone_reference: "../../assessment/capstones/ai_operations_capstone.md"
+journey_reference: "../../curriculum/journeys/ai_operations.yaml"
+
+estimated_duration:
+  learning: "55-75 hours"
+  assessment: "20-25 hours"
+  total: "75-100 hours"
+
+entry_requirements:
+  prior_tier: "WORKING (AI Foundations) or equivalent"
+  prerequisites:
+    - "RIU-001"
+  recommended:
+    - "RAG Engineer through RIU-021 for evaluation literacy"
+  expected_baseline:
+    - "Can read deployment plans and troubleshoot system behavior"
+    - "Can work with alerts, logs, and release controls"
+
+riu_sequence:
+  - "RIU-060"  # Deployment Readiness Envelope
+  - "RIU-061"  # Observability Baseline
+  - "RIU-063"  # Performance & Load Characterization
+  - "RIU-085"  # Cost/Latency Budget Envelope
+  - "RIU-064"  # Feature Flags + Kill Switch Integration
+  - "RIU-065"  # Config Management + Environment Parity
+  - "RIU-068"  # Canary Rollout + Error Budget Gate
+  - "RIU-070"  # SLO/SLI Definition + Alert Thresholds
+  - "RIU-062"  # Incident Containment & Recovery Plan
+  - "RIU-069"  # Runbook (Day-2 Operations)
+
+riu_count: 10
+
+certification_thresholds:
+  per_module: "competent on 3/4 rubric dimensions (per module threshold)"
+  capstone: "competent on all integrated dimensions"
+
+career_positioning:
+  target_roles:
+    - "AI/ML Operations Engineer"
+    - "Site Reliability Engineer (AI systems)"
+    - "Platform Engineer (AI infrastructure)"
+  value_proposition: "Proves you can safely deploy and operate AI systems with observability, rollback, and incident response"
+  differentiator: "Production-safety-first — deployment gates and rollback before feature velocity"

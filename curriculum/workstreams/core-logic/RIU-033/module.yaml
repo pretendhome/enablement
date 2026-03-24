@@ -1,0 +1,91 @@
+riu_id: RIU-033
+name: Classification Pattern (Soft Labels)
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Implement soft-label classification that outputs probability distributions rather than hard categories
+- Design calibration procedures that ensure confidence scores reflect actual accuracy
+- Build classification pipelines that handle overlapping categories and ambiguous inputs
+- Test classification quality with confusion matrices and per-class performance metrics
+prerequisites:
+  required:
+  - RIU-021
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-140
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- label_schema.json
+- classifier/
+- abstain_rules.md
+rubric_dimensions:
+  soft_label_quality:
+    description: Probability distributions are calibrated and multi-label cases handled appropriately
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  calibration:
+    description: Confidence scores reflect actual accuracy with calibration curves documented
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  ood_handling:
+    description: Out-of-distribution inputs detected and routed to human review rather than misclassified
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  taxonomy_management:
+    description: Overlapping and evolving categories handled with canonical taxonomy and team mappings
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  test_metrics:
+    description: Classification quality validated with confusion matrices and per-class performance metrics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 4/5 dimensions
+  PRODUCTION: expert on 3/5, competent on remaining
+exercises:
+- id: RIU-033-EX-01
+  failure_mode: silent
+  scenario: Your classifier assigns customer support tickets to categories. It outputs hard labels with 95% confidence on
+    everything. But 20% of tickets genuinely belong to multiple categories. The classifier forces a single label, routing
+    tickets to the wrong team half the time for multi-category issues.
+  expected_output: 'Soft-label output with probability per category. Multi-label threshold: tickets above threshold in multiple
+    categories get routed to all relevant teams. Calibration test: does 80% confidence mean 80% accuracy? Confusion matrix
+    showing multi-category ticket handling.'
+- id: RIU-033-EX-02
+  failure_mode: loud
+  scenario: Your classifier is well-calibrated on the training distribution. A new product launch introduces a category that
+    didn't exist in training data. The classifier confidently assigns new-product tickets to existing categories. No 'unknown'
+    category exists.
+  expected_output: 'Out-of-distribution detection: flag inputs that don''t match any training category well. ''Unknown/other''
+    category with routing to human triage. Confidence threshold below which classification is deferred. Monitoring for new
+    category emergence.'
+- id: RIU-033-EX-03
+  failure_mode: clustered
+  scenario: Your classification system serves 3 teams who each define categories differently. Team A's 'billing issue' overlaps
+    with Team B's 'payment problem' and Team C's 'account inquiry.' The taxonomy is inconsistent. Design classification that
+    handles overlapping taxonomies.
+  expected_output: Canonical taxonomy with per-team mapping. Classification against canonical categories with team-specific
+    translation. Taxonomy conflict resolution process. Per-team classification accuracy metrics.

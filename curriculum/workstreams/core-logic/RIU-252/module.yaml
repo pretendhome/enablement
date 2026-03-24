@@ -1,0 +1,90 @@
+riu_id: RIU-252
+name: Model Evaluation & Selection
+workstream: Core Logic
+journey_stage: retrieval
+classification: both
+difficulty: high
+learning_objectives:
+- Evaluate and select LLM models based on quality, cost, latency, and task-specific benchmarks
+- Design model comparison methodology that tests on representative production workloads
+- Implement model routing that sends different request types to different models
+- Track model performance over time to detect when a model change is needed
+prerequisites:
+  required:
+  - RIU-085
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-113
+  - LIB-114
+  supporting:
+  - LIB-115
+  - LIB-128
+service_context:
+  candidate_services:
+  - Artificial Analysis (artificialanalysis.ai — benchmarks + cost data)
+  - OpenRouter (model catalog with pricing, Palette routing candidate)
+  - LiteLLM (self-hosted model routing + cost tracking)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- model_evaluation.md
+- selection_rationale.md
+rubric_dimensions:
+  evaluation_methodology:
+    description: Models evaluated on representative production workloads, not just public benchmarks
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  business_alignment:
+    description: Model selection weighted by business impact per category, not just average quality
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  routing_design:
+    description: Multi-model routing assigns optimal model per task type with fallback chains
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  ongoing_monitoring:
+    description: Model performance tracked over time with triggers for re-evaluation
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-252-EX-01
+  failure_mode: silent
+  scenario: You selected GPT-4 based on public benchmarks. It scores highest on MMLU and HumanEval. But your actual workload
+    is customer support classification — a task not well-represented by academic benchmarks. A cheaper model (Claude Haiku)
+    performs equally well on your specific task at 1/10th the cost.
+  expected_output: 'Task-specific evaluation: benchmark on your actual production queries, not public benchmarks. Cost-normalized
+    quality comparison. Model comparison report with per-task-type results. Recommendation with cost/quality Pareto frontier.'
+- id: RIU-252-EX-02
+  failure_mode: loud
+  scenario: You switch from Model A to Model B based on evaluation results. Model B is better on average but significantly
+    worse on a specific query category (legal text) that represents 5% of traffic but 40% of revenue. The evaluation didn't
+    weight by business impact.
+  expected_output: 'Business-weighted evaluation: per-category quality × revenue weight. Minimum quality threshold per category
+    (no category can degrade below threshold regardless of average improvement). Staged rollout with per-category monitoring.
+    Rollback trigger per category.'
+- id: RIU-252-EX-03
+  failure_mode: clustered
+  scenario: Your system needs to serve 5 task types with different quality/cost/latency requirements. No single model is best
+    for all 5. Design the multi-model routing architecture.
+  expected_output: 'Per-task-type model assignment based on evaluation results. Model routing table with fallback models per
+    task. Cost budget allocation across models. Service evaluation: Artificial Analysis, OpenRouter, LiteLLM for model catalog
+    and routing. Monitoring per model × task combination.'

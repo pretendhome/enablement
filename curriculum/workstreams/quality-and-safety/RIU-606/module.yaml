@@ -1,0 +1,93 @@
+riu_id: RIU-606
+name: Brand Safety for AI-Generated Content
+workstream: Quality & Safety
+journey_stage: specialization
+classification: both
+difficulty: critical
+learning_objectives:
+- Design a brand safety framework that enforces brand voice without killing AI utility
+- Implement content guardrails with per-brand tone, vocabulary, and prohibited topics
+- Build a review workflow for AI-generated content before public exposure
+- Test brand safety with adversarial inputs that attempt to generate off-brand content
+prerequisites:
+  required:
+  - RIU-029
+  - RIU-534
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-131
+  supporting: []
+service_context:
+  candidate_services:
+  - AWS Bedrock Guardrails (managed, Claude-integrated, denied topics + word filters)
+  - Lakera Guard (prompt injection + brand safety)
+  - Guardrails AI (OSS, custom validators for brand voice)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- brand_safety_policy.md
+- guardrail_configuration.yaml
+- brand_voice_guide_per_brand/
+- incident_response_plan.md
+- red_team_test_cases/
+rubric_dimensions:
+  brand_voice_enforcement:
+    description: Brand voice enforced per brand with tone, vocabulary, and style rules — not just content safety
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  review_workflow:
+    description: Pre-publication review gate prevents harmful or off-brand content from reaching public
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  adversarial_robustness:
+    description: Brand safety tested against adversarial inputs including cross-brand contamination
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  incident_response:
+    description: Incident response plan covers takedown, communication, and root cause analysis for brand safety breaches
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in brand_voice_enforcement and adversarial_robustness
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-606-EX-01
+  failure_mode: silent
+  scenario: Your AI chatbot for a luxury brand uses casual language ('Hey! No worries!') that's appropriate for a tech startup
+    but completely wrong for the brand. No guardrail catches it because the content isn't harmful — it's just off-brand. Customer
+    perception of the brand degrades subtly over months.
+  expected_output: brand_voice_guide_per_brand/ with tone, vocabulary, and style rules. Content scoring against brand voice
+    profile. guardrail_configuration.yaml with brand-specific tone enforcement. Test suite with on-brand and off-brand examples
+    for each brand.
+- id: RIU-606-EX-02
+  failure_mode: loud
+  scenario: Your AI generates a social media post for a food brand that accidentally references a competitor's product recall.
+    The post goes live through the automated pipeline. The competitor threatens legal action. Design the review workflow that
+    prevents this.
+  expected_output: Pre-publication review gate for all AI-generated public content. Denied topics list including competitor
+    names, legal issues, and sensitive current events. incident_response_plan.md with takedown procedures and response templates.
+    Human review required for content mentioning external entities.
+- id: RIU-606-EX-03
+  failure_mode: clustered
+  scenario: 'Your company manages AI content for 5 brands with different audiences: a children''s brand, a luxury brand, a
+    budget brand, a B2B brand, and a health brand. Each has different safety requirements. A prompt injection causes the children''s
+    brand AI to generate content appropriate for the luxury brand (adult themes). Design the multi-brand safety architecture.'
+  expected_output: 'Per-brand safety profiles with isolated guardrail configurations. Cross-brand contamination prevention:
+    each brand''s AI runs in isolated context. red_team_test_cases/ with cross-brand contamination scenarios. brand_safety_policy.md
+    with per-brand prohibited content and escalation procedures.'

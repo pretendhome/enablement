@@ -1,0 +1,91 @@
+riu_id: RIU-108
+name: Agent Security & Access Control
+workstream: Quality & Safety
+journey_stage: orchestration
+classification: both
+difficulty: critical
+learning_objectives:
+- Implement least-privilege access controls for AI agents with per-action permission scoping
+- Design identity verification that ensures agents act only within their authorized role
+- Build guardrails that prevent agent misuse including prompt injection and privilege escalation
+- Evaluate managed security services against custom implementations for agent access control
+prerequisites:
+  required:
+  - RIU-001
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-120
+  - LIB-124
+  supporting: []
+service_context:
+  candidate_services:
+  - AWS Bedrock Guardrails (managed, Claude-integrated)
+  - Lakera Guard (prompt injection + agent safety)
+  - HashiCorp Vault (secrets + access for agent credentials)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- security_policy.md
+- agent_identity_config.yaml
+- guardrail_implementation.py
+- access_control_matrix.md
+rubric_dimensions:
+  least_privilege:
+    description: Agent permissions scoped to minimum required with per-action justification and no broad defaults
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  identity_verification:
+    description: Agent identity verified cryptographically with no impersonation or escalation paths
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  guardrail_calibration:
+    description: Guardrails block dangerous actions without over-blocking legitimate requests
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Managed services evaluated against custom implementation with cost/security tradeoff analysis
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in least_privilege and identity_verification
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-108-EX-01
+  failure_mode: silent
+  scenario: Your AI agent has broad 'developer' permissions because the team couldn't determine the minimum required set.
+    The agent can read all repos, write to any branch, and access secrets. For 6 months nobody notices because the agent only
+    uses a fraction of its permissions. Then a prompt injection causes it to read credentials from a secrets manager.
+  expected_output: Permission audit showing actual vs granted access. Reduced permission set based on observed usage. access_control_matrix.md
+    with per-action justification. Monitoring for permission usage anomalies (agent accessing resources it hasn't used before).
+- id: RIU-108-EX-02
+  failure_mode: loud
+  scenario: 'Your agent guardrails are too restrictive: the agent can''t complete 30% of legitimate user requests because
+    the safety policy blocks them. Users complain that the agent is useless. The team loosens guardrails without analysis,
+    introducing security gaps.'
+  expected_output: 'Guardrail calibration: false positive analysis on blocked requests. Tiered policy: strict for high-risk
+    actions (data deletion, external API calls), permissive for low-risk (read-only, internal queries). guardrail_implementation.py
+    with per-action risk classification.'
+- id: RIU-108-EX-03
+  failure_mode: clustered
+  scenario: Your multi-agent system has 4 agents with different roles (researcher, builder, reviewer, deployer). Each needs
+    different permissions. A compromised researcher agent attempts to escalate to deployer permissions by crafting messages
+    that look like inter-agent handoffs. Design the security architecture.
+  expected_output: Per-agent identity with cryptographic verification. Role-based access control matrix. Inter-agent message
+    authentication (agents can't impersonate each other). Privilege escalation detection. security_policy.md covering all
+    agent roles and trust boundaries.

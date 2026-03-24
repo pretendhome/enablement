@@ -1,0 +1,81 @@
+riu_id: RIU-103
+name: Training Session Design + Delivery
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design a training session that builds practical skills, not just knowledge transfer
+- Structure the session with hands-on exercises that mirror real work scenarios
+- Build assessment mechanisms that verify participants can apply what they learned
+- Handle mixed-skill audiences where some participants are advanced and others are beginners
+prerequisites:
+  required:
+  - RIU-102
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-146
+  - LIB-168
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- training_agenda.md
+- training_exercises/
+- training_followup.md
+rubric_dimensions:
+  skill_building:
+    description: Training builds practical skills through hands-on exercises, not just knowledge
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  assessment:
+    description: Post-training assessment verifies participants can apply skills independently
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audience_handling:
+    description: Mixed-skill audiences served with tiered content and appropriate pacing
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  scalability:
+    description: Training delivery scales across locations and timezones without quality loss
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-103-EX-01
+  failure_mode: silent
+  scenario: Your training session is a 2-hour presentation with slides. Participants rate it 4.5/5. But 2 weeks later, nobody
+    uses the system. The training transferred knowledge but not skills. Participants understood the concepts but cannot apply
+    them.
+  expected_output: 'Hands-on exercises comprising 60%+ of session time. Exercises mirror real work tasks. Post-training assessment:
+    can participants complete a task independently? Follow-up check at 2 weeks.'
+- id: RIU-103-EX-02
+  failure_mode: loud
+  scenario: Your training assumes all participants are beginners. Advanced users are bored and disengage. They leave negative
+    feedback and skip future sessions. The training lost the power users who could champion adoption.
+  expected_output: 'Pre-training skill assessment. Tiered content: beginner track and advanced track. Advanced users paired
+    with beginners as mentors. Optional deep-dive sessions for advanced topics.'
+- id: RIU-103-EX-03
+  failure_mode: clustered
+  scenario: Your training must be delivered to 200 people across 5 offices in 3 timezones within 2 weeks. Live sessions cannot
+    scale. Design the scalable training delivery.
+  expected_output: 'Blended approach: async self-paced content + live Q&A sessions. Train-the-trainer: certify local champions
+    to deliver hands-on portions. Recording of live sessions for async consumption. Completion tracking per office.'

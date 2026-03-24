@@ -1,0 +1,92 @@
+riu_id: RIU-109
+name: Business Plan Creation
+workstream: Clarify & Bound
+journey_stage: specialization
+classification: both
+difficulty: high
+learning_objectives:
+- Create a business plan that synthesizes research, financial analysis, and strategic recommendations
+- Design the plan structure to support decision-making under uncertainty
+- Evaluate research and presentation services for plan creation workflow
+- Present findings with appropriate confidence levels and explicit assumptions
+prerequisites:
+  required:
+  - RIU-001
+  - RIU-106
+  - RIU-107
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-125
+  - LIB-127
+  supporting: []
+service_context:
+  candidate_services:
+  - Perplexity (research with citations, Palette-integrated)
+  - Gamma (AI-native slides/presentation, high signal)
+  - NotebookLM (source-grounded synthesis, high signal)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- convergence_brief.md
+- comparable_organizations.md
+- market_research.md
+- strategic_framework.md
+- product_strategy.md
+- business_plan_draft.md
+- validation_report.md
+rubric_dimensions:
+  research_quality:
+    description: Plan built on corroborated, recent data with explicit confidence levels
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  financial_rigor:
+    description: Financial projections include scenario modeling, sensitivity analysis, and risk adjustment
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  stakeholder_alignment:
+    description: Plan addresses multiple stakeholder priorities without incoherence
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  service_evaluation:
+    description: Research and presentation services evaluated for plan creation workflow
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-109-EX-01
+  failure_mode: silent
+  scenario: Your business plan cites market size from a single source. The source is 2 years old and the market has shifted
+    significantly. The plan looks authoritative but the foundation is stale data. Nobody questions the numbers because they
+    are presented confidently.
+  expected_output: Multi-source corroboration for key claims. Source recency requirements. Confidence tagging per data point.
+    Assumptions section listing every unverified claim.
+- id: RIU-109-EX-02
+  failure_mode: loud
+  scenario: 'Your business plan recommends a $2M investment. The CFO asks for sensitivity analysis: what if the market is
+    30% smaller? Your plan has no scenario modeling. The recommendation is rejected as insufficiently rigorous.'
+  expected_output: 'Scenario modeling: base case, optimistic, pessimistic. Sensitivity analysis on key assumptions. Break-even
+    analysis. Risk-adjusted ROI.'
+- id: RIU-109-EX-03
+  failure_mode: clustered
+  scenario: 'Your business plan must satisfy 4 stakeholders with different priorities: CEO (growth), CFO (ROI), CTO (feasibility),
+    VP Sales (pipeline). Each wants different emphasis. A single plan cannot satisfy all four without becoming incoherent.'
+  expected_output: Stakeholder-specific executive summaries with shared detailed plan. Per-stakeholder value proposition.
+    Unified recommendation with per-stakeholder impact analysis.

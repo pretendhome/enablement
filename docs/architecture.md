@@ -32,10 +32,17 @@ This system works backwards from Palette's 117 RIUs to teach developers how to b
 Directed acyclic graph mapping RIU → module → assessment → credential. Prerequisites define the traversal order. Learning paths (journeys) are named sequences through the graph.
 
 ### 4. Assessment Engine
-Three-layer evaluation:
+Three-layer evaluation with cascaded escalation (informed by ICLR 2025 "Trust or Escalate" research):
 - **Layer 1 — Automated checks**: artifacts present, code runs, sources cited
-- **Layer 2 — AI rubric evaluation**: Claude evaluates each dimension with calibration exemplars
-- **Layer 3 — Human calibration**: 10% double-scored, rubric adjusted when agreement < 80%
+- **Layer 2 — AI rubric evaluation**: Claude evaluates each dimension with calibration exemplars. Uses question-specific rubrics on 0-5 scale with 2-3 scored exemplars per level (Microsoft LLM-Rubric approach, 2x improvement over uncalibrated baselines).
+- **Layer 3 — Human review**: Triggered by TWO paths:
+  - **Fixed sample**: 10% of all submissions double-scored for ongoing calibration
+  - **Confidence escalation**: Any submission where AI confidence is low or scores are borderline between levels. This is critical — research shows LLM expert agreement is only 64-68% (IUI 2025) and false positive rates in code grading reach ~29% (GreAIter, FSE 2025).
+
+**Bias mitigations** (from AI-augmented assessment research):
+- Position bias: Use absolute scoring, not pairwise comparison
+- Verbosity bias: Rubric explicitly penalizes padding; score substance not length
+- Self-preference bias: Do not judge submissions with the same model family that generated them
 
 ### 5. Certification System
 Three tiers mapping to Palette's maturity model:
@@ -90,6 +97,19 @@ Generate from existing Palette data: extract RIU fields → retrieve related KL 
 - Service freshness: flag when pricing/capabilities change
 - Assessment freshness: refresh when >30% items seen by >100 developers
 
+## Regulatory Compliance
+
+**EU AI Act** (full enforcement August 2026): Educational assessment AI is classified as **high-risk**. Requirements:
+- Mandatory risk assessment and conformity assessment before deployment
+- Human oversight requirement — humans must be able to override AI decisions
+- Transparency obligation — candidates must be informed AI is used in evaluation
+- Annual independent bias audit (also required by NYC Local Law 144 if certification gates employment)
+- Documentation of training data, evaluation methodology, and performance metrics
+
+**US Employment Law** (Title VII): If certification gates hiring decisions, the AI evaluation system is subject to disparate impact analysis. Maintain demographic performance data from launch.
+
+**Design response**: Our 3-layer architecture with human escalation satisfies the human oversight requirement. The fixed 10% sample + confidence-based escalation ensures human review of borderline cases. Open Badges 3.0 with competency metadata provides the transparency trail.
+
 ## Integrity Checks
 
 1. RIU coverage: 117/117 modules
@@ -100,6 +120,8 @@ Generate from existing Palette data: extract RIU fields → retrieve related KL 
 6. Assessment coverage: 3+ anchor items, 15+ total per module
 7. AI-human agreement: >80% per LIB-114
 8. Journey completeness: all paths traversable end-to-end
+9. Bias audit: annual independent review of AI evaluation for demographic disparate impact
+10. Regulatory compliance: EU AI Act high-risk conformity assessment maintained
 
 ## Agent Assignments
 
@@ -121,7 +143,10 @@ Research confirms this system occupies unoccupied territory (see `docs/research/
 | Competency graph with adaptive pathways | Yes | Nobody (most use linear tracks) |
 | Open Badges 3.0 credentials | Yes | Credly issuers (but not combined with AI evaluation) |
 
-Key risk: LLM-as-judge reliability on complex portfolio artifacts is untested at scale. Mitigated by 10% human calibration and anchor item sets.
+Key risks (from AI-augmented assessment research):
+1. **LLM-as-judge reliability**: Expert agreement only 64-68%, false positive rate ~29% for code. Mitigated by confidence-based escalation to human review + anchor item calibration sets.
+2. **Regulatory**: EU AI Act classifies educational assessment AI as high-risk (Aug 2026 enforcement). Mitigated by human oversight layer, transparency requirements, and annual bias audits.
+3. **No precedent**: No one has published results from LLM-graded professional certification. We are operating at the frontier — which is both the opportunity and the risk.
 
 ---
 

@@ -1,0 +1,82 @@
+riu_id: RIU-022
+name: Prompt Interface Contract
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Define a prompt interface contract with explicit variables, constraints, and output schema
+- Implement prompt versioning that prevents breaking changes to downstream consumers
+- Design failure handling for when LLM output doesn't conform to the expected schema
+- Test prompt contracts against model updates to detect silent behavioral changes
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-016
+  - LIB-117
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- prompt_contract.md
+- output_schema.json
+- prompt_templates/
+rubric_dimensions:
+  contract_precision:
+    description: Prompt variables have explicit types, constraints, and validation rules
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  output_schema:
+    description: Output schema enforced with failure handling for non-conforming responses
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  versioning:
+    description: Prompt versions managed with breaking change detection and consumer compatibility
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  composability:
+    description: Shared prompt components versioned independently with cascade impact analysis
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-022-EX-01
+  failure_mode: silent
+  scenario: Your prompt template uses a variable {{context}} that's supposed to be under 2000 tokens. Nobody enforces this.
+    A new data source produces 8000-token contexts. The LLM silently truncates, dropping critical information. Outputs degrade
+    but no error is raised.
+  expected_output: prompt_contract.md with per-variable constraints (type, max length, required/optional). Input validation
+    that rejects or truncates-with-warning before LLM call. output_schema.json enforcing expected response structure. Tests
+    for boundary conditions.
+- id: RIU-022-EX-02
+  failure_mode: loud
+  scenario: You update a prompt template to improve quality. The new template changes the output format from JSON to markdown.
+    Three downstream services that parse the JSON output break immediately. Design the prompt contract that prevents this.
+  expected_output: Versioned prompt templates with output schema pinned per version. Breaking change = new major version.
+    Consumer registry showing which services depend on which prompt version. Migration path for output format changes.
+- id: RIU-022-EX-03
+  failure_mode: clustered
+  scenario: Your system has 15 prompt templates that share common sub-prompts (system instructions, formatting rules). A change
+    to a shared sub-prompt cascades to all 15 templates. Some improve, some degrade. Design the prompt composition architecture.
+  expected_output: Modular prompt architecture with shared components versioned independently. Impact analysis tool showing
+    which templates use which components. Per-template regression test that runs when any shared component changes. prompt_templates/
+    with composition rules.

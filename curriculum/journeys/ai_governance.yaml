@@ -1,0 +1,50 @@
+track: "AI Governance"
+stage_focus: "governance"
+capstone_reference: "../../assessment/capstones/ai_governance_capstone.md"
+estimated_total_duration: "70-95 hours"
+
+entry_requirements:
+  placement_stage: "Foundation complete"
+  prerequisites:
+    - "AI Foundations track or equivalent"
+  expected_baseline:
+    - "Can read system design and operational documentation"
+    - "Can reason about risk, control design, and stakeholder sign-off"
+
+key_riu_ids:
+  - "RIU-001"
+  - "RIU-021"
+  - "RIU-082"
+  - "RIU-087"
+  - "RIU-530"
+  - "RIU-531"
+  - "RIU-532"
+  - "RIU-533"
+  - "RIU-534"
+  - "RIU-535"
+
+module_sequence:
+  - riu_id: "RIU-001"
+    rationale: "Governance controls are incoherent if the system scope and non-goals are unclear."
+  - riu_id: "RIU-021"
+    rationale: "Governance needs measurable evidence, not policy prose alone."
+  - riu_id: "RIU-082"
+    rationale: "Safety and guardrail controls provide the first operational governance layer."
+  - riu_id: "RIU-087"
+    rationale: "Teach explicit human review for one-way doors before formal governance packages."
+  - riu_id: "RIU-530"
+    rationale: "Risk classification anchors the rest of the governance track."
+  - riu_id: "RIU-531"
+    rationale: "Bias detection depends on both risk framing and measurable evaluation data."
+  - riu_id: "RIU-532"
+    rationale: "Explainability comes after the system's risk and fairness obligations are known."
+  - riu_id: "RIU-533"
+    rationale: "FRIA work follows risk classification and explainability because it integrates both."
+  - riu_id: "RIU-534"
+    rationale: "Audit-trail requirements are set once the regulated obligations are concrete."
+  - riu_id: "RIU-535"
+    rationale: "Finish by compiling the complete documentation package needed for audit, handoff, and oversight."
+
+ordering_notes:
+  - "This track is evidence-first and policy-second; governance without measurable evaluation and review gates is treated as incomplete."
+  - "RIU-535 closes the track because it packages the outputs of the earlier governance modules rather than replacing them."

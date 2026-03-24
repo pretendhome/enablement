@@ -1,0 +1,94 @@
+riu_id: RIU-520
+name: Prompt Version Control & Lifecycle
+workstream: Core Logic
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Implement prompt version control with change tracking, rollback, and deployment history
+- Design prompt lifecycle management from development through testing to production
+- Evaluate prompt management services (Braintrust, Helicone, LangSmith) for team workflows
+- Handle prompt A/B testing and gradual rollout to minimize risk of prompt changes
+prerequisites:
+  required:
+  - RIU-022
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-016
+  - LIB-025
+  supporting:
+  - LIB-042
+  - LIB-057
+  - LIB-062
+  - LIB-064
+service_context:
+  candidate_services:
+  - Braintrust (prompt management + evals, strong signal)
+  - Helicone (prompt versioning + observability)
+  - LangSmith (if in LangChain ecosystem)
+  - Anthropic Console (basic prompt management, already accessible)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- prompt_versioning.md
+- prompt_registry/
+- prompt_changelog.md
+- prompt_rollback.md
+rubric_dimensions:
+  version_control:
+    description: Prompts versioned independently with change tracking, diff, and rollback
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  deployment_safety:
+    description: Prompt changes deployed with staged rollout and automatic rollback on quality drop
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  lifecycle_management:
+    description: Full lifecycle from development through testing to production with approval gates
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  team_coordination:
+    description: Multi-team prompt management with dependency tracking and cross-team notifications
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-520-EX-01
+  failure_mode: silent
+  scenario: Your team edits prompts directly in production code. Three developers make prompt changes in the same week. Quality
+    drops but nobody knows which change caused it because there's no version history for prompts separate from code commits.
+  expected_output: 'Prompt version control: prompts stored separately from code with independent versioning. Change log per
+    prompt with author, timestamp, and rationale. Diff view showing exactly what changed between versions. Rollback capability
+    to any previous version.'
+- id: RIU-520-EX-02
+  failure_mode: loud
+  scenario: A prompt change improves quality for 80% of queries but breaks a critical edge case that affects your largest
+    customer. The change was deployed to 100% of traffic instantly. Design the safe prompt deployment process.
+  expected_output: 'Staged rollout: 5% → 25% → 50% → 100% with quality monitoring at each stage. Per-customer quality tracking
+    during rollout. Automatic rollback trigger if quality drops below threshold. A/B test framework for prompt changes.'
+- id: RIU-520-EX-03
+  failure_mode: clustered
+  scenario: Your system has 30 prompts managed by 5 teams. Each team updates their prompts independently. A change to the
+    system prompt affects all 30 downstream prompts. No dependency tracking exists. Design the prompt lifecycle for a multi-team
+    environment.
+  expected_output: 'Prompt dependency graph: system prompt → task prompts → sub-prompts. Impact analysis tool: ''if I change
+    this prompt, what else is affected?'' Per-team prompt ownership with cross-team change notification. Service evaluation:
+    Braintrust vs Helicone for team prompt management.'

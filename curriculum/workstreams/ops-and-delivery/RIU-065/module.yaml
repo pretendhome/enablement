@@ -1,0 +1,80 @@
+riu_id: RIU-065
+name: Config Management + Environment Parity
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Implement configuration management that ensures environment parity between staging and production
+- Design config validation that catches misconfigurations before deployment
+- Handle environment-specific overrides without diverging from the base configuration
+- Build config change tracking with audit trail and rollback capability
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-142
+  supporting: []
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- config_spec.md
+- env_parity_checks/
+- config_templates/
+rubric_dimensions:
+  environment_parity:
+    description: Staging and production configs compared automatically with documented exceptions
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  validation:
+    description: Config validated against schema before deployment with rejection of invalid values
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  change_tracking:
+    description: All config changes tracked with audit trail, approval workflow, and rollback
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  schema_management:
+    description: Config schema versioned with environment-specific override handling and migration tools ensuring all environments stay consistent
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-065-EX-01
+  failure_mode: silent
+  scenario: Your staging environment has a config value of max_tokens=4096. Production has max_tokens=2048 (set months ago
+    for cost control). A developer tests a feature in staging that works with 4096 tokens but fails silently with 2048 in
+    production — responses are truncated without error.
+  expected_output: 'Environment parity audit: automated comparison of staging vs production configs. Parity exceptions: documented
+    and justified divergences. Config diff report before every deployment. Alert on undocumented config divergence.'
+- id: RIU-065-EX-02
+  failure_mode: loud
+  scenario: A developer changes a production config value via the admin panel. The change breaks the system. There's no audit
+    trail showing who changed what, and no way to quickly identify which config value was modified.
+  expected_output: 'Config change audit trail: who, what, when, why for every change. Config versioning with rollback to any
+    previous state. Change approval workflow for production configs. Alert on production config changes.'
+- id: RIU-065-EX-03
+  failure_mode: clustered
+  scenario: Your system has 200 config values across 5 environments. Each environment has 20 overrides. A config refactoring
+    changes the schema. Some environments are updated, others aren't. The system works in some environments and fails in others
+    due to schema mismatch.
+  expected_output: 'Config schema validation: reject configs that don''t match expected schema. Schema migration tool that
+    updates all environments atomically. Per-environment config health check. Config-as-code with version control and CI validation.'

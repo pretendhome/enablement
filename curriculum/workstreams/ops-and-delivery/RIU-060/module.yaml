@@ -1,0 +1,88 @@
+riu_id: RIU-060
+name: Deployment Readiness Envelope
+workstream: Ops & Delivery
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Design a deployment readiness envelope that gates releases on explicit quality, security, and operational criteria
+- Implement pre-deploy checks that validate the system is ready for production traffic
+- Build post-deploy verification that confirms the deployment succeeded within SLA
+- Handle rollback procedures when post-deploy checks fail
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-024
+  - LIB-026
+  supporting:
+  - LIB-029
+  - LIB-030
+  - LIB-032
+  - LIB-043
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- deployment_envelope.md
+- env_matrix.md
+- release_gates.md
+rubric_dimensions:
+  readiness_criteria:
+    description: Deployment gated on explicit criteria covering quality, security, dependencies, and operational readiness
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  verification_depth:
+    description: Post-deploy checks verify end-to-end functionality, not just process liveness
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  rollback_capability:
+    description: Rollback procedures tested and executable within SLA for every deployment
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  dependency_management:
+    description: Multi-service deployments respect dependency ordering with enforced sequencing
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-060-EX-01
+  failure_mode: silent
+  scenario: Your deployment passes all automated checks. But the deployment readiness checklist doesn't include 'database
+    migration completed' as a criterion. The app deploys, tries to query a column that doesn't exist yet, and returns errors
+    for 20% of requests. The migration was supposed to run first but wasn't in the checklist.
+  expected_output: 'Deployment readiness checklist with dependency ordering: migrations before app deploy. Pre-deploy verification
+    script that checks all dependencies. Deployment manifest listing every step in order with rollback for each.'
+- id: RIU-060-EX-02
+  failure_mode: loud
+  scenario: Your post-deploy health check passes (HTTP 200 on /health). But the health check only verifies the app is running,
+    not that it's serving correct results. A config error causes all responses to return empty results. The health check is
+    green but the system is broken.
+  expected_output: 'Deep health checks: verify end-to-end functionality, not just process liveness. Smoke test suite that
+    runs post-deploy. Health check levels: liveness (process up), readiness (dependencies connected), functionality (correct
+    results).'
+- id: RIU-060-EX-03
+  failure_mode: clustered
+  scenario: Your system has 5 microservices that must be deployed in a specific order due to API dependencies. A developer
+    deploys Service C before Service B (which C depends on). Service C crashes on startup. The deployment order isn't enforced.
+    Design the multi-service deployment envelope.
+  expected_output: Service dependency graph with enforced deployment ordering. Parallel deployment where safe, sequential
+    where dependencies exist. Per-service rollback that doesn't break dependent services. Deployment orchestration with dependency-aware
+    scheduling.

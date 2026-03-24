@@ -1,0 +1,68 @@
+riu_id: "RIU-013"
+name: "Source-of-Truth Inventory"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Create a source-of-truth map listing systems, owners, fields, update cadence, and trust level"
+  - "Identify shadow data sources that compete with official systems"
+  - "Design a conflict resolution protocol when multiple systems claim ownership of the same data"
+  - "Establish drift detection mechanisms that alert when sources diverge"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"
+
+knowledge_library_entries:
+  primary:
+    - "LIB-133"
+  supporting:
+    - "LIB-009"
+    - "LIB-152"
+
+service_context: null
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "source_of_truth_inventory.md — Complete inventory with systems, owners, fields, cadence, and trust levels"
+
+rubric_dimensions:
+  system_coverage:
+    description: "All relevant systems identified including shadow sources and informal data stores"
+    levels: [insufficient, basic, competent, expert]
+  ownership_clarity:
+    description: "Each key field has exactly one authoritative system with named owner"
+    levels: [insufficient, basic, competent, expert]
+  conflict_resolution:
+    description: "Protocol exists for resolving disagreements between competing sources"
+    levels: [insufficient, basic, competent, expert]
+  drift_detection:
+    description: "Mechanisms defined to detect and alert when sources diverge"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-013-EX-01"
+    failure_mode: "silent"
+    scenario: "Your AI pulls customer data from the CRM. The sales team maintains a 'master spreadsheet' with corrections never pushed back. Your AI gives wrong answers for 15% of customers. Build the inventory that would have caught this."
+    expected_output: "Inventory showing CRM as official source with spreadsheet as shadow source. Trust level comparison. Reconciliation plan. Drift detection alert for future divergence."
+
+  - id: "RIU-013-EX-02"
+    failure_mode: "loud"
+    scenario: "Two department heads both claim their system is the source of truth for product pricing. The systems show different prices for 30% of products. Build the inventory and conflict resolution protocol."
+    expected_output: "Inventory with both systems documented, divergence analysis. Conflict resolution protocol with escalation. Interim policy for which system to use until resolved."
+
+  - id: "RIU-013-EX-03"
+    failure_mode: "clustered"
+    scenario: "A post-merger company has 3 CRMs, 2 ERPs, and 5 departmental databases with overlapping customer data. Create a source-of-truth inventory for the unified AI platform."
+    expected_output: "Tiered inventory: golden source per data domain, secondary sources with sync frequency, deprecated sources with migration timeline. Field-level mapping across all systems. Drift detection dashboard spec."

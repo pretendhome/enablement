@@ -1,0 +1,95 @@
+riu_id: RIU-531
+name: Algorithmic Bias Detection
+workstream: Quality & Safety
+journey_stage: foundation
+classification: both
+difficulty: high
+learning_objectives:
+- Implement bias detection across protected attributes using appropriate fairness metrics
+- Design test datasets that surface intersectional bias patterns
+- Build remediation tracking that connects detected bias to specific mitigation actions
+- Handle the tradeoff between fairness metrics that can conflict with each other
+prerequisites:
+  required:
+  - RIU-021
+  - RIU-530
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-061
+  - LIB-066
+  supporting:
+  - LIB-067
+  - LIB-069
+  - LIB-073
+service_context:
+  candidate_services:
+  - Fairlearn (Microsoft OSS, scikit-learn compatible)
+  - IBM AI Fairness 360 (AIF360, comprehensive metrics)
+  - Evidently AI (bias + data quality, OSS + managed)
+  integration_recipes: []
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: service_integration
+required_artifacts:
+- bias_detection.md
+- fairness_metrics.md
+- bias_test_datasets/
+- remediation_tracking.md
+rubric_dimensions:
+  detection_coverage:
+    description: Bias tested across all protected attributes including intersectional combinations
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  metric_selection:
+    description: Fairness metrics appropriate to use case with documented tradeoffs between competing metrics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  remediation_tracking:
+    description: Every bias finding has a tracked remediation action with owner and deadline
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  policy_clarity:
+    description: Fairness policy decisions documented with stakeholder sign-off and regulatory mapping
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-531-EX-01
+  failure_mode: silent
+  scenario: Your bias testing covers gender and race independently. Both pass fairness thresholds. But the intersection (e.g.,
+    Black women) shows significantly worse outcomes. Intersectional bias was invisible because you only tested single attributes.
+  expected_output: 'Intersectional test matrix: all pairwise and key triple combinations of protected attributes. bias_test_datasets/
+    with intersectional test cases. fairness_metrics.md showing per-intersection results. Alert when any intersection fails
+    even if individual attributes pass.'
+- id: RIU-531-EX-02
+  failure_mode: loud
+  scenario: Your fairness threshold triggers a bias alert. Investigation shows the model accurately reflects real-world data
+    distribution (e.g., fewer female CEOs in training data). The product team argues 'the model is correct.' The ethics team
+    argues 'correct isn't fair.' Resolve the tension.
+  expected_output: 'Distinction between descriptive accuracy and normative fairness. Policy decision documented: does the
+    system reflect reality or correct for it? remediation_tracking.md with explicit decision on each bias finding. Stakeholder
+    sign-off on fairness policy choices.'
+- id: RIU-531-EX-03
+  failure_mode: clustered
+  scenario: Your system serves hiring, lending, and content recommendation. Each domain has different fairness requirements
+    and different protected attributes. A single model serves all three. Bias acceptable in content recommendation (personalization)
+    is illegal in lending. Design the multi-domain bias framework.
+  expected_output: 'Per-domain fairness policy with domain-specific protected attributes and thresholds. Shared model with
+    domain-specific output filters. bias_detection.md with per-domain test suites. Regulatory mapping: which fairness metrics
+    are legally required per domain.'

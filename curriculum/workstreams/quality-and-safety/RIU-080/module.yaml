@@ -1,0 +1,88 @@
+riu_id: RIU-080
+name: Contract Tests (Input/Output)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Implement contract tests that validate input/output interfaces against versioned specifications
+- Design fixtures that represent production data including edge cases and optional fields
+- Integrate contract tests into CI pipeline as a deployment gate
+- Detect interface drift before it reaches downstream consumers
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-026
+  - LIB-028
+  supporting:
+  - LIB-029
+  - LIB-030
+  - LIB-032
+  - LIB-035
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- contract_tests/
+- fixtures/
+- ci_gate.md
+rubric_dimensions:
+  contract_coverage:
+    description: Contract tests cover all interface fields including optional field combinations and edge cases
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  fixture_quality:
+    description: Fixtures represent production data accurately with staleness detection and refresh strategy
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  ci_integration:
+    description: Contract tests integrated as CI gate that blocks deployment on failure with zero flakiness tolerance
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  drift_detection:
+    description: Interface drift detected before downstream impact with clear attribution of which change broke which consumer
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-080-EX-01
+  failure_mode: silent
+  scenario: 'Your contract test fixtures were created 6 months ago from a staging environment. Production data has since evolved:
+    3 new optional fields, a changed enum set, and a date format migration. All contract tests pass, but production integrations
+    break weekly. The fixtures are stale.'
+  expected_output: 'Fixture refresh strategy: automated fixture generation from production schema snapshots. Staleness detection
+    that flags fixtures older than N days. Contract tests that validate against both fixture and live schema. CI gate that
+    blocks deploy if fixtures are stale.'
+- id: RIU-080-EX-02
+  failure_mode: loud
+  scenario: Your contract tests are flaky — they pass locally but fail in CI 30% of the time due to timing-dependent assertions
+    and shared test state. The team starts ignoring CI failures. A real breaking change ships undetected.
+  expected_output: 'Root cause analysis of flakiness: timing dependencies replaced with deterministic assertions, shared state
+    eliminated with per-test fixtures. Flakiness tracking dashboard. Policy: flaky tests quarantined and fixed within 48 hours,
+    never ignored.'
+- id: RIU-080-EX-03
+  failure_mode: clustered
+  scenario: Your API has 12 optional fields. Consumers use different subsets. A change to one optional field breaks 3 consumers
+    but not the other 7. Your contract tests only cover the 'all fields present' case. Design contract tests that handle optional
+    field combinations.
+  expected_output: Per-consumer contract profiles specifying which fields each consumer depends on. Contract tests for each
+    profile. CI gate that runs consumer-specific tests when relevant fields change. Consumer registry that maps fields to
+    dependent consumers.

@@ -1,0 +1,69 @@
+riu_id: "RIU-015"
+name: "Contract for Outputs (API/Events/Files)"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+
+learning_objectives:
+  - "Define an output contract with schema, semantics, idempotency guarantees, and SLAs"
+  - "Design versioning rules that protect downstream consumers from breaking changes"
+  - "Identify one-way door commitments in output contracts and flag them before publication"
+  - "Implement consumer expectation documentation that prevents integration rework"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-011"
+
+knowledge_library_entries:
+  primary:
+    - "LIB-032"
+  supporting:
+    - "LIB-026"
+    - "LIB-028"
+
+service_context: null
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "output_contract.yaml — Versioned output contract with schema, semantics, SLAs, and idempotency rules"
+  - "consumer_expectations.md — Documentation of what each downstream consumer expects and tolerates"
+
+rubric_dimensions:
+  contract_precision:
+    description: "Output schema, semantics, and SLAs are unambiguous and machine-enforceable"
+    levels: [insufficient, basic, competent, expert]
+  versioning_safety:
+    description: "Versioning rules prevent breaking changes and one-way doors are flagged pre-commitment"
+    levels: [insufficient, basic, competent, expert]
+  consumer_alignment:
+    description: "Consumer expectations documented and validated — consumers can integrate without rework"
+    levels: [insufficient, basic, competent, expert]
+  idempotency_design:
+    description: "Idempotency guarantees are explicit and tested for retry/replay scenarios"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-015-EX-01"
+    failure_mode: "silent"
+    scenario: "Your AI service returns JSON responses. You add a new optional field. A downstream consumer's strict parser rejects the response. Design the output contract and versioning rules that prevent this."
+    expected_output: "Output contract with explicit extensibility rules. Versioning policy: additive = minor, breaking = major. Contract test validating both old and new consumers can parse."
+
+  - id: "RIU-015-EX-02"
+    failure_mode: "loud"
+    scenario: "A downstream consumer rejects your AI output because confidence scores don't match their expected semantics. Your 0.85 means 'model confidence' but they read 'probability of correctness.' Define the semantic contract."
+    expected_output: "Output contract with explicit semantic definitions. Confidence score specification: what it measures, calibration method, interpretation guide. Consumer sign-off process."
+
+  - id: "RIU-015-EX-03"
+    failure_mode: "clustered"
+    scenario: "Your AI system serves 5 downstream consumers (mobile app, web dashboard, batch ETL, alerting system, partner API) each with different latency, format, and completeness requirements. Design a unified output contract."
+    expected_output: "Base contract with per-consumer profiles. SLA tiers: real-time, near-real-time, batch. Format negotiation rules. Degradation policy per consumer under load."

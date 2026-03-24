@@ -1,0 +1,84 @@
+riu_id: RIU-101
+name: Customer Workshop Design (Discovery/Alignment)
+workstream: Adoption & Change
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Design a customer workshop that achieves discovery and alignment in a single session
+- Structure the workshop to surface hidden assumptions and conflicting priorities
+- Build workshop materials that guide discussion without constraining it
+- Capture workshop outputs as actionable artifacts, not just meeting notes
+prerequisites:
+  required:
+  - RIU-002
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-045
+  - LIB-047
+  supporting:
+  - LIB-049
+  - LIB-050
+  - LIB-052
+  - LIB-053
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- workshop_agenda.md
+- workshop_materials/
+- follow_up_plan.md
+rubric_dimensions:
+  alignment_depth:
+    description: Workshop surfaces hidden disagreements and achieves genuine alignment, not just apparent consensus
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  participation:
+    description: All stakeholders contribute meaningfully regardless of seniority
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  artifact_quality:
+    description: Workshop outputs are actionable artifacts, not just meeting notes
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  efficiency:
+    description: Workshop achieves objectives within time constraints with appropriate pre/post-work
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-101-EX-01
+  failure_mode: silent
+  scenario: Your workshop achieves apparent consensus. Everyone nods. But two stakeholders interpreted the same agreement
+    differently. The hidden disagreement surfaces 3 weeks later during implementation. The workshop did not surface the ambiguity.
+  expected_output: 'Explicit alignment checks: each stakeholder states their understanding independently. Disagreement surfacing
+    exercises. Written summary reviewed and signed by each stakeholder before leaving.'
+- id: RIU-101-EX-02
+  failure_mode: loud
+  scenario: Your workshop is dominated by the most senior person in the room. Junior stakeholders with critical domain knowledge
+    stay silent. The workshop captures executive perspective but misses operational reality.
+  expected_output: 'Workshop facilitation techniques: round-robin input, anonymous voting, breakout groups by role. Pre-workshop
+    survey to capture input from quiet stakeholders. Facilitation guide ensuring all voices are heard.'
+- id: RIU-101-EX-03
+  failure_mode: clustered
+  scenario: Your workshop has 15 participants from 5 departments with 3 hours of time. Too many people, too little time. The
+    workshop becomes a presentation rather than a working session. Design the workshop for large, time-constrained groups.
+  expected_output: Pre-workshop async input collection. Workshop focused on decisions, not information sharing. Breakout groups
+    by topic with report-back. Post-workshop async review of outputs. Workshop design document with timing per activity.

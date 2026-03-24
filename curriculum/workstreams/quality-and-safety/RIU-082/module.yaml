@@ -13,14 +13,14 @@ learning_objectives:
   - "Test guardrails against prompt injection and adversarial inputs"
 
 prerequisites:
-  required: []
+  required:
+    - "RIU-021"   # Golden Set — need evaluation harness to test guardrails rigorously
   recommended:
     - "RIU-001"   # Convergence Brief — safety requirements must be scoped
-    - "RIU-021"   # Golden Set — need evaluation harness to test guardrails
 
 knowledge_library_entries:
   primary:
-    - "LIB-082"   # Label/category alignment for safety classification
+    - "LIB-090"   # How do I add guardrails to prevent agent misuse?
   supporting:
     - "LIB-114"   # LLM-as-judge (for evaluating guardrail effectiveness)
     - "LIB-001"   # Convergence (defining safety requirements)
@@ -46,8 +46,8 @@ required_artifacts:
   - "adversarial_test_results.md — Results of testing guardrails against 10+ adversarial inputs"
 
 rubric_dimensions:
-  policy_completeness:
-    description: "Policy covers content safety, tool-use boundaries, PII handling, and refusal conditions"
+  policy_and_evidence_design:
+    description: "Policy covers content safety, tool-use boundaries, PII handling, evidence requirements, and refusal conditions with explicit user-tier handling"
     levels: [insufficient, basic, competent, expert]
   implementation_quality:
     description: "Guardrails are implemented at the right pipeline stage and don't degrade normal performance"
@@ -60,7 +60,7 @@ rubric_dimensions:
     levels: [insufficient, basic, competent, expert]
 
 certification_tier_thresholds:
-  WORKING: "competent on 3/4 dimensions"
+  WORKING: "competent on all 4 dimensions, with mandatory competence in adversarial_robustness"
   PRODUCTION: "expert on 3/4, competent on remaining"
 
 exercises:

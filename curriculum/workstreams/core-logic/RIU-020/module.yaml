@@ -1,0 +1,84 @@
+riu_id: RIU-020
+name: Baseline Behavior Snapshot
+workstream: Core Logic
+journey_stage: foundation
+classification: internal_only
+difficulty: high
+learning_objectives:
+- Capture a baseline behavior snapshot of an AI system before making changes
+- Design baseline metrics that cover accuracy, latency, cost, and edge case behavior
+- Implement automated baseline comparison that detects regressions after changes
+- Document baseline assumptions so future teams understand what 'normal' looked like
+prerequisites:
+  required: []
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-135
+  - LIB-144
+  supporting:
+  - LIB-156
+  - LIB-169
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: portfolio
+required_artifacts:
+- baseline_report.md
+- baseline_outputs/
+- baseline_metrics.json
+rubric_dimensions:
+  metric_coverage:
+    description: Baseline covers accuracy, latency, cost, and edge cases — not just aggregate metrics
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  comparison_automation:
+    description: Automated before/after comparison runs on every change with regression detection
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  segmentation:
+    description: Baseline captures per-segment performance, not just aggregate
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  documentation:
+    description: Baseline assumptions and methodology documented for future teams
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-020-EX-01
+  failure_mode: silent
+  scenario: You inherit an AI system with no documented baseline. The team says 'it works great.' You make an optimization
+    that improves average latency by 20% but degrades accuracy on rare query types by 15%. Nobody notices for weeks because
+    there's no baseline to compare against.
+  expected_output: 'Baseline snapshot covering: accuracy per query category, latency percentiles (p50/p95/p99), cost per request,
+    error rate by type. Automated comparison script that runs before/after any change. Baseline documented in version control.'
+- id: RIU-020-EX-02
+  failure_mode: loud
+  scenario: Your baseline metrics show the system is performing well. A stakeholder asks 'compared to what?' Your baseline
+    only measures the system against itself, not against business requirements or user expectations. The system is consistently
+    mediocre but stable.
+  expected_output: 'Dual baseline: system performance (self-comparison) AND business requirements (target comparison). Gap
+    analysis between current performance and business targets. Baseline report showing both dimensions.'
+- id: RIU-020-EX-03
+  failure_mode: clustered
+  scenario: Your system serves 3 customer segments with different quality expectations. The aggregate baseline looks good,
+    but Segment A (enterprise, 10% of traffic, 60% of revenue) has significantly worse performance than Segments B and C.
+    The aggregate masks segment-level problems.
+  expected_output: Per-segment baseline snapshots with segment-weighted quality scores. Revenue-weighted performance dashboard.
+    Alert when any segment drops below its specific baseline, even if aggregate is stable.

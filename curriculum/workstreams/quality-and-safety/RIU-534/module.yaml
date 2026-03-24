@@ -1,0 +1,88 @@
+riu_id: RIU-534
+name: AI Audit Trail Requirements
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: critical
+learning_objectives:
+- Define audit trail requirements covering what events to log, retention periods, and access controls
+- Design retrieval procedures that enable efficient investigation of specific decisions or time periods
+- Handle multi-jurisdiction retention requirements where regulations conflict
+- Ensure audit trails are tamper-evident and admissible as compliance evidence
+prerequisites:
+  required:
+  - RIU-012
+  - RIU-061
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-066
+  - LIB-067
+  supporting:
+  - LIB-071
+service_context: null
+estimated_duration:
+  learning: 6-8 hours
+  assessment: 3-4 hours
+assessment_type: architecture_defense
+required_artifacts:
+- audit_trail_requirements.md
+- retention_policy.md
+- access_controls.md
+- retrieval_procedures.md
+rubric_dimensions:
+  event_completeness:
+    description: Audit events capture all information needed to reproduce and investigate any decision
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  retention_compliance:
+    description: Retention periods comply with all applicable regulations with conflict resolution documented
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  access_security:
+    description: Audit trail access restricted by role with tamper-evident storage
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  retrieval_efficiency:
+    description: Investigation queries return results efficiently with documented retrieval procedures
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on all 4 dimensions, with mandatory competence in event_completeness and access_security
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-534-EX-01
+  failure_mode: silent
+  scenario: Your audit trail logs model inputs and outputs but not the model version, prompt template version, or system configuration
+    at the time of each decision. When investigating a complaint about a decision made 6 months ago, you can't reproduce it
+    because you don't know which model version was running.
+  expected_output: 'Audit event schema including: model version, prompt template hash, system config snapshot, feature flags.
+    audit_trail_requirements.md with mandatory fields per event type. Reproducibility test: can any logged decision be replayed
+    with logged context?'
+- id: RIU-534-EX-02
+  failure_mode: loud
+  scenario: Your audit trail retains all data for 7 years per financial regulation. GDPR requires deletion of personal data
+    upon request. A user exercises their right to erasure. You can't delete their data from the audit trail without violating
+    financial retention requirements.
+  expected_output: 'Retention conflict resolution: pseudonymization of personal data in audit trail (satisfies GDPR erasure
+    while preserving audit integrity). retention_policy.md with per-regulation requirements and conflict resolution rules.
+    Legal review of pseudonymization approach.'
+- id: RIU-534-EX-03
+  failure_mode: clustered
+  scenario: Your system processes 10M decisions per day. Full audit logging would cost $50K/month in storage and slow response
+    times by 15ms. Design an audit trail that meets compliance requirements without breaking the budget or performance.
+  expected_output: 'Tiered audit logging: full detail for high-risk decisions, summary for low-risk, sampling for routine.
+    Cost model per tier. Performance impact analysis. access_controls.md with role-based audit access. retrieval_procedures.md
+    with query patterns for common investigation types.'

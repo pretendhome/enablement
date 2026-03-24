@@ -1,0 +1,85 @@
+riu_id: RIU-087
+name: Human Review Gate (One-Way Doors)
+workstream: Quality & Safety
+journey_stage: foundation
+classification: internal_only
+difficulty: medium
+learning_objectives:
+- Define which decisions qualify as one-way doors requiring human review gates
+- Implement review checklists that capture rationale and sign-off in decisions.md
+- Design gate enforcement that cannot be bypassed even under time pressure
+- Handle urgent incidents where one-way door decisions must be made quickly without skipping review
+prerequisites:
+  required:
+  - RIU-003
+  recommended: []
+knowledge_library_entries:
+  primary:
+  - LIB-138
+  - LIB-145
+  supporting:
+  - LIB-172
+service_context: null
+estimated_duration:
+  learning: 4-6 hours
+  assessment: 2-3 hours
+assessment_type: portfolio
+required_artifacts:
+- one_way_door_gate.md
+rubric_dimensions:
+  gate_definition:
+    description: One-way door decisions clearly defined with classification criteria and no ambiguous cases
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  enforcement_strength:
+    description: Gate cannot be bypassed through technical workarounds with infrastructure-level enforcement
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  audit_trail:
+    description: Every gate passage recorded with rationale, reviewer, and timestamp in decisions.md
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+  urgency_handling:
+    description: Expedited review process exists for incidents without sacrificing accountability
+    levels:
+    - insufficient
+    - basic
+    - competent
+    - expert
+certification_tier_thresholds:
+  WORKING: competent on 3/4 dimensions
+  PRODUCTION: expert on 3/4, competent on remaining
+exercises:
+- id: RIU-087-EX-01
+  failure_mode: silent
+  scenario: Your team has a human review gate for production deployments. A developer discovers they can push directly to
+    the production branch via a CI pipeline that doesn't enforce the gate. They use this shortcut 'just this once' for a hotfix.
+    It becomes standard practice. The gate is bypassed for 3 months.
+  expected_output: 'Gate enforcement at infrastructure level (branch protection, CI pipeline checks, deployment webhook).
+    Bypass detection: alert when production changes lack sign-off record. Audit trail showing every gate passage and any bypass
+    attempts. one_way_door_gate.md with enforcement mechanisms.'
+- id: RIU-087-EX-02
+  failure_mode: loud
+  scenario: A critical production incident requires an immediate database migration (one-way door). The designated reviewer
+    is on vacation. The backup reviewer takes 4 hours to respond. The incident worsens while waiting for sign-off. Design
+    the expedited review process.
+  expected_output: 'Escalation ladder: primary reviewer (30 min SLA) → backup reviewer (30 min) → skip-level approval (15
+    min) → emergency self-approval with mandatory post-incident review. All paths recorded in decisions.md. Emergency approval
+    requires incident ID and post-mortem within 48 hours.'
+- id: RIU-087-EX-03
+  failure_mode: clustered
+  scenario: 'During a major incident, 5 one-way door decisions need to be made in rapid succession: rollback database, revoke
+    API keys, notify customers, disable feature flag, and update DNS. Each requires review. The review process creates a bottleneck
+    that extends the outage. Design the batch review process.'
+  expected_output: 'Incident-mode review: pre-approved runbook actions that are one-way doors but pre-reviewed. Batch approval
+    for related decisions under a single incident. Real-time decision log during incident (not after). Post-incident review
+    of all batch-approved decisions within 24 hours.'

@@ -1,0 +1,70 @@
+riu_id: "RIU-007"
+name: "Constraint Profile Capture"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "medium"
+
+learning_objectives:
+  - "Systematically capture technical, policy, budget, and timeline constraints before design begins"
+  - "Rank constraints as fixed vs negotiable and document the ranking rationale"
+  - "Surface unstated constraints through structured elicitation techniques"
+  - "Record constraints in decisions.md so design choices are traceable to specific constraints"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — constraints are meaningless without clear goals
+  recommended:
+    - "RIU-002"   # Stakeholder Map — different stakeholders own different constraints
+    - "RIU-003"   # Decision Log — constraints drive decisions that must be recorded
+
+knowledge_library_entries:
+  primary:
+    - "LIB-008"   # What questions surface hidden constraints that will block AI deployment later?
+    - "LIB-012"   # What's the checklist for 'good enough' convergence before moving to architecture?
+  supporting:
+    - "LIB-016"   # What prompt engineering patterns work for translating policy documents into LLM behavior?
+    - "LIB-021"   # How do I handle business rules that conflict across departments?
+    - "LIB-025"   # What's the best strategy for handling API rate limits in real-time AI systems?
+    - "LIB-028"   # How do I version APIs when both AI and legacy systems depend on them?
+
+service_context: null  # internal_only — constraint elicitation is dialogue-based
+
+estimated_duration:
+  learning: "3-4 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "constraint_profile.md — Complete constraint profile with categories (technical, policy, budget, timeline, compliance), fixed/negotiable ranking, and owner per constraint"
+
+rubric_dimensions:
+  constraint_coverage:
+    description: "All constraint categories are addressed — technical, policy, budget, timeline, compliance, and organizational"
+    levels: [insufficient, basic, competent, expert]
+  fixed_vs_negotiable:
+    description: "Each constraint is correctly classified as fixed or negotiable with rationale"
+    levels: [insufficient, basic, competent, expert]
+  hidden_constraint_detection:
+    description: "Unstated constraints are surfaced through systematic elicitation, not discovered by accident"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/3 dimensions"
+  PRODUCTION: "expert on 2/3, competent on remaining"
+
+exercises:
+  - id: "RIU-007-EX-01"
+    failure_mode: "silent"
+    scenario: "You're designing an AI document processing system. The customer says 'no constraints, just make it work.' Two months later, you discover: (1) documents must stay in the EU due to GDPR, (2) the system must respond in under 2 seconds because it's used during live customer calls, and (3) the budget was actually capped at $500/month for API costs. Build the constraint profile that would have surfaced these on day 1."
+    expected_output: "Constraint profile with structured elicitation questions organized by category. Each of the 3 hidden constraints mapped to the question that would have surfaced it. Constraint interview template with 15-20 questions covering data residency, latency, cost, compliance, integration, and organizational constraints."
+
+  - id: "RIU-007-EX-02"
+    failure_mode: "loud"
+    scenario: "The security team says 'no data can leave our VPC.' The AI team says 'we need to call OpenAI's API which is external.' These constraints directly conflict. One is fixed (security policy), one is negotiable (model choice). Resolve the conflict and document the constraint profile."
+    expected_output: "Constraint profile showing security policy as FIXED, model choice as NEGOTIABLE. Resolution options: (1) self-hosted model within VPC, (2) Azure OpenAI with private endpoint in their VPC, (3) security exception process with compensating controls. Each option with cost/quality/timeline tradeoffs. Decision recorded as ONE-WAY DOOR if it commits to a specific model hosting approach."
+
+  - id: "RIU-007-EX-03"
+    failure_mode: "clustered"
+    scenario: "An enterprise customer has constraints from 5 different teams: Security (data residency), Legal (PII handling), Finance (budget cap), Engineering (must integrate with Kubernetes), and Operations (must have 99.9% uptime SLA). Some constraints conflict. Build a unified constraint profile that identifies conflicts and proposes resolution order."
+    expected_output: "Unified constraint profile with all 5 teams' constraints, conflict matrix showing which constraints interact, and proposed resolution order (security and legal first because they're typically fixed, then engineering, then operations, then finance as the negotiation lever). Escalation path for unresolvable conflicts."
