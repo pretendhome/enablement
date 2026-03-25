@@ -26,7 +26,7 @@ This system works backwards from Palette's 117 RIUs to teach developers how to b
 117 competency areas organized into 6 workstreams + 5 specialized series. Each area is classified as `internal_only` (80) or `both` (37, requiring external service integration).
 
 ### 2. Knowledge Library (from Palette)
-163 sourced entries with evidence tiers and learning progressions. Journey stages: foundation → retrieval → orchestration → specialization, with evaluation as a cross-cutting meta-skill.
+167 sourced entries with evidence tiers and learning progressions. Journey stages: foundation → retrieval → orchestration → specialization, with evaluation as a cross-cutting meta-skill.
 
 ### 3. Curriculum Graph
 Directed acyclic graph mapping RIU → module → assessment → credential. Prerequisites define the traversal order. Learning paths (journeys) are named sequences through the graph.
@@ -113,7 +113,7 @@ Generate from existing Palette data: extract RIU fields → retrieve related KL 
 ## Integrity Checks
 
 1. RIU coverage: 117/117 modules
-2. KL utilization: >80% of 163 entries referenced
+2. KL utilization: >80% of 167 entries referenced
 3. Prerequisite acyclicity: no cycles
 4. Difficulty balance: matches KL distribution
 5. Source freshness: no sources >24 months without justification

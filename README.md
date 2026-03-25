@@ -23,7 +23,7 @@ Built on Palette's existing data layers:
 | Palette Layer | Enablement Use |
 |---|---|
 | 117 competency areas (RIUs) | Curriculum backbone — each RIU = 1 learning module |
-| 163 knowledge entries | Content source with evidence tiers and learning progressions |
+| 167 knowledge entries | Content source with evidence tiers and learning progressions |
 | 69 integration recipes | Service integration exercises for "both" classified modules |
 | 9 specialized agents | Evaluation agents + content maintenance |
 | Governance tiers | Certification tier model (UNVALIDATED → WORKING → PRODUCTION) |
