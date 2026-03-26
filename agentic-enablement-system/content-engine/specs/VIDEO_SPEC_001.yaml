@@ -1,0 +1,163 @@
+# VIDEO_SPEC_001
+# Topic rationale:
+# 1. Signal: PERSON-020 Chip Huyen consistently emphasizes evaluation frameworks and production AI discipline.
+# 2. Why this is a strong first video: it shows Mical's unique angle immediately — comparative linguistics + knowledge engineering + AI systems judgment — and avoids generic prompting/tutorial territory.
+# 3. Market fit: directly demonstrates competency measurement, artifact-based assessment, learning analytics logic, and operational enablement design that map to OpenAI, Anthropic, and Mistral hiring signals.
+
+signal:
+  source: "PERSON-020 Chip Huyen"
+  type: "influencer_post"
+  summary: "Chip Huyen keeps pushing evaluation as a first-class production AI discipline, which makes a tiny offline eval harness the right signal-driven rebuttal to shipping on vibes."
+
+classification:
+  riu: "RIU-021"
+  riu_name: "Golden Set + Offline Evaluation Harness"
+  knowledge_entries:
+    - "LIB-015"
+    - "LIB-037"
+    - "LIB-038"
+  new_knowledge: false
+  new_riu: false
+
+video:
+  title: "Build a Tiny AI Eval Harness"
+  title_chars: 28
+  title_formula: "authority-test"
+  duration_target: 8
+
+  thumbnail:
+    face: "serious"
+    visual: "A tiny 5-row eval table with one failing AI output circled in red"
+    text: "Stop Guessing"
+    palette: "blue-orange"
+
+  hook:
+    formula: "problem-promise"
+    script: |
+      Most AI teams are still shipping on vibes.
+      If you can't tell me what a good answer looks like before you run the model, you are not evaluating anything.
+      In this video I'll show you how to build a tiny offline eval harness in a few minutes, so you can stop saying "it seems better" and start saying "it passed."
+
+  build:
+    what_to_build: "A 5-case golden set with expected outputs and a simple pass/fail rule for one AI task"
+    tools_needed:
+      - "Any LLM chat tool"
+      - "Markdown editor or notes app"
+      - "Optional spreadsheet"
+    difficulty_on_camera: "Quick Start"
+
+enablement:
+  topic: "Build a Tiny AI Eval Harness"
+  output_description: "A small test set with expected outputs, a scoring rule, and a verdict you can reuse whenever you change a prompt or model."
+  concept_summary: "An offline eval harness is the smallest honest way to tell whether an AI task is actually improving. Instead of relying on taste or memory, you define a few representative cases, write down what good looks like, and score every new version against the same standard."
+  review_status: "reviewed"
+  confidence_baseline_task: "define five test cases and a pass rule that tell you whether an AI task is actually working"
+
+  constellation:
+    name: "Build → Test → Ship"
+    sequence: "2 of 3"
+    map:
+      - position: 1
+        topic: "Prompt Interface Contract"
+        riu: "RIU-022"
+        status: "done"
+      - position: 2
+        topic: "Golden Set + Offline Evaluation Harness"
+        riu: "RIU-021"
+        status: "this"
+      - position: 3
+        topic: "Deployment Readiness Envelope"
+        riu: "RIU-060"
+        status: "next"
+
+  quick_start:
+    output: "A 5-row markdown eval table with inputs, expected outputs, and a pass threshold for one simple AI task"
+    example: "Check whether an AI can sort your streaming watchlist into three moods without putting the same movie into contradictory buckets"
+    steps:
+      - "Pick one tiny AI task you care about, like categorizing short text or rewriting something into a specific format."
+      - "Write five representative inputs that cover the obvious cases plus one tricky case."
+      - "For each input, write the exact output or label you would accept as correct."
+      - "Set one pass rule, such as 'at least 4 of 5 cases must be correct to ship this version.'"
+      - "Run the same prompt or model against all five cases and record the results in one table."
+    failure_modes:
+      - "Choosing five nearly identical cases, which makes the harness look rigorous while hiding brittleness."
+      - "Writing vague expected outputs like 'pretty good summary' that no one can score consistently."
+      - "Changing the task halfway through, so the prompt and the expected outputs no longer measure the same thing."
+      - "Counting partial guesses as passes because the result feels close enough."
+
+  applied:
+    output: "A work-ready eval sheet with 10-15 cases, explicit acceptance criteria, and a comparison between baseline and candidate outputs"
+    steps:
+      - "Choose one real workflow where AI output quality matters, such as classification, extraction, summarization, or response drafting."
+      - "Define the decision the eval should support: prompt change, model swap, guardrail update, or release gate."
+      - "Collect 10-15 realistic examples, including at least three edge cases that have burned you before."
+      - "Write expected outputs or score dimensions that another person on your team could understand without your narration."
+      - "Run the baseline version and the candidate version on the same cases."
+      - "Score both versions using one simple rubric or pass/fail logic."
+      - "Write a one-paragraph verdict: keep baseline, ship candidate, or revise and retest."
+    failure_modes:
+      - "Using only clean demo cases instead of the ugly cases that actually trigger support tickets."
+      - "Comparing two versions without freezing the scoring rules first."
+      - "Letting one flashy win outweigh repeated failures on routine cases."
+      - "Forgetting to capture why a case failed, which kills the usefulness of the next iteration."
+
+  production:
+    output: "A portfolio-grade eval pack with golden set, rubric, baseline results, failure analysis, regression rule, and a clear ship/no-ship recommendation"
+    steps:
+      - "Start with a concrete task definition and one sentence explaining the business or user risk of getting it wrong."
+      - "Build a golden set with normal cases, edge cases, and adversarial or ambiguous cases."
+      - "Define the scoring method: pass/fail, rubric dimensions, or weighted metrics."
+      - "Document the baseline system version, the candidate change, and the hypothesis for improvement."
+      - "Run both systems and capture results side by side."
+      - "Label failure patterns, not just failures, so you can see clusters such as formatting drift, missed edge cases, or unsafe completions."
+      - "Set a regression rule, such as 'candidate cannot reduce baseline performance on critical cases.'"
+      - "Write a ship decision with rationale, open risks, and what to test next."
+    failure_modes:
+      - "Optimizing for the average score while letting critical-case failures slip through."
+      - "Mixing subjective preferences with objective acceptance criteria in the same score."
+      - "Treating one evaluation run as final truth instead of a decision input with known limits."
+      - "Skipping version labels, which makes later comparisons impossible to trust."
+
+  next_if_clicked:
+    - riu: "RIU-524"
+      topic: "LLM Output Quality Monitoring"
+      relationship: "Turns a one-time eval into an ongoing quality signal after deployment."
+    - riu: "RIU-060"
+      topic: "Deployment Readiness Envelope"
+      relationship: "Uses eval evidence to decide whether the system is actually ready to ship."
+    - riu: "RIU-022"
+      topic: "Prompt Interface Contract"
+      relationship: "Stabilizes the prompt and output shape so your eval results mean something."
+
+  next_if_hard:
+    - riu: "RIU-001"
+      topic: "Convergence Brief"
+      relationship: "If evaluation feels fuzzy, clarify what success actually means before scoring anything."
+    - riu: "RIU-022"
+      topic: "Prompt Interface Contract"
+      relationship: "If outputs keep drifting, tighten the interface before trying to evaluate quality."
+
+post_production:
+  workflow: "B"
+  ai_images_needed: 2
+  estimated_cost: "$4"
+  estimated_edit_time: "35 minutes"
+
+competitor_context: |
+  Chip Huyen covers evaluation as a production AI systems discipline, and that makes the signal strong.
+  Many AI creators cover prompting, model launches, or tool demos, but far fewer turn evaluation into a
+  fast, beginner-friendly artifact someone can build immediately. Our angle is not "here is another eval
+  framework explainer." Our angle is: stop vibe-evaluating AI outputs, build a tiny honest harness, and
+  understand why language quality needs explicit criteria. That combines comparative linguistics,
+  knowledge-engineering judgment, and practical system design in one debut video.
+
+checklist:
+  - spec_complete: true
+  - enablement_path_generated: true
+  - thumbnail_concepts_ready: false
+  - script_drafted: false
+  - recorded: false
+  - edited: false
+  - path_on_github: false
+  - uploaded_to_youtube: false
+  - description_includes_path: false

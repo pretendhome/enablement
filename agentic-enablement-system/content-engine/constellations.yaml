@@ -1,0 +1,113 @@
+# Constellation Registry — Canonical Source of Truth
+# Location: enablement/agentic-enablement-system/content-engine/constellations.yaml
+# Authority: This file is the machine-readable contract for constellation integrity.
+#            content-engine-spec.md markdown tables are the human-readable view.
+#            On conflict, this file wins.
+# Status vocabulary:
+#   published  — path file exists in enablement/paths/
+#   planned    — RIU assigned, no path file yet
+#   example    — filled example exists in template file, not a standalone path
+#   unmapped   — slot defined but no RIU assigned yet
+
+constellations:
+
+  - name: "Organize → Retrieve → Route"
+    arc: "From structuring knowledge to using it in AI systems"
+    nodes:
+      - position: 1
+        topic: "Taxonomy Design"
+        riu: "RIU-401"
+        status: "example"
+        path_file: null  # example lives in path-template.md, not standalone
+      - position: 2
+        topic: "Building a Knowledge Library"
+        riu: null
+        status: "unmapped"
+        path_file: null
+      - position: 3
+        topic: "Multi-Agent Routing"
+        riu: null
+        status: "unmapped"
+        path_file: null
+
+  - name: "Build → Test → Ship"
+    arc: "From prototype to production"
+    nodes:
+      - position: 1
+        topic: "Prompt Interface Contract"
+        riu: "RIU-022"
+        status: "planned"
+        path_file: null
+      - position: 2
+        topic: "Golden Set + Offline Eval Harness"
+        riu: "RIU-021"
+        status: "published"
+        path_file: "enablement/paths/RIU-021-tiny-ai-eval-harness.md"
+      - position: 3
+        topic: "Deployment Readiness Envelope"
+        riu: "RIU-060"
+        status: "planned"
+        path_file: null
+
+  - name: "Prompt → Guardrail → Monitor"
+    arc: "From basic AI use to production safety"
+    nodes:
+      - position: 1
+        topic: "Writing AI Instructions"
+        riu: null
+        status: "unmapped"
+        path_file: null
+      - position: 2
+        topic: "Guardrails & Safety"
+        riu: null
+        status: "unmapped"
+        path_file: null
+      - position: 3
+        topic: "Monitoring & Observability"
+        riu: null
+        status: "unmapped"
+        path_file: null
+
+  - name: "Clarify → Evaluate → Automate"
+    arc: "From problem definition to automated solutions"
+    nodes:
+      - position: 1
+        topic: "Convergence Brief"
+        riu: "RIU-001"
+        status: "planned"
+        path_file: null
+      - position: 2
+        topic: "Service Evaluation"
+        riu: null
+        status: "unmapped"
+        path_file: null
+      - position: 3
+        topic: "Integration Recipes"
+        riu: null
+        status: "unmapped"
+        path_file: null
+
+  - name: "Signal → Story → System"
+    arc: "From noticing a trend to building infrastructure around it"
+    nodes:
+      - position: 1
+        topic: "Signal Monitoring"
+        riu: null
+        status: "unmapped"
+        path_file: null
+      - position: 2
+        topic: "Content Strategy"
+        riu: null
+        status: "unmapped"
+        path_file: null
+      - position: 3
+        topic: "Enablement Architecture"
+        riu: null
+        status: "unmapped"
+        path_file: null
+
+# Routing targets referenced in published paths but not yet in a constellation
+unassigned_routing_targets:
+  - riu: "RIU-524"
+    topic: "LLM Output Quality Monitoring"
+    referenced_from: "RIU-021"

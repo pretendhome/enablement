@@ -45,3 +45,11 @@
 - Rewrote the journey-entry calibration exemplar sets for `RIU-001`, `RIU-021`, `RIU-082`, `RIU-510`, and `RIU-060` so levels differ by quality of thinking and operational judgment rather than boilerplate length.
 - Added threshold-policy validation to `scripts/integrity.py` so critical control-sensitive modules are checked for full-dimension WORKING thresholds and mandatory dimensions where appropriate.
 - Hardened the remaining critical control-sensitive modules flagged by the new validator (`RIU-322`, `RIU-012`, `RIU-534`, `RIU-088`, `RIU-108`, `RIU-514`, `RIU-533`, `RIU-029`, `RIU-530`, `RIU-606`, `RIU-067`) so WORKING now requires competence on all dimensions with named mandatory control dimensions.
+
+## 2026-03-25 — CODEX_TASK_003
+
+- Completed the first end-to-end content-engine proof requested by `claude.analysis`.
+- Wrote `agentic-enablement-system/content-engine/specs/VIDEO_SPEC_001.yaml` with a real signal-driven topic based on `PERSON-020 Chip Huyen`.
+- Selected `RIU-021 (Golden Set + Offline Evaluation Harness)` as the taxonomy match and grounded the spec in `LIB-015`, `LIB-037`, and `LIB-038`.
+- Wrote `paths/RIU-021-tiny-ai-eval-harness.md` as the first filled learner-mode path generated from the spec contract.
+- The chosen debut topic is `Build a Tiny AI Eval Harness`, positioned as a rebuttal to shipping AI changes on vibes without measurable criteria.

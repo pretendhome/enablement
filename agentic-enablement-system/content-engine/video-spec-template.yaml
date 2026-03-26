@@ -1,0 +1,134 @@
+# Video Spec Template (v2.1)
+# Fill this for each video. The enablement parameters feed directly
+# into path-template.md to generate the viewer's learning path.
+# Schema owner: content-engine-spec.md
+#
+# Wire contract: this IS the HandoffPacket.payload for the enablement skill.
+# v2 adds: confidence_baseline_task, constellation, failure_modes, next_if_hard, review_status
+
+# --- SIGNAL ---
+# What triggered this video?
+
+signal:
+  source: ""              # e.g., "PERSON-019 Andrej Karpathy" or "COMP-043 Descript shipped v4"
+  type: ""                # influencer_post | tool_update | funding | taxonomy_gap | audience_request
+  summary: ""             # One sentence: what happened and why it matters
+
+# --- CLASSIFICATION ---
+# Which RIU handles this? If none exists, create one.
+
+classification:
+  riu: ""                 # e.g., "RIU-401"
+  riu_name: ""            # e.g., "Taxonomy Design"
+  knowledge_entries: []   # e.g., ["LIB-045", "LIB-067"]
+  new_knowledge: false    # Will this video produce a new knowledge library entry?
+  new_riu: false          # Does this require creating a new RIU?
+
+# --- VIDEO ---
+# Thumbnail + Title + Hook + Build plan
+
+video:
+  title: ""               # Target: 53 chars, ~9 words
+  title_chars: 0
+  title_formula: ""       # challenge-journey | transformation | results | curiosity-gap | authority-test | contrarian | regret | comparison
+  duration_target: 0      # minutes
+
+  thumbnail:
+    face: ""              # determined | calm | serious | urgent
+    visual: ""            # What visual element beside your face
+    text: ""              # 2-4 words creating curiosity gap (NOT the title)
+    palette: ""           # blue-orange | yellow-black | red-accent | muted
+
+  hook:
+    formula: ""           # cold-open | bold-claim | best-moment | problem-promise | contrarian
+    script: |
+      # First 5 seconds: pattern interrupt
+      # 5-15 seconds: clarify the promise
+      # 15-30 seconds: establish stakes
+
+  build:
+    what_to_build: ""     # What you actually do on camera
+    tools_needed: []      # e.g., [terminal, Python, tiktoken]
+    difficulty_on_camera: "" # Keep it at Quick Start level — viewer goes deeper in the path
+
+# --- ENABLEMENT ---
+# These parameters fill path-template.md (schema defined in content-engine-spec.md)
+
+enablement:
+  topic: ""               # Human-readable topic name
+  output_description: ""  # One sentence: what the learner will build
+  concept_summary: ""     # 1-2 sentences: what this concept is and why it matters
+  review_status: "draft"  # draft | reviewed | current
+
+  # --- Confidence baseline ---
+  # Phrased as a capability: "could you [X]?" — used at start AND end to measure delta
+  confidence_baseline_task: ""  # e.g., "organize a messy domain into clean, non-overlapping categories"
+
+  # --- Constellation ---
+  # Which learning arc does this path belong to? See content-engine-spec.md for defined constellations.
+  constellation:
+    name: ""              # e.g., "Organize → Retrieve → Route"
+    sequence: ""          # e.g., "1 of 3"
+    map:                  # Visual position in the arc
+      - { position: 1, topic: "", riu: "", status: "" }  # this | next | upcoming | done
+
+  # --- Difficulty levels ---
+  quick_start:
+    output: ""            # What they'll produce (concrete)
+    example: ""           # Relatable daily-life example (not work)
+    steps:                # 3-6 clear steps
+      - ""
+    failure_modes:        # 2-4 specific, practical warnings
+      - ""
+
+  applied:
+    output: ""            # What they'll produce (useful for their real work)
+    steps:                # 4-8 guided steps
+      - ""
+    failure_modes:        # 2-4 specific, practical warnings
+      - ""
+
+  production:
+    output: ""            # What they'll produce (portfolio-grade)
+    steps:                # 5-10 detailed steps
+      - ""
+    failure_modes:        # 2-4 specific, practical warnings
+      - ""
+
+  # --- Routing ---
+  next_if_clicked:        # 2-3 paths for "if this clicked, go deeper"
+    - riu: ""
+      topic: ""
+      relationship: ""    # e.g., "organizes WHAT you know"
+
+  next_if_hard:           # 1-2 paths for "if this was hard, revisit"
+    - riu: ""
+      topic: ""
+      relationship: ""    # e.g., "the same skill, different framing"
+
+# --- POST-PRODUCTION ---
+
+post_production:
+  workflow: "B"           # A ($0, 50-70min) | B ($4, 30-40min) | C ($8.50, 25-35min)
+  ai_images_needed: 0     # Diagrams/illustrations via Leonardo AI
+  estimated_cost: ""
+  estimated_edit_time: ""
+
+# --- COMPETITOR CONTEXT ---
+# Informal awareness check. Not a system — just notes.
+
+competitor_context: |
+  # Who has covered this? What's our angle?
+
+# --- CHECKLIST ---
+
+checklist:
+  - spec_complete: false
+  - enablement_path_generated: false
+  - thumbnail_concepts_ready: false
+  - script_drafted: false
+  - recorded: false
+  - edited: false
+  - path_on_github: false
+  - uploaded_to_youtube: false
+  - description_includes_path: false

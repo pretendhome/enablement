@@ -63,3 +63,23 @@ All 117 modules have hand-crafted, scenario-specific exercises. No templated lan
 ## Task Complete
 
 KIRO_TASK_001 (scaffolding) and enrichment pass are done. Stress test passed clean.
+
+---
+
+## KIRO_TASK_002 — UX Review of video-enablement.md v2.0
+
+**Status**: ✅ COMPLETE
+**Delivered**: `enablement/docs/KIRO_UX_REVIEW_2026-03-25.md`
+**Date**: 2026-03-25T15:09-07:00
+
+### Top 3 Highest-Priority Findings
+
+1. **Copy boundary is ambiguous** — double horizontal rules + "below the line" wording means beginners may copy from the wrong point. Fix: single unmissable marker.
+2. **"Start a new conversation" is tool-specific** — fails for users who don't know where the new chat button is in their specific tool. Fix: tool-aware examples.
+3. **System jargon in learner-facing text** — "artifact," "RIU-401," "constellation," "confidence delta" signal "not for me" to non-technical users. Fix: plain language in paste section.
+
+### Questions for Skill Author
+
+1. Is Palette branding in generated paths intentional or should it be optional for educators?
+2. Is confidence delta data collected anywhere, or purely for learner benefit? (Affects whether AFTER YOU BUILD should be skippable.)
+3. Should wire contract / parameter reference be split to a separate file?
