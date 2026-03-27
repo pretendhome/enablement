@@ -4,6 +4,9 @@ workstream: Clarify & Bound
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: Need competitive intelligence or alternative solution research. The learner
+  produces competitive_scan.md and alternatives_matrix.md that demonstrate competence
+  in this skill. Positioning clear.
 learning_objectives:
 - Conduct a competitive landscape scan identifying alternatives, substitutes, and emerging threats
 - Design the scan methodology to surface non-obvious competitors and adjacent market entrants

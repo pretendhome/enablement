@@ -1,0 +1,82 @@
+riu_id: "RIU-550"
+name: "No-Code AI App Generation"
+workstream: "Core Logic"
+journey_stage: "foundation"
+classification: "both"
+difficulty: "medium"
+description: "Team needs to build AI-powered applications without traditional coding, using platforms that generate full-stack apps from natural language. The learner produces nocode_platform_selection.md and escape_hatch_strategy.md. Selection includes capability ceiling and migration path."
+
+learning_objectives:
+  - "Evaluate no-code AI app generation platforms against real use case requirements"
+  - "Map capability boundaries — what the platform can and cannot do"
+  - "Design an escape hatch strategy for when requirements exceed platform capabilities"
+  - "Assess vendor lock-in risk with concrete migration cost estimates"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-001"   # Convergence Brief — scope the use case before selecting a platform
+
+knowledge_library_entries:
+  primary:
+    - "LIB-037"   # How do I evaluate AI service quality beyond accuracy metrics?
+    - "LIB-003"   # How do I scope an AI pilot when the customer says 'we need AI everywhere'?
+  supporting:
+    - "LIB-038"   # What's the minimum viable evaluation framework for comparing AI services?
+    - "LIB-015"   # How do I turn 'we'll know it when we see it' into measurable acceptance criteria?
+
+service_context:
+  services:
+    - "Lovable"
+    - "v0.dev"
+  evaluation_criteria:
+    - "Complexity ceiling (what can't it build?)"
+    - "Code export and portability"
+    - "Customization depth"
+    - "Vendor lock-in risk"
+    - "Cost at scale"
+    - "AI model integration options"
+
+estimated_duration:
+  learning: "4-6 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "service_integration"
+required_artifacts:
+  - "nocode_platform_selection.md — Platform selection with capability boundary analysis"
+  - "capability_boundary_map.md — What the platform can and cannot do, with specific examples"
+  - "escape_hatch_strategy.md — Migration plan for when requirements exceed platform capabilities"
+
+rubric_dimensions:
+  capability_mapping:
+    description: "Platform capabilities and limitations mapped with specific examples, not marketing claims"
+    levels: [insufficient, basic, competent, expert]
+  lock_in_assessment:
+    description: "Vendor lock-in risk quantified with concrete migration cost estimates and code portability analysis"
+    levels: [insufficient, basic, competent, expert]
+  escape_strategy:
+    description: "Escape hatch is actionable — specific migration path, estimated effort, and trigger conditions for when to migrate"
+    levels: [insufficient, basic, competent, expert]
+  adoption_governance:
+    description: "Governance for platform adoption prevents shadow IT and ensures consistent evaluation across teams"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-550-EX-01"
+    failure_mode: "silent"
+    scenario: "Your team built an internal tool using a no-code platform. It works great for the first 6 months. Then a new requirement arrives: integrate with your company's SSO system. The platform doesn't support custom OAuth flows. The team discovers they can't export the code in a usable form. They're stuck — rebuild from scratch or live without SSO."
+    expected_output: "Capability boundary map that includes authentication, authorization, and enterprise integration requirements. Escape hatch strategy with trigger conditions (when to migrate). Code export assessment before committing to the platform."
+
+  - id: "RIU-550-EX-02"
+    failure_mode: "loud"
+    scenario: "The no-code platform raises prices 3x after your team has built 12 internal tools on it. The tools are critical to daily operations. Migration would take 6 months of engineering time. The team is locked in."
+    expected_output: "Lock-in risk assessment with cost projection scenarios. Multi-platform strategy (don't put all tools on one platform). Contract review for pricing guarantees. Migration cost estimate done BEFORE committing, not after."
+
+  - id: "RIU-550-EX-03"
+    failure_mode: "clustered"
+    scenario: "Five teams independently adopted five different no-code platforms. Each team chose based on their immediate needs. Now there are 5 platforms to maintain, 5 billing relationships, 5 security reviews needed, and no shared components between teams. The CTO wants consolidation but each team argues their platform is best for their use case."
+    expected_output: "Unified evaluation framework for no-code platforms. Consolidation recommendation based on capability overlap analysis. Governance process for new platform adoption (evaluate against shared criteria). Migration plan that prioritizes by lock-in risk and maintenance cost."

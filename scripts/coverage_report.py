@@ -3,7 +3,7 @@
 Coverage Report — verifies enablement system coverage against Palette taxonomy.
 
 Checks:
-1. RIU coverage: how many of 117 RIUs have modules?
+1. RIU coverage: how many of 121 RIUs have modules?
 2. KL utilization: what % of 163 knowledge library entries are referenced?
 3. Workstream balance: module distribution across workstreams
 4. Classification coverage: internal_only vs both
@@ -83,7 +83,7 @@ def run_coverage_report():
     all_rius = set()
     for riu in taxonomy.get('rius', []):
         all_rius.add(riu.get('riu_id'))
-    total_rius = len(all_rius) if all_rius else 117  # fallback
+    total_rius = len(all_rius) if all_rius else 121  # fallback
 
     # Module coverage
     module_rius = {m['riu_id'] for m in modules}

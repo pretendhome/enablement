@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Quality checkpoint needed before proceeding to next phase or deployment.
+  The learner produces validation_gate.md and criteria_checklist.md that demonstrate
+  competence in this skill. Pass/fail decision documented.
 learning_objectives:
 - Design validation gates with explicit pass/fail criteria and evidence requirements
 - Implement gate enforcement that blocks progression on failure without bypass paths

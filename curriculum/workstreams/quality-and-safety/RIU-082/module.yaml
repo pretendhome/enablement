@@ -4,6 +4,9 @@ workstream: "Quality & Safety"
 journey_stage: "foundation"
 classification: "both"
 difficulty: "critical"
+description: LLM outputs can hallucinate or violate constraints. The learner produces
+  policy_rules.yaml and llm_guardrails.md that demonstrate competence in this skill.
+  Tool calls constrained.
 
 learning_objectives:
   - "Define policy constraints, evidence requirements, and refusal rules for an LLM-powered system"

@@ -6,7 +6,7 @@ A competency-based developer education and certification platform built on the [
 
 ## What This Is
 
-This system teaches developers how to build enterprise AI systems by mapping each of 117 real problems (competency areas) to learning objectives, educational content, hands-on exercises, and portfolio-based assessment. It is not a course catalog — it is a competency graph where every node is a real problem, every edge is a prerequisite, and every assessment is a demonstration of ability to solve that problem under realistic conditions.
+This system teaches developers how to build enterprise AI systems by mapping each of 121 real problems (competency areas) to learning objectives, educational content, hands-on exercises, and portfolio-based assessment. It is not a course catalog — it is a competency graph where every node is a real problem, every edge is a prerequisite, and every assessment is a demonstration of ability to solve that problem under realistic conditions.
 
 ## How It Works
 
@@ -22,10 +22,10 @@ Built on Palette's existing data layers:
 
 | Palette Layer | Enablement Use |
 |---|---|
-| 117 competency areas (RIUs) | Curriculum backbone — each RIU = 1 learning module |
+| 121 competency areas (RIUs) | Curriculum backbone — each RIU = 1 learning module |
 | 167 knowledge entries | Content source with evidence tiers and learning progressions |
 | 69 integration recipes | Service integration exercises for "both" classified modules |
-| 9 specialized agents | Evaluation agents + content maintenance |
+| 12 specialized agents | Evaluation agents + content maintenance |
 | Governance tiers | Certification tier model (UNVALIDATED → WORKING → PRODUCTION) |
 
 ## Certification Tracks

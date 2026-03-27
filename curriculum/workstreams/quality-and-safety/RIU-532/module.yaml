@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: both
 difficulty: high
+description: AI decisions need explanation for users, auditors, or regulators. The
+  learner produces explainability_framework.md and explanation_templates/ that demonstrate
+  competence in this skill. Explanations understandable by target audience.
 learning_objectives:
 - Implement explainability techniques appropriate to the model type and audience
 - Design user-facing explanations that are understandable without technical background

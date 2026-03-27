@@ -4,6 +4,9 @@ workstream: Interfaces & Inputs
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: Need to integrate auth system (SSO/OAuth/SAML) with existing application.
+  The learner produces auth_integration_design.md and session_management.md that demonstrate
+  competence in this skill. Users can authenticate.
 learning_objectives:
 - Integrate authentication (SSO/OAuth/SAML) into an AI application securely
 - 'Handle token lifecycle: issuance, refresh, revocation, and expiry'

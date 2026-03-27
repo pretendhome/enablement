@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: specialization
 classification: internal_only
 difficulty: medium
+description: Security review needed; unclear what to provide. The learner produces
+  security_review_packet/ and threat_model.md that demonstrate competence in this
+  skill. Approval accelerated.
 learning_objectives:
 - Compile a security review packet that passes enterprise security review without delays
 - Create a threat model with data flows, attack vectors, and mitigations

@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: both
 difficulty: critical
+description: Logs/prompts may include sensitive info. The learner produces redaction_rules.yaml
+  and redaction_tests/ that demonstrate competence in this skill. Compliance risk
+  reduced.
 learning_objectives:
 - Implement a redaction pipeline that removes PII from logs, prompts, and stored artifacts
 - Design redaction rules that minimize sensitive data without destroying analytical utility

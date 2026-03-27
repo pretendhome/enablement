@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "both"
 difficulty: "critical"
+description: Regulated data or compliance requirements constrain design and tooling.
+  The learner produces compliance_triage.md and data_minimization_plan.md that demonstrate
+  competence in this skill. Compliance review path clear.
 
 learning_objectives:
   - "Classify data sensitivity levels and define minimization/redaction rules per field"

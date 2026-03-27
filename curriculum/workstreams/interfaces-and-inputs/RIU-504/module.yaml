@@ -1,0 +1,83 @@
+riu_id: "RIU-504"
+name: "AI Video Generation Model Selection"
+workstream: "Interfaces & Inputs"
+journey_stage: "specialization"
+classification: "both"
+difficulty: "high"
+description: "Team needs to select and integrate AI video generation models with cost, quality, and latency tradeoffs. The learner produces video_model_selection.md and model_benchmark_matrix.md. Selection justified with cost/quality/latency evidence."
+
+learning_objectives:
+  - "Evaluate AI video generation models (text-to-video, image-to-video) against consistent benchmark criteria"
+  - "Design a model benchmark matrix comparing cost, quality, latency, and content safety across providers"
+  - "Select and justify a model choice with evidence-based tradeoff analysis"
+  - "Plan integration with fallback strategy for model quality degradation"
+
+prerequisites:
+  required:
+    - "RIU-500"   # Multimodal Data Pipeline Design — video is a modality
+  recommended:
+    - "RIU-521"   # LLM Model Version Management — model lifecycle applies to video models too
+
+knowledge_library_entries:
+  primary:
+    - "LIB-037"   # How do I evaluate AI service quality beyond accuracy metrics?
+    - "LIB-038"   # What's the minimum viable evaluation framework for comparing AI services?
+  supporting:
+    - "LIB-043"   # What's the checklist for 'production-ready' data quality in AI systems?
+    - "LIB-065"   # How do I version control operational procedures for AI systems?
+
+service_context:
+  services:
+    - "Runway (Aleph model)"
+    - "Kling 2.1/3.0 (via Higgsfield AI)"
+    - "Seedance Pro (via Higgsfield AI)"
+  evaluation_criteria:
+    - "Video quality and consistency"
+    - "Generation latency"
+    - "Cost per minute of generated video"
+    - "Content safety filtering"
+    - "API stability and versioning"
+
+estimated_duration:
+  learning: "6-8 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "service_integration"
+required_artifacts:
+  - "video_model_selection.md — Model selection with evidence-based justification"
+  - "model_benchmark_matrix.md — Comparison matrix with cost, quality, latency, safety scores"
+  - "integration_plan.md — Integration plan with fallback and degradation handling"
+
+rubric_dimensions:
+  benchmark_rigor:
+    description: "Models evaluated against consistent, reproducible benchmark set with measurable criteria"
+    levels: [insufficient, basic, competent, expert]
+  tradeoff_analysis:
+    description: "Cost/quality/latency tradeoffs explicitly analyzed with evidence, not just listed"
+    levels: [insufficient, basic, competent, expert]
+  safety_verification:
+    description: "Content safety filters verified per model with test cases for edge cases"
+    levels: [insufficient, basic, competent, expert]
+  integration_resilience:
+    description: "Integration plan handles model degradation, API changes, and fallback scenarios"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-504-EX-01"
+    failure_mode: "silent"
+    scenario: "Your team selected a video generation model based on demo quality. In production, 15% of generated videos have visual artifacts that weren't in the demo set. The benchmark only tested 10 prompts — all simple scenes. Complex scenes with multiple subjects consistently fail."
+    expected_output: "Benchmark matrix with stratified test cases (simple, complex, edge case). Quality scoring per category. Minimum sample size requirement. Acceptance criteria that include worst-case performance, not just average."
+
+  - id: "RIU-504-EX-02"
+    failure_mode: "loud"
+    scenario: "Your video generation costs spike 400% in month 2. The model provider changed pricing from per-request to per-second-of-output. Your 30-second videos now cost 6x what 5-second clips cost. The integration has no cost controls."
+    expected_output: "Cost model with per-unit pricing analysis. Cost caps and alerting. Usage-based routing (short clips to expensive model, long videos to cheaper alternative). Contract review checklist for pricing change clauses."
+
+  - id: "RIU-504-EX-03"
+    failure_mode: "clustered"
+    scenario: "Three teams independently adopted three different video generation models. Marketing uses Runway for brand videos, product uses Kling for demos, and training uses a self-hosted model. No shared evaluation criteria, no cost visibility, no content safety standards across teams."
+    expected_output: "Unified evaluation framework applicable across teams. Shared benchmark matrix. Centralized cost tracking. Content safety policy that applies regardless of model. Governance for new model adoption (evaluate against shared criteria before adopting)."

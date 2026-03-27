@@ -1,5 +1,5 @@
 # Content Engine Specification
-# Version: 2.1
+# Version: 2.2
 # Location: enablement/agentic-enablement-system/content-engine/content-engine-spec.md
 # Status: Canonical — this file owns the parameter schema, quality bar, and publishing rules
 # Related: path-template.md (render target), creator-mode.md (creator UX layer)
@@ -66,11 +66,11 @@ Only constellations with concrete RIU mappings are listed. Unmapped slots are as
 
 | Constellation | Position | Topic | RIU | Path Status |
 |---|---|---|---|---|
-| **Build → Test → Ship** | 1 | Prompt Interface Contract | RIU-022 | planned |
+| **Build → Test → Ship** | 1 | Prompt Interface Contract | RIU-022 | **published** |
 | **Build → Test → Ship** | 2 | Golden Set + Offline Eval Harness | RIU-021 | **published** |
-| **Build → Test → Ship** | 3 | Deployment Readiness Envelope | RIU-060 | planned |
-| **Organize → Retrieve → Route** | 1 | Taxonomy Design | RIU-401 | example only |
-| **Clarify → Evaluate → Automate** | 1 | Convergence Brief | RIU-001 | planned |
+| **Build → Test → Ship** | 3 | Deployment Readiness Envelope | RIU-060 | **published** |
+| **Organize → Retrieve → Route** | 1 | Taxonomy Design | RIU-401 | **published** |
+| **Clarify → Evaluate → Automate** | 1 | Convergence Brief | RIU-001 | **published** |
 
 Routing targets referenced in published paths but not yet assigned to a constellation slot:
 
@@ -130,7 +130,7 @@ Based on the Palette Knowledge Library
 
 **System-level** (HTML comment or footer metadata):
 ```html
-<!-- Source: RIU-XXX | Knowledge: LIB-XXX, LIB-YYY | Engine: v2.1 -->
+<!-- Source: RIU-XXX | Knowledge: LIB-XXX, LIB-YYY | Engine: v2.2 -->
 ```
 
 Rationale: Provenance is part of the trust story. Visible structure is a differentiator. But learners don't need raw IDs inline.
@@ -160,31 +160,40 @@ If constrained to 6 fields, merge 6 and 7 into one textarea. Prioritize artifact
 
 The post-build sequence adapts by level to reduce completion friction while preserving learning signals.
 
-### Mandatory for all levels
+### Design change (v2.2)
 
-1. **Confidence delta**: Re-rate 1-5 against the exact same baseline question. Report the delta and name what drove it.
-2. **Summary sentence**: "Today I built [what] which does [purpose]. The key design decision was [choice]. My confidence moved from [X] to [Y]."
+Confidence re-rating is now captured inline in each level's CHECK YOUR WORK section (Quick Start item 4, Applied item 6, Production item 7). The AFTER YOU BUILD section references the already-captured delta instead of re-asking. This reduces friction and keeps the confidence measurement closer to the build moment.
 
-### Mandatory for Applied and Production
+### Quick Start wrap-up
 
-3. **Friction capture**: "What was the single hardest part? Not the longest — the part where you felt most uncertain."
+1. Remind learner of confidence delta (already captured during check).
+2. Proof-of-work: "Describe what you built in one sentence."
+3. Summary sentence: "Today I built [what] which does [purpose]. My confidence moved from [X] to [Y]."
 
-Then ask: "Want the full debrief (2 more quick questions) or are you good?"
+### Applied wrap-up
 
-### Optional debrief branch (all levels)
+1. Confidence delta (already captured during check).
+2. Friction capture: "What was the single hardest part?"
+3. Proof-of-work: "Describe what you built in 1-2 sentences."
+4. Summary sentence with key design decision included.
 
-4. **Artifact capture**: "Describe what you built in 1-2 sentences, or paste a link if you saved it somewhere."
-5. **Next pull**: "If you could build one more thing with this skill, what would it be?"
+### Production wrap-up
+
+1. Confidence delta (already captured during check).
+2. Friction capture: "What was the single hardest part?"
+3. Artifact capture: "Describe what you built, or paste a link."
+4. Next pull: "If you could build one more thing with this skill, what would it be?"
+5. Full summary: "Today I built [what] which does [purpose]. The key design decision was [choice]. My confidence moved from [X] to [Y]."
 
 ### Summary table
 
 | Step | Quick Start | Applied | Production |
 |------|-------------|---------|------------|
-| 1. Confidence delta | mandatory | mandatory | mandatory |
-| 2. Summary sentence | mandatory | mandatory | mandatory |
-| 3. Friction capture | opt-in via debrief | mandatory | mandatory |
-| 4. Artifact capture | opt-in via debrief | opt-in via debrief | mandatory |
-| 5. Next pull | opt-in via debrief | opt-in via debrief | opt-in via debrief |
+| Confidence delta | in CHECK YOUR WORK | in CHECK YOUR WORK | in CHECK YOUR WORK |
+| Friction capture | — | mandatory | mandatory |
+| Proof-of-work | mandatory (1 sentence) | mandatory (1-2 sentences) | mandatory (link or description) |
+| Next pull | — | — | opt-in |
+| Summary sentence | mandatory | mandatory | mandatory |
 
 **Principle**: Do not force a long debrief on low-commitment learners. Preserve richer signals when the learner has momentum.
 

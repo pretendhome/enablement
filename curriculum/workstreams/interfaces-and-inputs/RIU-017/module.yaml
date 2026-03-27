@@ -4,6 +4,8 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Need to build/configure a connector reliably. The learner produces connector_spec.md
+  and mapping_rules.yaml that demonstrate competence in this skill. Mapping deterministic.
 
 learning_objectives:
   - "Define a connector spec covering auth, pagination, rate limits, retries, and error handling"

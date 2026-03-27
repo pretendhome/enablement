@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: both
 difficulty: high
+description: Prompts evolve over time; need versioning, testing, and deployment management.
+  The learner produces prompt_versioning.md and prompt_registry/ that demonstrate
+  competence in this skill. Rollback to previous version is instant.
 learning_objectives:
 - Implement prompt version control with change tracking, rollback, and deployment history
 - Design prompt lifecycle management from development through testing to production

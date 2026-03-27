@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: System not observable; failures will be silent. The learner produces
+  observability_baseline.md and dashboards/ that demonstrate competence in this skill.
+  Debugging is faster.
 learning_objectives:
 - Design an observability baseline covering metrics, logs, and traces for an AI system
 - Implement structured logging that enables efficient debugging without excessive volume

@@ -1,96 +1,187 @@
-# Enablement System — Manifest
-# Single source of truth for current versions and paths
-
 system:
-  name: "Palette Developer Enablement & Certification System"
-  version: "0.3.0"
-  status: "phase-2-hardening"
-  updated: "2026-03-24"
-  repo: "github.com/pretendhome/enablement"
-
+  name: Palette Developer Enablement & Certification System
+  version: 0.4.0
+  status: phase-3-content-engine
+  updated: '2026-03-26'
+  repo: github.com/pretendhome/enablement
 palette_source:
-  taxonomy: "../palette/taxonomy/releases/v1.3/palette_taxonomy_v1.3.yaml"
-  knowledge_library: "../palette/knowledge-library/v1.4/palette_knowledge_library_v1.4.yaml"
-  riu_classification: "../palette/buy-vs-build/service-routing/v1.0/riu_classification_v1.0.yaml"
-  service_routing: "../palette/buy-vs-build/service-routing/v1.0/service_routing_v1.0.yaml"
-  relationship_graph: "../palette/RELATIONSHIP_GRAPH.yaml"
-  integrations: "../palette/buy-vs-build/integrations/"
-
+  taxonomy: ../palette/taxonomy/releases/v1.3/palette_taxonomy_v1.3.yaml
+  knowledge_library: ../palette/knowledge-library/v1.4/palette_knowledge_library_v1.4.yaml
+  riu_classification: ../palette/buy-vs-build/service-routing/v1.0/riu_classification_v1.0.yaml
+  service_routing: ../palette/buy-vs-build/service-routing/v1.0/service_routing_v1.0.yaml
+  relationship_graph: ../palette/RELATIONSHIP_GRAPH.yaml
+  integrations: ../palette/buy-vs-build/integrations/
 curriculum:
-  competency_areas: 117
-  knowledge_entries: 167
+  competency_areas: 121
+  knowledge_entries: 168
   workstreams: 6
   specialized_series: 5
   learning_paths: 5
-
+content_engine:
+  version: '2.2'
+  spec: agentic-enablement-system/content-engine/content-engine-spec.md
+  template: agentic-enablement-system/content-engine/path-template.md
+  creator_mode: agentic-enablement-system/content-engine/creator-mode.md
+  constellation_registry: agentic-enablement-system/content-engine/constellations.yaml
+  constellations_defined: 5
+  published_paths: 14
+  published:
+  - riu: RIU-001
+    path: paths/RIU-001-convergence-brief.md
+    constellation: Clarify → Evaluate → Automate
+    position: 1
+  - riu: RIU-021
+    path: paths/RIU-021-tiny-ai-eval-harness.md
+    constellation: Build → Test → Ship
+    position: 2
+  - riu: RIU-022
+    path: paths/RIU-022-prompt-interface-contract.md
+    constellation: Build → Test → Ship
+    position: 1
+  - riu: RIU-060
+    path: paths/RIU-060-deployment-readiness-envelope.md
+    constellation: Build → Test → Ship
+    position: 3
+  - riu: RIU-401
+    path: paths/RIU-401-taxonomy-design.md
+    constellation: Organize → Retrieve → Route
+    position: 1
+  - riu: RIU-082
+    path: paths/RIU-082-llm-safety-guardrails.md
+    constellation: Prompt → Guardrail → Monitor
+    position: 2
+  - riu: RIU-524
+    path: paths/RIU-524-llm-output-quality-monitoring.md
+    constellation: Prompt → Guardrail → Monitor
+    position: 3
+  - riu: RIU-252
+    path: paths/RIU-252-model-evaluation-selection.md
+    constellation: Clarify → Evaluate → Automate
+    position: 2
+  - riu: RIU-400
+    path: paths/RIU-400-kb-content-audit.md
+    constellation: Organize → Retrieve → Route
+    position: 2
+  video_specs: 2
+  constellations_complete:
+  - Build → Test → Ship (3/3)
+  - Prompt → Guardrail → Monitor (3/3)
 certification:
-  tiers: [UNVALIDATED, WORKING, PRODUCTION]
+  tiers:
+  - UNVALIDATED
+  - WORKING
+  - PRODUCTION
   tracks:
-    - name: "AI Foundations"
-      stage: foundation
-      target_rius: 12
-    - name: "RAG Engineer"
-      stage: retrieval
-      target_rius: 10
-    - name: "Agent Architect"
-      stage: orchestration
-      target_rius: 12
-    - name: "AI Governance"
-      stage: governance
-      target_rius: 10
-    - name: "AI Operations"
-      stage: ops
-      target_rius: 10
-
+  - name: AI Foundations
+    stage: foundation
+    target_rius: 12
+  - name: RAG Engineer
+    stage: retrieval
+    target_rius: 10
+  - name: Agent Architect
+    stage: orchestration
+    target_rius: 12
+  - name: AI Governance
+    stage: governance
+    target_rius: 10
+  - name: AI Operations
+    stage: ops
+    target_rius: 10
 assessment:
-  methodology: "portfolio-based, AI-augmented evaluation"
+  methodology: portfolio-based, AI-augmented evaluation
   anchor_items_per_module: 3
   total_items_per_module: 15
-  ai_human_agreement_target: 0.80
-  evaluation_layers: ["automated_checks", "ai_rubric", "human_calibration"]
-
+  ai_human_agreement_target: 0.8
+  evaluation_layers:
+  - automated_checks
+  - ai_rubric
+  - human_calibration
 validation:
-  integrity: "PASS (4 warnings — zero-KL modules pending)"
-  integrity_checks: 6
-  prerequisites: "PASS (no cycles in required or recommended, DAG valid)"
-  coverage: "117/117 RIUs (100%), 134/167 KL (80.2%)"
-  modules_hand_crafted: 117
+  integrity: PASS (0 warnings)
+  integrity_checks: 7
+  prerequisites: PASS (no cycles in required or recommended, DAG valid)
+  coverage: 121/121 RIUs (100%), 138/167 KL (82.6%)
+  constellation_integrity: PASS (4/4 metrics)
+  modules_hand_crafted: 121
   modules_templated: 0
-  calibration_exemplars: 1 reference (RIU-002), 2 legacy (pending revision)
-  threshold_engine: "assessment/evaluators/threshold_engine.py (89/89 tests, all 11 patterns)"
-  demo_runner: "scripts/demo_runner.py (6 commands, threshold engine integrated)"
-  golden_path: "examples/RIU-002-golden-path/"
-  architectural_plan: "docs/ARCHITECTURAL_IMPROVEMENT_PLAN.md"
-
+  zero_kl_modules: 0
+  calibration_exemplars: 10 modules covered (RIU-001, -002, -006, -009, -021, -022,
+    -080, -401, -500, -510, -521)
+  threshold_engine: assessment/evaluators/threshold_engine.py (89/89 tests, all 11
+    patterns)
+  demo_runner: scripts/demo_runner.py (6 commands, threshold engine integrated)
+  golden_path: examples/RIU-002-golden-path/
+  architectural_plan: docs/ARCHITECTURAL_IMPROVEMENT_PLAN.md
 scripts:
-  integrity: "python3 scripts/integrity.py"
-  coverage: "python3 scripts/coverage_report.py"
-  prerequisites: "python3 scripts/prerequisite_validator.py"
-  demo: "python3 scripts/demo_runner.py"
-  graph: "python3 scripts/generate_curriculum_graph.py"
-
+  integrity: python3 scripts/integrity.py
+  coverage: python3 scripts/coverage_report.py
+  prerequisites: python3 scripts/prerequisite_validator.py
+  constellation: python3 scripts/constellation_integrity.py
+  demo: python3 scripts/demo_runner.py
+  graph: python3 scripts/generate_curriculum_graph.py
 agents:
   kiro:
-    role: "scaffolding, rigorous generation, infrastructure"
+    role: scaffolding, rigorous generation, infrastructure
     trust_tier: WORKING
-    delivered: ["117 module.yaml (all hand-crafted)", "exercise enrichment (94 modules)", "Codex MCP fix", "stress test (24 checks)", "3 tier files", "5 track files", "Mistral MCP diagnosis"]
-    current_task: "KIRO_TASK_003 — zero-KL fixes, threshold engine → demo_runner wiring, tier/track validation"
+    delivered:
+    - 117 module.yaml (all hand-crafted)
+    - exercise enrichment (94 modules)
+    - Codex MCP fix
+    - stress test (24 checks)
+    - 3 tier files
+    - 5 track files
+    - Mistral MCP diagnosis
+    - product refinement doc (9 UX fixes + video lineup review)
+    current_task: KIRO_HANDOFF — template update → 3 learning paths → calibration
+      exemplars → module enrichment
   codex:
-    role: "creative design, coherence audit, assessment synthesis"
+    role: creative design, coherence audit, assessment synthesis
     trust_tier: WORKING
-    delivered: ["assessment methodology", "coherence audit", "5 journeys", "5 capstones", "post-fix audit", "Layer 2 harness spec", "system retrospective"]
-    current_task: "CODEX_TASK_004 — calibration exemplars (5 modules), prompt assembly module"
+    delivered:
+    - assessment methodology
+    - coherence audit
+    - 5 journeys
+    - 5 capstones
+    - post-fix audit
+    - Layer 2 harness spec
+    - system retrospective
+    - RIU-021 path content
+    current_task: Interview prep support (with Mical)
   mistral:
-    role: "content generation, structured data, QA"
+    role: content generation, structured data, QA
     trust_tier: WORKING
-    delivered: ["RIU-001 calibration exemplars (draft, revision pending)", "system review (10 strategic observations)"]
-    current_task: "MISTRAL_TASK_002 — Open Badges 3.0 credential schemas"
+    delivered:
+    - RIU-001 calibration exemplars (draft, revision pending)
+    - system review (10 strategic observations)
+    current_task: Interview prep coaching (with Mical)
   perplexity:
-    role: "deep research"
+    role: deep research
     trust_tier: WORKING
-    delivered: ["certification research", "competitor analysis", "source enrichment", "AI-augmented assessment research"]
+    delivered:
+    - certification research
+    - competitor analysis
+    - source enrichment
+    - AI-augmented assessment research
   claude_code:
-    role: "architecture, orchestration, finishing"
+    role: architecture, orchestration, finishing
     trust_tier: WORKING
-    delivered: ["repo structure", "scripts (5→6 checks)", "evaluator prompts", "demo runner", "golden-path example", "Mistral file relay", "traceability fixes (15→0)", "reference calibration exemplar (RIU-002)", "threshold engine (89/89)", "validator hardening (8→14 checks)", "KL loader fix (131→167)", "critical defect repair (4 modules)", "architectural improvement plan"]
-    current_task: "Iteration 4-5 orchestration, credential workflow, integration test"
+    delivered:
+    - repo structure
+    - scripts (5→7 checks)
+    - evaluator prompts
+    - demo runner
+    - golden-path example
+    - Mistral file relay
+    - traceability fixes (15→0)
+    - reference calibration exemplar (RIU-002)
+    - threshold engine (89/89)
+    - validator hardening (8→14 checks)
+    - KL loader fix (131→167)
+    - critical defect repair (4 modules)
+    - architectural improvement plan
+    - RIU-022 learning path
+    - zero-KL fix (4 modules)
+    - orphaned KL wiring (2 entries)
+    - constellation integrity fix (cycle + validator)
+    - content engine MANIFEST update
+    current_task: VIDEO_SPEC_002, Kiro delivery validation, production hardening

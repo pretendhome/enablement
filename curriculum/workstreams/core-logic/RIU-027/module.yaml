@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: both
 difficulty: medium
+description: Baseline retrieval exists; need better ordering without changing index.
+  The learner produces reranker_module/ and explainability_rules.md that demonstrate
+  competence in this skill. Explanations cite signals.
 learning_objectives:
 - Implement a reranking layer that improves retrieval quality after initial candidate selection
 - Evaluate reranking services (Cohere Rerank, Voyage AI, BGE) for accuracy and latency tradeoffs

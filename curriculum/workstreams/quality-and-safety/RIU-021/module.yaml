@@ -4,6 +4,9 @@ workstream: "Quality & Safety"
 journey_stage: "retrieval"
 classification: "both"
 difficulty: "high"
+description: Quality needs measurement without perfect telemetry. The learner produces
+  golden_set.jsonl and eval_runner/ that demonstrate competence in this skill. Quality
+  improvements measurable.
 
 learning_objectives:
   - "Design and build a golden set of evaluation cases with expected outputs for an AI system"

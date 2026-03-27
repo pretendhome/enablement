@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Batch jobs fail mid-run; partial results corrupt downstream. The learner
+  produces batch_semantics.md and checkpointing_design.md that demonstrate competence
+  in this skill. Partial failures recover cleanly.
 learning_objectives:
 - Implement batch pipeline checkpointing enabling restart from last successful point
 - Design durable checkpoint storage independent from pipeline output

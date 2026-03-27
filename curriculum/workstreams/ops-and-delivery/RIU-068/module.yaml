@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: high
+description: Need to ship while learning safely from real traffic. The learner produces
+  canary_plan.md and error_budget.md that demonstrate competence in this skill. Rollback
+  triggers objective.
 learning_objectives:
 - Design canary rollout with automated quality monitoring and error budget gates
 - Implement instant rollback via traffic routing when canary quality degrades

@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Costs/latency can blow up unexpectedly. The learner produces budget_envelope.md
+  and cost_guards/ that demonstrate competence in this skill. Spikes trigger alerts
+  and fallback.
 learning_objectives:
 - Define cost and latency budgets with per-component allocation and total envelope
 - Implement guards that enforce budgets with automatic fallback to cheaper/faster alternatives

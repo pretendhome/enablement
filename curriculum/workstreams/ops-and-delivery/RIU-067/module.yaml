@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: critical
+description: Schema changes are one-way doors and can cause outages. The learner produces
+  migration_plan.md and backfill_scripts/ that demonstrate competence in this skill.
+  No downtime surprises.
 learning_objectives:
 - Design database migration safety wrappers that prevent data loss during schema changes
 - Implement rollback procedures for failed migrations

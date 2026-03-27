@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: System delivered but customer cannot use it independently. The learner
+  produces enablement_pack/ and examples/ that demonstrate competence in this skill.
+  Support requests reduced.
 learning_objectives:
 - Create an enablement pack that allows users to self-serve without live support
 - Design documentation that covers common tasks, troubleshooting, and edge cases

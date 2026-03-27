@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: critical
+description: Secrets needed; risk leakage or rotation breakage. The learner produces
+  secrets_plan.md and rotation_playbook.md that demonstrate competence in this skill.
+  No secrets in logs/repos.
 learning_objectives:
 - Implement secrets handling with secure storage, access controls, and rotation policies
 - Design secret rotation that doesn't cause downtime during the rotation window

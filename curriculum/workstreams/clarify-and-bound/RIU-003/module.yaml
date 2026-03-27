@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Half-decisions and hidden commitments accumulate under pressure. The
+  learner produces decisions.md and one_way_door_registry.md that demonstrate competence
+  in this skill. System is restartable/handoff-safe.
 
 learning_objectives:
   - "Maintain a decisions.md log that captures every material decision with rationale, alternatives considered, and reversibility classification"

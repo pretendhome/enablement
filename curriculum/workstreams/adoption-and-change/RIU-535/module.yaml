@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: AI system requires comprehensive documentation for compliance, handoff,
+  or audit. The learner produces documentation_package/ and technical_specification.md
+  that demonstrate competence in this skill. Package sufficient for audit/handoff.
 learning_objectives:
 - Create a comprehensive AI system documentation package for compliance, audit, or handoff
 - 'Design the package to satisfy multiple audiences: regulators, auditors, and successor teams'

@@ -158,6 +158,6 @@ checklist:
   - script_drafted: false
   - recorded: false
   - edited: false
-  - path_on_github: false
+  - path_on_github: true
   - uploaded_to_youtube: false
   - description_includes_path: false

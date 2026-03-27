@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: LLM costs scale with token usage; need budgeting, monitoring, and optimization.
+  The learner produces token_budget.md and cost_attribution.md that demonstrate competence
+  in this skill. Budget breaches trigger alerts.
 learning_objectives:
 - Implement token budget management controlling LLM costs without degrading quality
 - Design per-request token allocation based on task complexity

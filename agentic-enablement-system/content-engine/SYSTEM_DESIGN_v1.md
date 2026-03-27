@@ -37,7 +37,7 @@ A content engine that turns Palette's existing signal network into YouTube video
 │   (people library 21 profiles + company signals 43)     │
 │       ↓                                                 │
 │   CLASSIFY      Which RIU handles this? (create if new) │
-│   (resolver + taxonomy 117 RIUs)                        │
+│   (resolver + taxonomy 121 RIUs)                        │
 │       ↓                                                 │
 │   RESEARCH      What do we already know? What's new?    │
 │   (knowledge library 167 entries → then Perplexity)     │
@@ -67,7 +67,7 @@ A content engine that turns Palette's existing signal network into YouTube video
 |-------------|-------------------|--------|
 | Signal | People Library (21 profiles, 7 clusters) | EXISTS |
 | Signal | Company Signals (43 tools, 3 tiers) | EXISTS |
-| Classify | Taxonomy (117 RIUs) | EXISTS |
+| Classify | Taxonomy (121 RIUs) | EXISTS |
 | Classify | Resolver agent | EXISTS |
 | Research | Knowledge Library (167 entries) | EXISTS |
 | Research | Researcher agent (Perplexity backend) | EXISTS |
@@ -446,7 +446,7 @@ pretendhome/
 │       └── phase-4-production/                   (pipeline research)
 │
 └── palette/                                      ← THE system (untouched)
-    ├── taxonomy/                                 (117 RIUs)
+    ├── taxonomy/                                 (121 RIUs)
     ├── knowledge-library/                        (167 entries)
     ├── buy-vs-build/people-library/              (21 profiles, 43 tools)
     ├── agents/                                   (11 agents)
@@ -474,7 +474,7 @@ pretendhome/
 
 - People library (21 profiles, 7 clusters) → signal source
 - Company signals (43 tools, 3 tiers) → signal source
-- Taxonomy (117 RIUs) → classification backbone
+- Taxonomy (121 RIUs) → classification backbone
 - Knowledge library (167 entries) → research depth
 - 11 agents → resolver classifies, researcher fills gaps, narrator scripts, validator checks
 - Enablement coach (canonical, tested with Elia) → retention system

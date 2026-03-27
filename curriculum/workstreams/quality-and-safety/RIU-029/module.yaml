@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: Agents can call tools; must limit blast radius and enforce permissions.
+  The learner produces tool_allowlist.yaml and tool_limits.md that demonstrate competence
+  in this skill. No sensitive data leakage.
 learning_objectives:
 - Define a tool allowlist that constrains which tools an AI agent can invoke and with what parameters
 - Implement rate limits and argument validation that prevent unsafe tool calls

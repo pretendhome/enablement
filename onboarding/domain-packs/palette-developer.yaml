@@ -8,7 +8,7 @@ version: "0.1.0"
 
 welcome:
   headline: "Build AI systems that work in production."
-  subline: "117 real problems. Performance-based assessment. No multiple choice."
+  subline: "121 real problems. Performance-based assessment. No multiple choice."
   tone: "Direct, respectful, no jargon. Assume the developer is smart but may be new to enterprise AI."
 
 intake_flow:
@@ -18,7 +18,7 @@ intake_flow:
       Welcome to Palette Developer Enablement.
 
       This system teaches you to build enterprise AI systems by working through real problems —
-      the same problems practitioners face in production. There are 117 competency areas organized
+      the same problems practitioners face in production. There are 121 competency areas organized
       into learning paths. You'll produce artifacts (not answer quizzes) and be evaluated on
       demonstrated capability.
 

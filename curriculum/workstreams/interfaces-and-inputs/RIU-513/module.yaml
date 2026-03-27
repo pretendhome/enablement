@@ -4,6 +4,9 @@ workstream: Interfaces & Inputs
 journey_stage: orchestration
 classification: internal_only
 difficulty: critical
+description: Agents need to exchange information with clear contracts and validation.
+  The learner produces communication_protocol.md and message_schema.json that demonstrate
+  competence in this skill. Communication is traceable.
 learning_objectives:
 - Design an inter-agent communication protocol with message schemas, routing, and delivery guarantees
 - Implement message authentication to prevent agent impersonation

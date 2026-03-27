@@ -4,6 +4,9 @@ workstream: Interfaces & Inputs
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Need to integrate message queue (SQS/Kafka/RabbitMQ) for async processing.
+  The learner produces queue_integration_design.md and consumer_pattern.md that demonstrate
+  competence in this skill. Messages processed reliably.
 learning_objectives:
 - Design message queue integration with appropriate queue selection, partitioning, and ordering guarantees
 - Implement dead letter queue handling for messages that fail processing

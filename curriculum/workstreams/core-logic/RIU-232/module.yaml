@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: internal_only
 difficulty: medium
+description: Duplicate data causing quality or processing issues. The learner produces
+  dedup_strategy.md and dedup_rules.yaml that demonstrate competence in this skill.
+  Data quality improved.
 learning_objectives:
 - Implement a deduplication system that identifies duplicates across exact, near-exact, and semantic similarity
 - Design merge strategies that preserve the best version without data loss

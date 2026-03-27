@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Users need hands-on training to adopt new system. The learner produces
+  training_agenda.md and training_exercises/ that demonstrate competence in this skill.
+  Adoption accelerates.
 learning_objectives:
 - Design a training session that builds practical skills, not just knowledge transfer
 - Structure the session with hands-on exercises that mirror real work scenarios

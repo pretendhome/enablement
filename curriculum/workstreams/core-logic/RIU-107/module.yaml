@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: specialization
 classification: internal_only
 difficulty: medium
+description: Customer has revenue projections but has not modeled cash flow; crises
+  hidden in spreadsheet data. The learner produces cash_flow_model.xlsx and crisis_analysis.md.
+  Prevents cash crises through early warning and right-sized funding asks.
 learning_objectives:
 - Implement financial crisis detection signals from structured and unstructured data sources
 - Design alert thresholds that distinguish genuine crisis signals from market noise

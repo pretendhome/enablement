@@ -4,6 +4,9 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: internal_only
 difficulty: high
+description: Customer describes symptoms, not root cause; narrative fragmented. The
+  learner produces customer_narrative.md and jtbd_analysis.md that demonstrate competence
+  in this skill. Customer confirms understanding.
 learning_objectives:
 - Craft a customer problem narrative using Jobs-to-Be-Done framework with explicit constraints
 - Distinguish between stated needs and actual needs through structured discovery

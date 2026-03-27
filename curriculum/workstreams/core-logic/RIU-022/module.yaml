@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Prompting drifts; unclear variables and output format. The learner produces
+  prompt_contract.md and output_schema.json that demonstrate competence in this skill.
+  Outputs parse reliably.
 learning_objectives:
 - Define a prompt interface contract with explicit variables, constraints, and output schema
 - Implement prompt versioning that prevents breaking changes to downstream consumers

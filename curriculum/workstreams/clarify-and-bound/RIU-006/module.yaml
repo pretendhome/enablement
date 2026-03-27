@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Undefined success leads to churn and rework. The learner produces success_metrics_charter.md
+  and acceptance_checks.md that demonstrate competence in this skill. Faster acceptance
+  decisions.
 
 learning_objectives:
   - "Define outcome metrics, leading indicators, and acceptance checks that make success measurable"

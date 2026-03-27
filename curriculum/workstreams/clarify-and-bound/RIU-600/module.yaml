@@ -4,6 +4,11 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: internal_only
 difficulty: critical
+description: Organization has multiple brands with different customer bases, operations,
+  and strategies; needs AI approach that preserves brand autonomy while enabling shared
+  learning. The learner produces multi_brand_strategy.md and brand_landscape_map.md
+  that demonstrate competence in this skill. Brand autonomy preserved; shared learning
+  active.
 learning_objectives:
 - Design a multi-brand AI strategy framework that balances brand autonomy with shared infrastructure
 - Identify shared capabilities vs brand-specific customizations

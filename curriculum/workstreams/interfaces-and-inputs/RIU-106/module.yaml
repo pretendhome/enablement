@@ -4,6 +4,10 @@ workstream: Interfaces & Inputs
 journey_stage: specialization
 classification: both
 difficulty: medium
+description: Customer claims no one does this or uses weak analogies; need credible
+  comparables with financial data to validate business model. The learner produces
+  comparable_organizations.md and financial_benchmarks.md. Validates customer model
+  and provides financial benchmarks.
 learning_objectives:
 - Research comparable organizations to identify patterns, benchmarks, and lessons learned
 - Design research methodology that produces actionable insights, not just data collection

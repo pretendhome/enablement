@@ -1,0 +1,78 @@
+riu_id: "RIU-401"
+name: "Taxonomy Design"
+workstream: "Clarify & Bound"
+journey_stage: "foundation"
+classification: "internal_only"
+difficulty: "high"
+description: Domain has accumulated concepts, categories, or entities with no consistent
+  organizing structure. The learner designs a hierarchical taxonomy that organizes
+  a domain into clean, non-overlapping categories with consistent depth, naming
+  conventions, and classification criteria — then validates it against real data.
+
+learning_objectives:
+  - "Design a hierarchical taxonomy from an unstructured domain with consistent depth and non-overlapping categories"
+  - "Apply naming conventions and classification criteria that support both human navigation and machine traversal"
+  - "Validate taxonomy coverage against real data (queries, support tickets, product features) and quantify gaps"
+  - "Detect and resolve ambiguous categorization through explicit boundary rules and override registries"
+
+prerequisites:
+  required:
+    - "RIU-001"   # Convergence Brief — must be able to scope the domain before organizing it
+  recommended:
+    - "RIU-004"   # Semantic Blueprint — structural thinking patterns
+    - "RIU-400"   # KB Content Audit — understanding coverage analysis
+
+knowledge_library_entries:
+  primary:
+    - "LIB-177"   # Taxonomy design for AI classification systems
+  supporting:
+    - "LIB-001"   # Convergence — aligning stakeholders on taxonomy scope
+    - "LIB-004"   # Semantic Blueprint — structuring non-obvious domains
+    - "LIB-163"   # KB Content Audit — coverage analysis patterns (sister RIU-400)
+
+service_context: null  # internal_only — no external services
+
+estimated_duration:
+  learning: "6-8 hours"
+  assessment: "3-4 hours"
+
+assessment_type: "portfolio"
+required_artifacts:
+  - "taxonomy_design.yaml — Complete hierarchical taxonomy with consistent depth, naming conventions, and classification criteria"
+  - "coverage_report.md — Quantified gap analysis: taxonomy categories vs. real query/entity data"
+  - "boundary_rules.md — Explicit rules for ambiguous categorization with documented edge cases and override decisions"
+  - "validation_log.md — Record of taxonomy tested against 20+ real queries with categorization accuracy"
+
+rubric_dimensions:
+  structural_consistency:
+    description: "Taxonomy has consistent depth, non-overlapping categories, and follows stated naming conventions throughout"
+    levels: [insufficient, basic, competent, expert]
+  coverage:
+    description: "Taxonomy covers the domain comprehensively — quantified gap analysis shows <15% uncategorized entities"
+    levels: [insufficient, basic, competent, expert]
+  boundary_clarity:
+    description: "Ambiguous cases are handled through explicit boundary rules, not ad-hoc judgment — override registry documents exceptions"
+    levels: [insufficient, basic, competent, expert]
+  machine_traversability:
+    description: "Taxonomy is machine-readable (YAML/JSON), supports programmatic traversal, and IDs are stable and referenceable"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/4 dimensions"
+  PRODUCTION: "expert on 2/4, competent on remaining"
+
+exercises:
+  - id: "RIU-401-EX-01"
+    failure_mode: "silent"
+    scenario: "You receive a dataset of 200 customer support tickets spanning 15 product areas. Currently they are tagged with free-text labels — inconsistent, overlapping, and 30% untagged. Design a taxonomy that organizes these tickets into a clean hierarchy that supports both human triage and automated routing."
+    expected_output: "A YAML taxonomy with 3 levels of depth, consistent naming, no overlapping categories, and a coverage report showing >85% of tickets categorized. Boundary rules document how edge cases (tickets spanning two categories) are resolved."
+
+  - id: "RIU-401-EX-02"
+    failure_mode: "loud"
+    scenario: "An existing taxonomy (50 categories, 2 levels deep) has grown organically over 3 years. Teams report that 20% of items are miscategorized and 3 categories overlap significantly. Audit the taxonomy, propose a restructured version, and provide a migration plan that preserves existing references."
+    expected_output: "Audit report quantifying overlaps and miscategorizations. Restructured taxonomy with override registry mapping old→new categories. Migration plan with stable ID preservation and backward-compatible aliasing."
+
+  - id: "RIU-401-EX-03"
+    failure_mode: "clustered"
+    scenario: "You are designing a competency taxonomy for an enterprise AI adoption program. The source material is 250+ enablement session transcripts with no consistent terminology — different teams use different words for the same concept. Create a taxonomy that normalizes terminology and groups competencies into journey stages."
+    expected_output: "Taxonomy with terminology normalization layer (alias→canonical mapping), journey stage progression (foundation→specialization), and a drift detection mechanism that flags when new terms emerge that don't map to existing categories."

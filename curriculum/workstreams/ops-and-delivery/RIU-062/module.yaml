@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Need containment, rollback, comms, ownership before incidents happen.
+  The learner produces incident_runbook.md and kill_switch.md that demonstrate competence
+  in this skill. Comms are clear/timely.
 learning_objectives:
 - Design an incident containment plan that limits blast radius during AI system failures
 - Implement recovery procedures that restore service with minimal data loss

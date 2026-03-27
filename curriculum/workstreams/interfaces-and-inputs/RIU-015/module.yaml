@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Downstream consumers need stable outputs; unclear payload/SLA/semantics.
+  The learner produces output_contract.yaml and consumer_expectations.md that demonstrate
+  competence in this skill. Versioning/compatibility explicit.
 
 learning_objectives:
   - "Define an output contract with schema, semantics, idempotency guarantees, and SLAs"

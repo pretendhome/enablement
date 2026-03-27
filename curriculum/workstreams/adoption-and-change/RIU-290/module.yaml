@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: specialization
 classification: internal_only
 difficulty: medium
+description: Need crisp internal alignment on what was built and what wasn't. The
+  learner produces demo_narrative.md and value_proposition.md that demonstrate competence
+  in this skill. Internal alignment achieved.
 learning_objectives:
 - Build an internal demo narrative that shows problem, value, and limitations in a compelling sequence
 - Design the demo to be reproducible and not dependent on live system availability

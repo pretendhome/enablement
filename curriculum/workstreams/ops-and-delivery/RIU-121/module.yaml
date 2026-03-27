@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Webhooks fail under retries/duplicates; consumers break. The learner
+  produces webhook_spec.md and retry_policy.md that demonstrate competence in this
+  skill. Retries do not overload systems.
 learning_objectives:
 - Implement webhook reliability with retry logic, idempotency keys, and delivery confirmation
 - Design exponential backoff preventing receiver overload during outages

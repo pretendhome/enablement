@@ -4,6 +4,9 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: both
 difficulty: medium
+description: Need detailed competitive analysis or alternative evaluation. The learner
+  produces competitive_analysis.md and feature_comparison.md that demonstrate competence
+  in this skill. Informed positioning decisions.
 learning_objectives:
 - Research competitive alternatives and substitutes for the proposed AI solution
 - Evaluate build-vs-buy options with total cost of ownership analysis

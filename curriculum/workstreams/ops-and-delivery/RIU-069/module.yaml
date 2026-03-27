@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Solution works but cannot be operated. The learner produces runbook.md
+  and known_issues.md that demonstrate competence in this skill. Incidents resolved
+  faster.
 learning_objectives:
 - Create runbooks for day-2 operations usable by on-call engineers under pressure
 - Design runbook structure with specific commands, decision trees, and escalation paths

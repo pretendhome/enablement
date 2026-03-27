@@ -4,6 +4,9 @@ workstream: Interfaces & Inputs
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Need to integrate external API with unknown reliability/rate limits.
+  The learner produces api_integration_design.md and circuit_breaker_config.yaml that
+  demonstrate competence in this skill. Failures handled gracefully.
 learning_objectives:
 - Design a third-party API integration pattern with auth, error handling, rate limiting, and retry logic
 - Implement circuit breakers that prevent cascading failures when third-party APIs are unavailable

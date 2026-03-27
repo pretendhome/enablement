@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "both"
 difficulty: "medium"
+description: Need to understand data movement and dependencies. The learner produces
+  data_lineage.md and lineage_diagram.md that demonstrate competence in this skill.
+  Reduces compliance/ops surprises.
 
 learning_objectives:
   - "Produce a minimal lineage diagram showing source→processing→sink with owners at each stage"

@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: critical
+description: Need reliability targets without overpromising. The learner produces
+  slo_sli.md and alert_thresholds.md that demonstrate competence in this skill. Alerts
+  tied to user impact.
 learning_objectives:
 - Define SLOs and SLIs that measure what users actually care about
 - Implement alert thresholds based on error budget consumption rate

@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: both
 difficulty: high
+description: AI system may exhibit bias; need systematic detection and documentation.
+  The learner produces bias_detection.md and fairness_metrics.md that demonstrate
+  competence in this skill. Fairness metrics documented.
 learning_objectives:
 - Implement bias detection across protected attributes using appropriate fairness metrics
 - Design test datasets that surface intersectional bias patterns

@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Customer expects fast delivery; scope must be bounded into phases. The
+  learner produces phase_plan.md and acceptance_criteria.md that demonstrate competence
+  in this skill. Expectations align; fewer surprises.
 
 learning_objectives:
   - "Define Phase 0/1/2 deliverables with acceptance criteria that bound scope without killing momentum"

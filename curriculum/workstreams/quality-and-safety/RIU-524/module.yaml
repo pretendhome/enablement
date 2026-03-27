@@ -3,7 +3,10 @@ name: LLM Output Quality Monitoring
 workstream: Quality & Safety
 journey_stage: foundation
 classification: both
-difficulty: high
+difficulty: critical
+description: LLM output quality can drift; need ongoing monitoring without manual
+  review of every response. The learner produces quality_monitoring.md and sampling_strategy.md
+  that demonstrate competence in this skill. Drift detected before customer impact.
 learning_objectives:
 - Implement automated quality monitoring with representative sampling of LLM outputs
 - Design quality scoring that detects drift before it impacts end users

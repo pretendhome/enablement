@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Data fails in reality due to edge cases not seen during development.
+  The learner produces edge_case_catalog.md and edge_case_samples/ that demonstrate
+  competence in this skill. Fewer surprises during implementation.
 
 learning_objectives:
   - "Collect representative data samples covering the full distribution of production inputs"

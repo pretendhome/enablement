@@ -4,6 +4,10 @@ workstream: Quality & Safety
 journey_stage: specialization
 classification: both
 difficulty: critical
+description: Customer-facing AI can generate content that damages brand reputation;
+  need guardrails that respect brand voice without killing utility. The learner produces
+  brand_safety_policy.md and guardrail_configuration.yaml that demonstrate competence
+  in this skill. Zero brand safety incidents from AI-generated content.
 learning_objectives:
 - Design a brand safety framework that enforces brand voice without killing AI utility
 - Implement content guardrails with per-brand tone, vocabulary, and prohibited topics

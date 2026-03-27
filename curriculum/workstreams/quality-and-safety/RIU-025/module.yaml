@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Recommendations stale; ingestion lag exists; removals silent. The learner
+  produces freshness_rules.yaml and orphan_detector/ that demonstrate competence in
+  this skill. Orphans never surfaced.
 learning_objectives:
 - Implement freshness classes that categorize data by acceptable staleness thresholds
 - Design downrank/omit rules that prevent stale recommendations from reaching users

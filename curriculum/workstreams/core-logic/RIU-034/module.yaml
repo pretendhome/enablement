@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Need explainability without LLM fluff. The learner produces reason_codes.md
+  and explainability_rules.yaml that demonstrate competence in this skill. Ranking
+  changes debug-friendly.
 learning_objectives:
 - Implement ranking explanation rules that generate human-readable reason codes for each ranked result
 - Design reason codes that are faithful to the actual ranking factors, not post-hoc rationalizations

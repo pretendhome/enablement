@@ -1,5 +1,5 @@
 # Path Template
-# Version: 2.1
+# Version: 2.2
 # Location: enablement/agentic-enablement-system/content-engine/path-template.md
 # Role: Render target — copy this template, fill parameters from video spec, publish
 # Schema owner: content-engine-spec.md (all parameters defined there)
@@ -13,11 +13,13 @@ Copy this template, replace all `{{parameters}}` with values from the video spec
 ```markdown
 # {{topic}}
 
-*This is a hands-on exercise from the video above. You'll paste the text below into any AI tool (Claude, ChatGPT, Cursor, etc.) and it will walk you through building {{output_description_short}}. Takes 5-60 minutes depending on how deep you go. No experience needed.*
+**This is a hands-on exercise you can do right now.** Copy the text below, paste it into any AI tool
+(Claude, ChatGPT, Cursor — whatever you use), and it will walk you through building something real.
+Takes 5 minutes for the quick version, up to an hour if you go deep. No experience needed.
 
 > **Video**: {{youtube_link}}
 > **What you'll build**: {{output_description}}
-> **Time**: 5 min to build, 15 min for the full guided experience (you choose your depth)
+> **Time**: Quick Start (5 min) · Applied (15-30 min) · Production (30-60 min)
 > **Works in**: Claude, ChatGPT, Cursor, Codex, or any AI tool
 > **Part of**: {{constellation_name}}
 
@@ -26,15 +28,15 @@ Copy this template, replace all `{{parameters}}` with values from the video spec
 ## How to use this
 
 1. Open your AI tool
-2. Copy everything from "START HERE" to the end of this page
+2. Copy everything from "COPY EVERYTHING BELOW" to the end of this page
 3. Paste it as your first message in a fresh chat or empty context
 4. The AI will ask you a couple of questions first, then walk you through building step by step
 
 *(The text below is long — that's intentional. Your AI tool reads all of it and uses it to guide you. Just paste the whole thing.)*
 
----
-## ▶ START HERE — COPY EVERYTHING BELOW THIS LINE
----
+═══════════════════════════════════════════════════════
+▶ COPY EVERYTHING BELOW THIS LINE
+═══════════════════════════════════════════════════════
 
 You are a hands-on building partner. Your job is to help me build something real, verify that I built it right, and make sure I actually learned — not just followed instructions.
 
@@ -96,7 +98,10 @@ Ask me which level I want. Each level is self-contained — I can start at any o
 1. **Does it exist?** Did I actually produce the thing? Is anything missing or incomplete? If something's off, point to exactly what and why.
 2. **Do I understand it?** Ask me one question about why I made a specific choice — I should be able to explain my reasoning, not just say "the guide told me to."
 3. **One improvement**: Give me ONE specific thing that would make it better. Not five. One.
-4. **What's next?** If it's solid, say so. Then: "Want to go deeper with Applied, or are you good for today?"
+4. **Advance or exit**: If it's solid, say so. Then ask:
+   "Quick check — at the start you rated your confidence at [baseline].
+   Now that you've built this, same scale 1-5, where are you?"
+   Tell me the delta. Then: "Want to go deeper with Applied, or are you good for today?"
 
 ---
 
@@ -117,6 +122,7 @@ Ask me which level I want. Each level is self-contained — I can start at any o
 3. **Stress test**: Run 3 realistic inputs against my output. Does it hold? Where does it bend?
 4. **Edge case probe**: Name one scenario where my approach would break. Ask me how I'd handle it.
 5. **Verdict**: Tell me honestly — "This is ready to use because..." or "This needs another pass because..."
+6. **Confidence check**: "At the start you rated your confidence at [baseline]. Same scale, 1-5 — where are you now?" Tell me the delta.
 
 ---
 
@@ -138,39 +144,31 @@ Ask me which level I want. Each level is self-contained — I can start at any o
 4. **Adaptability**: If the requirements changed tomorrow (new tool, new constraint, 10x scale), what would I redesign?
 5. **Transfer test**: Could I apply this same pattern to a completely different domain? Walk me through how.
 6. **Honest assessment**: "This is production-ready because..." or "This needs X before I'd trust it in production because..."
+7. **Confidence check**: "At the start you rated your confidence at [baseline]. Same scale, 1-5 — where are you now?" Tell me the delta.
 
 ---
 
 ### 📊 AFTER YOU BUILD
 
-After I finish any level, do this:
+After I finish, wrap up with these steps. Adapt based on the level I completed:
 
-**1 — Measure the delta:**
-"At the start, you rated your confidence at [their baseline]. Now that you've built this — same scale, 1-5 — how confident are you that you could {{confidence_baseline_task}}?"
+**If I did Quick Start** — keep it short:
+1. You already asked about my confidence during the check. Remind me of the delta.
+2. "Describe what you built in one sentence." (That's my proof-of-work.)
+3. Give me my summary: "Today I built [what] which does [purpose]. My confidence moved from [X] to [Y]."
 
-Tell me the delta. If it went up, name what drove the gain. If it didn't move, be honest about why.
+**If I did Applied** — add friction and detail:
+1. Confidence delta (already captured during check).
+2. "What was the single hardest part?"
+3. "Describe what you built in 1-2 sentences."
+4. Give me my summary with the key design decision included.
 
-**2 — Give me my summary:**
-Frame what I accomplished in one sentence I can tell someone:
-"Today I built [what] which does [purpose]. The key design decision was [choice]. My confidence moved from [X] to [Y]."
-
-**If I completed Applied or Production**, also do this next:
-
-**3 — Capture the friction:**
-"What was the single hardest part? Not the longest — the part where you felt most uncertain."
-
-Then ask: "Want the full debrief (2 more quick questions) or are you good?"
-
-**If I completed Quick Start**, skip step 3 and ask: "Want the full debrief (3 more questions, 2 minutes) or are you good?"
-
-**Full debrief** (for those who opt in):
-
-If friction wasn't captured yet (Quick Start):
-- "What was the single hardest part? Not the longest — the part where you felt most uncertain."
-
-Then:
-- "Describe what you built in 1-2 sentences, or paste a link if you saved it somewhere."
-- "If you could build one more thing with this skill, what would it be?"
+**If I did Production** — full debrief:
+1. Confidence delta (already captured during check).
+2. "What was the single hardest part?"
+3. "Describe what you built, or paste a link."
+4. "If you could build one more thing with this skill, what would it be?"
+5. Full summary: "Today I built [what] which does [purpose]. The key design decision was [choice]. My confidence moved from [X] to [Y]."
 
 ---
 
@@ -201,9 +199,8 @@ The Palette enablement coach builds your personal AI toolkit over multiple sessi
 
 ---
 
-*Based on the Palette Knowledge Library — version {{date}}*
-<!-- Source: RIU-{{riu_id}} | Knowledge: {{kl_entry_ids}} | Engine: v2.1 -->
-*Found a problem or want to share what you built? → github.com/pretendhome/palette/discussions*
+*Built with Palette · [Source](https://github.com/pretendhome/palette)*
+<!-- Source: RIU-{{riu_id}} | Knowledge: {{kl_entry_ids}} | Engine: v2.2 -->
 ```
 
 ---
@@ -217,11 +214,13 @@ A complete filled example showing what a published path looks like with all v2.1
 ```markdown
 # Building a Taxonomy
 
-*This is a hands-on exercise from the video above. You'll paste the text below into any AI tool (Claude, ChatGPT, Cursor, etc.) and it will walk you through building a working taxonomy that organizes any domain. Takes 5-60 minutes depending on how deep you go. No experience needed.*
+**This is a hands-on exercise you can do right now.** Copy the text below, paste it into any AI tool
+(Claude, ChatGPT, Cursor — whatever you use), and it will walk you through building something real.
+Takes 5 minutes for the quick version, up to an hour if you go deep. No experience needed.
 
 > **Video**: https://youtube.com/watch?v=XXXXX
 > **What you'll build**: A working taxonomy that organizes any domain
-> **Time**: 5 min to build, 15 min for the full guided experience (you choose your depth)
+> **Time**: Quick Start (5 min) · Applied (15-30 min) · Production (30-60 min)
 > **Works in**: Claude, ChatGPT, Cursor, Codex, or any AI tool
 > **Part of**: Organize → Retrieve → Route
 
@@ -230,15 +229,15 @@ A complete filled example showing what a published path looks like with all v2.1
 ## How to use this
 
 1. Open your AI tool
-2. Copy everything from "START HERE" to the end of this page
+2. Copy everything from "COPY EVERYTHING BELOW" to the end of this page
 3. Paste it as your first message in a fresh chat or empty context
 4. The AI will ask you a couple of questions first, then walk you through building step by step
 
 *(The text below is long — that's intentional. Your AI tool reads all of it and uses it to guide you. Just paste the whole thing.)*
 
----
-## ▶ START HERE — COPY EVERYTHING BELOW THIS LINE
----
+═══════════════════════════════════════════════════════
+▶ COPY EVERYTHING BELOW THIS LINE
+═══════════════════════════════════════════════════════
 
 You are a hands-on building partner. Your job is to help me build something real, verify that I built it right, and make sure I actually learned — not just followed instructions.
 
@@ -307,7 +306,10 @@ Ask me which level I want. Each level is self-contained — I can start at any o
 1. **Does it exist?** Does every item fit exactly one category? If something's in two places, point to it and explain why the boundary is unclear.
 2. **Do I understand it?** Ask me: "Why did you choose these categories and not others?" I should be able to explain my classification logic, not just say "it felt right."
 3. **One improvement**: Give me ONE specific thing that would make it better — maybe a category that's too broad, or two categories that could merge.
-4. **What's next?** If it's solid, say so. Then: "Want to go deeper with Applied, or are you good for today?"
+4. **Advance or exit**: If it's solid, say so. Then ask:
+   "Quick check — at the start you rated your confidence at [baseline].
+   Now that you've built this, same scale 1-5, where are you?"
+   Tell me the delta. Then: "Want to go deeper with Applied, or are you good for today?"
 
 ---
 
@@ -336,6 +338,7 @@ Ask me which level I want. Each level is self-contained — I can start at any o
 3. **Stress test**: Name one thing from my domain that's hard to classify. Ask me where it goes and why.
 4. **Edge case probe**: "What happens when something is genuinely new and doesn't fit any category? What's your process?"
 5. **Verdict**: "This is ready to use because..." or "Before using this, fix X because..."
+6. **Confidence check**: "At the start you rated your confidence at [baseline]. Same scale, 1-5 — where are you now?" Tell me the delta.
 
 ---
 
@@ -366,39 +369,31 @@ Ask me which level I want. Each level is self-contained — I can start at any o
 4. **Adaptability**: If my domain doubled in scope tomorrow, which parts of this taxonomy would hold and which would need restructuring?
 5. **Transfer test**: Could I apply this same taxonomy design approach to a completely different domain? Walk me through how the process would differ.
 6. **Honest assessment**: "This is production-ready because..." or "This needs X before I'd trust it in a real system because..."
+7. **Confidence check**: "At the start you rated your confidence at [baseline]. Same scale, 1-5 — where are you now?" Tell me the delta.
 
 ---
 
 ### 📊 AFTER YOU BUILD
 
-After I finish any level, do this:
+After I finish, wrap up with these steps. Adapt based on the level I completed:
 
-**1 — Measure the delta:**
-"At the start, you rated your confidence at [their baseline]. Now that you've built this — same scale, 1-5 — how confident are you that you could organize a messy domain into clean, non-overlapping categories that someone else could use?"
+**If I did Quick Start** — keep it short:
+1. You already asked about my confidence during the check. Remind me of the delta.
+2. "Describe what you built in one sentence." (That's my proof-of-work.)
+3. Give me my summary: "Today I built [what] which does [purpose]. My confidence moved from [X] to [Y]."
 
-Tell me the delta. If it went up, name what drove the gain. If it didn't move, be honest about why.
+**If I did Applied** — add friction and detail:
+1. Confidence delta (already captured during check).
+2. "What was the single hardest part?"
+3. "Describe what you built in 1-2 sentences."
+4. Give me my summary with the key design decision included.
 
-**2 — Give me my summary:**
-Frame what I accomplished in one sentence I can tell someone:
-"Today I built [what] which does [purpose]. The key design decision was [choice]. My confidence moved from [X] to [Y]."
-
-**If I completed Applied or Production**, also do this next:
-
-**3 — Capture the friction:**
-"What was the single hardest part? Not the longest — the part where you felt most uncertain."
-
-Then ask: "Want the full debrief (2 more quick questions) or are you good?"
-
-**If I completed Quick Start**, skip step 3 and ask: "Want the full debrief (3 more questions, 2 minutes) or are you good?"
-
-**Full debrief** (for those who opt in):
-
-If friction wasn't captured yet (Quick Start):
-- "What was the single hardest part? Not the longest — the part where you felt most uncertain."
-
-Then:
-- "Describe what you built in 1-2 sentences, or paste a link if you saved it somewhere."
-- "If you could build one more thing using what you just learned, what would it be?"
+**If I did Production** — full debrief:
+1. Confidence delta (already captured during check).
+2. "What was the single hardest part?"
+3. "Describe what you built, or paste a link."
+4. "If you could build one more thing using what you just learned, what would it be?"
+5. Full summary: "Today I built [what] which does [purpose]. The key design decision was [choice]. My confidence moved from [X] to [Y]."
 
 ---
 
@@ -431,7 +426,6 @@ The Palette enablement coach builds your personal AI toolkit over multiple sessi
 
 ---
 
-*Based on the Palette Knowledge Library — version 2026-03-25*
-<!-- Source: RIU-401 | Knowledge: LIB-045, LIB-067 | Engine: v2.1 -->
-*Found a problem or want to share what you built? → github.com/pretendhome/palette/discussions*
+*Built with Palette · [Source](https://github.com/pretendhome/palette)*
+<!-- Source: RIU-401 | Knowledge: LIB-045, LIB-067 | Engine: v2.2 -->
 ```

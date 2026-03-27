@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Field mapping causes endless churn. The learner produces schema_mapping.csv
+  and transform_rules.yaml that demonstrate competence in this skill. Fewer mapping
+  bugs.
 
 learning_objectives:
   - "Create a mapping table with transforms, defaults, and provenance for every field"

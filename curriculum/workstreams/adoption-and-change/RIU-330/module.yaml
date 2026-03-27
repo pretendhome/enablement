@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Error messages unclear or unhelpful; users frustrated. The learner produces
+  error_standards.md and error_templates/ that demonstrate competence in this skill.
+  Support requests reduced.
 learning_objectives:
 - Define error messaging standards that help users recover from failures
 - Design error messages with appropriate technical detail for the target audience

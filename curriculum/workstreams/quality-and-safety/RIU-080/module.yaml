@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Interfaces drift; downstream breaks without loud failures. The learner
+  produces contract_tests/ and fixtures/ that demonstrate competence in this skill.
+  Interfaces stable.
 learning_objectives:
 - Implement contract tests that validate input/output interfaces against versioned specifications
 - Design fixtures that represent production data including edge cases and optional fields

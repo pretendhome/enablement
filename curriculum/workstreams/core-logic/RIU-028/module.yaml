@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: Outputs must be machine-usable; free-form text breaks downstream. The
+  learner produces output_schema.json and validator/ that demonstrate competence in
+  this skill. Failures become loud/recoverable.
 learning_objectives:
 - Implement schema-constrained generation that forces LLM output to conform to a defined structure
 - Evaluate structured output libraries (Instructor, Outlines, native JSON mode) for reliability

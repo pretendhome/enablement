@@ -4,6 +4,10 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: both
 difficulty: high
+description: Customer needs comprehensive business plan but lacks time or expertise
+  to research comparables, model financials, and structure narrative. The learner
+  produces convergence_brief.md and comparable_organizations.md. Customer finds plan
+  valuable, comprehensive, and actionable.
 learning_objectives:
 - Create a business plan that synthesizes research, financial analysis, and strategic recommendations
 - Design the plan structure to support decision-making under uncertainty

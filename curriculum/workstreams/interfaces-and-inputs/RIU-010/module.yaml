@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Blocked delivery due to missing credentials, network access, or unclear
+  data movement constraints. The learner produces access_checklist.md and access_smoketests/
+  that demonstrate competence in this skill. No access-related schedule slips.
 
 learning_objectives:
   - "Design a least-privilege access checklist covering credentials, network paths, and data movement constraints"

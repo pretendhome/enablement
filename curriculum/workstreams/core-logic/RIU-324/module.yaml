@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: internal_only
 difficulty: medium
+description: Need to add caching to improve performance without introducing stale
+  data issues. The learner produces caching_strategy.md and invalidation_rules.md
+  that demonstrate competence in this skill. Stale data prevented.
 learning_objectives:
 - Design a caching strategy that balances hit rate, freshness, and memory constraints
 - Implement cache key design that maximizes reuse without serving wrong results

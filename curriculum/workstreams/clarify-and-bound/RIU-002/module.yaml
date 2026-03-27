@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Decisions slow or blocked because ownership and approval paths unclear.
+  The learner produces stakeholder_map.md and raci_lite.md that demonstrate competence
+  in this skill. Approvals speed up; fewer surprises.
 
 learning_objectives:
   - "Map all deciders, influencers, and approvers for an AI engagement and identify hidden stakeholders"

@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: orchestration
 classification: internal_only
 difficulty: high
+description: Agent failure must not halt workflow; graceful degradation required.
+  The learner produces failure_recovery.md and retry_policy.yaml that demonstrate
+  competence in this skill. Degraded mode maintains core functionality.
 learning_objectives:
 - Implement failure recovery with retry logic, exponential backoff, and circuit breakers
 - Design fallback agent strategies for when primary agents are unavailable or failing
@@ -15,8 +18,14 @@ prerequisites:
   - RIU-062
   recommended: []
 knowledge_library_entries:
-  primary: []
-  supporting: []
+  primary:
+  - LIB-049
+  - LIB-027
+  - LIB-050
+  - LIB-077
+  supporting:
+  - LIB-051
+  - LIB-047
 service_context: null
 estimated_duration:
   learning: 6-8 hours

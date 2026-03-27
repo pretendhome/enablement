@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: orchestration
 classification: both
 difficulty: critical
+description: Agent needs permissions to act but must be constrained to prevent misuse.
+  The learner produces security_policy.md and agent_identity_config.yaml that demonstrate
+  competence in this skill. Agent permissions scoped to minimum required.
 learning_objectives:
 - Implement least-privilege access controls for AI agents with per-action permission scoping
 - Design identity verification that ensures agents act only within their authorized role

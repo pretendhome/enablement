@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: both
 difficulty: high
+description: Need 'seen this before' exemplars for faster operator reasoning. The
+  learner produces similarity_index/ and neighbor_service/ that demonstrate competence
+  in this skill. Neighbors explainable via reason codes.
 learning_objectives:
 - Design a hybrid similarity system combining enum-based exact matching with embedding-based semantic matching
 - Implement scoring that appropriately weights exact matches vs semantic similarity

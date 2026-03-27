@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Need expansive decomposition without committing to a plan. The learner
+  produces candidate_workstreams.yaml and candidate_rius.yaml that demonstrate competence
+  in this skill. Human can select/decline quickly.
 
 learning_objectives:
   - "Decompose an ambiguous customer problem into candidate workstreams and RIUs without premature commitment"

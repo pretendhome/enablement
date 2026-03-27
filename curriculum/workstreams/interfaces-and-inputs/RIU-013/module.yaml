@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Multiple systems exist; unclear which is authoritative for each datum.
+  The learner produces source_of_truth_inventory.md that demonstrate competence in
+  this skill. Integration ambiguity reduced.
 
 learning_objectives:
   - "Create a source-of-truth map listing systems, owners, fields, update cadence, and trust level"

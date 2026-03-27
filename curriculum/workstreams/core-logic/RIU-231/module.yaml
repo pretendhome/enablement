@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: internal_only
 difficulty: medium
+description: Documents need to be chunked for RAG or processing; strategy unclear.
+  The learner produces chunking_strategy.md and chunk_validator/ that demonstrate
+  competence in this skill. Retrieval quality improved.
 learning_objectives:
 - Design a document chunking strategy that preserves semantic coherence within chunks
 - Implement chunking that handles different document types (prose, tables, code, mixed)

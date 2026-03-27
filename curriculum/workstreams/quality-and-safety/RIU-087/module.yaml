@@ -4,6 +4,8 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Irreversible decisions need explicit gating. The learner produces one_way_door_gate.md
+  that demonstrate competence in this skill. Audit trail exists.
 learning_objectives:
 - Define which decisions qualify as one-way doors requiring human review gates
 - Implement review checklists that capture rationale and sign-off in decisions.md

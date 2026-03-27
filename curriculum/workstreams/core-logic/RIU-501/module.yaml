@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: specialization
 classification: both
 difficulty: medium
+description: System needs to process, analyze, or generate images as part of AI workflow.
+  The learner produces image_pipeline.md and image_preprocessor/ that demonstrate
+  competence in this skill. Vision model outputs validated.
 learning_objectives:
 - Integrate image/vision processing into an AI pipeline with appropriate model selection
 - Design image preprocessing that handles format, resolution, and quality variations

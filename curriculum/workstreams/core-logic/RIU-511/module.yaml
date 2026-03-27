@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: orchestration
 classification: internal_only
 difficulty: medium
+description: Agent execution requires persistent state across steps or sessions. The
+  learner produces state_management.md and checkpoint_schema.json that demonstrate
+  competence in this skill. Recovery from checkpoint is seamless.
 learning_objectives:
 - Design agent state management that persists context across multi-step tasks
 - Implement state serialization that enables checkpoint/restore for long-running agent workflows

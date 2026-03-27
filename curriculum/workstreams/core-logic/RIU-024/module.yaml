@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Augment existing system without rewriting it. The learner produces sidecar_schema.json
+  and sidecar_writer/ that demonstrate competence in this skill. Rollback = ignore
+  sidecars.
 learning_objectives:
 - Design a sidecar augmentation pattern that enhances existing systems without modifying them
 - Implement sidecar integration with clear interface boundaries and failure isolation

@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Shifting schemas across sources cause downstream rework. The learner
+  produces data_contract.yaml and sample_payloads/ that demonstrate competence in
+  this skill. Integration unblocked; fewer misunderstandings.
 
 learning_objectives:
   - "Define a versioned data contract with schemas, constraints, and validation rules"

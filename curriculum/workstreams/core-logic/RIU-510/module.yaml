@@ -4,6 +4,9 @@ workstream: "Core Logic"
 journey_stage: "orchestration"
 classification: "internal_only"
 difficulty: "critical"
+description: Complex task requires coordination between multiple specialized agents.
+  The learner produces multi_agent_design.md and agent_handoff_protocol.md that demonstrate
+  competence in this skill. Handoffs are explicit and traceable.
 
 learning_objectives:
   - "Design a multi-agent workflow with explicit handoff protocols, state management, and failure isolation"

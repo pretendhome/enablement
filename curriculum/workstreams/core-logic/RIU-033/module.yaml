@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Need labels for narrowing/analytics without overfitting. The learner
+  produces label_schema.json and classifier/ that demonstrate competence in this skill.
+  Abstentions guide discovery.
 learning_objectives:
 - Implement soft-label classification that outputs probability distributions rather than hard categories
 - Design calibration procedures that ensure confidence scores reflect actual accuracy

@@ -1,0 +1,79 @@
+riu_id: "RIU-505"
+name: "Voice Input Modality Selection"
+workstream: "Interfaces & Inputs"
+journey_stage: "foundation"
+classification: "both"
+difficulty: "medium"
+description: "System needs voice/speech input but options range from consumer apps to self-hosted models with different API availability, privacy, and cost profiles. The learner produces voice_input_selection.md and privacy_assessment.md. Selection justified with privacy and availability evidence."
+
+learning_objectives:
+  - "Evaluate voice input options across the spectrum from consumer apps to self-hosted models"
+  - "Assess privacy implications of audio data handling for each option"
+  - "Design a selection framework that accounts for API availability, cost, accuracy, and privacy"
+  - "Plan for services that lack APIs today but may offer them in the future"
+
+prerequisites:
+  required: []
+  recommended:
+    - "RIU-500"   # Multimodal Data Pipeline Design — voice is a modality
+
+knowledge_library_entries:
+  primary:
+    - "LIB-037"   # How do I evaluate AI service quality beyond accuracy metrics?
+    - "LIB-038"   # What's the minimum viable evaluation framework for comparing AI services?
+  supporting:
+    - "LIB-067"   # What explainability is actually required for EU AI Act compliance?
+    - "LIB-024"   # How do I integrate with an undocumented legacy API?
+
+service_context:
+  services:
+    - "Whisper (OpenAI) — self-hosted"
+    - "OpenAI STT (gpt-4o-transcribe)"
+  evaluation_criteria:
+    - "Transcription accuracy"
+    - "Latency (real-time vs batch)"
+    - "Privacy (where does audio data go?)"
+    - "API availability and stability"
+    - "Cost per minute of audio"
+    - "Language and accent support"
+
+estimated_duration:
+  learning: "3-5 hours"
+  assessment: "2-3 hours"
+
+assessment_type: "service_integration"
+required_artifacts:
+  - "voice_input_selection.md — Selection with evidence-based justification"
+  - "privacy_assessment.md — Privacy analysis per option including data residency and retention"
+  - "integration_plan.md — Integration plan with monitoring for API-pending services"
+
+rubric_dimensions:
+  option_coverage:
+    description: "Full spectrum evaluated — from consumer apps to self-hosted, not just the obvious choices"
+    levels: [insufficient, basic, competent, expert]
+  privacy_rigor:
+    description: "Privacy assessment covers data residency, retention, third-party access, and compliance requirements"
+    levels: [insufficient, basic, competent, expert]
+  availability_handling:
+    description: "Selection accounts for services without APIs, with monitoring plan for future availability"
+    levels: [insufficient, basic, competent, expert]
+
+certification_tier_thresholds:
+  WORKING: "competent on 3/3 dimensions"
+  PRODUCTION: "expert on 2/3, competent on remaining"
+
+exercises:
+  - id: "RIU-505-EX-01"
+    failure_mode: "silent"
+    scenario: "Your team selected a voice transcription service for a healthcare application. The service sends audio to a third-party cloud for processing. Nobody checked the BAA (Business Associate Agreement) requirements. Six months later, a compliance audit reveals PHI (Protected Health Information) was processed without proper data handling agreements."
+    expected_output: "Privacy assessment checklist that includes: data residency, processing location, BAA/DPA requirements, retention policy, encryption in transit and at rest. Decision matrix that flags services incompatible with healthcare/financial/legal data requirements before selection."
+
+  - id: "RIU-505-EX-02"
+    failure_mode: "loud"
+    scenario: "Your team wants to use a consumer voice app (no API) for internal workflows. The app works great manually but can't be integrated into your pipeline. The team builds a screen-scraping workaround that breaks every time the app updates."
+    expected_output: "API availability assessment as a first-class selection criterion. Classification: API-available (integrate now), API-pending (monitor, use alternative), API-unlikely (exclude from automated workflows). Monitoring plan for API-pending services with fallback to API-available alternatives."
+
+  - id: "RIU-505-EX-03"
+    failure_mode: "clustered"
+    scenario: "Your organization uses three different voice input solutions: self-hosted Whisper for privacy-sensitive data, a cloud STT service for general use, and a consumer app for quick dictation. There's no unified quality measurement, no cost tracking, and accuracy varies wildly across accents and languages."
+    expected_output: "Unified evaluation framework with accuracy benchmarks per language/accent. Cost comparison across all three. Privacy tier classification (which data goes where). Consolidation recommendation with migration path. Shared quality monitoring across all voice inputs."

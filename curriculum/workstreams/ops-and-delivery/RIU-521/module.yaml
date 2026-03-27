@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: high
+description: Model versions change; need to track, test, and manage model transitions.
+  The learner produces model_version_registry.md and compatibility_matrix.md that
+  demonstrate competence in this skill. Migrations tested before production.
 learning_objectives:
 - Implement LLM model version management with tracking, comparison, and rollback
 - Design version testing against production workloads before promotion

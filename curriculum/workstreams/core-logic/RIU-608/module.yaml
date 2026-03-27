@@ -4,6 +4,8 @@ workstream: Core Logic
 journey_stage: orchestration
 classification: internal_only
 difficulty: high
+description: The learner produces workflow.yaml that demonstrate competence in this
+  skill.
 learning_objectives:
 - Define workflow specifications that coordinate multiple AI agents with clear handoff points
 - Design inter-agent communication protocols with message schemas and routing rules

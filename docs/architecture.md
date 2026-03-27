@@ -2,11 +2,11 @@
 
 ## Executive Summary
 
-This system works backwards from Palette's 117 RIUs to teach developers how to build enterprise AI systems. Each RIU is a real problem a developer will face. The enablement system maps each problem to learning objectives, educational content, and assessment criteria — then evaluates competency through performance-based assessment (not multiple choice) scaled by AI-augmented evaluation.
+This system works backwards from Palette's 121 RIUs to teach developers how to build enterprise AI systems. Each RIU is a real problem a developer will face. The enablement system maps each problem to learning objectives, educational content, and assessment criteria — then evaluates competency through performance-based assessment (not multiple choice) scaled by AI-augmented evaluation.
 
 ## Core Design Principle
 
-**The 117 RIUs ARE the curriculum.** Each RIU's fields map directly to curriculum components:
+**The 121 RIUs ARE the curriculum.** Each RIU's fields map directly to curriculum components:
 
 | RIU Field | Curriculum Mapping |
 |---|---|
@@ -23,7 +23,7 @@ This system works backwards from Palette's 117 RIUs to teach developers how to b
 ## Architecture Layers
 
 ### 1. Competency Taxonomy (from Palette)
-117 competency areas organized into 6 workstreams + 5 specialized series. Each area is classified as `internal_only` (80) or `both` (37, requiring external service integration).
+121 competency areas organized into 6 workstreams + 5 specialized series. Each area is classified as `internal_only` (81) or `both` (40, requiring external service integration).
 
 ### 2. Knowledge Library (from Palette)
 167 sourced entries with evidence tiers and learning progressions. Journey stages: foundation → retrieval → orchestration → specialization, with evaluation as a cross-cutting meta-skill.
@@ -112,7 +112,7 @@ Generate from existing Palette data: extract RIU fields → retrieve related KL 
 
 ## Integrity Checks
 
-1. RIU coverage: 117/117 modules
+1. RIU coverage: 121/121 modules
 2. KL utilization: >80% of 167 entries referenced
 3. Prerequisite acyclicity: no cycles
 4. Difficulty balance: matches KL distribution

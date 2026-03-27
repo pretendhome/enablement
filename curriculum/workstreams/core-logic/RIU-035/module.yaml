@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: both
 difficulty: high
+description: Latency/cost too high; caching needed; risk of staleness. The learner
+  produces cache_plan.md and invalidation_rules.yaml that demonstrate competence in
+  this skill. Staleness controlled and explicit.
 learning_objectives:
 - Design a caching strategy that reduces latency and cost for repeated or similar requests
 - Implement cache invalidation rules that prevent stale data from being served

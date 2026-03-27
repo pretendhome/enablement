@@ -15,20 +15,20 @@ constellations:
     arc: "From structuring knowledge to using it in AI systems"
     nodes:
       - position: 1
+        topic: "Building a Knowledge Library"
+        riu: "RIU-400"
+        status: "published"
+        path_file: "enablement/paths/RIU-400-kb-content-audit.md"
+      - position: 2
         topic: "Taxonomy Design"
         riu: "RIU-401"
-        status: "example"
-        path_file: null  # example lives in path-template.md, not standalone
-      - position: 2
-        topic: "Building a Knowledge Library"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        status: "published"
+        path_file: "enablement/paths/RIU-401-taxonomy-design.md"
       - position: 3
         topic: "Multi-Agent Routing"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-510"
+        status: "published"
+        path_file: "enablement/paths/RIU-510-multi-agent-workflow-design.md"
 
   - name: "Build → Test → Ship"
     arc: "From prototype to production"
@@ -36,8 +36,8 @@ constellations:
       - position: 1
         topic: "Prompt Interface Contract"
         riu: "RIU-022"
-        status: "planned"
-        path_file: null
+        status: "published"
+        path_file: "enablement/paths/RIU-022-prompt-interface-contract.md"
       - position: 2
         topic: "Golden Set + Offline Eval Harness"
         riu: "RIU-021"
@@ -46,27 +46,27 @@ constellations:
       - position: 3
         topic: "Deployment Readiness Envelope"
         riu: "RIU-060"
-        status: "planned"
-        path_file: null
+        status: "published"
+        path_file: "enablement/paths/RIU-060-deployment-readiness-envelope.md"
 
   - name: "Prompt → Guardrail → Monitor"
     arc: "From basic AI use to production safety"
     nodes:
       - position: 1
         topic: "Writing AI Instructions"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-022"
+        status: "published"
+        path_file: "enablement/paths/RIU-022-prompt-interface-contract.md"
       - position: 2
         topic: "Guardrails & Safety"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-082"
+        status: "published"
+        path_file: "enablement/paths/RIU-082-llm-safety-guardrails.md"
       - position: 3
         topic: "Monitoring & Observability"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-524"
+        status: "published"
+        path_file: "enablement/paths/RIU-524-llm-output-quality-monitoring.md"
 
   - name: "Clarify → Evaluate → Automate"
     arc: "From problem definition to automated solutions"
@@ -74,40 +74,40 @@ constellations:
       - position: 1
         topic: "Convergence Brief"
         riu: "RIU-001"
-        status: "planned"
-        path_file: null
+        status: "published"
+        path_file: "enablement/paths/RIU-001-convergence-brief.md"
       - position: 2
         topic: "Service Evaluation"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-252"
+        status: "published"
+        path_file: "enablement/paths/RIU-252-model-evaluation-selection.md"
       - position: 3
         topic: "Integration Recipes"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-035"
+        status: "published"
+        path_file: "enablement/paths/RIU-035-caching-strategy.md"
 
   - name: "Signal → Story → System"
     arc: "From noticing a trend to building infrastructure around it"
     nodes:
       - position: 1
-        topic: "Signal Monitoring"
-        riu: null
-        status: "unmapped"
-        path_file: null
-      - position: 2
-        topic: "Content Strategy"
-        riu: null
-        status: "unmapped"
-        path_file: null
-      - position: 3
         topic: "Enablement Architecture"
-        riu: null
-        status: "unmapped"
-        path_file: null
+        riu: "RIU-102"
+        status: "published"
+        path_file: "enablement/paths/RIU-102-enablement-pack.md"
+      - position: 2
+        topic: "Signal Monitoring"
+        riu: "RIU-543"
+        status: "published"
+        path_file: "enablement/paths/RIU-543-drift-detection.md"
+      - position: 3
+        topic: "Content Strategy"
+        riu: "RIU-600"
+        status: "published"
+        path_file: "enablement/paths/RIU-600-multi-brand-ai-strategy.md"
 
 # Routing targets referenced in published paths but not yet in a constellation
 unassigned_routing_targets:
-  - riu: "RIU-524"
-    topic: "LLM Output Quality Monitoring"
-    referenced_from: "RIU-021"
+  - riu: "RIU-608"
+    topic: "Workflow Definition for Multi-Agent Engagements"
+    referenced_from: "RIU-510"

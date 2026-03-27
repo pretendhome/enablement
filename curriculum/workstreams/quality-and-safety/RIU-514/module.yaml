@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: orchestration
 classification: internal_only
 difficulty: critical
+description: Agents must operate within defined capability boundaries to prevent scope
+  creep or unsafe actions. The learner produces capability_boundaries.md and action_allowlist.yaml
+  that demonstrate competence in this skill. Boundary violations logged and escalated.
 learning_objectives:
 - Define capability boundaries that constrain agents to their designated role and scope
 - Implement action validation that blocks out-of-scope operations before execution
@@ -15,8 +18,14 @@ prerequisites:
   - RIU-510
   recommended: []
 knowledge_library_entries:
-  primary: []
-  supporting: []
+  primary:
+  - LIB-138
+  - LIB-089
+  - LIB-090
+  - LIB-124
+  supporting:
+  - LIB-161
+  - LIB-077
 service_context: null
 estimated_duration:
   learning: 6-8 hours

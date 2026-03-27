@@ -4,6 +4,10 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: Engagement starts underspecified; stakeholders differ on goals, constraints,
+  and non-goals. The learner produces convergence_brief.md and assumptions.md that
+  demonstrate competence in this skill. Fewer scope re-litigations; faster decision
+  velocity.
 
 learning_objectives:
   - "Create a Convergence Brief that aligns stakeholders on goal, constraints, and non-goals within a single session"

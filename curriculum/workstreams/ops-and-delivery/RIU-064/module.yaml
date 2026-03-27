@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: high
+description: Need safe rollout and instant rollback without redeploy. The learner
+  produces flags.yaml and kill_switch.md that demonstrate competence in this skill.
+  Rollouts staged safely.
 learning_objectives:
 - Implement feature flags that enable gradual rollout and instant rollback of AI features
 - Design kill switches for AI components that can be activated without deployment

@@ -4,6 +4,10 @@ workstream: Quality & Safety
 journey_stage: specialization
 classification: internal_only
 difficulty: high
+description: Outputs from one modality must be validated against another (e.g., image
+  caption vs image content). The learner produces cross_modal_validation.md and consistency_checks/
+  that demonstrate competence in this skill. Disagreements surfaced with confidence
+  scores.
 learning_objectives:
 - Implement cross-modal validation that checks consistency between outputs from different modalities
 - Design confidence scoring for cross-modal agreement and disagreement detection
@@ -15,8 +19,13 @@ prerequisites:
   - RIU-021
   recommended: []
 knowledge_library_entries:
-  primary: []
-  supporting: []
+  primary:
+  - LIB-076
+  - LIB-050
+  - LIB-048
+  supporting:
+  - LIB-075
+  - LIB-038
 service_context: null
 estimated_duration:
   learning: 6-8 hours

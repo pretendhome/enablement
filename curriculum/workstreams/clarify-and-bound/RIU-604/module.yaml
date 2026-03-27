@@ -4,6 +4,10 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: internal_only
 difficulty: high
+description: CFO needs defensible business case for AI investment; standard revenue-growth
+  framing doesn't work when goal is cost reduction and efficiency. The learner produces
+  roi_framework.md and baseline_metrics.md that demonstrate competence in this skill.
+  CFO approves investment based on cost reduction narrative.
 learning_objectives:
 - Build an AI ROI quantification framework that captures both tangible and intangible value
 - Design measurement methodology that attributes outcomes to AI specifically

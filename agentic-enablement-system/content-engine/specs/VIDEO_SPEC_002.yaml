@@ -1,0 +1,157 @@
+# VIDEO_SPEC_002
+# Topic rationale:
+# 1. Signal: Prompt drift and silent schema breakage are the #1 undiagnosed failure mode in production AI.
+# 2. Why this video: demonstrates the engineering control that sits between "I wrote a prompt" and "I built a system."
+#    Shows Mical's knowledge engineering background — defining interfaces is a classification and contract problem.
+# 3. Market fit: prompt versioning, schema enforcement, and contract testing map directly to
+#    Mistral/Anthropic/OpenAI production infrastructure roles.
+
+signal:
+  source: "Production AI engineering patterns"
+  type: "practitioner_pattern"
+  summary: "Every production AI team eventually hits silent prompt drift — outputs change shape after a model update and downstream consumers break. A prompt interface contract is the cheapest prevention."
+
+classification:
+  riu: "RIU-022"
+  riu_name: "Prompt Interface Contract"
+  knowledge_entries:
+    - "LIB-016"
+    - "LIB-117"
+  new_knowledge: false
+  new_riu: false
+
+video:
+  title: "Your AI Prompts Need an Interface Contract"
+  title_chars: 42
+  title_formula: "authority-test"
+  duration_target: 10
+
+  thumbnail:
+    face: "explaining"
+    visual: "A prompt with typed variables and an output schema — one side green (conforming), one side red (breaking)"
+    text: "Stop Drifting"
+    palette: "blue-green"
+
+  hook:
+    formula: "problem-promise"
+    script: |
+      You changed one line in a prompt and three downstream systems broke.
+      That's not a prompting problem. That's a contract problem.
+      In this video I'll show you how to define a prompt interface contract —
+      the variables, the output schema, the version rules — so you know exactly
+      what breaks before it breaks.
+
+  build:
+    what_to_build: "A prompt contract with typed variables, output schema, one constraint, and a version tag"
+    tools_needed:
+      - "Any LLM chat tool"
+      - "Markdown editor or notes app"
+    difficulty_on_camera: "Quick Start"
+
+enablement:
+  topic: "Prompt Interface Contract"
+  output_description: "A formal contract that defines your prompt's variables, constraints, output schema, and version rules — so nothing breaks silently when you change something."
+  concept_summary: "A prompt interface contract is what separates a prompt that works once from one that works reliably. You define what goes in, what comes out, what the rules are, and what happens when something doesn't fit. It's the first real engineering control you put on an AI task."
+  review_status: "current"
+  confidence_baseline_task: "define a prompt's variables, output schema, and version rules well enough that someone else could use your prompt without breaking it"
+
+  constellation:
+    name: "Build → Test → Ship"
+    sequence: "1 of 3"
+    map:
+      - position: 1
+        topic: "Prompt Interface Contract"
+        riu: "RIU-022"
+        status: "this"
+      - position: 2
+        topic: "Golden Set + Offline Evaluation Harness"
+        riu: "RIU-021"
+        status: "next"
+      - position: 3
+        topic: "Deployment Readiness Envelope"
+        riu: "RIU-060"
+        status: "upcoming"
+
+  quick_start:
+    output: "A one-page prompt contract with 3-5 named variables, their types, one output schema, and one explicit constraint"
+    example: "Define a contract for 'summarize this email' — the input is the email text (string, max 2000 words), the output is a JSON object with summary, action_items, and urgency fields, and the constraint is: if the email has no action items, return an empty array — don't make them up"
+    steps:
+      - "Pick one AI prompt you already use or want to use. Something specific — 'classify this,' 'summarize that,' 'rewrite this as.'"
+      - "List every input that goes into that prompt. Name each one. What type is it? (text, number, list, choice from options?)"
+      - "Define exactly what the output should look like. Not 'a summary' — what fields, what format, what length?"
+      - "Add one constraint: one thing the AI should never do, or one rule about what happens when an input is weird or missing."
+      - "Write it all down as a clean contract — variable names, types, output schema, constraint."
+    failure_modes:
+      - "Defining inputs as 'the text' without saying what kind of text, how long, or what happens if it's empty."
+      - "Writing output descriptions like 'a good summary' — that's a wish, not a schema. Specify fields, types, and limits."
+      - "Forgetting edge cases: what if the input is blank? What if it's in a different language? What if it's 10x longer than expected?"
+      - "Mixing instructions with the contract — the contract defines the interface, not the implementation."
+
+  applied:
+    output: "A work-ready prompt contract with typed and constrained variables, a structured output schema (JSON or equivalent), failure handling rules, and a version tag"
+    steps:
+      - "Choose a real prompt from your work — one where getting the output wrong has actual consequences."
+      - "Inventory every input: name, type, allowed values, size limits, default if missing."
+      - "For each input, define what happens when it's invalid — reject? Use a default? Warn and proceed?"
+      - "Define the output schema with explicit types. Use JSON Schema style or a simple table — but every field needs a name, type, and description."
+      - "Add failure handling: what should the output look like when the AI can't fulfill the contract?"
+      - "Tag it with a version number (v1.0) and write one sentence about what would constitute a breaking change."
+      - "Test: give the contract to a different AI tool (or a colleague) and see if they can produce conforming output without extra explanation."
+    failure_modes:
+      - "Validating only the happy path — the contract matters most when inputs are weird or the model misbehaves."
+      - "Defining the output schema but not what happens when the model can't conform to it."
+      - "Forgetting that changing the output schema is a breaking change — downstream consumers depend on the current shape."
+      - "Making the version tag decorative — if you don't track what changed between versions, the version is meaningless."
+
+  production:
+    output: "A portfolio-grade prompt contract system with versioned templates, typed variables with validation rules, structured output schemas, a consumer registry, breaking change detection rules, and composition strategy for shared prompt components"
+    steps:
+      - "Start with your Applied contract (or build one if you skipped ahead)."
+      - "Extract shared components: are there variables, constraints, or output fields that would appear in multiple prompts? Define them as reusable modules."
+      - "Build a versioning strategy: major version = breaking change, minor version = additive change. Document what each means."
+      - "Create a consumer registry: list every system, person, or process that depends on this prompt's output."
+      - "Define breaking change detection: given the consumer registry, write rules for 'this change is safe' vs 'this change requires migration.'"
+      - "Add regression test cases: 5-10 input/output pairs that must always pass."
+      - "Write a composition spec: how do shared components combine? If you change a shared sub-prompt, which contracts are affected?"
+      - "Document the full system: contract, schema, versions, consumers, tests, composition rules."
+    failure_modes:
+      - "Versioning without a consumer registry — you can't assess impact if you don't know who depends on what."
+      - "Shared components without independent version tracking — one change cascades everywhere with no visibility."
+      - "Regression tests that only cover normal cases — the tests should include the edge cases that have broken things before."
+      - "Treating the contract as documentation instead of enforcement — if nothing validates against the contract at runtime, it's just a wish list."
+
+  next_if_clicked:
+    - riu: "RIU-021"
+      topic: "Build a Tiny AI Eval Harness"
+      relationship: "Turns your contract into something you can test and score automatically."
+    - riu: "RIU-060"
+      topic: "Deployment Readiness Envelope"
+      relationship: "Uses contract + eval evidence to decide if a system is actually ready to ship."
+
+  next_if_hard:
+    - riu: "RIU-001"
+      topic: "Convergence Brief"
+      relationship: "If defining the interface feels fuzzy, clarify what success means first."
+
+post_production:
+  workflow: "B"
+  ai_images_needed: 2
+  estimated_cost: "$4"
+  estimated_edit_time: "35 minutes"
+
+competitor_context: |
+  Prompt engineering content is saturated with "tips and tricks" — few creators treat prompts as
+  engineering artifacts with interfaces, versioning, and contracts. This video introduces the concept
+  of a prompt as a system boundary, not a text blob. The linguistics angle (defining interfaces is a
+  classification and naming problem) differentiates from the typical "here are 10 prompt templates" content.
+
+checklist:
+  - spec_complete: true
+  - enablement_path_generated: true
+  - thumbnail_concepts_ready: false
+  - script_drafted: false
+  - recorded: false
+  - edited: false
+  - path_on_github: true
+  - uploaded_to_youtube: false
+  - description_includes_path: false

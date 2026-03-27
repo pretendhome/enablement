@@ -4,6 +4,8 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: Bad data silently degrades outcomes. The learner produces data_quality_rules.yaml
+  and dq_checks/ that demonstrate competence in this skill. Anomalies visible to operators.
 learning_objectives:
 - Implement data quality checks for nulls, duplicates, range violations, and type mismatches
 - Design threshold-based alerting that distinguishes real anomalies from seasonal variation

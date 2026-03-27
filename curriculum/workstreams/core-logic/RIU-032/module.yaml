@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Need reliable extraction of fields from text/docs. The learner produces
+  extraction_schema.json and extractor/ that demonstrate competence in this skill.
+  Error cases visible.
 learning_objectives:
 - Implement structured extraction from unstructured text using schema-constrained generation
 - Design extraction pipelines that handle ambiguous, incomplete, and contradictory source text

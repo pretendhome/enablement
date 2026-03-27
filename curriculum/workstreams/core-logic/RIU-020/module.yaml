@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Baseline unknown; risk of regressions. The learner produces baseline_report.md
+  and baseline_outputs/ that demonstrate competence in this skill. Regression risk
+  reduced.
 learning_objectives:
 - Capture a baseline behavior snapshot of an AI system before making changes
 - Design baseline metrics that cover accuracy, latency, cost, and edge case behavior

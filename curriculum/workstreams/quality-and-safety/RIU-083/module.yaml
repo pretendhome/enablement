@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: System may be abused or fail dangerously under adversarial inputs. The
+  learner produces redteam_scenarios.md and redteam_results.md that demonstrate competence
+  in this skill. High-risk behaviors detected early.
 learning_objectives:
 - Define red-team scenarios covering abuse patterns, adversarial inputs, and dangerous failure modes
 - Run red-team exercises as a pre-launch gate with documented results and mitigations

@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Need confidence that critical path works in prod-like conditions. The
+  learner produces smoke_tests/ and smoke_test_runbook.md that demonstrate competence
+  in this skill. Deploy confidence increases.
 learning_objectives:
 - Create minimal end-to-end smoke tests that validate the critical path in production-like conditions
 - Design smoke test runbooks usable by on-call engineers with no prior context

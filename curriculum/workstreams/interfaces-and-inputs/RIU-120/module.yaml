@@ -4,6 +4,9 @@ workstream: Interfaces & Inputs
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: Unclear whether to use batch, streaming, or hybrid integration. The learner
+  produces integration_mode.md and tradeoff_analysis.md that demonstrate competence
+  in this skill. Architecture aligned with constraints.
 learning_objectives:
 - Evaluate batch, stream, and hybrid integration modes for specific data flow requirements
 - Design integration mode selection criteria based on latency, volume, and consistency needs

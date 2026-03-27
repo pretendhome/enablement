@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Need structured discovery or alignment session with customer stakeholders.
+  The learner produces workshop_agenda.md and workshop_materials/ that demonstrate
+  competence in this skill. Clear next steps.
 learning_objectives:
 - Design a customer workshop that achieves discovery and alignment in a single session
 - Structure the workshop to surface hidden assumptions and conflicting priorities

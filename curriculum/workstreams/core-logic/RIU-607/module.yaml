@@ -4,6 +4,8 @@ workstream: Core Logic
 journey_stage: specialization
 classification: internal_only
 difficulty: high
+description: The learner produces Updated MEMORY.md and Daily log entry with continuation
+  note that demonstrate competence in this skill.
 learning_objectives:
 - Design a context compaction strategy that preserves critical information while reducing token usage
 - Implement summarization checkpoints that capture decision history, open questions, and current state

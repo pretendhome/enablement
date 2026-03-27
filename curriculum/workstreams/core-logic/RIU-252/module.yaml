@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: both
 difficulty: high
+description: Multiple model options; need systematic evaluation and selection. The
+  learner produces model_evaluation.md and selection_rationale.md that demonstrate
+  competence in this skill. Selection aligns with constraints.
 learning_objectives:
 - Evaluate and select LLM models based on quality, cost, latency, and task-specific benchmarks
 - Design model comparison methodology that tests on representative production workloads

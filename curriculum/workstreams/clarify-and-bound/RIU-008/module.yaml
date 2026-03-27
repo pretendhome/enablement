@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Work proceeds on assumptions; they must be explicit and testable. The
+  learner produces assumptions.md and assumption_tests.md that demonstrate competence
+  in this skill. Wrong assumptions detected early.
 
 learning_objectives:
   - "Record assumptions explicitly with validation plans, owners, and expiry conditions"

@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: System needs comprehensive observability but stack is undefined or incomplete.
+  The learner produces observability_design.md and metrics_catalog.md that demonstrate
+  competence in this skill. Issues detectable before customer impact.
 learning_objectives:
 - Design observability stack for AI systems covering metrics, logs, traces, and AI-specific signals
 - 'Implement AI-specific observability: quality scoring, hallucination detection, cost tracking'

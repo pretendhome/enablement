@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Customer/executive needs crisp 'what are we building' summary. The learner
+  produces capability_statement.md that demonstrate competence in this skill. Faster
+  approvals.
 learning_objectives:
 - Write a capability statement that clearly communicates what the AI system does, why it exists, and how it works
 - 'Design the statement for multiple audiences: technical, business, and executive'

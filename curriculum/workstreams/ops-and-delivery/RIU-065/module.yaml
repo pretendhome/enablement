@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Works in one env but fails in another; configs diverge. The learner produces
+  config_spec.md and env_parity_checks/ that demonstrate competence in this skill.
+  Deploys reproduce local behavior.
 learning_objectives:
 - Implement configuration management that ensures environment parity between staging and production
 - Design config validation that catches misconfigurations before deployment

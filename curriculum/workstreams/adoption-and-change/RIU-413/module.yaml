@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: specialization
 classification: both
 difficulty: medium
+description: Need to demonstrate value to customer stakeholders. The learner produces
+  demo_script.md and demo_environment/ that demonstrate competence in this skill.
+  Stakeholders see value clearly.
 learning_objectives:
 - Create a customer value demo that demonstrates measurable impact on the customer's specific problem
 - Design the demo using the customer's own data or realistic proxies

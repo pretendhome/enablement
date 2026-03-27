@@ -4,6 +4,10 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: internal_only
 difficulty: high
+description: Multiple AI use cases proposed; need structured way to score, rank, and
+  select based on business impact, feasibility, and risk. The learner produces use_case_inventory.md
+  and prioritization_matrix.xlsx that demonstrate competence in this skill. Organization
+  focuses on highest-impact use cases first.
 learning_objectives:
 - Build an AI use case prioritization matrix based on business impact, feasibility, and risk
 - Evaluate use cases with quantified criteria rather than subjective judgment

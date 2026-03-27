@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: both
 difficulty: medium
+description: Performance unknown; risk of SLA failure after commitments. The learner
+  produces perf_envelope.md and load_tests/ that demonstrate competence in this skill.
+  Scaling assumptions documented.
 learning_objectives:
 - Characterize system performance under load with latency percentiles, throughput limits, and resource utilization
 - Identify performance bottlenecks through systematic load testing

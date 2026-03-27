@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: Authentication and authorization needed for system. The learner produces
+  auth_design.md and auth_implementation/ that demonstrate competence in this skill.
+  Authorization enforced.
 learning_objectives:
 - Design authentication and authorization for AI systems where agents act on behalf of users
 - Implement token handling with secure storage, rotation, and revocation

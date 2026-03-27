@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: High-risk AI system requires fundamental rights impact assessment per
+  EU AI Act. The learner produces fria_report.md and rights_mapping.md that demonstrate
+  competence in this skill. Mitigations documented and tracked.
 learning_objectives:
 - Conduct a Fundamental Rights Impact Assessment per EU AI Act requirements for high-risk systems
 - Map AI system capabilities to specific fundamental rights that may be affected

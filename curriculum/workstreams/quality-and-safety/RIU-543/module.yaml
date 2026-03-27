@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: both
 difficulty: high
+description: System behavior may drift over time; need automated detection. The learner
+  produces drift_detection.md and drift_metrics.yaml that demonstrate competence in
+  this skill. Alerts trigger before significant impact.
 learning_objectives:
 - Configure drift detection for data distribution, model behavior, and system performance
 - Design detection thresholds that catch meaningful drift while filtering seasonal patterns

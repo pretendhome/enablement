@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: External or internal audit requires evidence gathering and preparation.
+  The learner produces audit_preparation.md and evidence_inventory.md that demonstrate
+  competence in this skill. Gaps identified with remediation plan.
 learning_objectives:
 - Prepare an audit package with organized evidence, gap analysis, and remediation tracking
 - Design evidence collection that maps to specific audit framework controls
@@ -14,8 +17,14 @@ prerequisites:
   - RIU-534
   recommended: []
 knowledge_library_entries:
-  primary: []
-  supporting: []
+  primary:
+  - LIB-066
+  - LIB-071
+  - LIB-164
+  - LIB-073
+  supporting:
+  - LIB-067
+  - LIB-079
 service_context: null
 estimated_duration:
   learning: 6-8 hours

@@ -4,6 +4,10 @@ workstream: Clarify & Bound
 journey_stage: specialization
 classification: internal_only
 difficulty: critical
+description: Organization needs to structure AI decision rights, team topology, and
+  budget allocation between central and federated teams. The learner produces operating_model.md
+  and decision_rights_matrix.md that demonstrate competence in this skill. AI initiatives
+  move faster; fewer bottlenecks.
 learning_objectives:
 - Design an AI operating model defining roles, processes, and decision rights for AI initiatives
 - Establish the boundary between centralized AI platform and decentralized business unit AI

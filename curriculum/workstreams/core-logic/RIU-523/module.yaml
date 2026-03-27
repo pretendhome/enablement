@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: retrieval
 classification: both
 difficulty: medium
+description: Repeated similar queries waste tokens; caching can reduce cost and latency.
+  The learner produces caching_strategy.md and cache_config.yaml that demonstrate
+  competence in this skill. Cost/latency reduced measurably.
 learning_objectives:
 - Design a semantic caching strategy for LLM responses that handles similar (not just identical) queries
 - Implement cache key generation using embedding similarity for semantic matching

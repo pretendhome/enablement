@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: specialization
 classification: both
 difficulty: medium
+description: System needs to process, transcribe, or generate audio content. The learner
+  produces audio_pipeline.md and audio_preprocessor/ that demonstrate competence in
+  this skill. Transcriptions validated for accuracy.
 learning_objectives:
 - Integrate audio processing (STT, TTS, audio analysis) into an AI pipeline
 - Evaluate audio services (Whisper, Deepgram, AssemblyAI) for accuracy, latency, and language support

@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: AI system requires audit trail for compliance, debugging, or accountability.
+  The learner produces audit_trail_requirements.md and retention_policy.md that demonstrate
+  competence in this skill. Retention periods comply with regulations.
 learning_objectives:
 - Define audit trail requirements covering what events to log, retention periods, and access controls
 - Design retrieval procedures that enable efficient investigation of specific decisions or time periods

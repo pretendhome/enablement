@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: specialization
 classification: internal_only
 difficulty: medium
+description: Customer knowledge base exists but quality/coverage unknown. The learner
+  produces kb_audit_report.md and coverage_analysis.md that demonstrate competence
+  in this skill. Gaps and issues identified.
 learning_objectives:
 - Audit a knowledge base for coverage gaps, duplication, staleness, and structural issues
 - Design a coverage analysis that maps KB content to user needs and identifies blind spots

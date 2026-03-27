@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Need regressions caught beyond a small golden set. The learner produces
+  regression_suite/ and invariants.md that demonstrate competence in this skill. Confidence
+  improves.
 learning_objectives:
 - Build a regression suite combining golden set cases with metamorphic test invariants
 - Design metamorphic relations that catch regressions even when golden set is incomplete

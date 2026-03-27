@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Security risks unclear; need systematic threat identification. The learner
+  produces threat_model.md and attack_surface_map.md that demonstrate competence in
+  this skill. Security posture understood.
 learning_objectives:
 - Create a threat model identifying attack vectors specific to AI systems (prompt injection, data poisoning, model extraction)
 - Map the attack surface including all entry points, data flows, and trust boundaries

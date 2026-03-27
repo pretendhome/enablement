@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Engagement ends; new person must continue without context loss. The learner
+  produces handoff_bundle/ and decisions.md that demonstrate competence in this skill.
+  No knowledge loss.
 learning_objectives:
 - Create a handoff bundle that enables a new person to restart the engagement from documentation alone
 - 'Include all context needed: decisions made, rationale, current state, open questions, and next steps'

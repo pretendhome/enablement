@@ -4,6 +4,9 @@ workstream: Quality & Safety
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: AI system needs risk classification for regulatory compliance and governance.
+  The learner produces risk_classification.md and regulatory_mapping.md that demonstrate
+  competence in this skill. Compliance requirements identified.
 learning_objectives:
 - Classify AI system risk level per EU AI Act categories (unacceptable, high, limited, minimal)
 - Map system capabilities to regulatory requirements based on risk classification

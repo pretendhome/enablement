@@ -4,6 +4,9 @@ workstream: Core Logic
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: LLM used where deterministic logic would be safer; need containment.
+  The learner produces pipeline_split.md and deterministic_modules/ that demonstrate
+  competence in this skill. Reduced hallucination surface.
 learning_objectives:
 - Identify which parts of a pipeline can be handled deterministically vs require LLM inference
 - Design a pipeline split that maximizes deterministic processing to reduce cost and improve reliability

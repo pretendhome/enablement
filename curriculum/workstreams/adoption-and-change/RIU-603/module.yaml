@@ -4,6 +4,10 @@ workstream: "Adoption & Change"
 journey_stage: "specialization"
 classification: "internal_only"
 difficulty: "high"
+description: AI tools deployed but employees don't use them, fear them, or use them
+  incorrectly; need behavior change, not just training. The learner produces persona_map.md
+  and adoption_playbook.md that demonstrate competence in this skill. Employee behavior
+  changes measurably (not just trained).
 
 learning_objectives:
   - "Design an AI adoption program that drives measurable behavior change, not just training completion"
@@ -22,6 +26,7 @@ prerequisites:
 knowledge_library_entries:
   primary:
     - "LIB-088"   # Convergence methodology (applied to adoption goals)
+    - "LIB-072"   # AI adoption vs avoidance measurement
   supporting:
     - "LIB-001"   # Stakeholder alignment
     - "LIB-004"   # Semantic Blueprint for adoption program scoping

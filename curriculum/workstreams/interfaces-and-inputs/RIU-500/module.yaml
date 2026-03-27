@@ -4,6 +4,10 @@ workstream: Interfaces & Inputs
 journey_stage: specialization
 classification: internal_only
 difficulty: critical
+description: System requires processing multiple data modalities (text, image, audio,
+  video) with unified handling. The learner produces multimodal_pipeline_design.md
+  and modality_handlers/ that demonstrate competence in this skill. Cross-modal validation
+  prevents modality-specific failures.
 learning_objectives:
 - Design a multimodal data pipeline that handles text, images, audio, and video in a unified architecture
 - Implement format normalization and quality validation for each modality at ingestion

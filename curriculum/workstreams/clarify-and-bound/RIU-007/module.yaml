@@ -4,6 +4,9 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Hidden constraints (latency, compliance, budget) break design late. The
+  learner produces constraint_profile.md that demonstrate competence in this skill.
+  Design choices become faster.
 
 learning_objectives:
   - "Systematically capture technical, policy, budget, and timeline constraints before design begins"

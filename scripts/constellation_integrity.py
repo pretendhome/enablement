@@ -87,9 +87,9 @@ def load_published_paths():
         # Check for unfilled template variables
         unfilled = re.findall(r'\{\{[^}]+\}\}', text)
 
-        # Check for system IDs above START HERE
+        # Check for system IDs above START HERE / COPY EVERYTHING BELOW
         # Use the actual marker line, not the instruction that references it
-        start_marker = re.search(r'^##\s*▶\s*START HERE', text, re.MULTILINE)
+        start_marker = re.search(r'^(?:##\s*▶\s*START HERE|▶\s*COPY EVERYTHING BELOW)', text, re.MULTILINE)
         learner_preamble = text[:start_marker.start()] if start_marker else ""
         leaked_ids = re.findall(r'\bRIU-\d+\b|\bLIB-\d+\b', learner_preamble)
         # Filter: metadata comment lines (HTML comments) are OK
@@ -99,7 +99,7 @@ def load_published_paths():
         required_markers = [
             ("onramp", r'hands-on exercise|copy the text below'),
             ("how_to_use", r'How to use'),
-            ("start_here", r'START HERE'),
+            ("start_here", r'START HERE|COPY EVERYTHING BELOW'),
             ("quick_start", r'⚡.*QUICK START'),
             ("applied", r'🔨.*APPLIED'),
             ("production", r'🏗️.*PRODUCTION'),

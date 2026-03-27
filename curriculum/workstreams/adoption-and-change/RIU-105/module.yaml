@@ -4,6 +4,9 @@ workstream: Adoption & Change
 journey_stage: foundation
 classification: internal_only
 difficulty: medium
+description: Leadership needs concise status without technical detail. The learner
+  produces executive_update.md that demonstrate competence in this skill. Decisions
+  accelerated.
 learning_objectives:
 - Write executive updates that communicate status, risks, and decisions needed in under 2 minutes of reading
 - Design the update format to surface blockers and decisions, not just progress

@@ -4,6 +4,10 @@ workstream: Adoption & Change
 journey_stage: specialization
 classification: internal_only
 difficulty: medium
+description: AI learnings in one brand stay siloed; need systematic way to transfer
+  successful patterns to other brands without forcing uniformity. The learner produces
+  cross_brand_pattern_library.md and brand_learning_catalog.md that demonstrate competence
+  in this skill. Successful patterns replicated 2-3x faster than independent discovery.
 learning_objectives:
 - Design a knowledge transfer framework for sharing AI learnings across brands or business units
 - Identify transferable patterns vs context-specific solutions that should not be transferred

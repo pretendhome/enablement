@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: high
+description: Deployment readiness unknown; risk of environment surprises. The learner
+  produces deployment_envelope.md and env_matrix.md that demonstrate competence in
+  this skill. Rollback/gates defined before launch.
 learning_objectives:
 - Design a deployment readiness envelope that gates releases on explicit quality, security, and operational criteria
 - Implement pre-deploy checks that validate the system is ready for production traffic
@@ -21,6 +24,7 @@ knowledge_library_entries:
   - LIB-030
   - LIB-032
   - LIB-043
+  - LIB-065
 service_context: null
 estimated_duration:
   learning: 6-8 hours

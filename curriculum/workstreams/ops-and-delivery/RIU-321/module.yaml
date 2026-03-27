@@ -4,6 +4,9 @@ workstream: Ops & Delivery
 journey_stage: foundation
 classification: internal_only
 difficulty: critical
+description: Need to migrate data/schema without downtime or data loss. The learner
+  produces migration_strategy.md and rollback_plan.md that demonstrate competence
+  in this skill. Zero downtime achieved.
 learning_objectives:
 - Design database migration strategy for schema changes, data migration, and rollback
 - Implement zero-downtime migration for production databases under load

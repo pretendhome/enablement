@@ -4,6 +4,9 @@ workstream: "Interfaces & Inputs"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "high"
+description: API changes break customers. The learner produces api_contract_review.md
+  and versioning_plan.md that demonstrate competence in this skill. Customers protected
+  from breaking changes.
 
 learning_objectives:
   - "Review an existing API contract for compatibility risks and undeclared breaking changes"

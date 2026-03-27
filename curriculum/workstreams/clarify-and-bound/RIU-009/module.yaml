@@ -4,6 +4,8 @@ workstream: "Clarify & Bound"
 journey_stage: "foundation"
 classification: "internal_only"
 difficulty: "medium"
+description: Delivery risks need containment and owner assignment. The learner produces
+  risk_register.md that demonstrate competence in this skill. Fewer surprises.
 
 learning_objectives:
   - "Maintain a risk register with identified risks, owners, mitigations, and trigger conditions"
