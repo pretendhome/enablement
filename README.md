@@ -1,6 +1,6 @@
 # Palette Developer Enablement & Certification System
 
-A competency-based developer education and certification platform built on the [Palette knowledge architecture](https://github.com/pretendhome/palette). Works backwards from 117 real enterprise AI problems to teach developers how to solve them — with performance-based assessment scaled through AI-augmented evaluation.
+A competency-based developer education and certification platform built on the [Palette knowledge architecture](https://github.com/pretendhome/palette). Works backwards from 121 real enterprise AI problems to teach developers how to solve them — with performance-based assessment scaled through AI-augmented evaluation.
 
 ---
 
@@ -23,7 +23,7 @@ Built on Palette's existing data layers:
 | Palette Layer | Enablement Use |
 |---|---|
 | 121 competency areas (RIUs) | Curriculum backbone — each RIU = 1 learning module |
-| 167 knowledge entries | Content source with evidence tiers and learning progressions |
+| 168 knowledge entries | Content source with evidence tiers and learning progressions |
 | 69 integration recipes | Service integration exercises for "both" classified modules |
 | 12 specialized agents | Evaluation agents + content maintenance |
 | Governance tiers | Certification tier model (UNVALIDATED → WORKING → PRODUCTION) |
