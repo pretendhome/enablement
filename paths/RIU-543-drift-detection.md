@@ -4,7 +4,6 @@
 (Claude, ChatGPT, Cursor — whatever you use), and it will walk you through building something real.
 Takes 5 minutes for the quick version, up to an hour if you go deep. No experience needed.
 
-> **Video**: https://youtube.com/watch?v=PENDING
 > **What you'll build**: A drift detection system — the configuration that detects when your AI system's inputs, outputs, or behavior shift away from what you expected.
 > **Time**: Quick Start (5 min) · Applied (15-30 min) · Production (30-60 min)
 > **Works in**: Claude, ChatGPT, Cursor, Codex, or any AI tool
