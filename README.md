@@ -1,6 +1,8 @@
 # Developer Enablement System
 
-14 hands-on learning paths that teach enterprise AI skills by building real artifacts. Each path is a self-contained exercise: paste it into any AI tool (Claude, ChatGPT, Cursor) and build something in 5 minutes to an hour. No slides, no multiple choice -- just the work a practitioner actually does.
+14 hands-on learning paths that teach enterprise AI skills by building real artifacts. Each path is a self-contained exercise: paste it into any AI tool (Claude, ChatGPT, Cursor) and build something in 5 minutes to an hour. No slides, no multiple choice — just the work a practitioner actually does.
+
+**Design principle**: structure the knowledge right and the learning works. Every path is organized around what the learner needs to build, not what the system needs to categorize. The curriculum, assessment, and sequencing all follow from that.
 
 ## Try It Now
 
