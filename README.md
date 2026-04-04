@@ -42,7 +42,7 @@ Built on the [Palette](https://github.com/pretendhome/palette) knowledge archite
 | Palette Layer | Enablement Use |
 |---|---|
 | 121 competency areas (RIUs) | Curriculum backbone -- each RIU = 1 learning module |
-| 168 knowledge entries | Content source with evidence tiers and learning progressions |
+| 176 knowledge entries | Content source with evidence tiers and learning progressions |
 | 69 integration recipes | Service integration exercises for hands-on modules |
 | Governance tiers | Certification tier model (UNVALIDATED / WORKING / PRODUCTION) |
 
