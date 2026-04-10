@@ -1,0 +1,178 @@
+topic:
+  id: taxonomy-design
+  title: "Taxonomy Design for AI Systems"
+  subtitle: "Structure the knowledge right and the retrieval works"
+  label: "Learning Architecture"
+
+hero:
+  headline: "Classify by function, not origin.<br>That single decision changes everything."
+  description: >
+    A hands-on guide to designing classification taxonomies for AI systems.
+    From a 25-billion-node knowledge graph to an enterprise retrieval system
+    serving 12,000+ users monthly — the same structural insight applies everywhere.
+  stats:
+    - { num: "121", label: "RIUs Classified" }
+    - { num: "47", label: "Provider Schemes Normalized" }
+    - { num: "13", label: "Locales Supported" }
+    - { num: "12K+", label: "Users / Month" }
+
+projects:
+  - title: "Industry → Function: The Restructuring"
+    nav_label: "Case Study"
+    label: "Case Study — Ask Pathfinder"
+    section_title: "Ask Pathfinder — Taxonomy Restructuring"
+    section_desc: "The single design decision that improved retrieval quality more than any algorithmic change."
+    description: >
+      AWS's internal knowledge was organized by industry — law, healthcare, financial services.
+      That made sense historically, but in an LLM context it's the wrong organizing principle.
+      Reclassifying from industry-based to function-based taxonomy meant solutions from one domain
+      could inform another. A migrations team's rigor could improve a legal team's approach.
+      Result: 25% reduction in prep time, 12,000+ sellers served monthly.
+    tags: ["Knowledge Architecture", "Retrieval", "Enterprise", "Python"]
+    mock: enablement
+    mock_data:
+      title: "Taxonomy Restructuring: Before → After"
+      layers:
+        - num: 1
+          cls: l1
+          name: "Before: Industry-Based"
+          desc: "Siloed by vertical — law, healthcare, finance. No cross-domain transfer."
+          chips: ["law", "healthcare", "finance", "retail", "telecom"]
+        - num: 2
+          cls: l2
+          name: "Insight: Function Is the Organizing Principle"
+          desc: "Document processing, code generation, data extraction — these patterns cross industries."
+          chips: ["detection", "classification", "generation", "optimization"]
+        - num: 3
+          cls: l3
+          name: "After: Function-Based + Parent-Child"
+          desc: "Solutions cross-pollinate. One approach informs another. Accuracy improves."
+          chips: ["12K users/mo", "25% prep reduction", "67% play coverage"]
+      arrows:
+        - "▼ reclassify"
+        - "▼ result"
+    details:
+      - heading: "Architecture"
+        items:
+          - "3-layer design: content ingestion → metadata → use-case ontology"
+          - "pf_metaKeywords: human-designed signals, not automated tags"
+          - "15 verticals, 100+ specific use cases"
+          - "Staleness detection for content currency"
+      - heading: "Impact"
+        items:
+          - "12,000+ sellers served monthly"
+          - "25% reduction in prep time"
+          - "67% increase in sales-play coverage"
+          - "Biggest quality gain was structural, not algorithmic"
+      - heading: "Transferable Pattern"
+        items:
+          - "Same approach used in Alexa POI (47 provider schemes → 1 hierarchy)"
+          - "Same approach used in Palette (121 RIUs classified by function)"
+          - "Works at any scale: 100 items or 25 billion nodes"
+
+  - title: "POI Knowledge Graph — 47 Schemes → 1 Hierarchy"
+    nav_label: "Scale"
+    label: "Case Study — Alexa Automotive"
+    section_title: "POI Knowledge Graph — Multilingual Taxonomy at Scale"
+    section_desc: "Normalizing 47 different provider classification schemes into one consistent hierarchy across 13 locales."
+    description: >
+      At Alexa Automotive, 47 data providers each had their own category taxonomy — different granularity,
+      different hierarchies, different languages. The same restaurant might be "Italian food" in one feed
+      and "Fine dining > Mediterranean > Italian" in another. The solution: a hierarchical ontology
+      accommodating both granular (200+) and coarse (10) taxonomies, with vector-based entity resolution
+      and per-locale tunable thresholds.
+    tags: ["Ontology", "Entity Resolution", "13 Locales", "25B Nodes"]
+    mock: dashboard
+    mock_data:
+      accent_word: "POI"
+      title_rest: "Knowledge Graph"
+      metrics:
+        - { label: "Nodes", value: "25B" }
+        - { label: "Providers", value: "47", color: "green" }
+        - { label: "Locales", value: "13" }
+        - { label: "Resolution", value: "Vector", color: "green" }
+      chart1_title: "Provider Coverage by Locale"
+      bars:
+        - { width: 95, color: "#10A37F", label: "US" }
+        - { width: 88, color: "#27AE60", label: "UK" }
+        - { width: 82, color: "#3498DB", label: "DE" }
+        - { width: 76, color: "#9B59B6", label: "IT" }
+        - { width: 60, color: "#F39C12", label: "JP" }
+      chart2_title: "Entity Resolution"
+      bubbles:
+        - { size: 56, color: "#10A37F" }
+        - { size: 40, color: "#3498DB" }
+        - { size: 48, color: "#F39C12" }
+        - { size: 24, color: "#E74C3C" }
+    details:
+      - heading: "Taxonomy Design"
+        items:
+          - "Hierarchical ontology: granular (200+) and coarse (10) views"
+          - "Category normalization across 47 provider schemes"
+          - "Per-locale tunable merge thresholds"
+          - "New locales onboard via configuration, not rebuild"
+      - heading: "Entity Resolution"
+        items:
+          - "Vector-based: ID + embedding per entity"
+          - "Field-level provenance (not entity-level)"
+          - "Asymmetric merge thresholds: high auto, low → human review"
+          - "Source-priority rules with recency weighting"
+
+  - title: "The Enablement Path: Taxonomy Design"
+    nav_label: "Try It"
+    label: "Hands-On Learning Path"
+    section_title: "RIU-401: Taxonomy Design"
+    section_desc: "A self-contained learning path. Paste into any AI tool and build a taxonomy from scratch in under an hour."
+    description: >
+      Part of the Palette Enablement System. This learning path teaches taxonomy design through
+      building — not slides, not multiple choice. You define a domain, identify the organizing
+      principle, build the hierarchy, validate with test queries, and iterate. The same method
+      used to build Ask Pathfinder's taxonomy and the POI Knowledge Graph's category hierarchy.
+    tags: ["Learning Path", "Hands-On", "Open Source", "RIU-401"]
+    mock: obsidian
+    mock_data:
+      modes: ["Define", "Build", "Validate"]
+      active_mode: 1
+      pills:
+        - { text: "Domain scoped", color: "green" }
+        - { text: "Hierarchy drafted", color: "yellow" }
+        - { text: "Queries tested", color: "blue" }
+      cards:
+        - { title: "Choose organizing principle", meta: "function-based > origin-based", confidence: 95, state: "decided" }
+        - { title: "Build category hierarchy", meta: "3 levels, 15 leaf nodes", confidence: 78, state: "" }
+        - { title: "Test with real queries", meta: "10 test queries, measure precision", confidence: 45, state: "exploring" }
+        - { title: "Iterate on edge cases", meta: "Ambiguous items → parent categories", confidence: 60, state: "exploring" }
+    details:
+      - heading: "What You Build"
+        items:
+          - "A working taxonomy for a real domain"
+          - "Test query set with precision measurement"
+          - "Edge case analysis with resolution strategy"
+      - heading: "Assessment"
+        items:
+          - "Automated: schema valid, hierarchy acyclic"
+          - "AI rubric: organizing principle justified"
+          - "Human calibration: 10% double-scored"
+
+philosophy:
+  - title: "Classify by function, not origin"
+    desc: "Industry-based taxonomies trap knowledge in silos. Function-based taxonomies let solutions cross-pollinate. Detection, classification, generation, optimization — these patterns exist everywhere."
+  - title: "Human-designed signals beat automated tags"
+    desc: "pf_metaKeywords in Ask Pathfinder are hand-curated, not auto-generated. Precision over coverage. The human designer encodes judgment that no tagger can replicate."
+  - title: "Configuration over rebuild"
+    desc: "The POI Knowledge Graph onboards new locales via config. Palette onboards new domains via RIU classification. Good taxonomy design means new contexts don't require new architecture."
+  - title: "The taxonomy IS the routing layer"
+    desc: "In Palette, classifying a problem tells you what knowledge applies, what services to route to, and what agents to involve. The taxonomy isn't metadata — it's the decision engine."
+
+contact:
+  name: "Mical Neill"
+  headline: "Want to go deeper?"
+  description: "Try the taxonomy design learning path, explore the open-source enablement system, or reach out to discuss."
+  email: micalrneill@gmail.com
+  footer: "Mical Neill · San Francisco · github.com/pretendhome/palette · github.com/pretendhome/enablement"
+  links:
+    - { label: "GitHub — Palette", url: "https://github.com/pretendhome/palette" }
+    - { label: "GitHub — Enablement", url: "https://github.com/pretendhome/enablement" }
+
+theme:
+  accent: "#27ae60"
